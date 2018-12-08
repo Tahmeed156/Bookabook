@@ -13,6 +13,7 @@ An online peer-to-peer book sharing platform
 7. Payment calculations system
 8. Notifications about due date/ time remaining to return book
 9. Ratings and reviews of users (prompt book return,prompt back payment)
+10. Fine calculation and warnings
 
 
 Maybe:Payment through online services ? include bkash etc mobile banking?
