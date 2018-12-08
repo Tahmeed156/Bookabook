@@ -10,11 +10,11 @@ An online peer-to-peer book sharing platform
 4. Loads information about a book (via webscraping through google)
 5. Suggests similar books (through genre and tags)
 6. File sharing system
-7. Payment calculations system
+7. Payment calculations system with tokens
 8. Notifications about due date/ time remaining to return book
 9. Ratings and reviews of users (prompt book return,prompt back payment)
 10. Fine calculation and warnings
-11. User profile, points, token
+11. User profile, points
 
 
 Maybe:Payment through online services ? include bkash etc mobile banking?
