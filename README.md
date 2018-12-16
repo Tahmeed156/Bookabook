@@ -2,6 +2,14 @@
 
 An online peer-to-peer book sharing platform 
 
+### Core showcase features
+
+1. A solid recommendation system from scratch
+2. A real-time chat application
+3. Working with time and providing up-to-date notifications
+4. Storing information in database - reviews, books
+5. Authentication system
+
 ### Features
 
 1. Real-time messaging options to send and receive messages. Also shows if user is typing
@@ -18,5 +26,6 @@ An online peer-to-peer book sharing platform
 12. Signup, login, password reset (verification)
 
 
-Maybe:Payment through online services ? include bkash etc mobile banking?
+### Future plan
 
+1. Integrating online payment services
