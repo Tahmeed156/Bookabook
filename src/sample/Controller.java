@@ -139,43 +139,43 @@ public class Controller{
 
 
         //tbook1
-        timgs[0] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\hp.png").toURI().toString());
+        timgs[0] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\hp.png").toURI().toString());
 
         //tbook2
-        timgs[1] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\pj.png").toURI().toString());
+        timgs[1] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\pj.png").toURI().toString());
 
         //tbook3
 
-        timgs[2] = new Image( new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\animalFarm.png").toURI().toString());
+        timgs[2] = new Image( new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\animalFarm.png").toURI().toString());
 
         //tbook4
-        timgs[3] = new Image( new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\foundation.png").toURI().toString());
+        timgs[3] = new Image( new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\foundation.png").toURI().toString());
 
         //tbook5
-        timgs[4] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\animalFarm.png").toURI().toString());
+        timgs[4] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\animalFarm.png").toURI().toString());
 
         //tbook6
-        timgs[5] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\1984.png").toURI().toString());
+        timgs[5] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\1984.png").toURI().toString());
 
         //tbook7
-        timgs[6] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\hp.png").toURI().toString());
+        timgs[6] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\hp.png").toURI().toString());
 
         //rbook1
-        rimgs[0] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\book.png").toURI().toString());
+        rimgs[0] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\book.png").toURI().toString());
 
 
         //rbook2
-        rimgs[1] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\1984.png").toURI().toString());
+        rimgs[1] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\1984.png").toURI().toString());
 
         //rbook3
-        rimgs[2] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\animalFarm.png").toURI().toString());
+        rimgs[2] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\animalFarm.png").toURI().toString());
 
         //tbook4
-        rimgs[3] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\foundation.png").toURI().toString());
+        rimgs[3] = new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\foundation.png").toURI().toString());
 
 
         //profilePicture
-        File file4 = new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\woman.png");
+        File file4 = new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\woman.png");
         Image imgperson = new Image(file4.toURI().toString());
         imgCircle.setFill(new ImagePattern(imgperson));
 
@@ -436,11 +436,11 @@ public class Controller{
             {
                 if(i==1||i==3)
                 {
-                    arrows[i].setImage(new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\rightAClicked.png").toURI().toString()));
+                    arrows[i].setImage(new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\rightAClicked.png").toURI().toString()));
                 }
                 else
                 {
-                    arrows[i].setImage(new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\leftAClicked.png").toURI().toString()));
+                    arrows[i].setImage(new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\leftAClicked.png").toURI().toString()));
                 }
             }
 
@@ -455,11 +455,11 @@ public class Controller{
             {
                 if(i==1||i==3)
                 {
-                    arrows[i].setImage(new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\rightArrow.png").toURI().toString()));
+                    arrows[i].setImage(new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\rightArrow.png").toURI().toString()));
                 }
                 else
                 {
-                    arrows[i].setImage(new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\homePage\\src\\sample\\leftArrow.png").toURI().toString()));
+                    arrows[i].setImage(new Image(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\leftArrow.png").toURI().toString()));
                 }
             }
 

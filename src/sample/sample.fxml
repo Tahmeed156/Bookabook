@@ -15,7 +15,7 @@
     <left>
         <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #595656;" BorderPane.alignment="CENTER">
             <children>
-                <StackPane fx:id="searchStk" prefHeight="100.0" prefWidth="160.0">
+                <StackPane prefHeight="100.0" prefWidth="160.0">
                     <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc000" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
                         <Label text="Dashboard">
