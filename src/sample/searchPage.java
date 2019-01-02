@@ -242,7 +242,7 @@ public class searchPage{
         else {
             for (int i = 0; i < stck.length; i++) {
                 if (!stck[i].isHover()) {
-                    stck[i].setStyle("-fx-background-color:#595656;");
+                    stck[i].setStyle("-fx-background-color:#3b3838;");
                     lbl[i].setTextFill(Color.rgb(217, 217, 217));
                 }
             }
@@ -255,7 +255,7 @@ public class searchPage{
         {
             if(stck[i].isPressed())
             {
-                stck[i].setStyle("-fx-background-color:#383838;");
+                stck[i].setStyle("-fx-background-color:#303030;");
                 lbl[i].setTextFill(Color.rgb(217,217,217));
                 break;
             }

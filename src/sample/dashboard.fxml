@@ -11,9 +11,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.dashboard">
     <left>
-        <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #595656;" BorderPane.alignment="CENTER">
+        <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
             <children>
                 <StackPane prefHeight="100.0" prefWidth="160.0">
                     <children>
@@ -83,7 +83,7 @@
                 </ImageView>
                 <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="732.0">
                     <children>
-                        <Label prefHeight="55.0" prefWidth="152.0" style="-fx-background-color: #595656;" text="Dashboard" textFill="#d9d9d9">
+                        <Label prefHeight="55.0" prefWidth="152.0" style="-fx-background-color: #3b3838;" text="Dashboard" textFill="#d9d9d9">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -256,7 +256,7 @@
                             </children>
                         </GridPane>
                         <Region prefHeight="150.0" prefWidth="30.0" />
-                        <VBox alignment="CENTER" prefHeight="150.0" prefWidth="194.0" style="-fx-background-color: #595656;">
+                        <VBox alignment="CENTER" prefHeight="150.0" prefWidth="194.0" style="-fx-background-color: #3b3838;">
                             <children>
                                 <Label text="Upcoming" textFill="WHITE">
                                     <font>

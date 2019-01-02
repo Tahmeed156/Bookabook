@@ -13,7 +13,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.searchPage">
     <left>
-        <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #595656;" BorderPane.alignment="CENTER">
+        <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
             <children>
                 <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="100.0" prefWidth="160.0">
                     <children>
