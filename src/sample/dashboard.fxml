@@ -78,7 +78,7 @@
             <children>
                 <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
                     <image>
-                        <Image url="@logo.png" />
+                        <Image url="@Pictures/logo.png" />
                     </image>
                 </ImageView>
                 <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="732.0">

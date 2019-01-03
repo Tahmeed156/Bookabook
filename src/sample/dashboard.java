@@ -122,7 +122,7 @@ public class dashboard {
     Image[] rimgs = new Image[50];
 
 
-    String path = "E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\";
+    String path = "E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\Pictures";
 
 
     public void initialize()
