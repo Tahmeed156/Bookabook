@@ -297,7 +297,7 @@
                      <children>
                         <ImageView fx:id="tLArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
-                              <Image url="@leftArrow.png" />
+                              <Image url="@Pictures/leftArrow.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -361,7 +361,7 @@
                      <children>
                         <ImageView fx:id="tRArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
-                              <Image url="@rightArrow.png" />
+                              <Image url="@Pictures/rightArrow.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -386,7 +386,7 @@
                      <children>
                         <ImageView fx:id="rLArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
-                              <Image url="@leftArrow.png" />
+                              <Image url="@Pictures/leftArrow.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -450,7 +450,7 @@
                      <children>
                         <ImageView fx:id="rRArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
-                              <Image url="@rightArrow.png" />
+                              <Image url="@Pictures/rightArrow.png" />
                            </image>
                         </ImageView>
                      </children>
