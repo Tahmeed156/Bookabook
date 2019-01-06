@@ -226,8 +226,8 @@
                         </RadioButton>
                      </children>
                   </HBox>
-                  <ComboBox fx:id="condition" prefHeight="35.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextArea fx:id="review" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                  <ComboBox fx:id="condition" prefHeight="35.0" prefWidth="370.0" promptText="Please select one" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextArea fx:id="review" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="370.0" promptText="Write a review in short about your experience" GridPane.columnIndex="1" GridPane.rowIndex="7">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -240,7 +240,7 @@
                   <Region maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="360.0" />
                   <StackPane prefHeight="200.0" prefWidth="360.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="225.0" stroke="BLACK" strokeType="INSIDE" width="145.0" />
+                        <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="225.0" stroke="BLACK" strokeType="INSIDE" width="145.0" />
                         <ImageView fx:id="img" fitHeight="240.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </StackPane>

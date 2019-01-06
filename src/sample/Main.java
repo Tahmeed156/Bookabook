@@ -14,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("rentOutPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("bookDetailsPage.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 1200, 800));
         primaryStage.show();
@@ -23,21 +23,21 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-        try {
-            User u1 = new User("Tahmeed");
-            User u2 = new User("Najib");
+//        try {
+//            User u1 = new User("Tahmeed");
+//            User u2 = new User("Najib");
+//
+//            SessionFactory sf = new Configuration().configure("/sample/hibernate.cfg.xml").buildSessionFactory();
+//            Session s = sf.openSession();
+//            s.beginTransaction();
+//            s.save(u1);
+//            s.save(u2);
+//            s.getTransaction().commit();
+//        }
+//        catch (HibernateException e) {
+//            e.printStackTrace();
+//        }
 
-            SessionFactory sf = new Configuration().configure("/sample/hibernate.cfg.xml").buildSessionFactory();
-            Session s = sf.openSession();
-            s.beginTransaction();
-            s.save(u1);
-            s.save(u2);
-            s.getTransaction().commit();
-        }
-        catch (HibernateException e) {
-            e.printStackTrace();
-        }
-
-        // launch(args);
+         launch(args);
     }
 }

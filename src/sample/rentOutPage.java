@@ -90,6 +90,8 @@ public class rentOutPage {
     Button[] picBtn;
     File file;
 
+    @FXML private Rectangle rectangle;
+
 
 
 
@@ -183,7 +185,7 @@ public class rentOutPage {
             {
                 if(event.getSource()==picBtn[i])
                 {
-                    picBtn[i].setStyle("-fx-background-color:#90abd1");
+                    picBtn[i].setStyle("-fx-background-color:#92a2b9");
                 }
             }
         }
@@ -222,6 +224,7 @@ public class rentOutPage {
         else{
             img.setImage(new Image(file.toURI().toString()));
             upload.setDisable(false);
+            rectangle.setVisible(false);
         }
 
     }
