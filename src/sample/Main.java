@@ -5,39 +5,36 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+
+import java.util.prefs.Preferences;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("bookDetailsPage.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 1200, 800));
-        primaryStage.show();
+
+        Preferences userCon = Preferences.userRoot().node("bookabook/user");
+        Parent root = FXMLLoader.load(getClass().getResource("logIn.fxml"));
+        try {
+            String username = userCon.get("username", "user.username");
+            if (username.equals(""))
+                throw new Exception("User not found in registry");
+            System.out.println("Logged in as " + username);
+            root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            primaryStage.setTitle("Book A Book");
+            primaryStage.setScene(new Scene(root, 1200, 800));
+            primaryStage.show();
+        }
     }
 
 
     public static void main(String[] args) {
 
-//        try {
-//            User u1 = new User("Tahmeed");
-//            User u2 = new User("Najib");
-//
-//            SessionFactory sf = new Configuration().configure("/sample/hibernate.cfg.xml").buildSessionFactory();
-//            Session s = sf.openSession();
-//            s.beginTransaction();
-//            s.save(u1);
-//            s.save(u2);
-//            s.getTransaction().commit();
-//        }
-//        catch (HibernateException e) {
-//            e.printStackTrace();
-//        }
-
-         launch(args);
+        launch(args);
     }
 }
