@@ -121,8 +121,9 @@ public class dashboard {
     List<String> rauthor = new ArrayList<>(Arrays.asList("GRR Martin","George Orwell","George Orwell","Rick"));
     Image[] rimgs = new Image[50];
 
-
-    String path = "E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\Pictures";
+    // String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "A:\\"; // Tahmeed config
+    private String path = dir + "Bookabook\\src\\sample\\Pictures\\";
 
 
     public void initialize()
