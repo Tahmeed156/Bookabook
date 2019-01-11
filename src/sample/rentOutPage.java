@@ -79,6 +79,10 @@ public class rentOutPage {
     ObservableList<String> condList = FXCollections.observableArrayList("Perfect",
             "A little bit of tear", "Some tear", "Heavily used" );
 
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "A:\\"; // Tahmeed config
+    private String path = dir + "Bookabook\\src\\sample\\Pictures\\";
+
 
     //right image components
 
@@ -91,12 +95,6 @@ public class rentOutPage {
     File file;
 
     @FXML private Rectangle rectangle;
-
-
-
-
-
-    String path = "E:\\Projects\\CSE\\BookABook\\Code\\rentOutPage\\src\\sample\\Pictures\\";
 
     public void initialize() {
         lbl = new Label[]{dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
