@@ -26,6 +26,7 @@ public class searchPage{
     @FXML private VBox left;
     //left side labels;
     @FXML private Label dashBLbl;
+    @FXML private Label searchLbl;
     @FXML private Label messagesLbl;
     @FXML private Label helpLbl;
     @FXML private Label profileLbl;
@@ -35,6 +36,7 @@ public class searchPage{
 
     //left side stacks
     @FXML private StackPane dashBStk;
+    @FXML private StackPane searchStk;
     @FXML private StackPane messagesStk;
     @FXML private StackPane helpStk;
     @FXML private StackPane profileStk;
@@ -135,8 +137,8 @@ public class searchPage{
 
     public void initialize()
     {
-        lbl = new Label[]{dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
-        stck = new StackPane[]{dashBStk,messagesStk,helpStk,profileStk,logoutStk};
+        lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
+        stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
 
         bookLabel = new Label[]{BookName1,BookName2,BookName3,BookName4,BookName5,BookName6};
         authorLabel = new Label[]{BookAuthor1,BookAuthor2,BookAuthor3, BookAuthor4, BookAuthor5,BookAuthor6};
@@ -220,7 +222,8 @@ public class searchPage{
         }
         else {
             for (int i = 0; i < stck.length; i++) {
-                if (stck[i].isHover()) {
+                 if(i==1){continue;}
+                 if (stck[i].isHover()) {
                     stck[i].setStyle("-fx-background-color:#b9b9b9;");
                     lbl[i].setTextFill(Color.rgb(59, 56, 56));
                 }
@@ -241,6 +244,7 @@ public class searchPage{
         }
         else {
             for (int i = 0; i < stck.length; i++) {
+                if(i==1){continue;}
                 if (!stck[i].isHover()) {
                     stck[i].setStyle("-fx-background-color:#3b3838;");
                     lbl[i].setTextFill(Color.rgb(217, 217, 217));
@@ -253,26 +257,9 @@ public class searchPage{
     {
         for(int i=0; i<stck.length; i++)
         {
-            if(stck[i].isPressed())
+            if(stck[i].isPressed() && i!=1)
             {
-                stck[i].setStyle("-fx-background-color:#303030;");
-                lbl[i].setTextFill(Color.rgb(217,217,217));
-                break;
-            }
-        }
-
-    }
-
-
-    public void released(MouseEvent event)
-    {
-        for(int i=0; i<stck.length; i++)
-        {
-            if(event.getSource()==stck[i])
-            {
-                stck[i].setStyle("-fx-background-color:#b9b9b9;");
-                lbl[i].setTextFill(Color.rgb(59,56,56));
-                break;
+                Windows w = new Windows(stck[i], i);
             }
         }
 

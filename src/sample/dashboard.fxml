@@ -15,17 +15,17 @@
     <left>
         <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
             <children>
-                <StackPane prefHeight="100.0" prefWidth="160.0">
+                <StackPane fx:id="dashBStk" prefHeight="100.0" prefWidth="160.0">
                     <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc000" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                        <Label text="Dashboard">
+                        <Label fx:id="dashBLbl" text="Dashboard">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane fx:id="searchStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="80.0" prefWidth="160.0">
+                <StackPane fx:id="searchStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="searchLbl" text="Search" textFill="#d9d9d9">
                             <font>
@@ -34,7 +34,7 @@
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="80.0" prefWidth="160.0">
+                <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="messagesLbl" text="Messages" textFill="#d9d9d9">
                             <font>
@@ -43,7 +43,7 @@
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="80.0" prefWidth="160.0">
+                <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="helpLbl" text="Help" textFill="#d9d9d9">
                             <font>
@@ -52,7 +52,7 @@
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane fx:id="profileStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="80.0" prefWidth="160.0">
+                <StackPane fx:id="profileStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="profileLbl" text="Profile" textFill="#d9d9d9">
                             <font>
@@ -61,7 +61,7 @@
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="80.0" prefWidth="160.0">
+                <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="logoutLbl" text="Logout" textFill="#d9d9d9">
                             <font>
@@ -82,19 +82,17 @@
                     </image>
                 </ImageView>
                 <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="732.0">
-                    <children>
-                        <Label prefHeight="55.0" prefWidth="152.0" style="-fx-background-color: #3b3838;" text="Dashboard" textFill="#d9d9d9">
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                            <StackPane.margin>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                            </StackPane.margin>
-                            <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                            </padding>
-                        </Label>
-                    </children>
+               <children>
+                  <AnchorPane>
+                     <children>
+                        <Button fx:id="rentOutBtn" alignment="CENTER" layoutX="500.0" layoutY="60.0" mnemonicParsing="false" onAction="#btnPressed" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="198.0" style="-fx-background-color: #44546a;" text="Rent Out Page" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
                 </StackPane>
                 <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
                     <children>

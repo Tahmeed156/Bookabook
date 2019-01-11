@@ -6,7 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 import java.util.prefs.Preferences;
+
+
+
 
 public class Main extends Application {
 
@@ -14,10 +18,12 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Preferences userCon = Preferences.userRoot().node("bookabook/user");
-        Parent root = FXMLLoader.load(getClass().getResource("logIn.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+
+
         try {
             String username = userCon.get("username", "user.username");
-            if (username.equals(""))
+            if (username.equals("") || username.equals("user.username"))
                 throw new Exception("User not found in registry");
             System.out.println("Logged in as " + username);
             root = FXMLLoader.load(getClass().getResource("rentOutPage.fxml"));

@@ -52,7 +52,7 @@ public class User {
         this.username = u;
     }
 
-    // public void signup(String f, String u, String p, Date d, String g, String e, String c) {
+    // public void signup(String f, String u, String p, Date d, String e) {
     public void signup(String f, String u, String e, String c) {
         this.full_name = f;
         this.username = u;

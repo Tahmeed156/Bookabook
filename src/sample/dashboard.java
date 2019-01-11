@@ -2,7 +2,11 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,8 +19,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 public class dashboard {
     @FXML private VBox left;
     //left side labels;
+    @FXML private Label dashBLbl;
     @FXML private Label searchLbl;
     @FXML private Label messagesLbl;
     @FXML private Label helpLbl;
@@ -35,6 +43,7 @@ public class dashboard {
     //because of how fxml loader acts
 
     //left side stacks
+    @FXML private StackPane dashBStk;
     @FXML private StackPane searchStk;
     @FXML private StackPane messagesStk;
     @FXML private StackPane helpStk;
@@ -43,6 +52,7 @@ public class dashboard {
     StackPane[] stck;// = {searchStk,messagesStk,helpStk,profileStk,logoutStk};
 
     //borderpane top stuff
+    @FXML private Button rentOutBtn;
     @FXML private Circle imgCircle;
     @FXML private VBox upperRightVbox;
 
@@ -121,15 +131,15 @@ public class dashboard {
     List<String> rauthor = new ArrayList<>(Arrays.asList("GRR Martin","George Orwell","George Orwell","Rick"));
     Image[] rimgs = new Image[50];
 
-    // String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
-    private String dir = "A:\\"; // Tahmeed config
+    String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    //private String dir = "A:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\sample\\Pictures\\";
 
 
     public void initialize()
     {
-        lbl = new Label[]{searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
-        stck = new StackPane[]{searchStk,messagesStk,helpStk,profileStk,logoutStk};
+        lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
+        stck = new StackPane[]{dashBStk,searchStk,messagesStk,helpStk,profileStk,logoutStk};
 
         tlabel = new Label[]{tBookName1,tBookName2,tBookName3};
         rlabel = new Label[]{rBookName1,rBookName2,rBookName3};
@@ -240,7 +250,7 @@ public class dashboard {
     {
 
 
-        for(int i=0; i<stck.length; i++)
+        for(int i=1; i<stck.length; i++)
         {
             if(stck[i].isHover())
             {
@@ -253,7 +263,7 @@ public class dashboard {
 
     public void endHoverBox(MouseEvent event)
     {
-        for(int i=0; i<stck.length; i++)
+        for(int i=1; i<stck.length; i++)
         {
             if(!stck[i].isHover())
             {
@@ -266,33 +276,15 @@ public class dashboard {
 
     public void pressed(MouseEvent event)
     {
-        for(int i=0; i<stck.length; i++)
+        for(int i=1; i<stck.length; i++)
         {
             if(stck[i].isPressed())
             {
-                stck[i].setStyle("-fx-background-color:#303030;");
-                lbl[i].setTextFill(Color.rgb(217,217,217));
-                break;
+                Windows w = new Windows(stck[i], i);
             }
         }
 
     }
-
-
-    public void released(MouseEvent event)
-    {
-        for(int i=0; i<stck.length; i++)
-        {
-            if(event.getSource()==stck[i])
-            {
-                stck[i].setStyle("-fx-background-color:#b9b9b9;");
-                lbl[i].setTextFill(Color.rgb(59,56,56));
-                break;
-            }
-        }
-
-    }
-
 
     public void rArrowClicked(MouseEvent event)
     {
@@ -469,5 +461,27 @@ public class dashboard {
 
         }
     }
+
+    public void btnPressed(ActionEvent e)
+    {
+        Windows w = new Windows(rentOutBtn, 6);
+    }
+
+
+    public void onHoverButton(MouseEvent event)
+    {
+
+        rentOutBtn.setStyle("-fx-background-color:#92a2b9");
+
+    }
+
+
+    public void endHoverButton(MouseEvent event)
+    {
+
+        rentOutBtn.setStyle("-fx-background-color:#44546a");
+
+    }
+
 
 }

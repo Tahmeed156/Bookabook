@@ -15,7 +15,7 @@
     <left>
         <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
             <children>
-                <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="100.0" prefWidth="160.0">
+                <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="100.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="dashBLbl" text="Dashboard" textFill="#d9d9d9">
                             <font>
@@ -24,16 +24,16 @@
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
+                <StackPane fx:id="searchStk" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
                     <children>
-                        <Label text="Search">
+                        <Label fx:id="searchLbl" text="Search">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="80.0" prefWidth="160.0">
+                <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="messagesLbl" text="Messages" textFill="#d9d9d9">
                             <font>
@@ -42,7 +42,7 @@
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="80.0" prefWidth="160.0">
+                <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="helpLbl" text="Help" textFill="#d9d9d9">
                             <font>
@@ -51,7 +51,7 @@
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane fx:id="profileStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="80.0" prefWidth="160.0">
+                <StackPane fx:id="profileStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="profileLbl" text="Profile" textFill="#d9d9d9">
                             <font>
@@ -60,7 +60,7 @@
                         </Label>
                     </children>
                 </StackPane>
-                <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" onMouseReleased="#released" prefHeight="80.0" prefWidth="160.0">
+                <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
                     <children>
                         <Label fx:id="logoutLbl" text="Logout" textFill="#d9d9d9">
                             <font>

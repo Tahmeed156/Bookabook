@@ -27,6 +27,8 @@ public class rentOutPage {
     @FXML
     private Label dashBLbl;
     @FXML
+    private Label searchLbl;
+    @FXML
     private Label messagesLbl;
     @FXML
     private Label helpLbl;
@@ -42,6 +44,8 @@ public class rentOutPage {
     @FXML
     private StackPane dashBStk;
     @FXML
+    private StackPane searchStk;
+    @FXML
     private StackPane messagesStk;
     @FXML
     private StackPane helpStk;
@@ -52,10 +56,10 @@ public class rentOutPage {
     StackPane[] stck;// = {dashBStk,messagesStk,helpStk,profileStk,logoutStk};
 
     //borderpane top stuff
-    @FXML
-    private Circle imgCircle;
-    @FXML
-    private VBox upperRightVbox;
+    @FXML private Button mainPageBtn;
+    @FXML private Circle imgCircle;
+    @FXML private VBox upperRightVbox;
+
 
 
 
@@ -79,8 +83,8 @@ public class rentOutPage {
     ObservableList<String> condList = FXCollections.observableArrayList("Perfect",
             "A little bit of tear", "Some tear", "Heavily used" );
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
-    private String dir = "A:\\"; // Tahmeed config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "A:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\sample\\Pictures\\";
 
 
@@ -95,14 +99,17 @@ public class rentOutPage {
     File file;
 
     @FXML private Rectangle rectangle;
+    RadioButton[] rdbtn;
 
     public void initialize() {
-        lbl = new Label[]{dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
-        stck = new StackPane[]{dashBStk, messagesStk, helpStk, profileStk, logoutStk};
-        picBtn = new Button[]{choose,upload};
+        lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
+        stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
+        picBtn = new Button[]{choose,upload,mainPageBtn};
 
         Image imgperson = new Image(new File(path + "woman.png").toURI().toString());
         imgCircle.setFill(new ImagePattern(imgperson));
+
+        rdbtn = new RadioButton[]{original,whitePrint,newsPrint};
 
         //upperRightLabels
         Label nameUser = new Label("Jane Micheal ");
@@ -127,7 +134,7 @@ public class rentOutPage {
 
 
     public void onHoverBox(MouseEvent event) {
-        for (int i = 0; i < stck.length; i++) {
+        for (int i = 1; i < stck.length; i++) {
             if (stck[i].isHover()) {
                 stck[i].setStyle("-fx-background-color:#b9b9b9;");
                 lbl[i].setTextFill(Color.rgb(59, 56, 56));
@@ -138,7 +145,7 @@ public class rentOutPage {
     }
 
     public void endHoverBox(MouseEvent event) {
-        for (int i = 0; i < stck.length; i++) {
+        for (int i = 1; i < stck.length; i++) {
             if (!stck[i].isHover()) {
                 stck[i].setStyle("-fx-background-color:#3b3838;");
                 lbl[i].setTextFill(Color.rgb(217, 217, 217));
@@ -147,24 +154,13 @@ public class rentOutPage {
 
     }
 
-    public void pressed(MouseEvent event) {
-        for (int i = 0; i < stck.length; i++) {
-            if (stck[i].isPressed()) {
-                stck[i].setStyle("-fx-background-color:#383838;");
-                lbl[i].setTextFill(Color.rgb(217, 217, 217));
-                break;
-            }
-        }
-
-    }
-
-
-    public void released(MouseEvent event) {
-        for (int i = 0; i < stck.length; i++) {
-            if (event.getSource() == stck[i]) {
-                stck[i].setStyle("-fx-background-color:#b9b9b9;");
-                lbl[i].setTextFill(Color.rgb(59, 56, 56));
-                break;
+    public void pressed(MouseEvent event)
+    {
+        for(int i=1; i<stck.length; i++)
+        {
+            if(stck[i].isPressed())
+            {
+                Windows w = new Windows(stck[i], i);
             }
         }
 
@@ -238,13 +234,33 @@ public class rentOutPage {
     public void rentBook(MouseEvent event)
     {
 
-        condition.getValue(); //to get value of condition combo box;
+
+        //to get value of condition combo box
+       //condition.getValue();
         //to get the value from genre list
-        ObservableList<String> selectedGenre = genre.getSelectionModel().getSelectedItems();
+       // ObservableList<String> selectedGenre = genre.getSelectionModel().getSelectedItems();
+        //to get value from bookprint
+        for(int i=0; i<3; i++)
+        {
+            if(rdbtn[i].isSelected())
+            {
+                System.out.println(rdbtn[i].getText());
+                break;
+            }
+
+        }
+
+
 
         //DO THIS
         //MUST DO
         //MOST IMPORTANT PART
+    }
+
+
+    public void btnPressed(ActionEvent e)
+    {
+        Windows w = new Windows(mainPageBtn, 0);
     }
 
 }
