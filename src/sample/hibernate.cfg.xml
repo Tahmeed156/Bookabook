@@ -26,7 +26,8 @@
         </property>
 
         <property name = "hibernate.connection.password">
-            root
+            leavemealone
+            <!--root-->
         </property>
 
         <!-- Setting autocommit -->
@@ -52,6 +53,7 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="sample.models.User"/>
+        <mapping class="sample.models.Book"/>
 
         <!-- List of XML mapping files -->
         <!--<mapping resource = "Employee.hbm.xml"/>-->

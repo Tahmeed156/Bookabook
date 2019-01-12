@@ -15,9 +15,16 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.json.JSONException;
+import org.json.JSONObject;
+import sample.models.Book;
+import sample.models.User;
 
 import java.io.File;
-
+import java.time.LocalDate;
 
 
 public class rentOutPage {
@@ -83,8 +90,9 @@ public class rentOutPage {
     ObservableList<String> condList = FXCollections.observableArrayList("Perfect",
             "A little bit of tear", "Some tear", "Heavily used" );
 
-    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\sample\\Pictures\\";
 
 
@@ -233,24 +241,55 @@ public class rentOutPage {
 
     public void rentBook(MouseEvent event)
     {
+        // to get value of condition combo box
+        // condition.getValue();
+        // to get the value from genre list
+        // ObservableList<String> selectedGenre = genre.getSelectionModel().getSelectedItems();
+        // to get value from bookprint
 
+//        for(int i=0; i<3; i++) {
+//            if(rdbtn[i].isSelected())
+//            {
+//                System.out.println(rdbtn[i].getText());
+//                break;
+//            }
+//        }
 
-        //to get value of condition combo box
-       //condition.getValue();
-        //to get the value from genre list
-       // ObservableList<String> selectedGenre = genre.getSelectionModel().getSelectedItems();
-        //to get value from bookprint
-        for(int i=0; i<3; i++)
-        {
+        String printRBtn = "";
+        for(int i=0; i<3; i++) {
             if(rdbtn[i].isSelected())
             {
-                System.out.println(rdbtn[i].getText());
+                printRBtn = rdbtn[i].getText();
                 break;
             }
-
         }
 
+        Book b = new Book();
+        JSONObject bookInfo = new JSONObject();
+        try {
+            bookInfo.put("print", printRBtn);
+            bookInfo.put("condition", condition.getValue());
+            bookInfo.put("review", review.getText());
+            bookInfo.put("year_bought", "2017");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
+        b.rent(
+                book.getText(),
+                author.getText(),
+                Double.valueOf(rentPrice.getText()),
+                Double.valueOf(deposit.getText()),
+                bookInfo.toString()
+        );
+
+
+        SessionFactory sf = new Configuration().configure("/sample/hibernate.cfg.xml").buildSessionFactory();
+        Session s = sf.openSession();
+        s.beginTransaction();
+        s.save(b);
+        s.getTransaction().commit();
+        s.close();
 
         //DO THIS
         //MUST DO

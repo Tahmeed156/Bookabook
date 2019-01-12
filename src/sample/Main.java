@@ -18,15 +18,15 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Preferences userCon = Preferences.userRoot().node("bookabook/user");
-        Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("logIn.fxml"));
 
 
         try {
-            String username = userCon.get("username", "user.username");
-            if (username.equals("") || username.equals("user.username"))
+            String username = userCon.get("username", "");
+            if (username.equals("") || username.equals(""))
                 throw new Exception("User not found in registry");
             System.out.println("Logged in as " + username);
-            root = FXMLLoader.load(getClass().getResource("rentOutPage.fxml"));
+            root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

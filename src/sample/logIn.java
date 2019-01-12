@@ -18,7 +18,6 @@ import org.hibernate.query.Query;
 import sample.models.User;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.prefs.Preferences;
 
 public class logIn {
@@ -51,7 +50,7 @@ public class logIn {
             if(userNameLogin.getText().isEmpty() || password.getText().isEmpty())
             {
                 toastlogin.setText("PLEASE FILL ALL THE FIELDS");
-                toastlogin.setStyle("-fx-background-color:orange; -fx-text-fill:#ffffff");
+                toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
             }
             else {
                 try {
@@ -73,14 +72,14 @@ public class logIn {
                         userCon.put("id", String.valueOf(u.getId()));
                         userCon.put("full_name", u.getFull_name());
 
-                        String username = userCon.get("username", "user.username");
+                        String username = userCon.get("username", "");
                         System.out.println("Successfully logged in as " + username);
                         // todo: Add toast ^ and change screens
+                        Windows w = new Windows(logInBtn, "dashboard.fxml");
                     } catch (Exception e) {
-                        System.out.println("Wrong username or password");
-                        // todo: Add toast ^
                         toastlogin.setText("Wrong Username or Password");
-                        toastlogin.setStyle("-fx-background-color:orange; -fx-text-fill:#ffffff");
+                        toastlogin.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff");
+                        // todo: Add toast ^
                     }
 
                     s.getTransaction().commit();
@@ -88,37 +87,38 @@ public class logIn {
                 } catch (HibernateException e) {
                     // todo: Add toast "Unable to create new user"
                     toastlogin.setText("Unable to create new user");
-                    toastlogin.setStyle("-fx-background-color:orange; -fx-text-fill:#ffffff");
+                    toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
                     System.out.println(e.getMessage());
                 }
             }
         }
         if (event.getSource() == signUpBtn) {
-            // todo: Handling corner cases - didn't fill in all boxes, gender not right, not valid email/contact_no
+
             if(fullName.getText().isEmpty()|| userNameSignup.getText().isEmpty()||
-                    passwordSignup.getText().isEmpty()|| conPasswordSignup.getText().isEmpty()||
-                    emailAddress.getText().isEmpty()){
+                passwordSignup.getText().isEmpty()|| conPasswordSignup.getText().isEmpty()||
+                emailAddress.getText().isEmpty()) {
                 toastSignup.setText("PLEASE FILL ALL THE FIELDS");
-                toastSignup.setStyle("-fx-background-color:orange; -fx-text-fill:#ffffff");
-
-                LocalDate date = dateOfBirth.getValue();
-                System.out.println(date.toString());
+                toastSignup.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
             }
-
+            else if (!passwordSignup.getText().equals(conPasswordSignup.getText())) {
+                toastlogin.setText("RE-ENTER PASSWORDS");
+                passwordSignup.getText().equals(conPasswordSignup.getText());
+                toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
+            }
             else if(passwordSignup.getText().equals(conPasswordSignup.getText())) {
 
                 try {
-
                     User u = new User();
-                    LocalDate date = dateOfBirth.getValue();
-                    System.out.println(date.toString());
+
+                    LocalDate localDate = dateOfBirth.getValue();
+                    // Converts LocalDate object into Date object
+                    java.util.Date date = java.sql.Date.valueOf(localDate);
+
                     u.signup(
                             fullName.getText(),
                             userNameSignup.getText(),
-                            password.getText(),
-                            // dateOfBirth.<getData>, needs to return a Date object
-                            // returns LocalDate : use LocalDate if possible
-                            //dateOfBirth.getValue(),
+                            passwordSignup.getText(),
+                            date, // passes a date object
                             emailAddress.getText()
                     );
                     SessionFactory sf = new Configuration().configure("/sample/hibernate.cfg.xml").buildSessionFactory();
@@ -138,11 +138,12 @@ public class logIn {
                     System.out.println("Successfully signed up as " + username);
                     // todo: Add toast ^ and change screens
                     toastSignup.setText("SUCCESSFULLY SIGNED UP");
-                    toastSignup.setStyle("-fx-background-color:green; -fx-text-fill:#ffffff");
+                    toastSignup.setStyle("-fx-background-color: #5cb85c; -fx-text-fill:#ffffff");
+                    Windows w = new Windows(logInBtn, "dashboard.fxml");
                 } catch (HibernateException e) {
                     // todo: Add toast "Unable to create new user"
                     toastSignup.setText("UNABLE TO CREATE NEW USER");
-                    toastSignup.setStyle("-fx-background-color:red; -fx-text-fill:#ffffff");
+                    toastSignup.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff");
                     System.out.println(e.getMessage());
                 }
             }
@@ -183,17 +184,15 @@ public class logIn {
 
     // ========================== CONFIRM PASSWORD FUNCTIONS ========================
 
-    public void conPassPressed(KeyEvent e)
+    public void PassPressed(KeyEvent e)
     {
-        if(!passwordSignup.getText().equals(conPasswordSignup.getText()))
-        {
+        if(!passwordSignup.getText().equals(conPasswordSignup.getText())) {
             warningPassword.setText("PASSWORDS DON'T MATCH");
-            warningPassword.setStyle("-fx-background-color:#ff0000; -fx-text-fill:#ffffff");
+            warningPassword.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff; -fx-border-radius: 5");
         }
-        if(passwordSignup.getText().equals(conPasswordSignup.getText()))
-        {
+        if(passwordSignup.getText().equals(conPasswordSignup.getText())) {
             warningPassword.setText("PASSWORDS MATCH");
-            warningPassword.setStyle("-fx-background-color:#00ff00; -fx-text-fill:#ffffff");
+            warningPassword.setStyle("-fx-background-color: #5cb85c; -fx-text-fill:#ffffff; -fx-border-radius: 5");
         }
     }
 

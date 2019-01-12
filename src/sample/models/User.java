@@ -52,14 +52,12 @@ public class User {
         this.username = u;
     }
 
-    // public void signup(String f, String u, String p, Date d, String e) {
-    public void signup(String f, String u, String e, String c) {
+    public void signup(String f, String u, String p, Date d, String e) {
         this.full_name = f;
         this.username = u;
-        // this.date_of_birth = d;
-        // this.gender = g;
+        this.password = p;
+        this.date_of_birth = d;
         this.email = e;
-        this.contact_no = c;
     }
 
     public String showName() {

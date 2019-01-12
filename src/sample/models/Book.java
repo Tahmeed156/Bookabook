@@ -26,7 +26,7 @@ public class Book {
 
     @Column(name = "timestamp")
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date timestamp = new Date();
+    private Date timestamp;
 
     @Column(name = "book_info", columnDefinition = "TEXT")
     private String book_info;
@@ -42,6 +42,15 @@ public class Book {
     public Book (String n, String a) {
         this.name = n;
         this.author = a;
+    }
+
+    public void rent (String n, String a, double r, double d, String i) {
+        this.name = n;
+        this.author = a;
+        this.rent = r;
+        this.deposit = d;
+        this.book_info = i;
+        this.timestamp = new Date();
     }
 
 }
