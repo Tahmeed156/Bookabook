@@ -1,4 +1,4 @@
-package sample;
+package client.controllers;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,11 +14,11 @@ public class Windows {
 
 
     Parent root;
-    String[] name = new String[]{"dashboard.fxml", "searchPage.fxml", "", "","","logIn.fxml","rentOutPage.fxml"};
+    String[] name = new String[]{"dashboard.fxml", "searchPage.fxml", "", "","","login.fxml","rentOutPage.fxml"};
 
     Windows(StackPane s, int i) {
         try {
-            if (name[i].equals("logIn.fxml")) {
+            if (name[i].equals("login.fxml")) {
                 Preferences userCon = Preferences.userRoot().node("bookabook/user");
 
                 // Deleting information from the registry
@@ -26,7 +26,7 @@ public class Windows {
                 userCon.put("id", "");
                 userCon.put("full_name", "");
             }
-            root = FXMLLoader.load(getClass().getResource(name[i]));
+            root = FXMLLoader.load(getClass().getResource("../fxml/"+name[i]));
             Scene scene = new Scene(root);
             Stage window = (Stage)(s.getScene().getWindow());
             window.setScene(scene);
@@ -38,7 +38,7 @@ public class Windows {
 
     Windows (Button b, int i) {
         try {
-            root = FXMLLoader.load(getClass().getResource(name[i]));
+            root = FXMLLoader.load(getClass().getResource("../fxml/"+name[i]));
             Scene scene = new Scene(root);
             Stage window = (Stage)(b.getScene().getWindow());
             window.setScene(scene);

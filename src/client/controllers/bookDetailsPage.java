@@ -1,4 +1,4 @@
-package sample;
+package client.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -104,7 +104,10 @@ public class bookDetailsPage {
     String[] allsimilarBooks;
     Integer index;
 
-    String path = "E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\sample\\Pictures\\";
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "A:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
+    private String path = dir + "Bookabook\\src\\client\\Pictures\\";
 
     String[] reviewArr = new String[]{"Book quite good",
             "Maybe the world will be set right by this book",

@@ -1,4 +1,5 @@
-package sample;
+package client.controllers;
+
 
 // Javafx configuration
 import javafx.fxml.FXML;
@@ -15,12 +16,12 @@ import org.hibernate.cfg.Configuration;
 
 // Project files
 import org.hibernate.query.Query;
-import sample.models.User;
+import server.models.User;
 
 import java.time.LocalDate;
 import java.util.prefs.Preferences;
 
-public class logIn {
+public class login {
 
     @FXML private TextField userNameLogin;
     @FXML private PasswordField password;
@@ -54,7 +55,7 @@ public class logIn {
             }
             else {
                 try {
-                    SessionFactory sf = new Configuration().configure("/sample/hibernate.cfg.xml").buildSessionFactory();
+                    SessionFactory sf = new Configuration().configure("/client/hibernate.cfg.xml").buildSessionFactory();
                     Session s = sf.openSession();
                     s.beginTransaction();
 
@@ -75,7 +76,7 @@ public class logIn {
                         String username = userCon.get("username", "");
                         System.out.println("Successfully logged in as " + username);
                         // todo: Add toast ^ and change screens
-                        Windows w = new Windows(logInBtn, "dashboard.fxml");
+                        Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
                     } catch (Exception e) {
                         toastlogin.setText("Wrong Username or Password");
                         toastlogin.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff");
@@ -121,7 +122,7 @@ public class logIn {
                             date, // passes a date object
                             emailAddress.getText()
                     );
-                    SessionFactory sf = new Configuration().configure("/sample/hibernate.cfg.xml").buildSessionFactory();
+                    SessionFactory sf = new Configuration().configure("/client/hibernate.cfg.xml").buildSessionFactory();
                     Session s = sf.openSession();
                     s.beginTransaction();
                     s.save(u);
@@ -139,7 +140,7 @@ public class logIn {
                     // todo: Add toast ^ and change screens
                     toastSignup.setText("SUCCESSFULLY SIGNED UP");
                     toastSignup.setStyle("-fx-background-color: #5cb85c; -fx-text-fill:#ffffff");
-                    Windows w = new Windows(logInBtn, "dashboard.fxml");
+                    Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
                 } catch (HibernateException e) {
                     // todo: Add toast "Unable to create new user"
                     toastSignup.setText("UNABLE TO CREATE NEW USER");

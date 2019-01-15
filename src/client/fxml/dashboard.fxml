@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.dashboard">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.dashboard">
     <left>
         <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
             <children>
@@ -78,7 +78,7 @@
             <children>
                 <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
                     <image>
-                        <Image url="@Pictures/logo.png" />
+                        <Image url="@../Pictures/logo.png" />
                     </image>
                 </ImageView>
                 <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="732.0">
@@ -295,7 +295,7 @@
                      <children>
                         <ImageView fx:id="tLArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
-                              <Image url="@Pictures/leftArrow.png" />
+                              <Image url="@../Pictures/leftArrow.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -359,7 +359,7 @@
                      <children>
                         <ImageView fx:id="tRArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
-                              <Image url="@Pictures/rightArrow.png" />
+                              <Image url="@../Pictures/rightArrow.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -384,7 +384,7 @@
                      <children>
                         <ImageView fx:id="rLArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
-                              <Image url="@Pictures/leftArrow.png" />
+                              <Image url="@../Pictures/leftArrow.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -448,7 +448,7 @@
                      <children>
                         <ImageView fx:id="rRArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
                            <image>
-                              <Image url="@Pictures/rightArrow.png" />
+                              <Image url="@../Pictures/rightArrow.png" />
                            </image>
                         </ImageView>
                      </children>

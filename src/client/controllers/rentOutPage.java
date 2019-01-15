@@ -1,4 +1,4 @@
-package sample;
+package client.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +20,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.json.JSONException;
 import org.json.JSONObject;
-import sample.models.Book;
-import sample.models.User;
+import server.models.Book;
+import server.models.User;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -90,10 +90,10 @@ public class rentOutPage {
     ObservableList<String> condList = FXCollections.observableArrayList("Perfect",
             "A little bit of tear", "Some tear", "Heavily used" );
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
-    private String path = dir + "Bookabook\\src\\sample\\Pictures\\";
+    // private String dir = "D:\\"; // Tahmeed config
+    private String path = dir + "Bookabook\\src\\client\\Pictures\\";
 
 
     //right image components
@@ -284,7 +284,7 @@ public class rentOutPage {
         );
 
 
-        SessionFactory sf = new Configuration().configure("/sample/hibernate.cfg.xml").buildSessionFactory();
+        SessionFactory sf = new Configuration().configure("/client/hibernate.cfg.xml").buildSessionFactory();
         Session s = sf.openSession();
         s.beginTransaction();
         s.save(b);

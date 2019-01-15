@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.rentOutPage">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.rentOutPage">
     <left>
         <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
             <children>
@@ -77,7 +77,7 @@
             <children>
                 <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
                     <image>
-                        <Image url="@Pictures/logo.png" />
+                        <Image url="@../Pictures/logo.png" />
                     </image>
                 </ImageView>
                 <StackPane prefHeight="155.0" prefWidth="732.0">

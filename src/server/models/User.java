@@ -1,4 +1,4 @@
-package sample.models;
+package server.models;
 
 import javax.persistence.*;
 import java.util.Date;

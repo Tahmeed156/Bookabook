@@ -1,4 +1,4 @@
-package sample;
+package client.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -123,10 +123,10 @@ public class searchPage{
     @FXML private ImageView lArrow;
     @FXML private ImageView rArrow;
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
-    private String path = dir + "Bookabook\\src\\sample\\Pictures\\";
+   // private String dir = "D:\\"; // Tahmeed config
+    private String path = dir + "Bookabook\\src\\client\\Pictures\\";
 
     //list for searched items
     List<String> name = new ArrayList<>(Arrays.asList("Harry Potter","Percy Jackson","Animal Farm","Foundation",

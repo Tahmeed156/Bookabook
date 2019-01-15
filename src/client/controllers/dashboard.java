@@ -1,4 +1,4 @@
-package sample;
+package client.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -131,10 +131,10 @@ public class dashboard {
     List<String> rauthor = new ArrayList<>(Arrays.asList("GRR Martin","George Orwell","George Orwell","Rick"));
     Image[] rimgs = new Image[50];
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
-    private String path = dir + "Bookabook\\src\\sample\\Pictures\\";
+    // private String dir = "D:\\"; // Tahmeed config
+    private String path = dir + "Bookabook\\src\\client\\Pictures\\";
 
 
     public void initialize()
