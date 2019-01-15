@@ -12,6 +12,7 @@ import java.util.prefs.Preferences;
 
 public class Windows {
 
+
     Parent root;
     String[] name = new String[]{"dashboard.fxml", "searchPage.fxml", "", "","","logIn.fxml","rentOutPage.fxml"};
 
@@ -61,4 +62,3 @@ public class Windows {
 
 
 }
-
