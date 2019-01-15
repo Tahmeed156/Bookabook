@@ -52,8 +52,8 @@
 
 
         <!-- Names the annotated entity class -->
-        <mapping class="client.models.User"/>
-        <mapping class="client.models.Book"/>
+        <mapping class="server.models.User"/>
+        <mapping class="server.models.Book"/>
 
         <!-- List of XML mapping files -->
         <!--<mapping resource = "Employee.hbm.xml"/>-->

@@ -14,7 +14,7 @@ public class Windows {
 
 
     Parent root;
-    String[] name = new String[]{"dashboard.fxml", "searchPage.fxml", "", "","","login.fxml","rentOutPage.fxml"};
+    String[] name = new String[]{"dashboard.fxml", "searchPage.fxml", "", "","profilePage.fxml","login.fxml","rentOutPage.fxml"};
 
     Windows(StackPane s, int i) {
         try {
