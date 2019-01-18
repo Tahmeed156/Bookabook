@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.messenger">
+    <left>
+        <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
+            <children>
+                <StackPane fx:id="dashBStk" prefHeight="100.0" prefWidth="160.0">
+                    <children>
+                        <Label fx:id="dashBLbl" text="Dashboard" textFill="WHITE">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </StackPane>
+                <StackPane fx:id="searchStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                    <children>
+                        <Label fx:id="searchLbl" text="Search" textFill="#d9d9d9">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </StackPane>
+                <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
+                    <children>
+                        <Label fx:id="messagesLbl" text="Messages" textFill="#d9d9d9">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </StackPane>
+                <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                    <children>
+                        <Label fx:id="helpLbl" text="Help" textFill="#d9d9d9">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </StackPane>
+                <StackPane fx:id="profileStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                    <children>
+                        <Label fx:id="profileLbl" text="Profile" textFill="#d9d9d9">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </StackPane>
+                <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                    <children>
+                        <Label fx:id="logoutLbl" text="Logout" textFill="#d9d9d9">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </StackPane>
+            </children>
+        </VBox>
+    </left>
+    <top>
+        <HBox fx:id="headerHbx" prefHeight="144.0" prefWidth="1200.0" style="-fx-background-color: #404040;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../Pictures/logo.png" />
+                    </image>
+                </ImageView>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="1040.0">
+               <children>
+                  <Label layoutX="341.0" layoutY="51.0" text="Messages" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Line endX="50.0" layoutX="680.0" layoutY="86.0" rotate="90.0" startX="-50.0" stroke="#d9d9d9" />
+                  <Label layoutX="832.0" layoutY="51.0" text="Recent Chats" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            </children>
+        </HBox>
+    </top>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="567.0" prefWidth="681.0" style="-fx-background-color: #404040;" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <ImageView fx:id="upArrow" fitHeight="29.0" fitWidth="83.0" onMouseClicked="#upArrowClicked" onMouseEntered="#onArrowHover" onMouseExited="#endArrowHover" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Pictures/upArrow.png" />
+               </image></ImageView>
+            <VBox fx:id="message" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="680.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <ImageView fx:id="downArrow" fitHeight="29.0" fitWidth="83.0" onMouseClicked="#downArrowClicked" onMouseEntered="#onArrowHover" onMouseExited="#endArrowHover" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Pictures/downArrow.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+   </center>
+   <right>
+      <VBox prefHeight="645.0" prefWidth="359.0" style="-fx-background-color: #404040;" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <HBox prefHeight="78.0" prefWidth="1200.0" style="-fx-background-color: #404040;" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="78.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" />
+            <TextField fx:id="chat" prefHeight="34.0" prefWidth="680.0" promptText="Wirte your message" />
+            <Button fx:id="send" mnemonicParsing="false" onMouseClicked="#sendBtn" prefHeight="33.0" prefWidth="71.0" text="Send" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
