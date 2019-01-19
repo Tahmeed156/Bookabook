@@ -11,344 +11,350 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.searchPage">
-    <left>
-        <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
-            <children>
-                <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="100.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="dashBLbl" text="Dashboard" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="searchStk" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
-                    <children>
-                        <Label fx:id="searchLbl" text="Search">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="messagesLbl" text="Messages" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="helpLbl" text="Help" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="profileStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="profileLbl" text="Profile" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="logoutLbl" text="Logout" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-            </children>
-        </VBox>
-    </left>
-    <top>
-        <HBox fx:id="headerHbx" prefHeight="144.0" prefWidth="1200.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
-            <children>
-                <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
-                    <image>
-                        <Image url="@../Pictures/logo.png" />
-                    </image>
-                </ImageView>
-                <StackPane prefHeight="155.0" prefWidth="732.0" />
-                <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
-                    <children>
-                        <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
-                        <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
-                    </children>
-                </StackPane>
-            </children>
-        </HBox>
-    </top>
-    <center>
-        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
-            <children>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Region prefHeight="100.0" prefWidth="60.0" />
-                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="383.0">
-                            <children>
-                                <TextField fx:id="searchTxt" prefHeight="30.0" prefWidth="269.0" style="-fx-border-color: #000000;" />
-                                <Button fx:id="searchButton" alignment="CENTER" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" prefHeight="30.0" style="-fx-background-color: #000000; -fx-background-radius: 0;" text="Search" textFill="WHITE">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Button>
-                            </children>
-                        </HBox>
-                    </children>
-                </HBox>
-                <HBox prefHeight="150.0" prefWidth="1040.0">
-                    <children>
-                        <Region prefHeight="150.0" prefWidth="50.0" />
-                        <StackPane fx:id="stckLArrow" prefHeight="150.0" prefWidth="50.0" visible="false">
-                            <children>
-                                <ImageView fx:id="lArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../Pictures/leftArrow.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </StackPane>
-                        <Region prefHeight="150.0" prefWidth="20.0" />
-                        <VBox fx:id="Vbox11" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookName1" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookAuthor1" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="img1" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <VBox fx:id="Vbox12" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Rent">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="rent1" />
-                                <Label text="Deposit">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="deposit1" />
-                            </children>
-                        </VBox>
-                        <Region prefHeight="150.0" prefWidth="50.0" />
-                        <VBox fx:id="Vbox21" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookName2" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookAuthor2" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="img2" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <VBox fx:id="Vbox22" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Rent">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="rent2" />
-                                <Label text="Deposit">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="deposit2" />
-                            </children>
-                        </VBox>
-                        <Region prefHeight="150.0" prefWidth="50.0" />
-                    </children>
-                </HBox>
-                <Region prefHeight="30.0" prefWidth="1040.0" />
-                <HBox prefHeight="150.0" prefWidth="200.0">
-                    <children>
-                        <Region prefHeight="150.0" prefWidth="120.0" />
-                        <VBox fx:id="Vbox31" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookName3" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookAuthor3" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="img3" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <VBox fx:id="Vbox32" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Rent">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="rent3" />
-                                <Label text="Deposit">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="deposit3" />
-                            </children>
-                        </VBox>
-                        <Region prefHeight="150.0" prefWidth="50.0" />
-                        <VBox fx:id="Vbox41" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookName4" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookAuthor4" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="img4" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <VBox fx:id="Vbox42" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Rent">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="rent4" />
-                                <Label text="Deposit">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="deposit4" />
-                            </children>
-                        </VBox>
-                        <Region prefHeight="150.0" prefWidth="50.0" />
-                    </children>
-                </HBox>
-                <Region prefHeight="30.0" prefWidth="1040.0" />
-                <HBox prefHeight="150.0" prefWidth="200.0">
-                    <children>
-                        <Region prefHeight="150.0" prefWidth="120.0" />
-                        <VBox fx:id="Vbox51" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookName5" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookAuthor5" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="img5" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <VBox fx:id="Vbox52" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Rent">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="rent5" />
-                                <Label text="Deposit">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="deposit5" />
-                            </children>
-                        </VBox>
-                        <Region prefHeight="150.0" prefWidth="50.0" />
-                        <VBox fx:id="Vbox61" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookName6" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="BookAuthor6" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="img6" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <VBox fx:id="Vbox62" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Rent">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="rent6" />
-                                <Label text="Deposit">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="deposit6" />
-                            </children>
-                        </VBox>
-                        <Region prefHeight="150.0" prefWidth="20.0" />
-                        <StackPane fx:id="stckRArrow" prefHeight="150.0" prefWidth="50.0" visible="false">
-                            <children>
-                                <ImageView fx:id="rArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../Pictures/rightArrow.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </StackPane>
-                    </children>
-                </HBox>
-                <Region prefHeight="30.0" prefWidth="1040.0" />
-            </children></VBox>
-    </center>
-</BorderPane>
+
+<Pane fx:id="parent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.searchPage">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
+          <left>
+              <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
+                  <children>
+                      <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="100.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="dashBLbl" text="Dashboard" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="searchStk" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
+                          <children>
+                              <Label fx:id="searchLbl" text="Search">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="messagesLbl" text="Messages" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="helpLbl" text="Help" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="profileStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="profileLbl" text="Profile" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="logoutLbl" text="Logout" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                  </children>
+              </VBox>
+          </left>
+          <top>
+              <HBox fx:id="headerHbx" prefHeight="144.0" prefWidth="1200.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
+                  <children>
+                      <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
+                          <image>
+                              <Image url="@../Pictures/logo.png" />
+                          </image>
+                      </ImageView>
+                      <StackPane prefHeight="155.0" prefWidth="732.0" />
+                      <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
+                          <children>
+                              <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
+                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                          </children>
+                      </StackPane>
+                  </children>
+              </HBox>
+          </top>
+          <center>
+              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
+                  <children>
+                      <HBox prefHeight="100.0" prefWidth="200.0">
+                          <children>
+                              <Region prefHeight="100.0" prefWidth="60.0" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="383.0">
+                                  <children>
+                                      <TextField fx:id="searchTxt" prefHeight="30.0" prefWidth="269.0" style="-fx-border-color: #000000;" />
+                                      <Button fx:id="searchButton" alignment="CENTER" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" prefHeight="30.0" style="-fx-background-color: #000000; -fx-background-radius: 0;" text="Search" textFill="WHITE">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Button>
+                                  </children>
+                              </HBox>
+                          </children>
+                      </HBox>
+                      <HBox prefHeight="150.0" prefWidth="1040.0">
+                          <children>
+                              <Region prefHeight="150.0" prefWidth="50.0" />
+                              <StackPane fx:id="stckLArrow" prefHeight="150.0" prefWidth="50.0" visible="false">
+                                  <children>
+                                      <ImageView fx:id="lArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                              <Image url="@../Pictures/leftArrow.png" />
+                                          </image>
+                                      </ImageView>
+                                  </children>
+                              </StackPane>
+                              <Region prefHeight="150.0" prefWidth="20.0" />
+                              <VBox fx:id="Vbox11" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookName1" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookAuthor1" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="img1" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <VBox fx:id="Vbox12" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Rent">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="rent1" />
+                                      <Label text="Deposit">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="deposit1" />
+                                  </children>
+                              </VBox>
+                              <Region prefHeight="150.0" prefWidth="50.0" />
+                              <VBox fx:id="Vbox21" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookName2" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookAuthor2" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="img2" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <VBox fx:id="Vbox22" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Rent">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="rent2" />
+                                      <Label text="Deposit">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="deposit2" />
+                                  </children>
+                              </VBox>
+                              <Region prefHeight="150.0" prefWidth="50.0" />
+                          </children>
+                      </HBox>
+                      <Region prefHeight="30.0" prefWidth="1040.0" />
+                      <HBox prefHeight="150.0" prefWidth="200.0">
+                          <children>
+                              <Region prefHeight="150.0" prefWidth="120.0" />
+                              <VBox fx:id="Vbox31" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookName3" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookAuthor3" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="img3" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <VBox fx:id="Vbox32" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Rent">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="rent3" />
+                                      <Label text="Deposit">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="deposit3" />
+                                  </children>
+                              </VBox>
+                              <Region prefHeight="150.0" prefWidth="50.0" />
+                              <VBox fx:id="Vbox41" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookName4" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookAuthor4" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="img4" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <VBox fx:id="Vbox42" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Rent">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="rent4" />
+                                      <Label text="Deposit">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="deposit4" />
+                                  </children>
+                              </VBox>
+                              <Region prefHeight="150.0" prefWidth="50.0" />
+                          </children>
+                      </HBox>
+                      <Region prefHeight="30.0" prefWidth="1040.0" />
+                      <HBox prefHeight="150.0" prefWidth="200.0">
+                          <children>
+                              <Region prefHeight="150.0" prefWidth="120.0" />
+                              <VBox fx:id="Vbox51" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookName5" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookAuthor5" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="img5" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <VBox fx:id="Vbox52" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Rent">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="rent5" />
+                                      <Label text="Deposit">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="deposit5" />
+                                  </children>
+                              </VBox>
+                              <Region prefHeight="150.0" prefWidth="50.0" />
+                              <VBox fx:id="Vbox61" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookName6" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="BookAuthor6" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="img6" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <VBox fx:id="Vbox62" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Rent">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="rent6" />
+                                      <Label text="Deposit">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="deposit6" />
+                                  </children>
+                              </VBox>
+                              <Region prefHeight="150.0" prefWidth="20.0" />
+                              <StackPane fx:id="stckRArrow" prefHeight="150.0" prefWidth="50.0" visible="false">
+                                  <children>
+                                      <ImageView fx:id="rArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                              <Image url="@../Pictures/rightArrow.png" />
+                                          </image>
+                                      </ImageView>
+                                  </children>
+                              </StackPane>
+                          </children>
+                      </HBox>
+                      <Region prefHeight="30.0" prefWidth="1040.0" />
+                  </children>
+            </VBox>
+          </center>
+      </BorderPane>
+   </children>
+</Pane>

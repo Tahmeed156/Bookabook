@@ -11,10 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -31,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class dashboard {
+    @FXML private Pane parent;
     @FXML private VBox left;
     //left side labels;
     @FXML private Label dashBLbl;
@@ -139,6 +137,7 @@ public class dashboard {
 
     public void initialize()
     {
+        parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk,searchStk,messagesStk,helpStk,profileStk,logoutStk};
 

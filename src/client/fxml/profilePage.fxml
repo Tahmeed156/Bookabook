@@ -11,348 +11,355 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.profilePage">
-    <left>
-        <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
-            <children>
-                <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" prefHeight="100.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="dashBLbl" text="Dashboard" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="searchStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="searchLbl" text="Search" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="messagesLbl" text="Messages" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="helpLbl" text="Help" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="profileStk" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
-                    <children>
-                        <Label fx:id="profileLbl" text="Profile">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-                <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
-                    <children>
-                        <Label fx:id="logoutLbl" text="Logout" textFill="#d9d9d9">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </StackPane>
-            </children>
-        </VBox>
-    </left>
-    <top>
-        <HBox fx:id="headerHbx" prefHeight="144.0" prefWidth="1200.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
-            <children>
-                <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
-                    <image>
-                        <Image url="@../Pictures/logo.png" />
-                    </image>
-                </ImageView>
-                <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="732.0">
-                    <children>
-                        <AnchorPane />
-                    </children>
-                </StackPane>
-                <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
-                    <children>
-                        <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
-                        <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
-                    </children>
-                </StackPane>
-            </children>
-        </HBox>
-    </top>
-    <center>
-        <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
-            <children>
-                <HBox prefHeight="300.0" prefWidth="1040.0">
-                    <children>
-                        <Region maxHeight="300.0" maxWidth="40.0" prefHeight="150.0" prefWidth="30.0" />
-                  <AnchorPane>
-                     <children>
-                        <Circle fx:id="bigImgCircle" fill="DODGERBLUE" layoutX="104.0" layoutY="137.0" radius="114.0" stroke="BLACK" strokeType="INSIDE" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="791.0">
-                     <children>
-                        <Label fx:id="bigName" layoutX="22.0" layoutY="14.0" prefHeight="36.0" prefWidth="277.0">
-                           <font>
-                              <Font name="System Bold" size="25.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="22.0" layoutY="66.0" prefHeight="33.0" prefWidth="112.0" text="Work           :" textFill="#7f7f7f">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="22.0" layoutY="112.0" prefHeight="33.0" prefWidth="112.0" text="Birth  Date  :" textFill="#7f7f7f">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="22.0" layoutY="159.0" prefHeight="33.0" prefWidth="112.0" text="Email           :" textFill="#7f7f7f">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="22.0" layoutY="212.0" prefHeight="33.0" prefWidth="112.0" text="Contact no  :" textFill="#7f7f7f">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="work" layoutX="149.0" layoutY="69.0" prefHeight="27.0" prefWidth="280.0">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="birthDate" layoutX="149.0" layoutY="115.0" prefHeight="27.0" prefWidth="280.0">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="email" layoutX="149.0" layoutY="162.0" prefHeight="27.0" prefWidth="280.0">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="contact" layoutX="149.0" layoutY="215.0" prefHeight="27.0" prefWidth="280.0">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
-                        <Button fx:id="rentBookBtn" layoutX="456.0" layoutY="102.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Rent a Book" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="editProfileBtn" layoutX="457.0" layoutY="162.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Edit Profile" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="rentOutBtn" layoutX="614.0" layoutY="100.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented out Books" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font></Button>
-                        <Button fx:id="rentedBtn" layoutX="614.0" layoutY="164.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented Books" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font></Button>
-                     </children>
-                  </AnchorPane>
-                    </children>
-                </HBox>
-                <Region prefHeight="30.0" prefWidth="1040.0" />
-                <HBox prefHeight="120.0" prefWidth="1040.0">
-                    <children>
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <StackPane prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #2F528F;">
-                            <children>
-                                <Label alignment="CENTER" text="Rented Out&#10;Books" textAlignment="CENTER" textFill="WHITE">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </StackPane>
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <StackPane fx:id="tstckLArrow" visible="false">
-                            <children>
-                                <ImageView fx:id="tLArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
-                                    <image>
-                                        <Image url="@../Pictures/leftArrow.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </StackPane>
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <VBox fx:id="tVbox1" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="tBookName1" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="tBookAuthor1" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="tBookImage1" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <VBox fx:id="tVbox2" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="tBookName2" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="tBookAuthor2" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="tBookImage2" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <VBox fx:id="tVbox3" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="tBookName3" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="tBookAuthor3" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="tBookImage3" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <StackPane fx:id="tstckRArrow" visible="false">
-                            <children>
-                                <ImageView fx:id="tRArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
-                                    <image>
-                                        <Image url="@../Pictures/rightArrow.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </StackPane>
-                    </children>
-                </HBox>
-                <Region prefHeight="30.0" prefWidth="1040.0" />
-                <HBox prefHeight="120.0" prefWidth="200.0">
-                    <children>
-                        <Region prefHeight="100.0" prefWidth="30.0" />
-                        <StackPane prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #2F528F;">
-                            <children>
-                                <Label alignment="CENTER" text="Rented&#10;Books" textAlignment="CENTER" textFill="WHITE">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </StackPane>
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <StackPane fx:id="bstckLArrow" visible="false">
-                            <children>
-                                <ImageView fx:id="bLArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
-                                    <image>
-                                        <Image url="@../Pictures/leftArrow.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </StackPane>
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <VBox fx:id="bVbox1" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="bBookName1" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="bBookAuthor1" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="bBookImage1" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <VBox fx:id="bVbox2" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="bBookName2" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="bBookAuthor2" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="bBookImage2" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <VBox fx:id="bVbox3" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
-                            <children>
-                                <Label text="Name">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="bBookName3" />
-                                <Label text="Author">
-                                    <font>
-                                        <Font name="System Bold" size="15.0" />
-                                    </font>
-                                </Label>
-                                <Label fx:id="bBookAuthor3" />
-                            </children>
-                        </VBox>
-                        <ImageView fx:id="bBookImage3" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
-                        <Region prefHeight="150.0" prefWidth="30.0" />
-                        <StackPane fx:id="bstckRArrow" visible="false">
-                            <children>
-                                <ImageView fx:id="bRArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
-                                    <image>
-                                        <Image url="@../Pictures/rightArrow.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </StackPane>
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </center>
-</BorderPane>
+
+<Pane fx:id="parent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.controllers.profilePage">
+   <children>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
+          <left>
+              <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
+                  <children>
+                      <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" prefHeight="100.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="dashBLbl" text="Dashboard" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="searchStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="searchLbl" text="Search" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="messagesLbl" text="Messages" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="helpLbl" text="Help" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="profileStk" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
+                          <children>
+                              <Label fx:id="profileLbl" text="Profile">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                      <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                          <children>
+                              <Label fx:id="logoutLbl" text="Logout" textFill="#d9d9d9">
+                                  <font>
+                                      <Font size="16.0" />
+                                  </font>
+                              </Label>
+                          </children>
+                      </StackPane>
+                  </children>
+              </VBox>
+          </left>
+          <top>
+              <HBox fx:id="headerHbx" prefHeight="144.0" prefWidth="1200.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
+                  <children>
+                      <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
+                          <image>
+                              <Image url="@../Pictures/logo.png" />
+                          </image>
+                      </ImageView>
+                      <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="732.0">
+                          <children>
+                              <AnchorPane />
+                          </children>
+                      </StackPane>
+                      <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
+                          <children>
+                              <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
+                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                          </children>
+                      </StackPane>
+                  </children>
+              </HBox>
+          </top>
+          <center>
+              <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
+                  <children>
+                      <HBox prefHeight="300.0" prefWidth="1040.0">
+                          <children>
+                              <Region maxHeight="300.0" maxWidth="40.0" prefHeight="150.0" prefWidth="30.0" />
+                        <AnchorPane>
+                           <children>
+                              <Circle fx:id="bigImgCircle" fill="DODGERBLUE" layoutX="104.0" layoutY="137.0" radius="114.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="791.0">
+                           <children>
+                              <Label fx:id="bigName" layoutX="22.0" layoutY="14.0" prefHeight="36.0" prefWidth="277.0">
+                                 <font>
+                                    <Font name="System Bold" size="25.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="66.0" prefHeight="33.0" prefWidth="112.0" text="Work           :" textFill="#7f7f7f">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="112.0" prefHeight="33.0" prefWidth="112.0" text="Birth  Date  :" textFill="#7f7f7f">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="159.0" prefHeight="33.0" prefWidth="112.0" text="Email           :" textFill="#7f7f7f">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="22.0" layoutY="212.0" prefHeight="33.0" prefWidth="112.0" text="Contact no  :" textFill="#7f7f7f">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="work" layoutX="149.0" layoutY="69.0" prefHeight="27.0" prefWidth="280.0">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="birthDate" layoutX="149.0" layoutY="115.0" prefHeight="27.0" prefWidth="280.0">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="email" layoutX="149.0" layoutY="162.0" prefHeight="27.0" prefWidth="280.0">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="contact" layoutX="149.0" layoutY="215.0" prefHeight="27.0" prefWidth="280.0">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="rentBookBtn" layoutX="456.0" layoutY="102.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Rent a Book" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="editProfileBtn" layoutX="457.0" layoutY="162.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Edit Profile" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="rentOutBtn" layoutX="614.0" layoutY="100.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented out Books" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="rentedBtn" layoutX="614.0" layoutY="164.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented Books" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                          </children>
+                      </HBox>
+                      <Region prefHeight="30.0" prefWidth="1040.0" />
+                      <HBox prefHeight="120.0" prefWidth="1040.0">
+                          <children>
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <StackPane prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #2F528F;">
+                                  <children>
+                                      <Label alignment="CENTER" text="Rented Out&#10;Books" textAlignment="CENTER" textFill="WHITE">
+                                          <font>
+                                              <Font size="18.0" />
+                                          </font>
+                                      </Label>
+                                  </children>
+                              </StackPane>
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <StackPane fx:id="tstckLArrow" visible="false">
+                                  <children>
+                                      <ImageView fx:id="tLArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                                          <image>
+                                              <Image url="@../Pictures/leftArrow.png" />
+                                          </image>
+                                      </ImageView>
+                                  </children>
+                              </StackPane>
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <VBox fx:id="tVbox1" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="tBookName1" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="tBookAuthor1" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="tBookImage1" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <VBox fx:id="tVbox2" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="tBookName2" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="tBookAuthor2" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="tBookImage2" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <VBox fx:id="tVbox3" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="tBookName3" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="tBookAuthor3" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="tBookImage3" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <StackPane fx:id="tstckRArrow" visible="false">
+                                  <children>
+                                      <ImageView fx:id="tRArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                                          <image>
+                                              <Image url="@../Pictures/rightArrow.png" />
+                                          </image>
+                                      </ImageView>
+                                  </children>
+                              </StackPane>
+                          </children>
+                      </HBox>
+                      <Region prefHeight="30.0" prefWidth="1040.0" />
+                      <HBox prefHeight="120.0" prefWidth="200.0">
+                          <children>
+                              <Region prefHeight="100.0" prefWidth="30.0" />
+                              <StackPane prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #2F528F;">
+                                  <children>
+                                      <Label alignment="CENTER" text="Rented&#10;Books" textAlignment="CENTER" textFill="WHITE">
+                                          <font>
+                                              <Font size="18.0" />
+                                          </font>
+                                      </Label>
+                                  </children>
+                              </StackPane>
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <StackPane fx:id="bstckLArrow" visible="false">
+                                  <children>
+                                      <ImageView fx:id="bLArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                                          <image>
+                                              <Image url="@../Pictures/leftArrow.png" />
+                                          </image>
+                                      </ImageView>
+                                  </children>
+                              </StackPane>
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <VBox fx:id="bVbox1" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="bBookName1" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="bBookAuthor1" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="bBookImage1" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <VBox fx:id="bVbox2" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="bBookName2" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="bBookAuthor2" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="bBookImage2" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <VBox fx:id="bVbox3" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
+                                  <children>
+                                      <Label text="Name">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="bBookName3" />
+                                      <Label text="Author">
+                                          <font>
+                                              <Font name="System Bold" size="15.0" />
+                                          </font>
+                                      </Label>
+                                      <Label fx:id="bBookAuthor3" />
+                                  </children>
+                              </VBox>
+                              <ImageView fx:id="bBookImage3" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <Region prefHeight="150.0" prefWidth="30.0" />
+                              <StackPane fx:id="bstckRArrow" visible="false">
+                                  <children>
+                                      <ImageView fx:id="bRArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#rArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">
+                                          <image>
+                                              <Image url="@../Pictures/rightArrow.png" />
+                                          </image>
+                                      </ImageView>
+                                  </children>
+                              </StackPane>
+                          </children>
+                      </HBox>
+                  </children>
+              </VBox>
+          </center>
+      </BorderPane>
+   </children>
+</Pane>

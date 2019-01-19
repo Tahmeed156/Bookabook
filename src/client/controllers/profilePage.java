@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -23,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class profilePage {
+    @FXML private Pane parent;
     @FXML
     private VBox left;
     //left side labels;
@@ -143,6 +145,7 @@ public class profilePage {
 
     public void initialize()
     {
+        parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk,searchStk,messagesStk,helpStk,profileStk,logoutStk};
 

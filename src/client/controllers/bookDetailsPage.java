@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -17,6 +18,7 @@ import java.io.File;
 
 
 public class bookDetailsPage {
+    @FXML private Pane parent;
     @FXML
     private VBox left;
     //left side labels;
@@ -121,6 +123,7 @@ public class bookDetailsPage {
 
     public void initialize()
     {
+        parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk,messagesStk,helpStk,profileStk,logoutStk};
         allBookGenre = new String[]{"Mystery","Action","Fantasy"};

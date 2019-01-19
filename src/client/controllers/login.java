@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 // Hibernate configuration
@@ -23,6 +25,7 @@ import java.util.prefs.Preferences;
 
 public class login {
 
+    @FXML private Pane parent;
     @FXML private TextField userNameLogin;
     @FXML private PasswordField password;
     @FXML private Label toastlogin;
@@ -41,6 +44,11 @@ public class login {
     @FXML private Button logInBtn;
     @FXML private Button signUpBtn;
 
+    public void initialize()
+    {
+        parent.getChildren().add(toast.get());
+    }
+
 
     // ========================== PRESS FUNCTIONS (User authentication) ========================
 
@@ -50,8 +58,10 @@ public class login {
 
             if(userNameLogin.getText().isEmpty() || password.getText().isEmpty())
             {
-                toastlogin.setText("PLEASE FILL ALL THE FIELDS");
-                toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
+                toast.set("PLEASE FILL ALL THE FIELDS");
+                toast.setColor("#f0ad4e");
+//                toastlogin.setText("PLEASE FILL ALL THE FIELDS");
+//                toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
             }
             else {
                 try {
@@ -76,10 +86,14 @@ public class login {
                         String username = userCon.get("username", "");
                         System.out.println("Successfully logged in as " + username);
                         // todo: Add toast ^ and change screens
+                        toast.set("LOGIN SUCCESSFUL");
+                        toast.setColor("#5cb85c");
                         Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
                     } catch (Exception e) {
-                        toastlogin.setText("Wrong Username or Password");
-                        toastlogin.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff");
+                        toast.set("WRONG USERNAME OR PASSWORD");
+                        toast.setColor("#D9534F");
+//                        toastlogin.setText("Wrong Username or Password");
+//                        toastlogin.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff");
                         // todo: Add toast ^
                     }
 
@@ -87,8 +101,10 @@ public class login {
                     s.close();
                 } catch (HibernateException e) {
                     // todo: Add toast "Unable to create new user"
-                    toastlogin.setText("Unable to create new user");
-                    toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
+                    toast.set("UNABLE TO CREATE NEW USER");
+                    toast.setColor("#f0ad4e");
+//                    toastlogin.setText("Unable to create new user");
+//                    toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
                     System.out.println(e.getMessage());
                 }
             }
@@ -98,13 +114,17 @@ public class login {
             if(fullName.getText().isEmpty()|| userNameSignup.getText().isEmpty()||
                 passwordSignup.getText().isEmpty()|| conPasswordSignup.getText().isEmpty()||
                 emailAddress.getText().isEmpty()) {
-                toastSignup.setText("PLEASE FILL ALL THE FIELDS");
-                toastSignup.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
+                toast.set("PLEASE FILL ALL THE FIELDS");
+                toast.setColor("#f0ad4e");
+//                toastSignup.setText("PLEASE FILL ALL THE FIELDS");
+//                toastSignup.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
             }
             else if (!passwordSignup.getText().equals(conPasswordSignup.getText())) {
-                toastlogin.setText("RE-ENTER PASSWORDS");
-                passwordSignup.getText().equals(conPasswordSignup.getText());
-                toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
+                toast.set("RE-ENTER PASSWORDS");
+                toast.setColor("#f0ad4e");
+//                toastlogin.setText("RE-ENTER PASSWORDS");
+                passwordSignup.getText().equals(conPasswordSignup.getText()); //WHAT DOES THIS DO TAHMEED
+//                toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
             }
             else if(passwordSignup.getText().equals(conPasswordSignup.getText())) {
 
@@ -138,13 +158,17 @@ public class login {
                     String username = userCon.get("username", "user.username");
                     System.out.println("Successfully signed up as " + username);
                     // todo: Add toast ^ and change screens
-                    toastSignup.setText("SUCCESSFULLY SIGNED UP");
-                    toastSignup.setStyle("-fx-background-color: #5cb85c; -fx-text-fill:#ffffff");
+                    toast.set("SUCCESSFULLY SIGNED UP");
+                    toast.setColor("#5CB85C");
+//                    toastSignup.setText("SUCCESSFULLY SIGNED UP");
+//                    toastSignup.setStyle("-fx-background-color: #5cb85c; -fx-text-fill:#ffffff");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
                 } catch (HibernateException e) {
                     // todo: Add toast "Unable to create new user"
-                    toastSignup.setText("UNABLE TO CREATE NEW USER");
-                    toastSignup.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff");
+                    toast.set("UNABLE TO CREATE NEW USER");
+                    toast.setColor("#D9534F");
+//                    toastSignup.setText("UNABLE TO CREATE NEW USER");
+//                    toastSignup.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff");
                     System.out.println(e.getMessage());
                 }
             }

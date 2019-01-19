@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class searchPage{
+    @FXML private Pane parent;
     @FXML private VBox left;
     //left side labels;
     @FXML private Label dashBLbl;
@@ -139,6 +140,7 @@ public class searchPage{
 
     public void initialize()
     {
+        parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
 
