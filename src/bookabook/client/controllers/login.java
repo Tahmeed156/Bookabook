@@ -1,4 +1,4 @@
-package client.controllers;
+package bookabook.client.controllers;
 
 
 // Javafx configuration
@@ -65,7 +65,7 @@ public class login {
             }
             else {
                 try {
-                    SessionFactory sf = new Configuration().configure("/client/hibernate.cfg.xml").buildSessionFactory();
+                    SessionFactory sf = new Configuration().configure("/bookabook/client/hibernate.cfg.xml").buildSessionFactory();
                     Session s = sf.openSession();
                     s.beginTransaction();
 
@@ -142,7 +142,7 @@ public class login {
                             date, // passes a date object
                             emailAddress.getText()
                     );
-                    SessionFactory sf = new Configuration().configure("/client/hibernate.cfg.xml").buildSessionFactory();
+                    SessionFactory sf = new Configuration().configure("/bookabook/client/hibernate.cfg.xml").buildSessionFactory();
                     Session s = sf.openSession();
                     s.beginTransaction();
                     s.save(u);

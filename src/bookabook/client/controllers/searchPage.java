@@ -1,4 +1,4 @@
-package client.controllers;
+package bookabook.client.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -127,7 +127,7 @@ public class searchPage{
      private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
    // private String dir = "D:\\"; // Tahmeed config
-    private String path = dir + "Bookabook\\src\\client\\Pictures\\";
+    private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     //list for searched items
     List<String> name = new ArrayList<>(Arrays.asList("Harry Potter","Percy Jackson","Animal Farm","Foundation",

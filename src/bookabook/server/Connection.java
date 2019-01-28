@@ -1,6 +1,6 @@
 package bookabook.server;
 
-import jdk.nashorn.internal.parser.JSONParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -75,13 +75,13 @@ class Connection extends Thread {
     }
 
 
-    // Sending objects from server to client
+    // Sending objects from server to bookabook.client
     private void send(Object obj) {
 //        try {
 //            output.writeObject(obj);
 //        }
 //        catch (IOException e) {
-//            log("Cannot output to client");
+//            log("Cannot output to bookabook.client");
 //        }
     }
 

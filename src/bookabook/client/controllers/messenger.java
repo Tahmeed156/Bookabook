@@ -1,4 +1,4 @@
-package client.controllers;
+package bookabook.client.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -58,7 +58,7 @@ public class messenger {
     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
-    private String path = dir + "Bookabook\\src\\client\\Pictures\\";
+    private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
     List<String> user = new ArrayList<>(Arrays.asList("Hello","How are you?","I am fine thank you",

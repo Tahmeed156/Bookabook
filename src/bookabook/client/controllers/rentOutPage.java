@@ -1,4 +1,4 @@
-package client.controllers;
+package bookabook.client.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -94,7 +94,7 @@ public class rentOutPage {
      private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
-    private String path = dir + "Bookabook\\src\\client\\Pictures\\";
+    private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
     //right image components
@@ -286,7 +286,7 @@ public class rentOutPage {
         );
 
 
-        SessionFactory sf = new Configuration().configure("/client/hibernate.cfg.xml").buildSessionFactory();
+        SessionFactory sf = new Configuration().configure("/bookabook/client/hibernate.cfg.xml").buildSessionFactory();
         Session s = sf.openSession();
         s.beginTransaction();
         s.save(b);

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Server {
 
     private static ArrayList<Connection> clients = new ArrayList<>();
-    private static ThreadGroup clientGroup = new ThreadGroup("Clients");
+    private static ThreadGroup clientGroup = new ThreadGroup("clients");
 
     public static void main (String [] args) throws IOException {
 

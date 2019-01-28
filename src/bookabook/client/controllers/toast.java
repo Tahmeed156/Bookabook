@@ -1,4 +1,4 @@
-package client.controllers;
+package bookabook.client.controllers;
 
 
 import javafx.animation.PauseTransition;
