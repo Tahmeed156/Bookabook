@@ -26,7 +26,7 @@ public class Main extends Application {
             if (username.equals(""))
                 throw new Exception("User not found in registry");
             System.out.println("Logged in as " + username);
-            root = FXMLLoader.load(getClass().getResource("fxml/messenger.fxml"));
+            root = FXMLLoader.load(getClass().getResource("fxml/dashboard.fxml"));
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

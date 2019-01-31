@@ -11,7 +11,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane fx:id="parent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookabook.client.controllers.rentOutPage">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
@@ -117,11 +116,12 @@
                     <rowConstraints>
                       <RowConstraints maxHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
                       <RowConstraints maxHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="105.0" minHeight="80.0" prefHeight="105.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="70.0" minHeight="53.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="81.0" minHeight="68.0" prefHeight="81.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="95.0" minHeight="66.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="133.0" minHeight="80.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="96.0" minHeight="46.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="115.0" minHeight="53.0" prefHeight="71.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="140.0" minHeight="48.0" prefHeight="52.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="140.0" minHeight="80.0" prefHeight="132.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
@@ -160,7 +160,7 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="30.0" prefWidth="165.0" text="Review:" GridPane.rowIndex="7">
+                        <Label prefHeight="30.0" prefWidth="165.0" text="Review:" GridPane.rowIndex="8">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -229,12 +229,22 @@
                            </children>
                         </HBox>
                         <ComboBox fx:id="condition" prefHeight="35.0" prefWidth="370.0" promptText="Please select one" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <TextArea fx:id="review" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="370.0" promptText="Write a review in short about your experience" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                        <TextArea fx:id="review" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="370.0" promptText="Write a review in short about your experience" GridPane.columnIndex="1" GridPane.rowIndex="8">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </TextArea>
                         <ListView fx:id="genre" maxWidth="-Infinity" prefHeight="115.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label prefHeight="30.0" prefWidth="165.0" text="Year Bought:" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="yearBought" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="370.0" promptText="In Number" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
                      </children>
                   </GridPane>
                   <VBox alignment="CENTER" prefHeight="645.0" prefWidth="360.0">

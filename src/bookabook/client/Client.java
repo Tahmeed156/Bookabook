@@ -89,4 +89,68 @@ public class Client {
         return send(request.toString());
     }
 
+
+    public boolean rentOutBook (int user_id, String book, String author, Double rent,
+                                Double deposit, String genre, String print, String condition,
+                                String review, String year_bought) {
+        request = new JSONObject();
+
+        try {
+            request.put("type", "rent_out_book");
+            request.put("user_id", user_id);
+            request.put("book", book);
+            request.put("author", author);
+            request.put("rent", rent);
+            request.put("deposit", deposit);
+            request.put("genre", genre);
+            request.put("print", print);
+            request.put("condition", condition);
+            request.put("review", review);
+            request.put("year_bought", year_bought);
+
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        return send(request.toString());
+    }
+
+
+    public boolean editProfile (int user_id, String name, String dob, String work,
+                                String gender, String email, String contact_no,
+                                String about) {
+        request = new JSONObject();
+
+        try {
+            request.put("type", "edit_profile");
+            request.put("user_id", user_id);
+            request.put("name",name);
+            request.put("dob",dob);
+            request.put("work",work);
+            request.put("gender",gender);
+            request.put("email",email);
+            request.put("contact_no",contact_no);
+            request.put("about",about);
+
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        return send(request.toString());
+    }
+
+    public Boolean rentBook(int user_id, String book, int renter_id)
+    {
+        request = new JSONObject();
+        try{
+            request.put("type", "rent_book");
+            request.put("user_id", user_id);
+            request.put("book", book);
+            request.put("rented_id", renter_id);
+
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        return send(request.toString());
+    }
+
+
 }

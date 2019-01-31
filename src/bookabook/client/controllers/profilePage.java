@@ -211,9 +211,9 @@ public class profilePage {
         Label nameUser = new Label("Jane Micheal ");
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = 2;
-        Integer rentedBooks = 3;
-        Integer deposit = 2000;
+        Integer daysLeft = dashboard.daysLeft;
+        Integer rentedBooks = dashboard.rentedBooks;
+        Integer deposit = dashboard.deposit;
 
         upperRightVbox.getChildren().addAll(nameUser,
                 new Label("Next return: "+daysLeft+" days"),

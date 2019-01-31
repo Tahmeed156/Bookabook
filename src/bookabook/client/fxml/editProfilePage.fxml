@@ -246,7 +246,7 @@
                            </font>
                         </Button>
                                 <Region prefHeight="151.0" prefWidth="360.0" />
-                                <Button fx:id="save" mnemonicParsing="false" onMouseClicked="#rentBook" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="136.0" style="-fx-background-color: #70ad47;" text="Save Profile" textFill="WHITE">
+                                <Button fx:id="save" mnemonicParsing="false" onMouseClicked="#saveProfile" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="136.0" style="-fx-background-color: #70ad47;" text="Save Profile" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="17.0" />
                                     </font>

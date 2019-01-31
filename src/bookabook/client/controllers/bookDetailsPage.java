@@ -1,5 +1,6 @@
 package bookabook.client.controllers;
 
+import bookabook.client.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,6 +17,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import java.io.File;
+import java.util.prefs.Preferences;
 
 
 public class bookDetailsPage {
@@ -162,9 +164,9 @@ public class bookDetailsPage {
         Label nameUser = new Label("Jane Micheal ");
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = 2;
-        Integer rentedBooks = 3;
-        Integer deposit = 2000;
+        Integer daysLeft = dashboard.daysLeft;
+        Integer rentedBooks = dashboard.rentedBooks;
+        Integer deposit = dashboard.deposit;
 
         upperRightVbox.getChildren().addAll(nameUser,
                 new Label("Next return: "+daysLeft+" days"),
@@ -392,8 +394,23 @@ public class bookDetailsPage {
 
 
     public void rentBtnPressed(MouseEvent e){
-        toast.set("LOGIN SUCCESSFUL","#5cb85c");
-        Windows w = new Windows(rentBtn, "../fxml/dashboard.fxml");
+
+        Boolean success = Main.connection.rentBook(
+                1,
+                BookName.getText(),
+                2
+        );
+
+        if (success) {
+            toast.set("SUCCESSFULLY RENTED","#5CB85C");
+            Preferences userCon = Main.userCon;
+            dashboard.rentedBooks += 1;
+            userCon.put("rented_books", String.valueOf(dashboard.rentedBooks));
+            Windows w = new Windows(rentBtn, "../fxml/dashboard.fxml");
+        }
+        else {
+            toast.set("UNABLE TO RENT","#D9534F");
+        }
     }
 
     public void messageBtnPressed(MouseEvent e){

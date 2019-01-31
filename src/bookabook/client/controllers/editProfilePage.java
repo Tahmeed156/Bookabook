@@ -1,5 +1,6 @@
 package bookabook.client.controllers;
 
+import bookabook.client.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ import bookabook.server.models.User;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class editProfilePage {
@@ -119,9 +121,9 @@ public class editProfilePage {
         Label nameUser = new Label("Jane Micheal ");
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = 2;
-        Integer rentedBooks = 3;
-        Integer deposit = 2000;
+        Integer daysLeft = dashboard.daysLeft;
+        Integer rentedBooks = dashboard.rentedBooks;
+        Integer deposit = dashboard.deposit;
 
         upperRightVbox.getChildren().addAll(nameUser,
                 new Label("Next return: " + daysLeft + " days"),
@@ -230,7 +232,7 @@ public class editProfilePage {
         //MUST DOOOO
     }
 
-    public void rentBook(MouseEvent event)
+    public void saveProfile(MouseEvent event)
     {
 
         String printRBtn = "";
@@ -245,6 +247,29 @@ public class editProfilePage {
         //DO THIS
         //MUST DO
         //MOST IMPORTANT PART
+
+        LocalDate localDate = birthDate.getValue();
+        String dob = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+
+        Boolean success= Main.connection.editProfile(
+                1,
+                name.getText(),
+                dob,
+                work.getText(),
+                printRBtn,
+                email.getText(),
+                contactNo.getText(),
+                about.getText()
+        );
+
+        if (success) {
+            toast.set("SUCCESSFULLY EDITED PROFILE","#5CB85C");
+            Windows w = new Windows(save, "../fxml/dashboard.fxml");
+        }
+        else {
+            toast.set("UNABLE TO EDIT PROFILE","#D9534F");
+        }
     }
 
 

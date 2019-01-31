@@ -1,5 +1,6 @@
 package bookabook.client.controllers;
 
+import bookabook.client.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,9 +26,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.prefs.Preferences;
 
 
 public class dashboard {
+
+    static int daysLeft = 2;
+    static int rentedBooks = 3;
+    static int deposit = 2000;
+
     @FXML private Pane parent;
     @FXML private VBox left;
     //left side labels;
@@ -138,6 +145,18 @@ public class dashboard {
     public void initialize()
     {
         parent.getChildren().add(toast.get());
+
+
+        Preferences userCon = Main.userCon;
+
+        // Saving information in the registry
+        // TODO: DO THIS ON LOG_IN
+        userCon.put("days_left", String.valueOf(daysLeft));
+        userCon.put("rented_books", String.valueOf(rentedBooks));
+        userCon.put("deposit", String.valueOf(deposit));
+
+
+
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk,searchStk,messagesStk,helpStk,profileStk,logoutStk};
 
@@ -200,9 +219,6 @@ public class dashboard {
         Label nameUser = new Label("Jane Micheal ");
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = 2;
-        Integer rentedBooks = 3;
-        Integer deposit = 2000;
 
         upperRightVbox.getChildren().addAll(nameUser,
                 new Label("Next return: "+daysLeft+" days"),
