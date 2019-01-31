@@ -3,6 +3,7 @@ package bookabook.client.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +26,8 @@ public class bookDetailsPage {
     @FXML
     private Label dashBLbl;
     @FXML
+    private Label searchLbl;
+    @FXML
     private Label messagesLbl;
     @FXML
     private Label helpLbl;
@@ -39,6 +42,8 @@ public class bookDetailsPage {
     //left side stacks
     @FXML
     private StackPane dashBStk;
+    @FXML
+    private StackPane searchStk;
     @FXML
     private StackPane messagesStk;
     @FXML
@@ -76,7 +81,7 @@ public class bookDetailsPage {
     @FXML private Label yearBought;
     @FXML private Label timesRented;
 
-    @FXML private Text reviewByRenter;
+    @FXML private TextArea reviewByRenter;
     @FXML private Text genre; //use '\n' between the genres;
     @FXML private Text similarBook; //use '\n' between the book links;
 
@@ -106,6 +111,8 @@ public class bookDetailsPage {
     String[] allsimilarBooks;
     Integer index;
 
+    static String s;
+
     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
@@ -117,15 +124,20 @@ public class bookDetailsPage {
             "Dont mess with GRRM he is the fantasy king",
             "Book was goood i guess"};
 
-    String[] reviewers = new String[]{"Mary","Sherlock","Watson","Bruce","Stark"};
+    String[] reviewers = new String[]{"Mary  4.5 ★","Sherlock  5 ★","Watson 3.5 ★","Bruce  5 ★","Stark  2 ★"};
 
 
+    public void info(String str)
+    {
+        s = str;
+    }
 
-    public void initialize()
+    public void initialize(String s)
     {
         parent.getChildren().add(toast.get());
-        lbl = new Label[]{dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
-        stck = new StackPane[]{dashBStk,messagesStk,helpStk,profileStk,logoutStk};
+        System.out.println(s);
+        lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
+        stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
         allBookGenre = new String[]{"Mystery","Action","Fantasy"};
         allsimilarBooks = new String[]{"Harry Potter","Lord of the Rings","Percy Jackson"};
 
@@ -195,8 +207,8 @@ public class bookDetailsPage {
         condition.setText("Optimal");
         yearBought.setText("2017");
         timesRented.setText("3");
-        reviewByRenter.setText("The book is undoubtedly a masterpiece created by George R R Martin dbkjbdkhbkjd" +
-                "sskcishkjbksboubxijnxinixsnknxsinsijnisxnisnxxsninxssxbcbhn");
+        reviewByRenter.setText("The book is undoubtedly a masterpiece created by George R R Martin. Best thing" +
+                "that happened to the world after J.K.Rowling.");
 
 
 
@@ -254,26 +266,15 @@ public class bookDetailsPage {
 
     public void pressed(MouseEvent event) {
         for (int i = 0; i < stck.length; i++) {
-            if (stck[i].isPressed()) {
-                stck[i].setStyle("-fx-background-color:#383838;");
-                lbl[i].setTextFill(Color.rgb(217, 217, 217));
-                break;
+            if(stck[i].isPressed())
+            {
+                Windows w = new Windows(stck[i], i);
             }
         }
 
     }
 
 
-    public void released(MouseEvent event) {
-        for (int i = 0; i < stck.length; i++) {
-            if (event.getSource() == stck[i]) {
-                stck[i].setStyle("-fx-background-color:#b9b9b9;");
-                lbl[i].setTextFill(Color.rgb(59, 56, 56));
-                break;
-            }
-        }
-
-    }
 
 
 
@@ -387,6 +388,16 @@ public class bookDetailsPage {
             stckLArrow.setVisible(false);
         }
         stckRArrow.setVisible(true);
+    }
+
+
+    public void rentBtnPressed(MouseEvent e){
+        toast.set("LOGIN SUCCESSFUL","#5cb85c");
+        Windows w = new Windows(rentBtn, "../fxml/dashboard.fxml");
+    }
+
+    public void messageBtnPressed(MouseEvent e){
+        Windows w = new Windows(messageBtn, "../fxml/messenger.fxml");
     }
 
 

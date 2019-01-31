@@ -13,25 +13,25 @@ public class toast {
     private static Label lb = new Label();
     private static int i = 0;
 
-    public static void set(String a)
+    public static void set(String a, String colorBG)
     {
         lb.setAlignment(Pos.BOTTOM_CENTER);
         lb.setPadding(new Insets(10,10,10,10));
-        lb.setStyle("-fx-background-color:#000000; -fx-background-radius:10; -fx-text-fill:#ffffff;" +
+        lb.setStyle("-fx-background-color:"+colorBG+"; -fx-background-radius:10; -fx-text-fill:#ffffff;" +
                 "-fx-border-color:#ffffff; -fx-border-radius:10");
         lb.setLayoutX(500);
         lb.setLayoutY(700);
-        text(a);
+        text(a, "#000000");
 
     }
 
-    public static void setColor(String colorBG)
-    {
-        lb.setStyle("-fx-background-color:"+colorBG+";  -fx-background-radius:10; -fx-text-fill:#ffffff;" +
-                "-fx-border-color:#ffffff; -fx-border-radius:10");
-    }
+//    public static void setColor(String colorBG)
+//    {
+//        lb.setStyle("-fx-background-color:"+colorBG+";  -fx-background-radius:10; -fx-text-fill:#ffffff;" +
+//                "-fx-border-color:#ffffff; -fx-border-radius:10");
+//    }
 
-    public static void text(String a)
+    public static void text(String a, String colorBG)
     {
         lb.setText(a);
         i = 0;

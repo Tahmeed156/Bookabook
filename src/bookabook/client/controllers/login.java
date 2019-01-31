@@ -51,8 +51,7 @@ public class login {
 
             if(userNameLogin.getText().isEmpty() || password.getText().isEmpty())
             {
-                toast.set("PLEASE FILL ALL THE FIELDS");
-                toast.setColor("#f0ad4e");
+                toast.set("PLEASE FILL ALL THE FIELDS","#f0ad4e");
             }
             else {
 
@@ -69,13 +68,11 @@ public class login {
                     // userCon.put("id", String.valueOf(u.getId()));
                     // userCon.put("full_name", );
 
-                    toast.set("LOGIN SUCCESSFUL");
-                    toast.setColor("#5cb85c");
+                    toast.set("LOGIN SUCCESSFUL","#5cb85c");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
                 }
                 else {
-                    toast.set("WRONG USERNAME OR PASSWORD");
-                    toast.setColor("#D9534F");
+                    toast.set("WRONG USERNAME OR PASSWORD","#D9534F");
                 }
 
             }
@@ -85,12 +82,10 @@ public class login {
             if(fullName.getText().isEmpty()|| userNameSignup.getText().isEmpty()||
                 passwordSignup.getText().isEmpty()|| conPasswordSignup.getText().isEmpty()||
                 emailAddress.getText().isEmpty()) {
-                toast.set("PLEASE FILL ALL THE FIELDS");
-                toast.setColor("#f0ad4e");
+                toast.set("PLEASE FILL ALL THE FIELDS","#f0ad4e");
             }
             else if (!passwordSignup.getText().equals(conPasswordSignup.getText())) {
-                toast.set("RE-ENTER PASSWORDS");
-                toast.setColor("#f0ad4e");
+                toast.set("RE-ENTER PASSWORDS","#f0ad4e");
             }
             else if(passwordSignup.getText().equals(conPasswordSignup.getText())) {
 
@@ -115,13 +110,11 @@ public class login {
                     // userCon.put("id", String.valueOf(u.getId()));
                     // userCon.put("full_name", u.getFull_name());
 
-                    toast.set("SUCCESSFULLY SIGNED UP");
-                    toast.setColor("#5CB85C");
+                    toast.set("SUCCESSFULLY SIGNED UP","#5CB85C");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
                 }
                 else {
-                    toast.set("UNABLE TO CREATE NEW USER");
-                    toast.setColor("#D9534F");
+                    toast.set("UNABLE TO CREATE NEW USER","#D9534F");
                 }
             }
         }

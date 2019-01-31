@@ -11,7 +11,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane fx:id="parent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookabook.client.controllers.searchPage">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
@@ -140,7 +139,7 @@
                                       <Label fx:id="BookAuthor1" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="img1" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="img1" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <VBox fx:id="Vbox12" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
                                       <Label text="Rent">
@@ -174,7 +173,7 @@
                                       <Label fx:id="BookAuthor2" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="img2" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="img2" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <VBox fx:id="Vbox22" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
                                       <Label text="Rent">
@@ -214,7 +213,7 @@
                                       <Label fx:id="BookAuthor3" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="img3" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="img3" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <VBox fx:id="Vbox32" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
                                       <Label text="Rent">
@@ -248,7 +247,7 @@
                                       <Label fx:id="BookAuthor4" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="img4" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="img4" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <VBox fx:id="Vbox42" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
                                       <Label text="Rent">
@@ -288,7 +287,7 @@
                                       <Label fx:id="BookAuthor5" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="img5" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="img5" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <VBox fx:id="Vbox52" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
                                       <Label text="Rent">
@@ -322,7 +321,7 @@
                                       <Label fx:id="BookAuthor6" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="img6" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="img6" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <VBox fx:id="Vbox62" alignment="CENTER" maxHeight="150.0" maxWidth="130.0" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
                                       <Label text="Rent">

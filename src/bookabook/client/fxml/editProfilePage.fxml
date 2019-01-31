@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="parent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookabook.client.controllers.editProfilePage">
+    <children>
+        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
+            <left>
+                <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
+                    <children>
+                        <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="100.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="dashBLbl" text="Dashboard" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="searchStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="searchLbl" text="Search" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="messagesLbl" text="Messages" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="helpStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="helpLbl" text="Help" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="profileStk" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
+                            <children>
+                                <Label fx:id="profileLbl" text="Profile">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="logoutLbl" text="Logout" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                    </children>
+                </VBox>
+            </left>
+            <top>
+                <HBox fx:id="headerHbx" prefHeight="144.0" prefWidth="1200.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@../Pictures/logo.png" />
+                            </image>
+                        </ImageView>
+                        <StackPane prefHeight="155.0" prefWidth="732.0">
+                            <children>
+                                <AnchorPane>
+                                    <children>
+                                        <Button fx:id="profilePageBtn" alignment="CENTER" layoutX="486.0" layoutY="60.0" mnemonicParsing="false" onAction="#btnPressed" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="212.0" style="-fx-background-color: #44546a;" text="Return to Profile Page" textFill="WHITE">
+                                            <font>
+                                                <Font name="System Bold" size="17.0" />
+                                            </font>
+                                        </Button>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
+                            <children>
+                                <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
+                                <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                            </children>
+                        </StackPane>
+                    </children>
+                </HBox>
+            </top>
+            <center>
+                <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="1040.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="645.0" prefWidth="50.0" />
+                  <HBox>
+                     <children>
+                              <GridPane alignment="CENTER_LEFT" maxWidth="800.0" prefWidth="600.0">
+                                  <columnConstraints>
+                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="100.0" prefWidth="165.0" />
+                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="498.0" minWidth="10.0" prefWidth="433.0" />
+                                  </columnConstraints>
+                                  <rowConstraints>
+                                      <RowConstraints maxHeight="70.0" minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+                                      <RowConstraints maxHeight="70.0" minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+                                      <RowConstraints maxHeight="70.0" minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+                                      <RowConstraints maxHeight="70.0" minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+                                      <RowConstraints maxHeight="70.0" minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+                                      <RowConstraints maxHeight="70.0" minHeight="-Infinity" prefHeight="70.0" vgrow="SOMETIMES" />
+                                      <RowConstraints maxHeight="140.0" minHeight="80.0" prefHeight="132.0" vgrow="SOMETIMES" />
+                                  </rowConstraints>
+                                  <children>
+                                      <Label prefHeight="30.0" prefWidth="165.0" text="Name :">
+                                          <font>
+                                              <Font name="System Bold" size="20.0" />
+                                          </font>
+                                      </Label>
+                                      <Label prefHeight="30.0" prefWidth="165.0" text="Birth Date :" GridPane.rowIndex="1">
+                                          <font>
+                                              <Font name="System Bold" size="20.0" />
+                                          </font>
+                                      </Label>
+                                      <Label prefHeight="59.0" prefWidth="165.0" text="Work :" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font name="System Bold" size="20.0" />
+                                          </font>
+                                      </Label>
+                                      <Label prefHeight="30.0" prefWidth="165.0" text="Email :" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font name="System Bold" size="20.0" />
+                                          </font>
+                                      </Label>
+                                      <Label prefHeight="30.0" prefWidth="165.0" text="Contact no :" GridPane.rowIndex="5">
+                                          <font>
+                                              <Font name="System Bold" size="20.0" />
+                                          </font>
+                                      </Label>
+                                      <Label prefHeight="30.0" prefWidth="165.0" text="Gender :" GridPane.rowIndex="3">
+                                          <font>
+                                              <Font name="System Bold" size="20.0" />
+                                          </font>
+                                      </Label>
+                                      <Label prefHeight="30.0" prefWidth="165.0" text="About :" GridPane.rowIndex="6">
+                                          <font>
+                                              <Font name="System Bold" size="20.0" />
+                                          </font>
+                                      </Label>
+                                      <TextField fx:id="name" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="370.0" GridPane.columnIndex="1">
+                                          <font>
+                                              <Font size="18.0" />
+                                          </font>
+                                          <GridPane.margin>
+                                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                                          </GridPane.margin>
+                                      </TextField>
+                                      <TextField fx:id="work" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <font>
+                                              <Font size="18.0" />
+                                          </font>
+                                          <GridPane.margin>
+                                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                                          </GridPane.margin>
+                                      </TextField>
+                                      <TextField fx:id="email" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <font>
+                                              <Font size="18.0" />
+                                          </font>
+                                          <GridPane.margin>
+                                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                                          </GridPane.margin>
+                                      </TextField>
+                                      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                          <children>
+                                              <RadioButton fx:id="male" mnemonicParsing="false" text="Male">
+                                                  <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                  </HBox.margin>
+                                                  <font>
+                                                      <Font size="17.0" />
+                                                  </font>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="gender" />
+                                       </toggleGroup>
+                                              </RadioButton>
+                                              <RadioButton fx:id="female" mnemonicParsing="false" text="Female" toggleGroup="$gender">
+                                                  <HBox.margin>
+                                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                  </HBox.margin>
+                                                  <font>
+                                                      <Font size="17.0" />
+                                                  </font>
+                                              </RadioButton>
+                                          </children>
+                                      </HBox>
+                                      <TextArea fx:id="about" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="370.0" promptText="Write about yourself" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                          <font>
+                                              <Font size="17.0" />
+                                          </font>
+                                      </TextArea>
+                              <TextField fx:id="contactNo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
+                              <DatePicker fx:id="birthDate" prefHeight="31.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                  </children>
+                              </GridPane>
+                     </children>
+                  </HBox>
+                        <VBox alignment="CENTER" prefHeight="645.0" prefWidth="360.0">
+                            <children>
+                                <Region maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="360.0" />
+                                <StackPane prefHeight="200.0" prefWidth="360.0">
+                           <children>
+                              <Circle fx:id="proPicCircle" fill="DODGERBLUE" radius="107.0" stroke="BLACK" strokeType="INSIDE">
+                                 <StackPane.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </StackPane.margin>
+                              </Circle>
+                           </children>
+                                </StackPane>
+                                <Button fx:id="changeProPic" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#choosePic" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="224.0" style="-fx-background-color: #44546a;" text="Change Profile Picture" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="17.0" />
+                                    </font>
+                                </Button>
+                                <Region prefHeight="22.0" prefWidth="360.0" />
+                        <Button fx:id="upload" alignment="CENTER" disable="true" mnemonicParsing="false" onMouseClicked="#choosePic" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="119.0" style="-fx-background-color: #44546a;" text="Upload" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Button>
+                                <Region prefHeight="151.0" prefWidth="360.0" />
+                                <Button fx:id="save" mnemonicParsing="false" onMouseClicked="#rentBook" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="136.0" style="-fx-background-color: #70ad47;" text="Save Profile" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="17.0" />
+                                    </font>
+                                </Button>
+                                <Region prefHeight="49.0" prefWidth="360.0" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </center>
+        </BorderPane>
+    </children>
+</Pane>

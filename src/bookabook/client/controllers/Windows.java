@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -14,7 +15,9 @@ public class Windows {
 
 
     Parent root;
-    String[] name = new String[]{"dashboard.fxml", "searchPage.fxml", "messenger.fxml", "","profilePage.fxml","login.fxml","rentOutPage.fxml"};
+    String[] name = new String[]{"dashboard.fxml", "searchPage.fxml", "messenger.fxml",
+            "helpPage.fxml","profilePage.fxml","login.fxml","rentOutPage.fxml",
+            "editProfilePage.fxml","profileRentedBooksPage.fxml","profileRentedOutBooksPage.fxml","bookDetailsPage.fxml"};
 
     Windows(StackPane s, int i) {
         try {
@@ -63,14 +66,32 @@ public class Windows {
         }
     }
 
+    Windows (ImageView b, String n, String book) {
+        try {
+            cornerCase(n);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(n));
+            root = loader.load();
+            bookDetailsPage bdp = loader.getController();
+            bdp.initialize(book);
+            Scene scene = new Scene(root);
+            Stage window = (Stage)(b.getScene().getWindow());
+            window.setScene(scene);
+            window.show();
+        } catch (Exception e) {
+            System.out.println("Cannot be opened");
+        }
+    }
+
     public void cornerCase(String a)
     {
         if(a.equals("login.fxml"))
         {
-            toast.set("SUCCESSFULLY LOGGED OUT");
-            toast.setColor("#5cb85c");
+            toast.set("SUCCESSFULLY LOGGED OUT","#5cb85c");
         }
     }
+
+
 
 
 }

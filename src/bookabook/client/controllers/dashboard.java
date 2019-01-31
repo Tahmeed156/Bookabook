@@ -483,5 +483,20 @@ public class dashboard {
 
     }
 
+    public void bookPageClicked(MouseEvent event)
+    {
+        for(int i=0; i<timgv.length; i++) {
+            if (event.getSource() == timgv[i]) {
+                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tlabel[i].getText());
+            }
+        }
+
+        for(int i=0; i<rimgv.length; i++) {
+            if (event.getSource() == rimgv[i]) {
+                Windows w = new Windows(rimgv[i], "../fxml/bookDetailsPage.fxml",rlabel[i].getText());
+            }
+        }
+    }
+
 
 }

@@ -11,14 +11,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane fx:id="parent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookabook.client.controllers.profilePage">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
           <left>
               <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
                   <children>
-                      <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" prefHeight="100.0" prefWidth="160.0">
+                      <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="100.0" prefWidth="160.0">
                           <children>
                               <Label fx:id="dashBLbl" text="Dashboard" textFill="#d9d9d9">
                                   <font>
@@ -54,7 +53,7 @@
                               </Label>
                           </children>
                       </StackPane>
-                      <StackPane fx:id="profileStk" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
+                      <StackPane fx:id="profileStk" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
                           <children>
                               <Label fx:id="profileLbl" text="Profile">
                                   <font>
@@ -155,22 +154,22 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="rentBookBtn" layoutX="456.0" layoutY="102.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Rent a Book" textFill="WHITE">
+                              <Button fx:id="rentBookBtn" layoutX="456.0" layoutY="102.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#rentABookClicked" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Rent a Book" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="editProfileBtn" layoutX="457.0" layoutY="162.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Edit Profile" textFill="WHITE">
+                              <Button fx:id="editProfileBtn" layoutX="457.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#editProClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Edit Profile" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="rentOutBtn" layoutX="614.0" layoutY="100.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented out Books" textFill="WHITE">
+                              <Button fx:id="rentOutBtn" layoutX="614.0" layoutY="100.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#rentedOutBooksClicked" prefHeight="38.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented out Books" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="rentedBtn" layoutX="614.0" layoutY="164.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented Books" textFill="WHITE">
+                              <Button fx:id="rentedBtn" layoutX="614.0" layoutY="164.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#rentedBooksClicked" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented Books" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="17.0" />
                                  </font>

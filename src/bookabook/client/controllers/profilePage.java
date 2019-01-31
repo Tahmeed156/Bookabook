@@ -518,4 +518,13 @@ public class profilePage {
     }
 
 
+    public void editProClicked(MouseEvent e)
+    {
+        Windows w = new Windows(editProfileBtn, 7);
+    }
+    public void rentABookClicked(MouseEvent e) {Windows w = new Windows(rentBookBtn, 6);}
+    public void rentedBooksClicked(MouseEvent e) { Windows w = new Windows(rentedBtn, 8); }
+    public void rentedOutBooksClicked(MouseEvent e) { Windows w = new Windows(rentOutBtn, 9); }
+
+
 }

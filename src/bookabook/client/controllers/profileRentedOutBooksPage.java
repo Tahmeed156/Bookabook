@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class searchPage{
+public class profileRentedOutBooksPage{
     @FXML private Pane parent;
     @FXML private VBox left;
     //left side labels;
@@ -49,7 +49,6 @@ public class searchPage{
     @FXML private VBox upperRightVbox;
 
     //searchButton
-    @FXML private Button searchButton;
 
 
     public Integer index = 0;
@@ -96,13 +95,6 @@ public class searchPage{
     @FXML private Label rent6;
     Label[] rentLabel;
 
-    @FXML private Label deposit1;
-    @FXML private Label deposit2;
-    @FXML private Label deposit3;
-    @FXML private Label deposit4;
-    @FXML private Label deposit5;
-    @FXML private Label deposit6;
-    Label[] depositLabel;
 
 
 
@@ -124,9 +116,12 @@ public class searchPage{
     @FXML private ImageView lArrow;
     @FXML private ImageView rArrow;
 
-     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    @FXML private Label labelBooks;
+    @FXML private Button profileBtn;
+
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-   // private String dir = "D:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     //list for searched items
@@ -135,7 +130,7 @@ public class searchPage{
     List<String> author = new ArrayList<>(Arrays.asList("JK ROWLING","EE","George Orwell","Issac Assimov","LLALAL",
             "Mary Houdini","The Great Em","Heidi","Tom Cruise","Tom Shelby","Idea Partner","Lookie here","Mr. A"));
     List<Integer> rent = new ArrayList<>(Arrays.asList(10,20,30,10,50,10,10,20,30,40,10,20,30));
-    List<Integer> depositArr = new ArrayList<>(Arrays.asList(201,101,220,600,300,200,100,500,300,200,100,150,300));
+    //List<Integer> depositArr = new ArrayList<>(Arrays.asList(201,101,220,600,300,200,100,500,300,200,100,150,300));
     Image[] imgs = new Image[50];
 
     public void initialize()
@@ -147,7 +142,6 @@ public class searchPage{
         bookLabel = new Label[]{BookName1,BookName2,BookName3,BookName4,BookName5,BookName6};
         authorLabel = new Label[]{BookAuthor1,BookAuthor2,BookAuthor3, BookAuthor4, BookAuthor5,BookAuthor6};
         rentLabel = new Label[]{rent1,rent2,rent3,rent4,rent5,rent6};
-        depositLabel = new Label[]{deposit1,deposit2,deposit3,deposit4,deposit5,deposit6};
         imgv = new ImageView[]{img1,img2,img3,img4,img5,img6};
         Vbox1 = new VBox[]{Vbox11,Vbox21,Vbox31,Vbox41,Vbox51,Vbox61};
         Vbox2 = new VBox[]{Vbox12,Vbox22,Vbox32,Vbox42,Vbox52,Vbox62};
@@ -165,7 +159,6 @@ public class searchPage{
         ImageView imgBtn = new ImageView(new Image(new File(path+"searchLogo.jpg").toURI().toString()));
         imgBtn.setFitHeight(25);
         imgBtn.setFitWidth(25);
-        searchButton.setGraphic(imgBtn);
 
         //profilePicture
         Image imgperson = new Image(new File(path+"woman.png").toURI().toString());
@@ -199,7 +192,6 @@ public class searchPage{
             authorLabel[index].setText(author.get(index));
             imgv[index].setImage(imgs[index]);
             rentLabel[index].setText(Integer.toString(rent.get(index)));
-            depositLabel[index].setText(Integer.toString(depositArr.get(index)));
         }
         //Here Index value increments +1 at the end. So value is 6 not 5. Can be used as a normal value
 
@@ -212,62 +204,65 @@ public class searchPage{
 
     }
 
-    public void onHoverBox(MouseEvent event)
-    {
-
-
-        if(event.getSource()==searchButton)
-        {
-            searchButton.setStyle("-fx-background-color:#595656");
-            ImageView imgBtn = new ImageView(new Image(new File(path+"searchLogoChanged.jpg").toURI().toString()));
-            imgBtn.setFitHeight(25);
-            imgBtn.setFitWidth(25);
-            searchButton.setGraphic(imgBtn);
-        }
-        else {
-            for (int i = 0; i < stck.length; i++) {
-                 if(i==1){continue;}
-                 if (stck[i].isHover()) {
-                    stck[i].setStyle("-fx-background-color:#b9b9b9;");
-                    lbl[i].setTextFill(Color.rgb(59, 56, 56));
-                }
+    public void onHoverBox(MouseEvent event) {
+        for (int i = 0; i < stck.length; i++) {
+            if (i == 4) {
+                continue;
             }
-        }
-
-    }
-
-    public void endHoverBox(MouseEvent event)
-    {
-        if(event.getSource()==searchButton)
-        {
-            searchButton.setStyle("-fx-background-color:#000000");
-            ImageView imgBtn = new ImageView(new Image(new File(path+"searchLogo.jpg").toURI().toString()));
-            imgBtn.setFitHeight(25);
-            imgBtn.setFitWidth(25);
-            searchButton.setGraphic(imgBtn);
-        }
-        else {
-            for (int i = 0; i < stck.length; i++) {
-                if(i==1){continue;}
-                if (!stck[i].isHover()) {
-                    stck[i].setStyle("-fx-background-color:#3b3838;");
-                    lbl[i].setTextFill(Color.rgb(217, 217, 217));
-                }
+            if (stck[i].isHover()) {
+                stck[i].setStyle("-fx-background-color:#b9b9b9;");
+                lbl[i].setTextFill(Color.rgb(59, 56, 56));
             }
         }
     }
+
+    public void endHoverBox(MouseEvent event) {
+        for (int i = 0; i < stck.length; i++) {
+            if (i == 4) {
+                continue;
+            }
+            if (!stck[i].isHover()) {
+                stck[i].setStyle("-fx-background-color:#3b3838;");
+                lbl[i].setTextFill(Color.rgb(217, 217, 217));
+            }
+        }
+    }
+
 
     public void pressed(MouseEvent event)
     {
         for(int i=0; i<stck.length; i++)
         {
-            if(stck[i].isPressed() && i!=1)
+            if(stck[i].isPressed() && i!=4)
             {
                 Windows w = new Windows(stck[i], i);
             }
         }
 
     }
+
+
+
+    public void onHoverButton(MouseEvent event)
+    {
+
+        if(event.getSource()==profileBtn) {
+            profileBtn.setStyle("-fx-background-color:#92a2b9");
+        }
+
+    }
+
+
+    public void endHoverButton(MouseEvent event)
+    {
+
+        if(event.getSource()==profileBtn) {
+            profileBtn.setStyle("-fx-background-color:#44546a");
+        }
+
+    }
+
+
 
 
     public void rArrowClicked(MouseEvent event)
@@ -291,7 +286,6 @@ public class searchPage{
                 bookLabel[i].setText(name.get(index));
                 authorLabel[i].setText(author.get(index));
                 rentLabel[i].setText(Integer.toString(rent.get(index)));
-                depositLabel[i].setText(Integer.toString(depositArr.get(index)));
                 imgv[i].setImage(imgs[index]);
                 index++;
                 i++;
@@ -323,7 +317,6 @@ public class searchPage{
             bookLabel[boxIn].setText(name.get(index-(6-boxIn)));
             authorLabel[boxIn].setText(author.get(index-(6-boxIn)));
             rentLabel[boxIn].setText(Integer.toString(rent.get(index-(6-boxIn))));
-            depositLabel[boxIn].setText(Integer.toString(depositArr.get(index-(6-boxIn))));
             imgv[boxIn].setImage(imgs[index-(6-boxIn)]);
             Vbox1[boxIn].setVisible(true);
             Vbox2[boxIn].setVisible(true);
@@ -365,14 +358,6 @@ public class searchPage{
         }
     }
 
-
-    public void bookPageClicked(MouseEvent event) {
-        for (int i = 0; i < imgv.length; i++) {
-            if (event.getSource() == imgv[i]) {
-                Windows w = new Windows(imgv[i], "../fxml/bookDetailsPage.fxml", name.get(i));
-            }
-        }
-    }
-
+    public void profileBtnPressed(MouseEvent e){Windows w = new Windows(profileBtn, 4);}
 
 }

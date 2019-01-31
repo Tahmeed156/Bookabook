@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="parent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookabook.client.controllers.helpPage">
+    <children>
+        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
+            <left>
+                <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
+                    <children>
+                        <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="100.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="dashBLbl" text="Dashboard" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="searchStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="searchLbl" text="Search" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="messagesStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="messagesLbl" text="Messages" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="helpStk" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0" style="-fx-background-color: #ffc000;">
+                            <children>
+                                <Label fx:id="helpLbl" text="Help">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="profileStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="profileLbl" text="Profile" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                        <StackPane fx:id="logoutStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="80.0" prefWidth="160.0">
+                            <children>
+                                <Label fx:id="logoutLbl" text="Logout" textFill="#d9d9d9">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </StackPane>
+                    </children>
+                </VBox>
+            </left>
+            <top>
+                <HBox fx:id="headerHbx" prefHeight="144.0" prefWidth="1200.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@../Pictures/logo.png" />
+                            </image>
+                        </ImageView>
+                        <StackPane prefHeight="155.0" prefWidth="732.0">
+                            <children>
+                                <AnchorPane />
+                            </children>
+                        </StackPane>
+                        <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
+                            <children>
+                                <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
+                                <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                            </children>
+                        </StackPane>
+                    </children>
+                </HBox>
+            </top>
+         <center>
+            <AnchorPane style="-fx-background-color: #ededed;">
+               <children>
+                  <ImageView fitHeight="374.0" fitWidth="923.0" layoutX="110.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../Pictures/help.jpg" />
+                     </image>
+                  </ImageView>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ededed" height="129.0" layoutX="654.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="172.0" />
+               </children>
+            </AnchorPane>
+         </center>
+        </BorderPane>
+    </children>
+</Pane>
