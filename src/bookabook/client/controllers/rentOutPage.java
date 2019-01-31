@@ -20,8 +20,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.json.JSONException;
 import org.json.JSONObject;
-import server.models.Book;
-import server.models.User;
+import bookabook.server.models.Book;
+import bookabook.server.models.User;
 
 import java.io.File;
 import java.time.LocalDate;

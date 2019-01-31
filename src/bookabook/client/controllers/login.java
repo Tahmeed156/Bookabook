@@ -2,6 +2,7 @@ package bookabook.client.controllers;
 
 
 // Javafx configuration
+import bookabook.client.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -10,17 +11,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-// Hibernate configuration
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
-// Project files
-import org.hibernate.query.Query;
-import server.models.User;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.prefs.Preferences;
 
 public class login {
@@ -60,53 +53,31 @@ public class login {
             {
                 toast.set("PLEASE FILL ALL THE FIELDS");
                 toast.setColor("#f0ad4e");
-//                toastlogin.setText("PLEASE FILL ALL THE FIELDS");
-//                toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
             }
             else {
-                try {
-                    SessionFactory sf = new Configuration().configure("/bookabook/client/hibernate.cfg.xml").buildSessionFactory();
-                    Session s = sf.openSession();
-                    s.beginTransaction();
 
-                    Query query = s.createQuery("from User where username = :u and password = :p");
-                    query.setParameter("u", userNameLogin.getText());
-                    query.setParameter("p", password.getText());
-                    try {
-                        User u = (User) query.uniqueResult();
-                        System.out.println(u.showName());
-                        // todo: Add toast "Login successful"
-                        Preferences userCon = Preferences.userRoot().node("bookabook/user");
+                String u = userNameLogin.getText();
+                String p = password.getText();
+                boolean success = Main.connection.login(u, p);
 
-                        // Saving information in the registry
-                        userCon.put("username", u.getUsername());
-                        userCon.put("id", String.valueOf(u.getId()));
-                        userCon.put("full_name", u.getFull_name());
+                if (success) {
+                    Preferences userCon = Main.userCon;
 
-                        String username = userCon.get("username", "");
-                        System.out.println("Successfully logged in as " + username);
-                        // todo: Add toast ^ and change screens
-                        toast.set("LOGIN SUCCESSFUL");
-                        toast.setColor("#5cb85c");
-                        Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
-                    } catch (Exception e) {
-                        toast.set("WRONG USERNAME OR PASSWORD");
-                        toast.setColor("#D9534F");
-//                        toastlogin.setText("Wrong Username or Password");
-//                        toastlogin.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff");
-                        // todo: Add toast ^
-                    }
+                    // Saving information in the registry
+                    userCon.put("username", u);
+                    // bug TMD # Returning user_id and full_name from the server
+                    // userCon.put("id", String.valueOf(u.getId()));
+                    // userCon.put("full_name", );
 
-                    s.getTransaction().commit();
-                    s.close();
-                } catch (HibernateException e) {
-                    // todo: Add toast "Unable to create new user"
-                    toast.set("UNABLE TO CREATE NEW USER");
-                    toast.setColor("#f0ad4e");
-//                    toastlogin.setText("Unable to create new user");
-//                    toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
-                    System.out.println(e.getMessage());
+                    toast.set("LOGIN SUCCESSFUL");
+                    toast.setColor("#5cb85c");
+                    Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
                 }
+                else {
+                    toast.set("WRONG USERNAME OR PASSWORD");
+                    toast.setColor("#D9534F");
+                }
+
             }
         }
         if (event.getSource() == signUpBtn) {
@@ -116,60 +87,41 @@ public class login {
                 emailAddress.getText().isEmpty()) {
                 toast.set("PLEASE FILL ALL THE FIELDS");
                 toast.setColor("#f0ad4e");
-//                toastSignup.setText("PLEASE FILL ALL THE FIELDS");
-//                toastSignup.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
             }
             else if (!passwordSignup.getText().equals(conPasswordSignup.getText())) {
                 toast.set("RE-ENTER PASSWORDS");
                 toast.setColor("#f0ad4e");
-//                toastlogin.setText("RE-ENTER PASSWORDS");
-                passwordSignup.getText().equals(conPasswordSignup.getText()); //WHAT DOES THIS DO TAHMEED
-//                toastlogin.setStyle("-fx-background-color: #f0ad4e; -fx-text-fill:#ffffff");
             }
             else if(passwordSignup.getText().equals(conPasswordSignup.getText())) {
 
-                try {
-                    User u = new User();
+                LocalDate localDate = dateOfBirth.getValue();
+                String dob = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
-                    LocalDate localDate = dateOfBirth.getValue();
-                    // Converts LocalDate object into Date object
-                    java.util.Date date = java.sql.Date.valueOf(localDate);
+                String u = userNameSignup.getText();
+                boolean success = Main.connection.signup(
+                        fullName.getText(),
+                        userNameSignup.getText(),
+                        passwordSignup.getText(),
+                        dob,
+                        emailAddress.getText()
+                );
 
-                    u.signup(
-                            fullName.getText(),
-                            userNameSignup.getText(),
-                            passwordSignup.getText(),
-                            date, // passes a date object
-                            emailAddress.getText()
-                    );
-                    SessionFactory sf = new Configuration().configure("/bookabook/client/hibernate.cfg.xml").buildSessionFactory();
-                    Session s = sf.openSession();
-                    s.beginTransaction();
-                    s.save(u);
-                    s.getTransaction().commit();
-                    s.close();
+                if (success) {
+                    Preferences userCon = Main.userCon;
 
-                    Preferences userCon = Preferences.userRoot().node("bookabook/user");
                     // Saving information in the registry
-                    userCon.put("username", u.getUsername());
-                    userCon.put("id", String.valueOf(u.getId()));
-                    userCon.put("full_name", u.getFull_name());
+                    userCon.put("username", u);
+                    // bug: add user_id, full_name to registry
+                    // userCon.put("id", String.valueOf(u.getId()));
+                    // userCon.put("full_name", u.getFull_name());
 
-                    String username = userCon.get("username", "user.username");
-                    System.out.println("Successfully signed up as " + username);
-                    // todo: Add toast ^ and change screens
                     toast.set("SUCCESSFULLY SIGNED UP");
                     toast.setColor("#5CB85C");
-//                    toastSignup.setText("SUCCESSFULLY SIGNED UP");
-//                    toastSignup.setStyle("-fx-background-color: #5cb85c; -fx-text-fill:#ffffff");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
-                } catch (HibernateException e) {
-                    // todo: Add toast "Unable to create new user"
+                }
+                else {
                     toast.set("UNABLE TO CREATE NEW USER");
                     toast.setColor("#D9534F");
-//                    toastSignup.setText("UNABLE TO CREATE NEW USER");
-//                    toastSignup.setStyle("-fx-background-color: #d9534f; -fx-text-fill:#ffffff");
-                    System.out.println(e.getMessage());
                 }
             }
         }
