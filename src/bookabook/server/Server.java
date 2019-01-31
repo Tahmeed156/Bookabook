@@ -1,5 +1,8 @@
 package bookabook.server;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -14,7 +17,6 @@ public class Server {
         // Creating the server
         ServerSocket server = new ServerSocket(9899);
         Socket socket;
-
         System.out.println("Server running!");
 
         // Accepting new clients

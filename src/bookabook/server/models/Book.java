@@ -1,4 +1,4 @@
-package server.models;
+package bookabook.server.models;
 
 import javax.persistence.*;
 import java.util.Date;

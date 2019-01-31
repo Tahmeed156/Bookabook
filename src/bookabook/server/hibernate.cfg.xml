@@ -7,6 +7,7 @@
 <hibernate-configuration>
     <session-factory>
 
+
         <property name = "hibernate.dialect">
             org.hibernate.dialect.MySQL5Dialect
         </property>
@@ -27,7 +28,8 @@
 
         <property name = "hibernate.connection.password">
             <!--leavemealone-->
-            root
+            <!--root-->
+            tahmeed
         </property>
 
         <!-- Setting autocommit -->
@@ -42,7 +44,9 @@
         </property>
 
         <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">true</property>
+        <property name="show_sql">
+            true
+        </property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <!--<property name="connection.pool_size">1</property>-->
@@ -52,8 +56,9 @@
 
 
         <!-- Names the annotated entity class -->
-        <mapping class="server.models.User"/>
-        <mapping class="server.models.Book"/>
+        <mapping class="bookabook.server.models.User"/>
+        <mapping class="bookabook.server.models.Book"/>
+
 
         <!-- List of XML mapping files -->
         <!--<mapping resource = "Employee.hbm.xml"/>-->
