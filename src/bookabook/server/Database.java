@@ -1,5 +1,6 @@
 package bookabook.server;
 
+import antlr.debug.MessageAdapter;
 import bookabook.server.models.*;
 
 // Hibernate components
@@ -95,6 +96,24 @@ public class Database {
         finally {
             endSession();
         }
+    }
+
+    public boolean send_message (int id, String name, String type, String body) {
+        startSession();
+
+        try {
+            Message m = new Message(id, name, type, body);
+            session.save(m);
+            return true;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        finally {
+            endSession();
+        }
+
     }
 
     private void endSession () {

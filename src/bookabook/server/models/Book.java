@@ -16,7 +16,12 @@ public class Book {
     private String name;
 
     @Column(name = "author", length = 32, nullable = false)
+
     private String author;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
 
     @Column(name = "rent", scale = 4, precision = 2) // Rent per week
     private double rent;
@@ -51,6 +56,10 @@ public class Book {
         this.deposit = d;
         this.book_info = i;
         this.timestamp = new Date();
+    }
+
+    public User getOwner() {
+        return owner;
     }
 
 }

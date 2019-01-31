@@ -78,6 +78,17 @@ class Connection extends Thread {
                         break;
                     }
 
+                    case "messages/add": {
+                        success = db.send_message(
+                                request.getInt("id"),
+                                request.getString("username"),
+                                request.getString("message_type"),
+                                request.getString("body")
+                        );
+                        send(success);
+                        break;
+                    }
+
                     default:
                         break;
                 }

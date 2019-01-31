@@ -2,6 +2,7 @@ package bookabook.server.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "bookabook")
@@ -43,6 +44,8 @@ public class User {
     @Column(name = "work", length = 64)
     private String work;
 
+    @OneToMany(mappedBy = "owner")
+    private Set<Book> books;
 
     public User () {
 
