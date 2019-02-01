@@ -89,6 +89,12 @@ class Connection extends Thread {
                         break;
                     }
 
+                    case "books/trending": {
+
+
+                        break;
+                    }
+
                     default:
                         break;
                 }

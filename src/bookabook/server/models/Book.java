@@ -33,6 +33,9 @@ public class Book {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date timestamp;
 
+    @Column(name = "genre")
+    private String genre;
+
     @Column(name = "book_info", columnDefinition = "TEXT")
     private String book_info;
 
@@ -45,17 +48,18 @@ public class Book {
     }
 
     public Book (String n, String a) {
-        this.name = n;
-        this.author = a;
+        name = n;
+        author = a;
     }
 
-    public void rent (String n, String a, double r, double d, String i) {
-        this.name = n;
-        this.author = a;
-        this.rent = r;
-        this.deposit = d;
-        this.book_info = i;
-        this.timestamp = new Date();
+    public void rent (String n, String a, double r, double d, String i, String g) {
+        name = n;
+        author = a;
+        rent = r;
+        deposit = d;
+        book_info = i;
+        genre = g;
+        timestamp = new Date();
     }
 
     public User getOwner() {
