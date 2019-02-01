@@ -66,4 +66,51 @@ public class Book {
         return owner;
     }
 
+    public Book(String name, String author, User owner, double rent, double deposit, Date timestamp, String genre, String book_info, boolean available) {
+        this.name = name;
+        this.author = author;
+        this.owner = owner;
+        this.rent = rent;
+        this.deposit = deposit;
+        this.timestamp = timestamp;
+        this.genre = genre;
+        this.book_info = book_info;
+        this.available = available;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public double getRent() {
+        return rent;
+    }
+
+    public double getDeposit() {
+        return deposit;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getBook_info() {
+        return book_info;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
 }

@@ -1,5 +1,8 @@
 package bookabook.client.controllers;
 
+import bookabook.client.Main;
+import bookabook.objects.Bookser;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +20,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.json.JSONException;
 
 
 import java.io.File;
@@ -117,26 +121,28 @@ public class dashboard {
 
 
 
-    //list for trending
-    List<String> tname = new ArrayList<>(Arrays.asList("Harry Potter","Percy Jackson","Animal Farm","Foundation",
-            "The Houdini","ABC","New Ton"));
-    List<String> tauthor = new ArrayList<>(Arrays.asList("JK ROWLING","EE","George Orwell","Issac Assimov","LLALAL",
-            "Mary Houdini","The Great Em"));
-    Image[] timgs = new Image[50];
+//    //list for trending
+    List<String> tname = new ArrayList<>();
+    List<String> tauthor = new ArrayList<>();
+//    Image[] timgs = new Image[50];
+    List<Image> timgs = new ArrayList<>();
+
+    List<Bookser> trendingBooks;
 
     //list for recommended
-    List<String> rname = new ArrayList<>(Arrays.asList("Game of Thrones","1984","Animal Farm","Percy Jackson"));
-    List<String> rauthor = new ArrayList<>(Arrays.asList("GRR Martin","George Orwell","George Orwell","Rick"));
-    Image[] rimgs = new Image[50];
+    List<String> rname = new ArrayList<>();
+    List<String> rauthor = new ArrayList<>();
+    List<Image> rimgs = new ArrayList<>();
 
-     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    List<Bookser> latestBooks;
+
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    // private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
-    public void initialize()
-    {
+    public void initialize() throws IOException, JSONException, ClassNotFoundException, InterruptedException {
         parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk,searchStk,messagesStk,helpStk,profileStk,logoutStk};
@@ -152,40 +158,57 @@ public class dashboard {
         arrows = new ImageView[]{tLArrow,tRArrow,rLArrow,rRArrow};
 
 
-        //tbook1
-        timgs[0] = new Image(new File(path+"hp.png").toURI().toString());
 
-        //tbook2
-        timgs[1] = new Image(new File(path+"pj.png").toURI().toString());
+        trendingBooks = Main.connection.latest_books("books/trending","");
+        //Thread.sleep(5000);
+        for (Bookser b: trendingBooks) {
+            tname.add(b.getName());
+            tauthor.add(b.getAuthor());
+            timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
+        }
 
-        //tbook3
+        latestBooks = Main.connection.latest_books("books/latest","");
+        for (Bookser b: latestBooks) {
+            rname.add(b.getName());
+            rauthor.add(b.getAuthor());
+            rimgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
+        }
 
-        timgs[2] = new Image( new File(path+"animalFarm.png").toURI().toString());
-
-        //tbook4
-        timgs[3] = new Image( new File(path+"foundation.png").toURI().toString());
-
-        //tbook5
-        timgs[4] = new Image(new File(path+"animalFarm.png").toURI().toString());
-
-        //tbook6
-        timgs[5] = new Image(new File(path+"1984.png").toURI().toString());
-
-        //tbook7
-        timgs[6] = new Image(new File(path+"hp.png").toURI().toString());
+//
+//        //tbook1
+//        timgs[0] = new Image(new File(path+"hp.png").toURI().toString());
+//
+//        //tbook2
+//        timgs[1] = new Image(new File(path+"pj.png").toURI().toString());
+//
+//        //tbook3
+//
+//        timgs[2] = new Image( new File(path+"animalFarm.png").toURI().toString());
+//
+//        //tbook4
+//        timgs[3] = new Image( new File(path+"foundation.png").toURI().toString());
+//
+//        //tbook5
+//        timgs[4] = new Image(new File(path+"animalFarm.png").toURI().toString());
+//
+//        //tbook6
+//        timgs[5] = new Image(new File(path+"1984.png").toURI().toString());
+//
+//        //tbook7
+//        timgs[6] = new Image(new File(path+"hp.png").toURI().toString());
 
         //rbook1
-        rimgs[0] = new Image(new File(path+"book.png").toURI().toString());
-
-
-        //rbook2
-        rimgs[1] = new Image(new File(path+"1984.png").toURI().toString());
-
-        //rbook3
-        rimgs[2] = new Image(new File(path+"animalFarm.png").toURI().toString());
-
-        //tbook4
-        rimgs[3] = new Image(new File(path+"foundation.png").toURI().toString());
+//        rimgs[0] = new Image(new File(path+"book.png").toURI().toString());
+//
+//
+//        //rbook2
+//        rimgs[1] = new Image(new File(path+"1984.png").toURI().toString());
+//
+//        //rbook3
+//        rimgs[2] = new Image(new File(path+"animalFarm.png").toURI().toString());
+//
+//        //tbook4
+//        rimgs[3] = new Image(new File(path+"foundation.png").toURI().toString());
 
 
         //profilePicture
@@ -197,7 +220,7 @@ public class dashboard {
 
 
         //upperRightLabels
-        Label nameUser = new Label("Jane Micheal ");
+        Label nameUser = new Label("Ayan Antik Khan ");
         nameUser.setStyle("-fx-font-weight:bold");
 
         Integer daysLeft = 2;
@@ -205,10 +228,10 @@ public class dashboard {
         Integer deposit = 2000;
 
         upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Next return: "+daysLeft+" days"),
-                new Label("Rented: "+rentedBooks+" Books"),
+                new Label("Next return: " + daysLeft+" days"),
+                new Label("Rented: " + rentedBooks+" Books"),
                 new Label("Money deposited:"),
-                new Label("Tk "+deposit));
+                new Label("Tk " + deposit));
 
 
         //populating trending
@@ -217,7 +240,8 @@ public class dashboard {
             tVbox[tIndex].setVisible(true);
             tlabel[tIndex].setText(tname.get(tIndex));
             tAuthorLabel[tIndex].setText(tauthor.get(tIndex));
-            timgv[tIndex].setImage(timgs[tIndex]);
+            timgv[tIndex].setImage(timgs.get(tIndex));
+
         }
         //Here tIndex value increments +1 at the end. So value is 3 not 2. Can be used as a normal value
 
@@ -233,7 +257,7 @@ public class dashboard {
             rVbox[rIndex].setVisible(true);
             rlabel[rIndex].setText(rname.get(rIndex));
             rAuthorLabel[rIndex].setText(rauthor.get(rIndex));
-            rimgv[rIndex].setImage(rimgs[rIndex]);
+            rimgv[rIndex].setImage(rimgs.get(rIndex));
 
         }
 
@@ -309,7 +333,7 @@ public class dashboard {
                    tVbox[i].setVisible(true);
                    tlabel[i].setText(tname.get(tIndex));
                    tAuthorLabel[i].setText(tauthor.get(tIndex));
-                   timgv[i].setImage(timgs[tIndex]);
+                   timgv[i].setImage(timgs.get(tIndex));
                    tIndex++;
                    i++;
                }
@@ -343,7 +367,7 @@ public class dashboard {
                     rVbox[i].setVisible(true);
                     rlabel[i].setText(rname.get(rIndex));
                     rAuthorLabel[i].setText(rauthor.get(rIndex));
-                    rimgv[i].setImage(rimgs[rIndex]);
+                    rimgv[i].setImage(rimgs.get(rIndex));
                     rIndex++;
                     i++;
                 }
@@ -377,7 +401,7 @@ public class dashboard {
             {
                 tlabel[boxIn].setText(tname.get(tIndex-(3-boxIn)));
                 tAuthorLabel[boxIn].setText(tauthor.get(tIndex-(3-boxIn)));
-                timgv[boxIn].setImage(timgs[tIndex-(3-boxIn)]);
+                timgv[boxIn].setImage(timgs.get(tIndex-(3-boxIn)));
                 tVbox[boxIn].setVisible(true);
                 boxIn++;
             }
@@ -406,8 +430,8 @@ public class dashboard {
             while(boxIn<=2)
             {
                 rlabel[boxIn].setText(rname.get(rIndex-(3-boxIn)));
-                rimgv[boxIn].setImage(rimgs[rIndex-(3-boxIn)]);
-                rimgv[boxIn].setImage(rimgs[rIndex-(3-boxIn)]);
+                rAuthorLabel[boxIn].setText(rauthor.get(rIndex-(3-boxIn)));
+                rimgv[boxIn].setImage(rimgs.get(rIndex-(3-boxIn)));
                 rVbox[boxIn].setVisible(true);
                 boxIn++;
             }

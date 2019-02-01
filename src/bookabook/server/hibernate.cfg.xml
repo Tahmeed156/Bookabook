@@ -26,9 +26,9 @@
         </property>
 
         <property name = "hibernate.connection.password">
-            <!--leavemealone-->
+            leavemealone
             <!--root-->
-            tahmeed
+            <!--tahmeed-->
         </property>
 
         <!-- Setting autocommit -->

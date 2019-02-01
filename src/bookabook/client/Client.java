@@ -1,11 +1,15 @@
 package bookabook.client;
 
+import bookabook.objects.Bookser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.ConnectException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Client {
 
@@ -88,5 +92,34 @@ public class Client {
         }
         return send(request.toString());
     }
+
+
+
+    public ArrayList<Bookser> latest_books (String type, String query) throws JSONException, IOException, ClassNotFoundException {
+
+        JSONObject request  = new JSONObject();
+        request.put("type", type);
+        request.put("query", query);
+        send(request.toString());
+        System.out.println(request.toString());
+
+        System.out.println("Started reading array list");
+        ArrayList books_objects = (ArrayList) input.readObject();
+        System.out.println("Done reading array list");
+        ArrayList<Bookser> books = new ArrayList<>();
+
+        for (int i=0; i<books_objects.size(); i++) {
+            System.out.println("Saving image " + i);
+            Bookser book = (Bookser) books_objects.get(i);
+            BufferedImage image = ImageIO.read(input);
+            book.saveImage(image);
+            // To omit end of file
+            input.skipBytes(16);
+            books.add(book);
+        }
+
+        return books;
+    }
+
 
 }

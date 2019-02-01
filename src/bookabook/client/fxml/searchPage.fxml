@@ -101,7 +101,7 @@
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="383.0">
                                   <children>
                                       <TextField fx:id="searchTxt" prefHeight="30.0" prefWidth="269.0" style="-fx-border-color: #000000;" />
-                                      <Button fx:id="searchButton" alignment="CENTER" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" prefHeight="30.0" style="-fx-background-color: #000000; -fx-background-radius: 0;" text="Search" textFill="WHITE">
+                                      <Button fx:id="searchButton" alignment="CENTER" maxHeight="30.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#searchedItem" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" prefHeight="30.0" style="-fx-background-color: #000000; -fx-background-radius: 0;" text="Search" textFill="WHITE">
                                           <font>
                                               <Font name="System Bold" size="15.0" />
                                           </font>

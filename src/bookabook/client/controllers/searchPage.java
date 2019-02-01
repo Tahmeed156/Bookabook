@@ -1,10 +1,15 @@
 package bookabook.client.controllers;
 
+import bookabook.client.Main;
+import bookabook.objects.Bookser;
+import bookabook.server.models.Book;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -13,8 +18,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import org.json.JSONException;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -23,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 
 public class searchPage{
+    @FXML private TextField searchTxt;
     @FXML private Pane parent;
     @FXML private VBox left;
     //left side labels;
@@ -124,22 +132,20 @@ public class searchPage{
     @FXML private ImageView lArrow;
     @FXML private ImageView rArrow;
 
-     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-   // private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     //list for searched items
-    List<String> name = new ArrayList<>(Arrays.asList("Harry Potter","Percy Jackson","Animal Farm","Foundation",
-            "The Houdini","ABC","New Ton","ANI","Hey you","Maybe","Looking for mid","Hullaa","DragonSlayer"));
-    List<String> author = new ArrayList<>(Arrays.asList("JK ROWLING","EE","George Orwell","Issac Assimov","LLALAL",
-            "Mary Houdini","The Great Em","Heidi","Tom Cruise","Tom Shelby","Idea Partner","Lookie here","Mr. A"));
-    List<Integer> rent = new ArrayList<>(Arrays.asList(10,20,30,10,50,10,10,20,30,40,10,20,30));
-    List<Integer> depositArr = new ArrayList<>(Arrays.asList(201,101,220,600,300,200,100,500,300,200,100,150,300));
-    Image[] imgs = new Image[50];
+    List<String> name = new ArrayList<>();
+    List<String> author = new ArrayList<>();
+    List<Integer> rent = new ArrayList<>();
+    List<Integer> depositArr = new ArrayList<>();
+    List<Image> imgs = new ArrayList<>();
+    List<Bookser> searchResults;
 
-    public void initialize()
-    {
+    public void initialize() throws IOException, JSONException, ClassNotFoundException {
         parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
@@ -153,9 +159,13 @@ public class searchPage{
         Vbox2 = new VBox[]{Vbox12,Vbox22,Vbox32,Vbox42,Vbox52,Vbox62};
 
 
-        for(int i=1; i<=13; i++)
-        {
-            imgs[i-1] = new Image(new File(path+i+".png").toURI().toString());
+        searchResults = Main.connection.latest_books("books/search","");
+        for (Bookser b: searchResults) {
+            name.add(b.getName());
+            author.add(b.getAuthor());
+            rent.add((int)b.getRent());
+            depositArr.add((int)b.getDeposit());
+            imgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
         }
 
 
@@ -175,7 +185,7 @@ public class searchPage{
 
 
         //upperRightLabels
-        Label nameUser = new Label("Jane Micheal ");
+        Label nameUser = new Label("Ayan Antik Khan ");
         nameUser.setStyle("-fx-font-weight:bold");
 
         Integer daysLeft = 2;
@@ -197,7 +207,7 @@ public class searchPage{
             Vbox2[index].setVisible(true);
             bookLabel[index].setText(name.get(index));
             authorLabel[index].setText(author.get(index));
-            imgv[index].setImage(imgs[index]);
+            imgv[index].setImage(imgs.get(index));
             rentLabel[index].setText(Integer.toString(rent.get(index)));
             depositLabel[index].setText(Integer.toString(depositArr.get(index)));
         }
@@ -292,7 +302,7 @@ public class searchPage{
                 authorLabel[i].setText(author.get(index));
                 rentLabel[i].setText(Integer.toString(rent.get(index)));
                 depositLabel[i].setText(Integer.toString(depositArr.get(index)));
-                imgv[i].setImage(imgs[index]);
+                imgv[i].setImage(imgs.get(index));
                 index++;
                 i++;
             }
@@ -324,7 +334,7 @@ public class searchPage{
             authorLabel[boxIn].setText(author.get(index-(6-boxIn)));
             rentLabel[boxIn].setText(Integer.toString(rent.get(index-(6-boxIn))));
             depositLabel[boxIn].setText(Integer.toString(depositArr.get(index-(6-boxIn))));
-            imgv[boxIn].setImage(imgs[index-(6-boxIn)]);
+            imgv[boxIn].setImage(imgs.get(index-(6-boxIn)));
             Vbox1[boxIn].setVisible(true);
             Vbox2[boxIn].setVisible(true);
             boxIn++;
@@ -374,5 +384,51 @@ public class searchPage{
         }
     }
 
+    public void searchedItem(MouseEvent event) throws IOException, JSONException, ClassNotFoundException {
+        searchResults.clear();
+        name.clear();
+        author.clear();
+        rent.clear();
+        depositArr.clear();
+        imgs.clear();
+        searchResults = Main.connection.latest_books("books/search", searchTxt.getText());
+        for (Bookser b: searchResults) {
+            name.add(b.getName());
+            author.add(b.getAuthor());
+            rent.add((int)b.getRent());
+            depositArr.add((int)b.getDeposit());
+            imgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
+        }
+
+        for (int boxIn = 5; boxIn >= 0; boxIn--) {
+                Vbox1[boxIn].setVisible(false);
+                Vbox2[boxIn].setVisible(false);
+                imgv[boxIn].setImage(null);
+            }
+
+        //populating the box
+        for(index = 0 ; index<name.size() && index<6; index++)
+        {
+
+            Vbox1[index].setVisible(true);
+            Vbox2[index].setVisible(true);
+            bookLabel[index].setText(name.get(index));
+            authorLabel[index].setText(author.get(index));
+            imgv[index].setImage(imgs.get(index));
+            rentLabel[index].setText(Integer.toString(rent.get(index)));
+            depositLabel[index].setText(Integer.toString(depositArr.get(index)));
+        }
+        //Here Index value increments +1 at the end. So value is 6 not 5. Can be used as a normal value
+
+        //make right arrow visible if more books available
+        if(name.size()>6)
+        {
+            stckRArrow.setVisible(true);
+        }
+
+
+
+
+    }
 
 }

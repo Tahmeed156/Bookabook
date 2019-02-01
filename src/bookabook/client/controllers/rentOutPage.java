@@ -91,9 +91,9 @@ public class rentOutPage {
     ObservableList<String> condList = FXCollections.observableArrayList("Perfect",
             "A little bit of tear", "Some tear", "Heavily used" );
 
-     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    // private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -122,7 +122,7 @@ public class rentOutPage {
         rdbtn = new RadioButton[]{original,whitePrint,newsPrint};
 
         //upperRightLabels
-        Label nameUser = new Label("Jane Micheal ");
+        Label nameUser = new Label("Ayan Antik Khan ");
         nameUser.setStyle("-fx-font-weight:bold");
 
         Integer daysLeft = 2;
@@ -282,7 +282,8 @@ public class rentOutPage {
                 author.getText(),
                 Double.valueOf(rentPrice.getText()),
                 Double.valueOf(deposit.getText()),
-                bookInfo.toString()
+                bookInfo.toString(),
+                "test"
         );
 
 

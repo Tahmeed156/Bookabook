@@ -1,11 +1,20 @@
 package bookabook.client;
 
+import bookabook.objects.Bookser;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.net.Socket;
+import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
 public class Main extends Application {
@@ -26,7 +35,7 @@ public class Main extends Application {
             if (username.equals(""))
                 throw new Exception("User not found in registry");
             System.out.println("Logged in as " + username);
-            root = FXMLLoader.load(getClass().getResource("fxml/messenger.fxml"));
+            root = FXMLLoader.load(getClass().getResource("fxml/dashboard.fxml"));
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -38,7 +47,34 @@ public class Main extends Application {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, JSONException, ClassNotFoundException {
+
+//        Socket s = new Socket("127.0.0.1", 9899);
+//        ObjectInputStream input = new ObjectInputStream(s.getInputStream());
+//        DataOutputStream output = new DataOutputStream(s.getOutputStream());
+
+
+//        Bookser book = (Bookser) input.readObject();
+//        BufferedImage image = ImageIO.read(input);
+//        ImageIO.write(image, "png", new File("D:\\Bookabook\\src\\bookabook\\client\\Pictures\\saved\\"
+//                + book.getName() + ".png"));
+//        System.out.println("Image received!");
+//        input.skipBytes(100);
+
+//        try {
+//            String line = (String) input.readObject();
+//
+//            // test: displaying shit
+//            System.out.println("Book name: " + book.getName());
+//            System.out.println("Line: " + line);
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+
+        //    BufferedImage image = ImageIO.read(inputStream);
+//    ImageIO.write(image, "png", new File("E:\\Coding\\Code\\Gava\\src\\server\\upload\\" + String.valueOf(std.getId()) + ".png"));
+
         launch(args);
     }
 }
