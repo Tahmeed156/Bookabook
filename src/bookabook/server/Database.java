@@ -1,6 +1,7 @@
 package bookabook.server;
 
 import antlr.debug.MessageAdapter;
+import bookabook.objects.Bookser;
 import bookabook.server.models.*;
 
 // Hibernate components
@@ -9,11 +10,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+@SuppressWarnings("Duplicates")
 public class Database {
 
     private SessionFactory sessionFactory;
@@ -97,6 +102,60 @@ public class Database {
             endSession();
         }
     }
+
+    public ArrayList<Bookser> latest_books () {
+        startSession();
+
+        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(5);
+        List books = q.getResultList();
+        ArrayList<Bookser> book_objects = new ArrayList<>();
+        for (int i=0; i<books.size(); i++) {
+            Book b = (Book) books.get(i);
+            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            book_objects.add(bser);
+        }
+
+        System.out.println("Successful queries!");
+        endSession();
+        return book_objects;
+    }
+
+    public ArrayList<Bookser> trending_books () {
+        startSession();
+
+        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(5);
+        List books = q.getResultList();
+        ArrayList<Bookser> book_objects = new ArrayList<>();
+        for (int i=0; i<books.size(); i++) {
+            Book b = (Book) books.get(i);
+            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            book_objects.add(bser);
+        }
+
+        System.out.println("Successful queries!");
+        endSession();
+        return book_objects;
+    }
+
+
+    public ArrayList<Bookser> searching_books (String str) {
+        startSession();
+
+        Query q = session.createQuery("from Book where name LIKE CONCAT('%', :str,'%')").setFirstResult(0).setMaxResults(5);
+        q.setParameter("str", str);
+        List books = q.getResultList();
+        ArrayList<Bookser> book_objects = new ArrayList<>();
+        for (int i=0; i<books.size(); i++) {
+            Book b = (Book) books.get(i);
+            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            book_objects.add(bser);
+        }
+
+        System.out.println("Successful queries!");
+        endSession();
+        return book_objects;
+    }
+
 
     public boolean send_message (int id, String name, String type, String body) {
         startSession();

@@ -69,9 +69,9 @@ public class helpPage {
 
 
 
-    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    // private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -86,7 +86,7 @@ public class helpPage {
         imgCircle.setFill(new ImagePattern(imgperson));
 
         //upperRightLabels
-        Label nameUser = new Label("Jane Micheal ");
+        Label nameUser = new Label("Ayan Antik Khan ");
         nameUser.setStyle("-fx-font-weight:bold");
 
         Integer daysLeft = dashboard.daysLeft;

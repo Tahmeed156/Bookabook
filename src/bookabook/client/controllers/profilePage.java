@@ -137,9 +137,9 @@ public class profilePage {
     List<String> bauthor = new ArrayList<>(Arrays.asList("GRR Martin","George Orwell","George Orwell","Rick"));
     Image[] bimgs = new Image[50];
 
-    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    // private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -208,7 +208,7 @@ public class profilePage {
 
 
         //upperRightLabels
-        Label nameUser = new Label("Jane Micheal ");
+        Label nameUser = new Label("Ayan Antik Khan ");
         nameUser.setStyle("-fx-font-weight:bold");
 
         Integer daysLeft = dashboard.daysLeft;
@@ -223,7 +223,7 @@ public class profilePage {
 
 
 
-        bigName.setText("Jane Micheal");
+        bigName.setText("Ayan Antik Khan");
         work.setText("Intern at the king's guard");
         birthDate.setText("11th March 2018");
         email.setText("jmike@gmail.com");

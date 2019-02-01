@@ -115,9 +115,9 @@ public class bookDetailsPage {
 
     static String s;
 
-    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    // private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     String[] reviewArr = new String[]{"Book quite good",
@@ -161,7 +161,7 @@ public class bookDetailsPage {
         imgCircle.setFill(new ImagePattern(imgperson));
 
 
-        Label nameUser = new Label("Jane Micheal ");
+        Label nameUser = new Label("Ayan Antik Khan ");
         nameUser.setStyle("-fx-font-weight:bold");
 
         Integer daysLeft = dashboard.daysLeft;
@@ -394,7 +394,6 @@ public class bookDetailsPage {
 
 
     public void rentBtnPressed(MouseEvent e){
-
         Boolean success = Main.connection.rentBook(
                 1,
                 BookName.getText(),
@@ -406,11 +405,12 @@ public class bookDetailsPage {
             Preferences userCon = Main.userCon;
             dashboard.rentedBooks += 1;
             userCon.put("rented_books", String.valueOf(dashboard.rentedBooks));
-            Windows w = new Windows(rentBtn, "../fxml/dashboard.fxml");
+            Windows w = new Windows(rentBtn, "../fxml/profilePage.fxml");
         }
         else {
             toast.set("UNABLE TO RENT","#D9534F");
         }
+
     }
 
     public void messageBtnPressed(MouseEvent e){

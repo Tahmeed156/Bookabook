@@ -99,7 +99,7 @@
                       <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
                           <children>
                               <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
-                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="CENTER_LEFT" />
                           </children>
                       </StackPane>
                   </children>

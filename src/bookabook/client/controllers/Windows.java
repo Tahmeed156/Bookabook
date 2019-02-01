@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.prefs.Preferences;
 
 
@@ -61,7 +62,7 @@ public class Windows {
             Stage window = (Stage)(b.getScene().getWindow());
             window.setScene(scene);
             window.show();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Cannot be opened");
         }
     }

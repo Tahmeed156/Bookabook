@@ -1,12 +1,14 @@
 package bookabook.server;
 
 
+import bookabook.objects.Bookser;
 import bookabook.server.models.User;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.print.Book;
 import java.io.*;
 import java.net.Socket;
 import java.text.ParseException;
@@ -14,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 
 @SuppressWarnings("Duplicates")
@@ -62,7 +65,6 @@ class Connection extends Thread {
                                 request.getString("username"),
                                 request.getString("password")
                         );
-                        send(success);
                         break;
                     }
 
@@ -74,7 +76,6 @@ class Connection extends Thread {
                                 request.getString("dob"),
                                 request.getString("email")
                         );
-                        send(success);
                         break;
                     }
 
@@ -88,12 +89,50 @@ class Connection extends Thread {
                         send(success);
                         break;
                     }
+                    case "books/latest": {
 
-                    case "books/trending": {
-
+                        ArrayList<Bookser> books = db.latest_books();
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
 
                         break;
                     }
+
+
+
+                    case "books/trending": {
+
+                        ArrayList<Bookser> books = db.trending_books();
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+
+                        break;
+                    }
+
+                    case "books/search": {
+                        String str = request.getString("query");
+                        ArrayList<Bookser> books = db.searching_books(str);
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+
+                        break;
+                    }
+
+
+
+
 
                     default:
                         break;
