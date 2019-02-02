@@ -1,9 +1,10 @@
 package bookabook.client;
 
 import bookabook.objects.Bookser;
+import javafx.application.Platform;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import bookabook.client.controllers.toast;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -17,6 +18,7 @@ public class Client {
     private DataOutputStream output;
     private Socket socket;
     private JSONObject request;
+    static String message;
 
     public Client () throws IOException, InterruptedException {
         while (true) {
@@ -25,13 +27,31 @@ public class Client {
                 socket = new Socket("127.0.0.1", 9899);
                 System.out.println("Successfully connected!");
                 // todo NHS: Reference to toasts in both cases
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast.set("SUCCESSFULLY CONNECTED TO SERVER", "#5cb85c");
+                    }
+                });
+                // todo:message disappears immediately after connecting
+
+
                 break;
             } catch (ConnectException e) {
                 // Restarting message
                 System.out.println("Start your server and connect again.");
                 System.out.println("Retrying in ");
+                message = "Start your server and connect again.\nRetrying in : ";
                 for (int i = 5; i > 0; i--) {
                     System.out.print(i + "  ");
+                    message += i+" ";
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            toast.set(message, "#D9534F");
+                        }
+                    });
                     Thread.sleep(1000);
                 }
                 System.out.println();

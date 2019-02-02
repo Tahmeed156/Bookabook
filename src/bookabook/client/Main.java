@@ -25,8 +25,21 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        // Configuring an object to be used, starting sockets
-        connection = new Client();
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    // Configuring an object to be used, starting sockets
+                    connection = new Client();
+                }catch (Exception e)
+                {
+                    System.out.println("Can't connect with server");
+                }
+            }
+        };
+        t.start();
+
+
         // Configuring Preference API to write registry
         Parent root = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
 

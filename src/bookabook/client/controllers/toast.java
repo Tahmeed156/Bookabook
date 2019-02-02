@@ -1,7 +1,13 @@
 package bookabook.client.controllers;
 
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -21,8 +27,7 @@ public class toast {
                 "-fx-border-color:#ffffff; -fx-border-radius:10");
         lb.setLayoutX(500);
         lb.setLayoutY(700);
-        text(a, "#000000");
-
+        text(a);
     }
 
 //    public static void setColor(String colorBG)
@@ -31,7 +36,7 @@ public class toast {
 //                "-fx-border-color:#ffffff; -fx-border-radius:10");
 //    }
 
-    public static void text(String a, String colorBG)
+    public static void text(String a)
     {
         lb.setText(a);
         i = 0;
@@ -39,7 +44,7 @@ public class toast {
 
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
         pause.setOnFinished(event ->{
-            //System.out.println(i);
+            //System.out.println("IN TOAST" + i);
             if (i<=3) {
                 pause.play();
             } else {

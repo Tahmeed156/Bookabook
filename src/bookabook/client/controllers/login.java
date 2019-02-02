@@ -39,7 +39,9 @@ public class login {
 
     public void initialize()
     {
+
         parent.getChildren().add(toast.get());
+
     }
 
 
@@ -165,6 +167,7 @@ public class login {
             warningPassword.setStyle("-fx-background-color: #5cb85c; -fx-text-fill:#ffffff; -fx-border-radius: 5");
         }
     }
+
 
 
 
