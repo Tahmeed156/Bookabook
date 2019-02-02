@@ -290,7 +290,7 @@
                                     <Insets right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label text="Hunger Games">
+                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Hunger Games">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -298,7 +298,7 @@
                                     <Insets right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label text="World of Wizards">
+                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="World of Wizards">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -306,7 +306,7 @@
                                     <Insets right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label text="Fire in Blood">
+                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Fire in Blood">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -314,7 +314,7 @@
                                     <Insets right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label text="Restore the posture">
+                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Restore the posture">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -322,7 +322,7 @@
                                     <Insets right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label text="Win the Fin">
+                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Win the Fin">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -330,7 +330,7 @@
                                     <Insets right="10.0" top="10.0" />
                                  </padding>
                               </Label>
-                              <Label text="Winnie the Pooh">
+                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Winnie the Pooh">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

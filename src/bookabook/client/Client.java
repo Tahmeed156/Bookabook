@@ -111,6 +111,7 @@ public class Client {
             request.put("condition", condition);
             request.put("review", review);
             request.put("year_bought", year_bought);
+            //todo TMD: input image from user ??
 
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
@@ -134,6 +135,7 @@ public class Client {
             request.put("email",email);
             request.put("contact_no",contact_no);
             request.put("about",about);
+            //todo TMD: input image from user ?? Also DEFAULT IMAGE
 
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
@@ -155,13 +157,13 @@ public class Client {
         return send(request.toString());
     }
 
-    public ArrayList<Bookser> latest_books (String type, String query) throws JSONException, IOException, ClassNotFoundException {
+    public ArrayList<Bookser> latest_books(String type, String query) throws JSONException, IOException, ClassNotFoundException {
 
         JSONObject request = new JSONObject();
         request.put("type", type);
         request.put("query", query);
         send(request.toString());
-        System.out.println(request.toString());
+       // System.out.println(request.toString());
 
         System.out.println("Started reading array list");
         ArrayList books_objects = (ArrayList) input.readObject();

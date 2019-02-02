@@ -3,6 +3,8 @@ package bookabook.client.controllers;
 import bookabook.client.Main;
 import bookabook.objects.Bookser;
 import bookabook.server.models.Book;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -132,9 +134,9 @@ public class searchPage{
     @FXML private ImageView lArrow;
     @FXML private ImageView rArrow;
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    //private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     //list for searched items
@@ -158,18 +160,8 @@ public class searchPage{
         Vbox1 = new VBox[]{Vbox11,Vbox21,Vbox31,Vbox41,Vbox51,Vbox61};
         Vbox2 = new VBox[]{Vbox12,Vbox22,Vbox32,Vbox42,Vbox52,Vbox62};
 
-
-        searchResults = Main.connection.latest_books("books/search","");
-        for (Bookser b: searchResults) {
-            name.add(b.getName());
-            author.add(b.getAuthor());
-            rent.add((int)b.getRent());
-            depositArr.add((int)b.getDeposit());
-            imgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
-        }
-
-
-
+        Loading l = new Loading();
+        new Thread(l).start();
 
         //search Button
         ImageView imgBtn = new ImageView(new Image(new File(path+"searchLogo.jpg").toURI().toString()));
@@ -197,28 +189,6 @@ public class searchPage{
                 new Label("Rented: "+rentedBooks+" Books"),
                 new Label("Money deposited:"),
                 new Label("Tk "+deposit));
-
-
-        //populating the box
-        for(index = 0 ; index<name.size() && index<6; index++)
-        {
-
-            Vbox1[index].setVisible(true);
-            Vbox2[index].setVisible(true);
-            bookLabel[index].setText(name.get(index));
-            authorLabel[index].setText(author.get(index));
-            imgv[index].setImage(imgs.get(index));
-            rentLabel[index].setText(Integer.toString(rent.get(index)));
-            depositLabel[index].setText(Integer.toString(depositArr.get(index)));
-        }
-        //Here Index value increments +1 at the end. So value is 6 not 5. Can be used as a normal value
-
-        //make right arrow visible if more books available
-        if(name.size()>6)
-        {
-            stckRArrow.setVisible(true);
-        }
-
 
     }
 
@@ -386,6 +356,7 @@ public class searchPage{
 
     public void searchedItem(MouseEvent event) throws IOException, JSONException, ClassNotFoundException {
         searchResults.clear();
+        stckRArrow.setVisible(false);
         name.clear();
         author.clear();
         rent.clear();
@@ -418,17 +389,66 @@ public class searchPage{
             rentLabel[index].setText(Integer.toString(rent.get(index)));
             depositLabel[index].setText(Integer.toString(depositArr.get(index)));
         }
-        //Here Index value increments +1 at the end. So value is 6 not 5. Can be used as a normal value
-
         //make right arrow visible if more books available
         if(name.size()>6)
         {
             stckRArrow.setVisible(true);
         }
-
-
-
-
     }
+
+    class Loading extends Task {
+        @Override
+        public Void call() throws Exception {
+            try {
+                searchResults = Main.connection.latest_books("books/search","");
+                for (Bookser b: searchResults) {
+                    name.add(b.getName());
+                    author.add(b.getAuthor());
+                    rent.add((int)b.getRent());
+                    depositArr.add((int)b.getDeposit());
+                    imgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
+                }
+
+            }catch(Exception e)
+            {
+                System.out.println("Couldn't load books");
+            }
+
+
+            Platform.runLater(new Runnable() {
+                @Override public void run() {
+                    //populating the box
+                    for(index = 0 ; index<name.size() && index<6; index++)
+                    {
+
+                        Vbox1[index].setVisible(true);
+                        Vbox2[index].setVisible(true);
+                        bookLabel[index].setText(name.get(index));
+                        authorLabel[index].setText(author.get(index));
+                        imgv[index].setImage(imgs.get(index));
+                        rentLabel[index].setText(Integer.toString(rent.get(index)));
+                        depositLabel[index].setText(Integer.toString(depositArr.get(index)));
+                    }
+                    //Here Index value increments +1 at the end. So value is 6 not 5. Can be used as a normal value
+
+                    //make right arrow visible if more books available
+                    if(name.size()>6)
+                    {
+                        stckRArrow.setVisible(true);
+                    }
+
+                }
+            });
+
+            return null;
+        }
+    }
+
+
+
+
+
+
+
 
 }

@@ -50,10 +50,12 @@ class Connection extends Thread {
 
         while (true) {
 
+
             // Getting requests (Json objects)
             JSONObject request;
             try {
                 request = new JSONObject(input.readUTF());
+                System.out.println(request.toString());
 
                 String type = request.getString("type");
                 System.out.println("The message type is: " + type);
@@ -90,7 +92,6 @@ class Connection extends Thread {
                         break;
                     }
                     case "books/latest": {
-
                         ArrayList<Bookser> books = db.latest_books();
                         output.writeObject(books);
                         System.out.println("Sending images: " + books.size());

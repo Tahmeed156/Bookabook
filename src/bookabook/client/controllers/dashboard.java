@@ -3,6 +3,9 @@ package bookabook.client.controllers;
 import bookabook.client.Main;
 
 import bookabook.objects.Bookser;
+import bookabook.server.models.Book;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 
 import javafx.event.ActionEvent;
@@ -144,13 +147,14 @@ public class dashboard {
 
     List<Bookser> latestBooks;
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    //private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
-    public void initialize() throws IOException, JSONException, ClassNotFoundException, InterruptedException {
+    public void initialize() throws IOException, JSONException, ClassNotFoundException,
+            InterruptedException ,IllegalStateException{
         parent.getChildren().add(toast.get());
 
 
@@ -178,65 +182,14 @@ public class dashboard {
         arrows = new ImageView[]{tLArrow,tRArrow,rLArrow,rRArrow};
 
 
-
-        trendingBooks = Main.connection.latest_books("books/trending","");
-        //Thread.sleep(5000);
-        for (Bookser b: trendingBooks) {
-            tname.add(b.getName());
-            tauthor.add(b.getAuthor());
-            timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
-        }
-
-        latestBooks = Main.connection.latest_books("books/latest","");
-        for (Bookser b: latestBooks) {
-            rname.add(b.getName());
-            rauthor.add(b.getAuthor());
-            rimgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
-        }
-
-//
-//        //tbook1
-//        timgs[0] = new Image(new File(path+"hp.png").toURI().toString());
-//
-//        //tbook2
-//        timgs[1] = new Image(new File(path+"pj.png").toURI().toString());
-//
-//        //tbook3
-//
-//        timgs[2] = new Image( new File(path+"animalFarm.png").toURI().toString());
-//
-//        //tbook4
-//        timgs[3] = new Image( new File(path+"foundation.png").toURI().toString());
-//
-//        //tbook5
-//        timgs[4] = new Image(new File(path+"animalFarm.png").toURI().toString());
-//
-//        //tbook6
-//        timgs[5] = new Image(new File(path+"1984.png").toURI().toString());
-//
-//        //tbook7
-//        timgs[6] = new Image(new File(path+"hp.png").toURI().toString());
-
-        //rbook1
-//        rimgs[0] = new Image(new File(path+"book.png").toURI().toString());
-//
-//
-//        //rbook2
-//        rimgs[1] = new Image(new File(path+"1984.png").toURI().toString());
-//
-//        //rbook3
-//        rimgs[2] = new Image(new File(path+"animalFarm.png").toURI().toString());
-//
-//        //tbook4
-//        rimgs[3] = new Image(new File(path+"foundation.png").toURI().toString());
+        Loading t = new Loading();
+        new Thread(t).start();
 
 
         //profilePicture
         File file4 = new File(path+"woman.png");
         Image imgperson = new Image(file4.toURI().toString());
         imgCircle.setFill(new ImagePattern(imgperson));
-
-
 
 
         //upperRightLabels
@@ -249,42 +202,6 @@ public class dashboard {
                 new Label("Rented: " + rentedBooks+" Books"),
                 new Label("Money deposited:"),
                 new Label("Tk " + deposit));
-
-
-        //populating trending
-        for(tIndex = 0 ; tIndex<tname.size() && tIndex<=2; tIndex++)
-        {
-            tVbox[tIndex].setVisible(true);
-            tlabel[tIndex].setText(tname.get(tIndex));
-            tAuthorLabel[tIndex].setText(tauthor.get(tIndex));
-            timgv[tIndex].setImage(timgs.get(tIndex));
-
-        }
-        //Here tIndex value increments +1 at the end. So value is 3 not 2. Can be used as a normal value
-
-        //make right arrow visible if more books available
-        if(tname.size()>3)
-        {
-            tstckRArrow.setVisible(true);
-        }
-
-        //populating recommended
-        for(rIndex = 0 ; rIndex<rname.size() && rIndex<3; rIndex++)
-        {
-            rVbox[rIndex].setVisible(true);
-            rlabel[rIndex].setText(rname.get(rIndex));
-            rAuthorLabel[rIndex].setText(rauthor.get(rIndex));
-            rimgv[rIndex].setImage(rimgs.get(rIndex));
-
-        }
-
-        //make right arrow visible if more books available
-        if(rname.size()>3)
-        {
-            rstckRArrow.setVisible(true);
-        }
-
-
     }
 
     public void onHoverBox(MouseEvent event)
@@ -539,5 +456,176 @@ public class dashboard {
         }
     }
 
+    public void onLabelHover(MouseEvent event)
+    {
+        ((Label)event.getSource()).setUnderline(true);
+    }
+
+
+    public void endLabelHover(MouseEvent event)
+    {
+        ((Label)event.getSource()).setUnderline(false);
+    }
+
+    public void labelClicked(MouseEvent event)
+    {
+        Windows w = new Windows((Label)event.getSource(),"../fxml/bookDetailsPage.fxml",((Label)event.getSource()).getText());
+    }
+
+    class Loading extends Task {
+        @Override
+        public Void call() throws Exception {
+            try {
+                trendingBooks = Main.connection.latest_books("books/trending", "");
+                //Thread.sleep(5000);
+                for (Bookser b : trendingBooks) {
+                    tname.add(b.getName());
+                    tauthor.add(b.getAuthor());
+                    timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
+                }
+
+                latestBooks = Main.connection.latest_books("books/latest", "");
+                for (Bookser b : latestBooks) {
+                    rname.add(b.getName());
+                    rauthor.add(b.getAuthor());
+                    rimgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
+                }
+            }catch(Exception e)
+            {
+                System.out.println("Couldn't load books");
+            }
+
+
+            Platform.runLater(new Runnable() {
+                @Override public void run() {
+                    //populating trending
+                    for(tIndex = 0 ; tIndex<tname.size() && tIndex<=2; tIndex++)
+                    {
+                        tVbox[tIndex].setVisible(true);
+                        tlabel[tIndex].setText(tname.get(tIndex));
+                        tAuthorLabel[tIndex].setText(tauthor.get(tIndex));
+                        timgv[tIndex].setImage(timgs.get(tIndex));
+
+                    }
+                    //Here tIndex value increments +1 at the end. So value is 3 not 2. Can be used as a normal value
+
+                    //make right arrow visible if more books available
+                    if(tname.size()>3)
+                    {
+                        tstckRArrow.setVisible(true);
+                    }
+
+                    //populating recommended
+                    for(rIndex = 0 ; rIndex<rname.size() && rIndex<3; rIndex++)
+                    {
+                        rVbox[rIndex].setVisible(true);
+                        rlabel[rIndex].setText(rname.get(rIndex));
+                        rAuthorLabel[rIndex].setText(rauthor.get(rIndex));
+                        rimgv[rIndex].setImage(rimgs.get(rIndex));
+
+                    }
+
+                    //make right arrow visible if more books available
+                    if(rname.size()>3)
+                    {
+                        rstckRArrow.setVisible(true);
+                    }
+                }
+            });
+
+            return null;
+        }
+    }
+
+
+
+//    class LoadingT extends Task {
+//        @Override
+//        public Void call() throws Exception {
+//            try {
+//                trendingBooks = Main.connection.latest_books("books/trending", "");
+//                //Thread.sleep(5000);
+//                for (Bookser b : trendingBooks) {
+//                    tname.add(b.getName());
+//                    tauthor.add(b.getAuthor());
+//                    timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
+//                }
+//
+//            }catch(Exception e)
+//            {
+//                System.out.println("Couldn't load books");
+//            }
+//
+//
+//            Platform.runLater(new Runnable() {
+//                @Override public void run() {
+//                    //populating trending
+//                    for(tIndex = 0 ; tIndex<tname.size() && tIndex<=2; tIndex++)
+//                    {
+//                        tVbox[tIndex].setVisible(true);
+//                        tlabel[tIndex].setText(tname.get(tIndex));
+//                        tAuthorLabel[tIndex].setText(tauthor.get(tIndex));
+//                        timgv[tIndex].setImage(timgs.get(tIndex));
+//
+//                    }
+//                    //Here tIndex value increments +1 at the end. So value is 3 not 2. Can be used as a normal value
+//
+//                    //make right arrow visible if more books available
+//                    if(tname.size()>3)
+//                    {
+//                        tstckRArrow.setVisible(true);
+//                    }
+//                }
+//            });
+//
+//            return null;
+//        }
+//    }
+//
+//
+//    class LoadingL extends Task {
+//        @Override
+//        public Void call() throws Exception {
+//            try {
+//                latestBooks = Main.connection.latest_books("books/latest", "");
+//                for (Bookser b : latestBooks) {
+//                    rname.add(b.getName());
+//                    rauthor.add(b.getAuthor());
+//                    rimgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
+//                }
+//            }catch(Exception e)
+//            {
+//                System.out.println("Couldn't load books");
+//            }
+//
+//
+//            Platform.runLater(new Runnable() {
+//                @Override public void run() {
+//                    //populating recommended
+//                    for(rIndex = 0 ; rIndex<rname.size() && rIndex<3; rIndex++)
+//                    {
+//                        rVbox[rIndex].setVisible(true);
+//                        rlabel[rIndex].setText(rname.get(rIndex));
+//                        rAuthorLabel[rIndex].setText(rauthor.get(rIndex));
+//                        rimgv[rIndex].setImage(rimgs.get(rIndex));
+//
+//                    }
+//
+//                    //make right arrow visible if more books available
+//                    if(rname.size()>3)
+//                    {
+//                        rstckRArrow.setVisible(true);
+//                    }
+//                }
+//            });
+//
+//            return null;
+//        }
+//    }
+
+
+
 
 }
+
+

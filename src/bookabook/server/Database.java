@@ -106,7 +106,7 @@ public class Database {
     public ArrayList<Bookser> latest_books () {
         startSession();
 
-        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(5);
+        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
@@ -123,7 +123,7 @@ public class Database {
     public ArrayList<Bookser> trending_books () {
         startSession();
 
-        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(5);
+        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
@@ -141,7 +141,7 @@ public class Database {
     public ArrayList<Bookser> searching_books (String str) {
         startSession();
 
-        Query q = session.createQuery("from Book where name LIKE CONCAT('%', :str,'%')").setFirstResult(0).setMaxResults(5);
+        Query q = session.createQuery("from Book where name LIKE CONCAT('%', :str,'%')").setFirstResult(0).setMaxResults(8);
         q.setParameter("str", str);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
