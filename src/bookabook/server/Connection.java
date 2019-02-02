@@ -51,7 +51,7 @@ class Connection extends Thread {
         while (true) {
 
             // Getting requests (Json objects)
-            JSONObject request;
+            JSONObject request, response;
             try {
                 request = new JSONObject(input.readUTF());
 
@@ -61,21 +61,23 @@ class Connection extends Thread {
                 switch (type) {
 
                     case "login": {
-                        success = db.login(
+                        response = db.login(
                                 request.getString("username"),
                                 request.getString("password")
                         );
+                        send(response);
                         break;
                     }
 
                     case "signup": {
-                        success = db.signup(
+                        response = db.signup(
                                 request.getString("full_name"),
                                 request.getString("username"),
                                 request.getString("password"),
                                 request.getString("dob"),
                                 request.getString("email")
                         );
+                        send(response.toString());
                         break;
                     }
 

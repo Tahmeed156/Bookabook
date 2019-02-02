@@ -10,8 +10,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.prefs.Preferences;
@@ -45,7 +48,7 @@ public class login {
 
     // ========================== PRESS FUNCTIONS (User authentication) ========================
 
-    public void onPress(MouseEvent event) {
+    public void onPress(MouseEvent event) throws IOException, ClassNotFoundException, JSONException {
 
         if (event.getSource() == logInBtn) {
 
@@ -57,16 +60,19 @@ public class login {
 
                 String u = userNameLogin.getText();
                 String p = password.getText();
-                boolean success = Main.connection.login(u, p);
+                JSONObject response = Main.connection.login(u, p);
+                System.out.println("The response is: " + response.getString("success"));
 
-                if (success) {
-                    Preferences userCon = Main.userCon;
+                if (Boolean.valueOf(response.getString("success"))) {
 
                     // Saving information in the registry
+                    Preferences userCon = Main.userCon;
                     userCon.put("username", u);
-                    // bug TMD # Returning user_id and full_name from the server
-                    // userCon.put("id", String.valueOf(u.getId()));
-                    // userCon.put("full_name", );
+                    userCon.put("id", response.getString("id"));
+                    userCon.put("full_name", response.getString("full_name"));
+                    userCon.put("wallet", response.getString("wallet"));
+                    userCon.put("books_rented", response.getString("books_rented"));
+                    userCon.put("books_shared", response.getString("books_shared"));
 
                     toast.set("LOGIN SUCCESSFUL","#5cb85c");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
@@ -93,22 +99,25 @@ public class login {
                 String dob = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
                 String u = userNameSignup.getText();
-                boolean success = Main.connection.signup(
+                String line = Main.connection.signup(
                         fullName.getText(),
                         userNameSignup.getText(),
                         passwordSignup.getText(),
                         dob,
                         emailAddress.getText()
                 );
+                JSONObject response = new JSONObject(line);
 
-                if (success) {
+                if (Boolean.valueOf(response.getString("success"))) {
                     Preferences userCon = Main.userCon;
 
                     // Saving information in the registry
                     userCon.put("username", u);
-                    // bug: add user_id, full_name to registry
-                    // userCon.put("id", String.valueOf(u.getId()));
-                    // userCon.put("full_name", u.getFull_name());
+                    userCon.put("id", response.getString("id"));
+                    userCon.put("full_name", response.getString("full_name"));
+                    userCon.put("wallet", response.getString("wallet"));
+                    userCon.put("books_rented", response.getString("books_rented"));
+                    userCon.put("books_shared", response.getString("books_shared"));
 
                     toast.set("SUCCESSFULLY SIGNED UP","#5CB85C");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");

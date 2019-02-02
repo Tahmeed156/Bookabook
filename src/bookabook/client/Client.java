@@ -52,7 +52,7 @@ public class Client {
         socket.close();
     }
 
-    public boolean send (String str) {
+    private boolean send (String str) {
         try {
             output.writeUTF(str);
             System.out.println("Json sent: " + str);
@@ -63,9 +63,9 @@ public class Client {
         }
     }
 
-    public boolean login (String username, String password) {
+    public JSONObject login (String username, String password) throws IOException, ClassNotFoundException {
+        // Preparing request and handling failures
         request = new JSONObject();
-
         try {
             request.put("type", "login");
             request.put("username", username);
@@ -73,13 +73,14 @@ public class Client {
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
-        return send(request.toString());
+        // Sending prepared request and handling response
+        send(request.toString());
+        return (JSONObject) input.readObject();
     }
 
-    public boolean signup (String full_name, String username, String password,
-                           String dob, String email) {
+    public String signup (String full_name, String username, String password,
+                           String dob, String email) throws IOException, ClassNotFoundException {
         request = new JSONObject();
-
         try {
             request.put("type", "signup");
             request.put("full_name", full_name);
@@ -90,7 +91,8 @@ public class Client {
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
-        return send(request.toString());
+        send(request.toString());
+        return (String) input.readObject();
     }
 
 

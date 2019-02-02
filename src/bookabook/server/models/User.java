@@ -29,6 +29,15 @@ public class User {
     @Column(name = "gender", length = 8)
     private String gender;
 
+    @Column(name = "wallet", precision = 10, scale = 2, nullable = false, columnDefinition = "int default 1000")
+    private double wallet;
+
+    @Column(name = "books_shared", nullable = false, columnDefinition = "int default 0")
+    private int books_shared;
+
+    @Column(name = "books_rented", nullable = false, columnDefinition = "int default 0")
+    private int books_rented;
+
     @Column(name = "email", length = 64)
     private String email;
 
@@ -55,12 +64,16 @@ public class User {
         this.username = u;
     }
 
-    public void signup(String f, String u, String p, Date d, String e) {
+    public void signup (String f, String u, String p, Date d, String e) {
         this.full_name = f;
         this.username = u;
         this.password = p;
         this.date_of_birth = d;
         this.email = e;
+        this.rating = 0;
+        this.books_rented = 0;
+        this.books_shared = 0;
+        this.wallet = 1000;
     }
 
     public String showName() {
@@ -77,5 +90,53 @@ public class User {
 
     public String getFull_name() {
         return this.full_name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Date getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public double getWallet() {
+        return wallet;
+    }
+
+    public int getBooks_shared() {
+        return books_shared;
+    }
+
+    public int getBooks_rented() {
+        return books_rented;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getContact_no() {
+        return contact_no;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getWork() {
+        return work;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
     }
 }

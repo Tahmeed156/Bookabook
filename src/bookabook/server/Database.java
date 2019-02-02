@@ -9,6 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.text.ParseException;
@@ -43,7 +45,7 @@ public class Database {
 
     // =====================================   USER AUTHENTICATION
 
-    public boolean login (String username, String password) {
+    public JSONObject login (String username, String password) throws JSONException {
         startSession();
 
         // Generating an input query
@@ -55,34 +57,43 @@ public class Database {
         try {
             User u = (User) query.uniqueResult();
             System.out.printf("%s logged in [%s]", u.getUsername(), Instant.now());
-            return true;
+            // Creating response object
+            JSONObject response = new JSONObject();
+            response.put("success", "true");
+            response.put("id", String.valueOf(u.getId()));
+            response.put("full_name", u.getFull_name());
+            response.put("wallet", String.valueOf(u.getWallet()));
+            response.put("books_shared", String.valueOf(u.getBooks_shared()));
+            response.put("books_rented", String.valueOf(u.getBooks_rented()));
+            return response;
         }
         catch (Exception e) {
+            // In case user is not found
             System.out.println("Wrong login credentials | " + e.getMessage());
-            return false;
+            JSONObject response = new JSONObject();
+            response.put("success", "false");
+            return response;
         }
         finally {
             endSession();
         }
     }
 
-    public boolean signup (
+    public JSONObject signup (
             String full_name,
             String username,
             String password,
             String date,
             String email
-    ) {
+    ) throws JSONException {
         startSession();
 
         // Formatter to convert a string into a Date object
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
-        // Code for current instance
-        // String now = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
         User u = new User();
         try {
+            // Creating and saving user
             u.signup(
                     full_name,
                     username,
@@ -92,11 +103,23 @@ public class Database {
                     email
             );
             session.save(u);
-            return true;
+
+            // Creating response object
+            JSONObject response = new JSONObject();
+            response.put("success", "true");
+            response.put("id", String.valueOf(u.getId()));
+            response.put("full_name", u.getFull_name());
+            response.put("wallet", String.valueOf(u.getWallet()));
+            response.put("books_shared", String.valueOf(u.getBooks_shared()));
+            response.put("books_rented", String.valueOf(u.getBooks_rented()));
+            return response;
         }
         catch (ParseException e) {
+            // returning error JSON
             System.out.println(e.getMessage());
-            return false;
+            JSONObject response = new JSONObject();
+            response.put("success", "false");
+            return response;
         }
         finally {
             endSession();
