@@ -157,6 +157,41 @@ public class Database {
     }
 
 
+    public ArrayList<Bookser> rented_books () {
+        startSession();
+
+        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        List books = q.getResultList();
+        ArrayList<Bookser> book_objects = new ArrayList<>();
+        for (int i=0; i<books.size(); i++) {
+            Book b = (Book) books.get(i);
+            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            book_objects.add(bser);
+        }
+
+        System.out.println("Successful queries!");
+        endSession();
+        return book_objects;
+    }
+
+    public ArrayList<Bookser> rented_out_books () {
+        startSession();
+
+        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        List books = q.getResultList();
+        ArrayList<Bookser> book_objects = new ArrayList<>();
+        for (int i=0; i<books.size(); i++) {
+            Book b = (Book) books.get(i);
+            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            book_objects.add(bser);
+        }
+
+        System.out.println("Successful queries!");
+        endSession();
+        return book_objects;
+    }
+
+
     public boolean send_message (int id, String name, String type, String body) {
         startSession();
 

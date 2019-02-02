@@ -132,6 +132,31 @@ class Connection extends Thread {
                     }
 
 
+                    case "books/rented": {
+                        ArrayList<Bookser> books = db.rented_books();
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+
+                        break;
+                    }
+
+                    case "books/rentedOut": {
+                        ArrayList<Bookser> books = db.rented_out_books();
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+
+                        break;
+                    }
+
+
 
 
 
