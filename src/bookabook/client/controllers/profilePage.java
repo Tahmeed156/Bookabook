@@ -83,6 +83,8 @@ public class profilePage {
     @FXML
     private Label email;
     @FXML
+    private Label loc;
+    @FXML
     private Label contact;
 
     @FXML
@@ -250,6 +252,7 @@ public class profilePage {
         bigName.setText("Ayan Antik Khan");
         work.setText("Intern at the king's guard");
         birthDate.setText("11th March 2018");
+        loc.setText("Winterfell");
         email.setText("jmike@gmail.com");
         contact.setText("54654685");
 

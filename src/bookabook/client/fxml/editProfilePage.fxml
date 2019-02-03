@@ -130,7 +130,7 @@
                                               <Font name="System Bold" size="20.0" />
                                           </font>
                                       </Label>
-                                      <Label prefHeight="30.0" prefWidth="165.0" text="Birth Date :" GridPane.rowIndex="1">
+                                      <Label prefHeight="30.0" prefWidth="165.0" text="Location :" GridPane.rowIndex="1">
                                           <font>
                                               <Font name="System Bold" size="20.0" />
                                           </font>
@@ -151,11 +151,6 @@
                                           </font>
                                       </Label>
                                       <Label prefHeight="30.0" prefWidth="165.0" text="Gender :" GridPane.rowIndex="3">
-                                          <font>
-                                              <Font name="System Bold" size="20.0" />
-                                          </font>
-                                      </Label>
-                                      <Label prefHeight="30.0" prefWidth="165.0" text="About :" GridPane.rowIndex="6">
                                           <font>
                                               <Font name="System Bold" size="20.0" />
                                           </font>
@@ -207,17 +202,16 @@
                                               </RadioButton>
                                           </children>
                                       </HBox>
-                                      <TextArea fx:id="about" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="115.0" prefWidth="370.0" promptText="Write about yourself" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                          <font>
-                                              <Font size="17.0" />
-                                          </font>
-                                      </TextArea>
                               <TextField fx:id="contactNo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </TextField>
-                              <DatePicker fx:id="birthDate" prefHeight="31.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="location" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TextField>
                                   </children>
                               </GridPane>
                      </children>

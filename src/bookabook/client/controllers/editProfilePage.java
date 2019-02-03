@@ -75,14 +75,13 @@ public class editProfilePage {
 
     //Components
     @FXML private TextField name;
-    @FXML private DatePicker birthDate;
+    @FXML private TextField location;
     @FXML private TextField work;
     @FXML private RadioButton male;
     @FXML private RadioButton female;
     @FXML private ToggleGroup gender;
     @FXML private TextField email;
     @FXML private TextField contactNo;
-    @FXML private TextArea about;
 
 
     //right image components
@@ -248,13 +247,12 @@ public class editProfilePage {
         //MUST DO
         //MOST IMPORTANT PART
 
-        LocalDate localDate = birthDate.getValue();
-        String dob = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
 
         Boolean success= Main.connection.editProfile(
                 1,
                 name.getText(),
+                //location.getText(),
                 work.getText(),
                 printRBtn,
                 email.getText(),
