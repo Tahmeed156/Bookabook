@@ -39,7 +39,6 @@ public class Main extends Application {
         };
         t.start();
 
-
         // Configuring Preference API to write registry
         Parent root = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));
 

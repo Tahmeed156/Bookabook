@@ -226,7 +226,7 @@ public class Database {
 
     // ========================================   PROFILE PAGE BOOKS
 
-    public ArrayList<Bookser> rented_books () {
+    public ArrayList<Bookser> rented_books() {
         startSession();
 
         Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);

@@ -177,18 +177,18 @@ public class searchPage{
 
 
         //upperRightLabels
-        Label nameUser = new Label("Ayan Antik Khan ");
+        Label nameUser = new Label(dashboard.userName);
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = dashboard.daysLeft;
-        Integer rentedBooks = dashboard.rentedBooks;
-        Integer deposit = dashboard.deposit;
+        String rentedOutBooks = dashboard.rentedOutBooks;
+        String rentedBooks = dashboard.rentedBooks;
+        String wallet = dashboard.wallet;
 
         upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Next return: "+daysLeft+" days"),
+                new Label("Rented Out: "+rentedOutBooks+" Books"),
                 new Label("Rented: "+rentedBooks+" Books"),
                 new Label("Money deposited:"),
-                new Label("Tk "+deposit));
+                new Label("Tk "+wallet));
 
     }
 
@@ -252,71 +252,14 @@ public class searchPage{
 
     public void rArrowClicked(MouseEvent event)
     {
-        //if right arrow clicked and more books available
-        if(index<name.size()) {
-            //set left arrow visible
-            stckLArrow.setVisible(true);
-            //making boxes and images invisible
-            for (int boxIn = 5; boxIn >= 0; boxIn--) {
-                Vbox1[boxIn].setVisible(false);
-                Vbox2[boxIn].setVisible(false);
-                imgv[boxIn].setImage(null);
-            }
-
-            //populating remaining boxes
-            int i = 0;
-            while (index < name.size() && i < 6) {
-                Vbox1[i].setVisible(true);
-                Vbox2[i].setVisible(true);
-                bookLabel[i].setText(name.get(index));
-                authorLabel[i].setText(author.get(index));
-                rentLabel[i].setText(Integer.toString(rent.get(index)));
-                depositLabel[i].setText(Integer.toString(depositArr.get(index)));
-                imgv[i].setImage(imgs.get(index));
-                index++;
-                i++;
-            }
-
-            //making arrow disabled if no more books
-            //System.out.println(tIndex);
-            if (index >= name.size()) {
-                stckRArrow.setVisible(false);
-            }
-        }
+        index = helper.right_arrow_clicked(name,author,rent,depositArr,imgs,stckRArrow,stckLArrow,Vbox1,Vbox2,
+                bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
     }
 
     public void lArrowClicked(MouseEvent event)
     {
-
-        //finding out the (index+1) value of the rightmost box
-        if(index%6==0) {
-            index-=6;
-        }
-        else{
-            index -= index%6;
-        }
-
-        //populate these boxes
-        int boxIn = 0;
-        while(boxIn<=5)
-        {
-            bookLabel[boxIn].setText(name.get(index-(6-boxIn)));
-            authorLabel[boxIn].setText(author.get(index-(6-boxIn)));
-            rentLabel[boxIn].setText(Integer.toString(rent.get(index-(6-boxIn))));
-            depositLabel[boxIn].setText(Integer.toString(depositArr.get(index-(6-boxIn))));
-            imgv[boxIn].setImage(imgs.get(index-(6-boxIn)));
-            Vbox1[boxIn].setVisible(true);
-            Vbox2[boxIn].setVisible(true);
-            boxIn++;
-        }
-        //System.out.println(tIndex);
-
-        //if leftmost box contain last book then left arrow will be invisible
-        if((index-6)<=0)
-        {
-            stckLArrow.setVisible(false);
-        }
-        stckRArrow.setVisible(true);
+        index = helper.left_arrow_clicked(name,author,rent,depositArr,imgs,stckRArrow,stckLArrow,Vbox1,Vbox2,
+                bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
     }
 
     public void onHoverArrow(MouseEvent event)
@@ -378,22 +321,8 @@ public class searchPage{
             }
 
         //populating the box
-        for(index = 0 ; index<name.size() && index<6; index++)
-        {
-
-            Vbox1[index].setVisible(true);
-            Vbox2[index].setVisible(true);
-            bookLabel[index].setText(name.get(index));
-            authorLabel[index].setText(author.get(index));
-            imgv[index].setImage(imgs.get(index));
-            rentLabel[index].setText(Integer.toString(rent.get(index)));
-            depositLabel[index].setText(Integer.toString(depositArr.get(index)));
-        }
-        //make right arrow visible if more books available
-        if(name.size()>6)
-        {
-            stckRArrow.setVisible(true);
-        }
+        index = helper.initiate(name,author,rent,depositArr,imgs,stckRArrow,Vbox1,Vbox2,
+                bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
     }
 
     class Loading extends Task {
@@ -418,24 +347,8 @@ public class searchPage{
             Platform.runLater(new Runnable() {
                 @Override public void run() {
                     //populating the box
-                    for(index = 0 ; index<name.size() && index<6; index++)
-                    {
-
-                        Vbox1[index].setVisible(true);
-                        Vbox2[index].setVisible(true);
-                        bookLabel[index].setText(name.get(index));
-                        authorLabel[index].setText(author.get(index));
-                        imgv[index].setImage(imgs.get(index));
-                        rentLabel[index].setText(Integer.toString(rent.get(index)));
-                        depositLabel[index].setText(Integer.toString(depositArr.get(index)));
-                    }
-                    //Here Index value increments +1 at the end. So value is 6 not 5. Can be used as a normal value
-
-                    //make right arrow visible if more books available
-                    if(name.size()>6)
-                    {
-                        stckRArrow.setVisible(true);
-                    }
+                    index = helper.initiate(name,author,rent,depositArr,imgs,stckRArrow,Vbox1,Vbox2,
+                            bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
 
                 }
             });

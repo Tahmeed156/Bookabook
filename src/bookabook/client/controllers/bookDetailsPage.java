@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,7 +17,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.prefs.Preferences;
 
 
@@ -75,8 +80,11 @@ public class bookDetailsPage {
 
     @FXML private Button rentBtn;
     @FXML private Button messageBtn;
-    @FXML private Button reviewBtn;
+    @FXML private Button sendBtn;
     Button[] btn;
+
+    @FXML private TextField weeks;
+    @FXML private TextArea bookReview;
 
     @FXML private Label print;
     @FXML private Label condition;
@@ -109,24 +117,28 @@ public class bookDetailsPage {
     @FXML private Text review3;
     Text[] rev;
 
-    String[] allBookGenre;
+    String bookGenre;
     String[] allsimilarBooks;
     Integer index;
 
     static String s;
+    int book_rent;
+    int book_deposit;
 
     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
     //private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
-    String[] reviewArr = new String[]{"Book quite good",
+    List<String> reviewArr = new ArrayList<>(Arrays.asList("Book quite good",
             "Maybe the world will be set right by this book",
             "Look out for the journey of your lifetime",
             "Dont mess with GRRM he is the fantasy king",
-            "Book was goood i guess"};
+            "Book was goood i guess"));
 
-    String[] reviewers = new String[]{"Mary  4.5 ★","Sherlock  5 ★","Watson 3.5 ★","Bruce  5 ★","Stark  2 ★"};
+
+    List<String> reviewers = new ArrayList<>(Arrays.asList("Mary  4.5 ★","Sherlock  5 ★",
+            "Watson 3.5 ★","Bruce  5 ★","Stark  2 ★"));
 
 
     public void info(String str)
@@ -140,7 +152,7 @@ public class bookDetailsPage {
         System.out.println(s);
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
-        allBookGenre = new String[]{"Mystery","Action","Fantasy"};
+        bookGenre = "Fantasy";
         allsimilarBooks = new String[]{"Harry Potter","Lord of the Rings","Percy Jackson"};
 
 
@@ -151,7 +163,7 @@ public class bookDetailsPage {
 
 
 
-        btn = new Button[]{rentBtn,messageBtn,reviewBtn};
+        btn = new Button[]{rentBtn,messageBtn,sendBtn};
 
 
         //upperRightLabels
@@ -161,18 +173,18 @@ public class bookDetailsPage {
         imgCircle.setFill(new ImagePattern(imgperson));
 
 
-        Label nameUser = new Label("Ayan Antik Khan ");
+        Label nameUser = new Label(dashboard.userName);
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = dashboard.daysLeft;
-        Integer rentedBooks = dashboard.rentedBooks;
-        Integer deposit = dashboard.deposit;
+        String rentedOutBooks = dashboard.rentedOutBooks;
+        String rentedBooks = dashboard.rentedBooks;
+        String wallet = dashboard.wallet;
 
         upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Next return: "+daysLeft+" days"),
+                new Label("Rented Out: "+rentedOutBooks+" Books"),
                 new Label("Rented: "+rentedBooks+" Books"),
                 new Label("Money deposited:"),
-                new Label("Tk "+deposit));
+                new Label("Tk "+wallet));
 
 
 
@@ -197,10 +209,12 @@ public class bookDetailsPage {
                 new Label("Reviews: "+reviewsOfrenter));
 
         //setting book details
+        book_rent = 10;
+        book_deposit = 300;
         BookName.setText("Game of Thrones");
         BookAuthor.setText("George R R Martin");
-        BookRent.setText("Tk 10 per week");
-        BookDeposit.setText("Tk 300");
+        BookRent.setText("Tk "+book_rent+" per week");
+        BookDeposit.setText("Tk "+book_deposit);
 
 
         BookImg.setImage(new Image(new File(path+"book.png").toURI().toString()));
@@ -215,10 +229,9 @@ public class bookDetailsPage {
 
 
 
-        for(String a:allBookGenre)
-        {
-            genre.setText(genre.getText().concat(a + "\n"));
-        }
+
+        genre.setText(bookGenre);
+
 
         for(String a:allsimilarBooks)
         {
@@ -230,12 +243,12 @@ public class bookDetailsPage {
         for(index = 0; index<3; index++)
         {
             vbx[index].setVisible(true);
-            revName[index].setText(reviewers[index]);
-            rev[index].setText(reviewArr[index]);
+            revName[index].setText(reviewers.get(index));
+            rev[index].setText(reviewArr.get(index));
         }
 
         //making right arrow visible
-        if(reviewers.length>3)
+        if(reviewers.size()>3)
         {
             stckRArrow.setVisible(true);
         }
@@ -336,7 +349,7 @@ public class bookDetailsPage {
     public void rArrowClicked(MouseEvent event)
     {
         //if right arrow clicked and more books available
-        if(index<reviewers.length) {
+        if(index<reviewers.size()) {
             //set left arrow visible
             stckLArrow.setVisible(true);
             //making boxes invisible
@@ -346,17 +359,17 @@ public class bookDetailsPage {
 
             //populating remaining boxes
             int i = 0;
-            while (index < reviewers.length && i < 3) {
+            while (index < reviewers.size() && i < 3) {
                 vbx[i].setVisible(true);
-                revName[i].setText(reviewers[index]);
-                rev[i].setText(reviewArr[index]);
+                revName[i].setText(reviewers.get(index));
+                rev[i].setText(reviewArr.get(index));
                 index++;
                 i++;
             }
 
             //making arrow disabled if no more books
             //System.out.println(tIndex);
-            if (index >= reviewers.length) {
+            if (index >= reviewers.size()) {
                 stckRArrow.setVisible(false);
             }
         }
@@ -377,8 +390,8 @@ public class bookDetailsPage {
         int boxIn = 0;
         while(boxIn<=2)
         {
-            revName[boxIn].setText(reviewers[index-(3-boxIn)]);
-            rev[boxIn].setText(reviewArr[index-(3-boxIn)]);
+            revName[boxIn].setText(reviewers.get(index-(3-boxIn)));
+            rev[boxIn].setText(reviewArr.get(index-(3-boxIn)));
             vbx[boxIn].setVisible(true);
             boxIn++;
         }
@@ -394,28 +407,65 @@ public class bookDetailsPage {
 
 
     public void rentBtnPressed(MouseEvent e){
-        Boolean success = Main.connection.rentBook(
-                1,
-                2,
-                2,
-                2
-        );
 
-        if (success) {
-            toast.set("SUCCESSFULLY RENTED","#5CB85C");
-            Preferences userCon = Main.userCon;
-            dashboard.rentedBooks += 1;
-            userCon.put("rented_books", String.valueOf(dashboard.rentedBooks));
-            Windows w = new Windows(rentBtn, "../fxml/profilePage.fxml");
+        if(weeks.getText().isEmpty()){
+            toast.set("PLEASE FILL IN THE NO OF WEEKS TEXTFIELD","#f0ad4e");
         }
         else {
-            toast.set("UNABLE TO RENT","#D9534F");
+            Boolean success = Main.connection.rentBook(
+                    1,
+                    Integer.valueOf(weeks.getText()),
+                    2,
+                    2
+            );
+
+            if (success) {
+                toast.set("SUCCESSFULLY RENTED", "#5CB85C");
+                Preferences userCon = Main.userCon;
+                dashboard.rentedBooks = String.valueOf(Integer.valueOf(dashboard.rentedBooks) + 1);
+                userCon.put("books_rented", dashboard.rentedBooks);
+
+                Integer payment = (Integer.valueOf(weeks.getText()) * book_rent) + book_deposit;
+                dashboard.wallet = String.valueOf(Double.valueOf(dashboard.wallet) - payment);
+                userCon.put("wallet",dashboard.wallet);
+
+                Windows w = new Windows(rentBtn, "../fxml/profilePage.fxml");
+            } else {
+                toast.set("UNABLE TO RENT", "#D9534F");
+            }
         }
 
     }
 
     public void messageBtnPressed(MouseEvent e){
         Windows w = new Windows(messageBtn, "../fxml/messenger.fxml");
+    }
+
+    public void sendBtnPressed(MouseEvent e){
+        if(bookReview.getText().isEmpty())
+        {
+            toast.set("PLEASE ENTER YOUR REVIEW","#f0ad4e");
+        }
+        else
+        {
+            reviewers.add(0,dashboard.userName);
+            reviewArr.add(0,bookReview.getText());
+
+            stckLArrow.setVisible(false);
+            //populating reviews
+            for(index = 0; index<3; index++)
+            {
+                vbx[index].setVisible(true);
+                revName[index].setText(reviewers.get(index));
+                rev[index].setText(reviewArr.get(index));
+            }
+
+            //making right arrow visible
+            if(reviewers.size()>3)
+            {
+                stckRArrow.setVisible(true);
+            }
+        }
     }
 
 

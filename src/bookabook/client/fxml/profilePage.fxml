@@ -90,7 +90,7 @@
                       <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
                           <children>
                               <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
-                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="CENTER_LEFT" />
                           </children>
                       </StackPane>
                   </children>
@@ -104,7 +104,7 @@
                               <Region maxHeight="300.0" maxWidth="40.0" prefHeight="150.0" prefWidth="30.0" />
                         <AnchorPane>
                            <children>
-                              <Circle fx:id="bigImgCircle" fill="DODGERBLUE" layoutX="104.0" layoutY="137.0" radius="114.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="bigImgCircle" fill="DODGERBLUE" layoutX="104.0" layoutY="137.0" radius="114.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="791.0">

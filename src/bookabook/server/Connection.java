@@ -144,6 +144,8 @@ class Connection extends Thread {
                         break;
                     }
 
+                    //todo TMD loction field add
+
                     case "profile/edit": {
                         response = db.edit_profile(
                                 request.getInt("user_id"),
@@ -156,6 +158,33 @@ class Connection extends Thread {
                         send(response);
                         break;
                     }
+
+                    // todo TMD do these two for profile page books request
+                    case "books/rented": {
+                        ArrayList<Bookser> books = db.rented_books();
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+
+                        break;
+                    }
+
+                    case "books/rent_out": {
+                        ArrayList<Bookser> books = db.rented_out_books();
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+                        break;
+                    }
+
+
+
 
                     default:
                         break;

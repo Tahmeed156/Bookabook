@@ -233,18 +233,18 @@ public class profilePage {
 
 
         //upperRightLabels
-        Label nameUser = new Label("Ayan Antik Khan ");
+        Label nameUser = new Label(dashboard.userName);
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = dashboard.daysLeft;
-        Integer rentedBooks = dashboard.rentedBooks;
-        Integer deposit = dashboard.deposit;
+        String rentedOutBooks = dashboard.rentedOutBooks;
+        String rentedBooks = dashboard.rentedBooks;
+        String wallet = dashboard.wallet;
 
         upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Next return: " + daysLeft + " days"),
+                new Label("Rented Out: " + rentedOutBooks + " Books"),
                 new Label("Rented: " + rentedBooks + " Books"),
                 new Label("Money deposited:"),
-                new Label("Tk " + deposit));
+                new Label("Tk " + wallet));
 
 
         bigName.setText("Ayan Antik Khan");
@@ -289,116 +289,27 @@ public class profilePage {
 
     public void rArrowClicked(MouseEvent event) {
         if (event.getSource() == tRArrow) {
-            //if right arrow clicked and more books available
-            if (tIndex < tname.size()) {
-                //set left arrow visible
-                tstckLArrow.setVisible(true);
-                //making boxes and images invisible
-                for (int boxIn = 2; boxIn >= 0; boxIn--) {
-                    tVbox[boxIn].setVisible(false);
-                    timgv[boxIn].setImage(null);
-                }
-
-                //populating remaining boxes
-                int i = 0;
-                while (tIndex < tname.size() && i < 3) {
-                    tVbox[i].setVisible(true);
-                    tlabel[i].setText(tname.get(tIndex));
-                    tAuthorLabel[i].setText(tauthor.get(tIndex));
-                    timgv[i].setImage(timgs.get(tIndex));
-                    tIndex++;
-                    i++;
-                }
-
-                //making arrow disabled if no more books
-                //System.out.println(tIndex);
-                if (tIndex >= tname.size()) {
-                    tstckRArrow.setVisible(false);
-                }
-            }
+            tIndex = helper.right_arrow_clicked(tname, tauthor, timgs, tstckRArrow, tstckLArrow, tVbox, tlabel,
+                    tAuthorLabel, timgv, tIndex, 3);
         }
 
 
         if (event.getSource() == bRArrow) {
-            if (bIndex < bname.size()) {
-                //set left arrow visible
-                bstckLArrow.setVisible(true);
-                //making invisible boxes and images
-                for (int boxIn = 2; boxIn >= 0; boxIn--) {
-                    bVbox[boxIn].setVisible(false);
-                    bimgv[boxIn].setImage(null);
-                }
-                //populate remaining boxes
-                int i = 0;
-                while (bIndex < bname.size() && i < 3) {
-                    bVbox[i].setVisible(true);
-                    blabel[i].setText(bname.get(bIndex));
-                    bAuthorLabel[i].setText(bauthor.get(bIndex));
-                    bimgv[i].setImage(bimgs.get(bIndex));
-                    bIndex++;
-                    i++;
-                }
-                //System.out.println(rIndex);
-                //making arrow disabled if no more books
-                if (bIndex >= bname.size()) {
-                    bstckRArrow.setVisible(false);
-                }
-            }
+            bIndex = helper.right_arrow_clicked(bname, bauthor, bimgs, bstckRArrow, bstckLArrow, bVbox, blabel,
+                    bAuthorLabel, bimgv, bIndex, 3);
+
         }
     }
 
     public void lArrowClicked(MouseEvent event) {
         if (event.getSource() == tLArrow) {
-            //finding out the (index+1) value of the rightmost box
-            if (tIndex % 3 == 0) {
-                tIndex -= 3;
-            } else {
-                tIndex -= tIndex % 3;
-            }
-
-
-            //populate these boxes
-            int boxIn = 0;
-            while (boxIn <= 2) {
-                tlabel[boxIn].setText(tname.get(tIndex - (3 - boxIn)));
-                tAuthorLabel[boxIn].setText(tauthor.get(tIndex - (3 - boxIn)));
-                timgv[boxIn].setImage(timgs.get(tIndex - (3 - boxIn)));
-                tVbox[boxIn].setVisible(true);
-                boxIn++;
-            }
-            //System.out.println(tIndex);
-
-            //if leftmost box contain last book then left arrow will be invisible
-            if ((tIndex - 3) <= 0) {
-                tstckLArrow.setVisible(false);
-            }
-            tstckRArrow.setVisible(true);
+            tIndex = helper.left_arrow_clicked(tname, tauthor, timgs, tstckRArrow, tstckLArrow, tVbox, tlabel,
+                    tAuthorLabel, timgv, tIndex, 3);
         }
 
         if (event.getSource() == bLArrow) {
-            //finding out the (index+1) value of the rightmost box
-            if (bIndex % 3 == 0) {
-                bIndex -= 3;
-            } else {
-                bIndex -= bIndex % 3;
-            }
-
-            //populate these boxes
-            int boxIn = 0;
-            while (boxIn <= 2) {
-                blabel[boxIn].setText(bname.get(bIndex - (3 - boxIn)));
-                bAuthorLabel[boxIn].setText(bauthor.get(bIndex - (3 - boxIn)));
-                bimgv[boxIn].setImage(bimgs.get(bIndex - (3 - boxIn)));
-                bVbox[boxIn].setVisible(true);
-                boxIn++;
-            }
-
-            //System.out.println(rIndex);
-            //if leftmost box contain last book then left arrow will be invisible
-            if ((bIndex - 3) <= 0) {
-                bstckLArrow.setVisible(false);
-            }
-            bstckRArrow.setVisible(true);
+            bIndex = helper.left_arrow_clicked(bname, bauthor, bimgs, bstckRArrow, bstckLArrow, bVbox, blabel,
+                    bAuthorLabel, bimgv, bIndex, 3);
         }
     }
 
@@ -504,32 +415,12 @@ public class profilePage {
                 @Override
                 public void run() {
                     //populating top (Rented out books)
-                    for (tIndex = 0; tIndex < tname.size() && tIndex <= 2; tIndex++) {
-                        tVbox[tIndex].setVisible(true);
-                        tlabel[tIndex].setText(tname.get(tIndex));
-                        tAuthorLabel[tIndex].setText(tauthor.get(tIndex));
-                        timgv[tIndex].setImage(timgs.get(tIndex));
-                    }
-                    //Here tIndex value increments +1 at the end. So value is 3 not 2. Can be used as a normal value
-
-                    //make right arrow visible if more books available
-                    if (tname.size() > 3) {
-                        tstckRArrow.setVisible(true);
-                    }
+                    tIndex = helper.initiate(tname, tauthor, timgs, tstckRArrow, tVbox, tlabel, tAuthorLabel, timgv,
+                            tIndex, 3);
 
                     //populating bottom (rented books)
-                    for (bIndex = 0; bIndex < bname.size() && bIndex < 3; bIndex++) {
-                        bVbox[bIndex].setVisible(true);
-                        blabel[bIndex].setText(bname.get(bIndex));
-                        bAuthorLabel[bIndex].setText(bauthor.get(bIndex));
-                        bimgv[bIndex].setImage(bimgs.get(bIndex));
-
-                    }
-
-                    //make right arrow visible if more books available
-                    if (bname.size() > 3) {
-                        bstckRArrow.setVisible(true);
-                    }
+                    bIndex = helper.initiate(bname, bauthor, bimgs, bstckRArrow, bVbox, blabel, bAuthorLabel, bimgv,
+                            bIndex, 3);
 
                 }
             });

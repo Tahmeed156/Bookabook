@@ -49,7 +49,7 @@ public class Client {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            toast.set(message, "#D9534F");
+                            toast.set(message, "#f0ad4e");
                         }
                     });
                     Thread.sleep(1000);

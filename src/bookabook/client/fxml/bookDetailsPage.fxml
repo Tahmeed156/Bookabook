@@ -86,7 +86,7 @@
                       <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
                           <children>
                               <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
-                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="CENTER_LEFT" />
                           </children>
                       </StackPane>
                   </children>
@@ -136,30 +136,36 @@
                               <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
                                   <children>
                                       <VBox fx:id="middleRightVBox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
-                                      <Circle fx:id="imgCircleCenter" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                                      <Circle fx:id="imgCircleCenter" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="CENTER_LEFT" />
                                   </children>
                               </StackPane>
                               <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="220.0" spacing="10.0">
                                   <children>
-                                      <Button fx:id="rentBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#rentBtnPressed" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #44546a;" text="Rent" textFill="WHITE">
+                              <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
+                                 <children>
+                                            <Button fx:id="rentBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#rentBtnPressed" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #44546a;" text="Rent" textFill="WHITE">
+                                                <font>
+                                                    <Font name="System Bold" size="17.0" />
+                                                </font>
+                                            </Button>
+                                    <TextField fx:id="weeks" alignment="CENTER" prefHeight="61.0" prefWidth="200.0" promptText="No of weeks to rent" />
+                                 </children>
+                              </VBox>
+                                      <Button fx:id="messageBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#messageBtnPressed" prefHeight="38.0" prefWidth="196.0" style="-fx-background-color: #44546a;" text="Message" textFill="WHITE">
                                           <font>
                                               <Font name="System Bold" size="17.0" />
                                           </font>
-                                      </Button>
-                                      <Button fx:id="messageBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#messageBtnPressed" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #44546a;" text="Message" textFill="WHITE">
-                                          <font>
-                                              <Font name="System Bold" size="17.0" />
-                                          </font>
-                                      </Button>
-                                      <Button fx:id="reviewBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #44546a;" text="Review" textFill="WHITE">
-                                          <font>
-                                              <Font name="System Bold" size="17.0" />
-                                          </font>
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
                                       </Button>
                                   </children>
                                   <padding>
                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                   </padding>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
                               </VBox>
                           </children>
                       </HBox>
@@ -300,15 +306,21 @@
                   <HBox prefHeight="150.0" prefWidth="1040.0">
                      <children>
                         <Region prefHeight="150.0" prefWidth="11.0" />
-                        <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #44546a;">
+                        <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <Label text="REVIEWS" textFill="WHITE">
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="207.0" style="-fx-background-color: #44546a;" text="REVIEW" textFill="WHITE">
                                  <font>
-                                    <Font name="System Bold" size="20.0" />
+                                    <Font name="System Bold" size="17.0" />
                                  </font>
                               </Label>
+                              <TextArea fx:id="bookReview" prefHeight="200.0" prefWidth="200.0" promptText="Write your reviews here" />
+                              <Button fx:id="sendBtn" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#sendBtnPressed" prefHeight="33.0" prefWidth="198.0" style="-fx-background-color: #44546a;" text="Send" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="17.0" />
+                                 </font>
+                              </Button>
                            </children>
-                        </StackPane>
+                        </VBox>
                         <StackPane fx:id="stckLArrow" prefHeight="150.0" prefWidth="60.0" visible="false">
                            <children>
                               <ImageView fx:id="lArrow" fitHeight="80.0" fitWidth="50.0" onMouseClicked="#lArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER">

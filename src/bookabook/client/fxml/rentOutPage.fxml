@@ -98,7 +98,7 @@
                       <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
                           <children>
                               <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
-                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" StackPane.alignment="CENTER_LEFT" />
+                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="CENTER_LEFT" />
                           </children>
                       </StackPane>
                   </children>
@@ -252,7 +252,7 @@
                         <Region maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="90.0" prefWidth="360.0" />
                         <StackPane prefHeight="200.0" prefWidth="360.0">
                            <children>
-                              <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="225.0" stroke="BLACK" strokeType="INSIDE" width="145.0" />
+                              <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="225.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="145.0" />
                               <ImageView fx:id="img" fitHeight="240.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </StackPane>

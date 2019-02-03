@@ -11,7 +11,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane fx:id="parent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookabook.client.controllers.messenger">
    <children>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
@@ -85,7 +84,7 @@
                       </ImageView>
                   <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="155.0" prefWidth="1040.0">
                      <children>
-                        <Label layoutX="341.0" layoutY="51.0" text="Messages" textFill="WHITE">
+                        <Label layoutX="341.0" layoutY="51.0" text="Group&#10;Message&#10;" textAlignment="CENTER" textFill="WHITE">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -110,7 +109,7 @@
                         <Image url="@../Pictures/upArrow.png" />
                      </image>
                   </ImageView>
-                  <VBox fx:id="message" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="680.0">
+                  <VBox fx:id="message" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="680.0">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
@@ -148,8 +147,8 @@
             <HBox prefHeight="58.0" prefWidth="1200.0" style="-fx-background-color: #404040;" BorderPane.alignment="CENTER">
                <children>
                   <Region prefHeight="78.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" />
-                  <TextField fx:id="chat" prefHeight="34.0" prefWidth="599.0" promptText="Wirte your message" />
-                  <Button fx:id="send" mnemonicParsing="false" onMouseClicked="#sendBtn" prefHeight="33.0" prefWidth="71.0" text="Send" />
+                  <TextField fx:id="chat" onKeyPressed="#sendKey" prefHeight="34.0" prefWidth="599.0" promptText="Wirte your message" />
+                  <Button fx:id="send" mnemonicParsing="false" onAction="#sendBtn" prefHeight="33.0" prefWidth="71.0" text="Send" />
                </children>
             </HBox>
          </bottom>

@@ -1,4 +1,6 @@
 package bookabook.client.controllers;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -8,11 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.TextAlignment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -64,7 +69,7 @@ public class messenger {
 
 
     List<String> user = new ArrayList<>(Arrays.asList("Hello","How are you?","I am fine thank you",
-            "For future use lets do this dont you think we should lets do aaaaaaaaaaaaaa" +
+            "For future use lets do this dont you think we should\n lets do aaaaaaaaaaaaaa" +
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
@@ -323,7 +328,19 @@ public class messenger {
         //System.out.println(index);
     }
 
-    public void sendBtn(MouseEvent event){
+    public void sendBtn(ActionEvent event){
+        sendMessage();
+    }
+
+    public void sendKey(KeyEvent e)
+    {
+        if(e.getCode().equals(KeyCode.ENTER))
+        {
+            sendMessage();
+        }
+    }
+
+    public void sendMessage(){
         user.add(chat.getText());
         who.add(1);
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
@@ -336,7 +353,6 @@ public class messenger {
         messageDisplay(index, user.size());
 
     }
-
     public void addOnlineUser(){
         // TODO: add online users from server
     }
@@ -353,7 +369,8 @@ public class messenger {
             Label timeStamp = new Label(time.get(i));
             timeStamp.setStyle("-fx-text-fill:#ffffff; -fx-font-size:10");
             Label lb = new Label(user.get(i));
-            lb.setPadding(new Insets(10,10,10,10));
+            lb.setPadding(new Insets(5,5,5,5));
+            //todo NHS && TMD text doesn't get wrapped if bottom padding is set
             lb.setWrapText(true);
             lb.setMaxWidth(400);
             vb.setPadding(new Insets(10,0,0,0));
@@ -372,7 +389,7 @@ public class messenger {
             }
             hb.getChildren().add(vb);
             Region rg = new Region();
-            rg.setPrefHeight(10);
+            rg.setPrefHeight(5);
             rg.setPrefWidth(680);
             message.getChildren().addAll(hb,rg);
         }

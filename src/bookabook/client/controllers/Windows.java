@@ -38,6 +38,7 @@ public class Windows {
             window.setScene(scene);
             window.show();
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Cannot be opened");
         }
     }

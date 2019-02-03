@@ -168,18 +168,18 @@ public class profileRentedOutBooksPage{
 
 
         //upperRightLabels
-        Label nameUser = new Label("Ayan Antik Khan ");
+        Label nameUser = new Label(dashboard.userName);
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = dashboard.daysLeft;
-        Integer rentedBooks = dashboard.rentedBooks;
-        Integer deposit = dashboard.deposit;
+        String rentedOutBooks = dashboard.rentedOutBooks;
+        String rentedBooks = dashboard.rentedBooks;
+        String wallet = dashboard.wallet;
 
         upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Next return: "+daysLeft+" days"),
+                new Label("Rented Out: "+rentedOutBooks+" Books"),
                 new Label("Rented: "+rentedBooks+" Books"),
                 new Label("Money deposited:"),
-                new Label("Tk "+deposit));
+                new Label("Tk "+wallet));
 
 
         //populating the box

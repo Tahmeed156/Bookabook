@@ -76,6 +76,11 @@ public class login {
                     userCon.put("books_rented", response.getString("books_rented"));
                     userCon.put("books_shared", response.getString("books_shared"));
 
+                    dashboard.userName = userCon.get("username","BookABook");
+                    dashboard.rentedBooks = userCon.get("books_rented", "0");
+                    dashboard.rentedOutBooks = userCon.get("books_shared","0");
+                    dashboard.wallet = userCon.get("wallet","0");
+
                     toast.set("LOGIN SUCCESSFUL","#5cb85c");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
                 }
@@ -120,6 +125,11 @@ public class login {
                     userCon.put("wallet", response.getString("wallet"));
                     userCon.put("books_rented", response.getString("books_rented"));
                     userCon.put("books_shared", response.getString("books_shared"));
+
+                    dashboard.userName = userCon.get("username","BookABook");
+                    dashboard.rentedBooks = userCon.get("books_rented", "0");
+                    dashboard.rentedOutBooks = userCon.get("books_shared","0");
+                    dashboard.wallet = userCon.get("wallet","0");
 
                     toast.set("SUCCESSFULLY SIGNED UP","#5CB85C");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
