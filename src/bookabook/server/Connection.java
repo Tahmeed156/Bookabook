@@ -133,20 +133,18 @@ class Connection extends Thread {
                         break;
                     }
 
-
-                    case "books/rented": {
-                        ArrayList<Bookser> books = db.rented_books();
-                        output.writeObject(books);
-                        System.out.println("Sending images: " + books.size());
-                        for (Bookser book : books) {
-                            book.sendImage(output);
-                        }
-                        System.out.println("Successfully sent all objects and images!");
-
+                    case "books/rent": {
+                        response = db.rent_book(
+                                request.getInt("renter_id"),
+                                request.getInt("rentee_id"),
+                                request.getInt("book_id"),
+                                request.getInt("week")
+                        );
+                        send(response);
                         break;
                     }
 
-                    case "books/rentedOut": {
+                    case "books/rent_out": {
                         ArrayList<Bookser> books = db.rented_out_books();
                         output.writeObject(books);
                         System.out.println("Sending images: " + books.size());
@@ -157,10 +155,6 @@ class Connection extends Thread {
 
                         break;
                     }
-
-
-
-
 
                     default:
                         break;

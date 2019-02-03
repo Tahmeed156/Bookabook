@@ -396,7 +396,8 @@ public class bookDetailsPage {
     public void rentBtnPressed(MouseEvent e){
         Boolean success = Main.connection.rentBook(
                 1,
-                BookName.getText(),
+                2,
+                2,
                 2
         );
 

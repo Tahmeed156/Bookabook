@@ -126,6 +126,19 @@ public class Database {
         }
     }
 
+    public JSONObject rent_book (int b, int w, int rtr, int rte) {
+        startSession();
+
+        JSONObject response = new JSONObject();
+        Rent r = new Rent(b, w, rtr, rte);
+        session.save(r);
+
+        endSession();
+        return response;
+    }
+
+    // =========================================  DASHBOARD BOOKS
+
     public ArrayList<Bookser> latest_books () {
         startSession();
 
@@ -160,7 +173,6 @@ public class Database {
         return book_objects;
     }
 
-
     public ArrayList<Bookser> searching_books (String str) {
         startSession();
 
@@ -179,6 +191,7 @@ public class Database {
         return book_objects;
     }
 
+    // ========================================   PROFILE PAGE BOOKS
 
     public ArrayList<Bookser> rented_books () {
         startSession();

@@ -115,14 +115,13 @@ public class Client {
         return (String) input.readObject();
     }
 
-
     public boolean rentOutBook (int user_id, String book, String author, Double rent,
                                 Double deposit, String genre, String print, String condition,
                                 String review, String year_bought) {
         request = new JSONObject();
 
         try {
-            request.put("type", "rent_out_book");
+            request.put("type", "books/rent_out");
             request.put("user_id", user_id);
             request.put("book", book);
             request.put("author", author);
@@ -140,7 +139,6 @@ public class Client {
         }
         return send(request.toString());
     }
-
 
     public boolean editProfile (int user_id, String name, String dob, String work,
                                 String gender, String email, String contact_no,
@@ -165,14 +163,15 @@ public class Client {
         return send(request.toString());
     }
 
-    public Boolean rentBook(int user_id, String book, int renter_id) {
+    public Boolean rentBook(int book_id,
+                            int week, int renter_id, int rentee_id) {
         request = new JSONObject();
         try {
-            request.put("type", "rent_book");
-            request.put("user_id", user_id);
-            request.put("book", book);
-            request.put("rented_id", renter_id);
-
+            request.put("type", "books/rent");
+            request.put("renter_id", renter_id);
+            request.put("rentee_id", rentee_id);
+            request.put("book_id", book_id);
+            request.put("week", week);
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }

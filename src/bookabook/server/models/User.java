@@ -56,8 +56,18 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private Set<Book> books;
 
+    @OneToMany(mappedBy = "renter")
+    private Set<Rent> rented_books;
+
+    @OneToMany(mappedBy = "rentee")
+    private Set<Rent> rented_out_books;
+
     public User () {
 
+    }
+
+    public User (int i) {
+        id = i;
     }
 
     public User (String u) {

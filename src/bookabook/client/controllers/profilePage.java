@@ -488,7 +488,7 @@ public class profilePage {
                     timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
                 }
 
-                rentedOutBooks = Main.connection.latest_books("books/rentedOut", "");
+                rentedOutBooks = Main.connection.latest_books("books/rent_out", "");
                 for (Bookser b : rentedOutBooks) {
                     bname.add(b.getName());
                     bauthor.add(b.getAuthor());

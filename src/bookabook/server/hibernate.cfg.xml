@@ -58,6 +58,7 @@
         <mapping class="bookabook.server.models.User"/>
         <mapping class="bookabook.server.models.Book"/>
         <mapping class="bookabook.server.models.Message"/>
+        <mapping class="bookabook.server.models.Rent"/>
 
 
         <!-- List of XML mapping files -->
