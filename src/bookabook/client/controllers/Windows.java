@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -68,6 +69,24 @@ public class Windows {
     }
 
     Windows (ImageView b, String n, String book) {
+        try {
+            cornerCase(n);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(n));
+            root = loader.load();
+            bookDetailsPage bdp = loader.getController();
+            bdp.initialize(book);
+            Scene scene = new Scene(root);
+            Stage window = (Stage)(b.getScene().getWindow());
+            window.setScene(scene);
+            window.show();
+        } catch (Exception e) {
+            System.out.println("Cannot be opened");
+        }
+    }
+
+
+    Windows (Label b, String n, String book) {
         try {
             cornerCase(n);
 

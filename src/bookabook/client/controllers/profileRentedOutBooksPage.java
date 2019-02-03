@@ -119,9 +119,9 @@ public class profileRentedOutBooksPage{
     @FXML private Label labelBooks;
     @FXML private Button profileBtn;
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    //private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     //list for searched items
@@ -171,9 +171,9 @@ public class profileRentedOutBooksPage{
         Label nameUser = new Label("Ayan Antik Khan ");
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = 2;
-        Integer rentedBooks = 3;
-        Integer deposit = 2000;
+        Integer daysLeft = dashboard.daysLeft;
+        Integer rentedBooks = dashboard.rentedBooks;
+        Integer deposit = dashboard.deposit;
 
         upperRightVbox.getChildren().addAll(nameUser,
                 new Label("Next return: "+daysLeft+" days"),

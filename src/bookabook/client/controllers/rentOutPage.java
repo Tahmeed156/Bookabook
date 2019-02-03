@@ -1,5 +1,6 @@
 package bookabook.client.controllers;
 
+import bookabook.client.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -81,6 +82,7 @@ public class rentOutPage {
     @FXML private RadioButton newsPrint;
     @FXML private ToggleGroup print;
     @FXML private TextArea review;
+    @FXML private TextField yearBought;
 
     @FXML private ListView<String> genre;
     ObservableList<String> genreList = FXCollections.observableArrayList("Action","Comedy","Horror",
@@ -91,9 +93,9 @@ public class rentOutPage {
     ObservableList<String> condList = FXCollections.observableArrayList("Perfect",
             "A little bit of tear", "Some tear", "Heavily used" );
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    //private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -125,9 +127,9 @@ public class rentOutPage {
         Label nameUser = new Label("Ayan Antik Khan ");
         nameUser.setStyle("-fx-font-weight:bold");
 
-        Integer daysLeft = 2;
-        Integer rentedBooks = 3;
-        Integer deposit = 2000;
+        Integer daysLeft = dashboard.daysLeft;
+        Integer rentedBooks = dashboard.rentedBooks;
+        Integer deposit = dashboard.deposit;
 
         upperRightVbox.getChildren().addAll(nameUser,
                 new Label("Next return: " + daysLeft + " days"),
@@ -135,7 +137,7 @@ public class rentOutPage {
                 new Label("Money deposited:"),
                 new Label("Tk " + deposit));
 
-        genre.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //genre.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         condition.setItems(condList);
         genre.setItems(genreList);
 
@@ -262,41 +264,67 @@ public class rentOutPage {
             if(rdbtn[i].isSelected())
             {
                 printRBtn = rdbtn[i].getText();
+                System.out.println(printRBtn);
                 break;
             }
         }
 
-        Book b = new Book();
-        JSONObject bookInfo = new JSONObject();
-        try {
-            bookInfo.put("print", printRBtn);
-            bookInfo.put("condition", condition.getValue());
-            bookInfo.put("review", review.getText());
-            bookInfo.put("year_bought", "2017");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        b.rent(
+
+
+//        Book b = new Book();
+//        JSONObject bookInfo = new JSONObject();
+//        try {
+//            bookInfo.put("print", printRBtn);
+//            bookInfo.put("condition", condition.getValue());
+//            bookInfo.put("review", review.getText());
+//            bookInfo.put("year_bought", "2017");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        b.rent(
+//                book.getText(),
+//                author.getText(),
+//                Double.valueOf(rentPrice.getText()),
+//                Double.valueOf(deposit.getText()),
+//                bookInfo.toString()
+//        );
+//
+//
+//
+//
+//        SessionFactory sf = new Configuration().configure("/bookabook/client/hibernate.cfg.xml").buildSessionFactory();
+//        Session s = sf.openSession();
+//        s.beginTransaction();
+//        s.save(b);
+//        s.getTransaction().commit();
+//        s.close();
+
+
+
+        boolean success = Main.connection.rentOutBook(
+                1,
                 book.getText(),
                 author.getText(),
                 Double.valueOf(rentPrice.getText()),
                 Double.valueOf(deposit.getText()),
-                bookInfo.toString(),
-                "test"
+                genre.getSelectionModel().getSelectedItem(),
+                printRBtn,
+                condition.getValue(),
+                review.getText(),
+                yearBought.getText()
         );
 
+        if (success) {
+            toast.set("SUCCESSFULLY RENTED OUT","#5CB85C");
+            Windows w = new Windows(rent, "../fxml/dashboard.fxml");
+        }
+        else {
+            toast.set("UNABLE TO RENT OUT","#D9534F");
+        }
 
-        SessionFactory sf = new Configuration().configure("/bookabook/client/hibernate.cfg.xml").buildSessionFactory();
-        Session s = sf.openSession();
-        s.beginTransaction();
-        s.save(b);
-        s.getTransaction().commit();
-        s.close();
 
-        //DO THIS
-        //MUST DO
-        //MOST IMPORTANT PART
     }
 
 

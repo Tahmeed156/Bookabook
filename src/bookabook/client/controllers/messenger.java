@@ -9,10 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -28,8 +25,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class messenger {
-    @FXML
-    private VBox left;
+    @FXML private Pane parent;
+    @FXML private VBox left;
     //left side labels;
     @FXML private Label dashBLbl;
     @FXML private Label searchLbl;
@@ -60,9 +57,9 @@ public class messenger {
     @FXML private ImageView downArrow1;
 
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    //private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -96,7 +93,7 @@ public class messenger {
         stck = new StackPane[]{dashBStk,searchStk,messagesStk,helpStk,profileStk,logoutStk};
 
 
-
+        parent.getChildren().add(toast.get());
 
         int start = 0;
         int start1 = 0;

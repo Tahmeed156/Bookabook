@@ -16,6 +16,12 @@ public class Bookser implements Serializable {
     private double deposit;
     private transient BufferedImage image;
 
+
+     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "A:\\"; // Tahmeed config
+    //private String dir = "D:\\"; // Tahmeed config
+    private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
+
     public Bookser(String n, String a, double r, double d) {
         name = n;
         author = a;
@@ -26,7 +32,7 @@ public class Bookser implements Serializable {
     public void sendImage (ObjectOutputStream out) {
         try {
 
-            image = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\client\\Pictures\\" + name + ".png"));
+            image = ImageIO.read(new File(path + name + ".png"));
             System.out.println("Sending image for book: " + name);
             ImageIO.write(image, "png", out);
 

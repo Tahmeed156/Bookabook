@@ -50,10 +50,12 @@ class Connection extends Thread {
 
         while (true) {
 
+
             // Getting requests (Json objects)
             JSONObject request, response;
             try {
                 request = new JSONObject(input.readUTF());
+                System.out.println(request.toString());
 
                 String type = request.getString("type");
                 System.out.println("The message type is: " + type);
@@ -65,7 +67,7 @@ class Connection extends Thread {
                                 request.getString("username"),
                                 request.getString("password")
                         );
-                        send(response);
+                        send(response.toString());
                         break;
                     }
 
@@ -92,7 +94,6 @@ class Connection extends Thread {
                         break;
                     }
                     case "books/latest": {
-
                         ArrayList<Bookser> books = db.latest_books();
                         output.writeObject(books);
                         System.out.println("Sending images: " + books.size());
@@ -122,6 +123,31 @@ class Connection extends Thread {
                     case "books/search": {
                         String str = request.getString("query");
                         ArrayList<Bookser> books = db.searching_books(str);
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+
+                        break;
+                    }
+
+
+                    case "books/rented": {
+                        ArrayList<Bookser> books = db.rented_books();
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+
+                        break;
+                    }
+
+                    case "books/rentedOut": {
+                        ArrayList<Bookser> books = db.rented_out_books();
                         output.writeObject(books);
                         System.out.println("Sending images: " + books.size());
                         for (Bookser book : books) {

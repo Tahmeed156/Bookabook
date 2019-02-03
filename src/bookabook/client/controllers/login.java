@@ -42,7 +42,9 @@ public class login {
 
     public void initialize()
     {
+
         parent.getChildren().add(toast.get());
+
     }
 
 
@@ -60,7 +62,7 @@ public class login {
 
                 String u = userNameLogin.getText();
                 String p = password.getText();
-                JSONObject response = Main.connection.login(u, p);
+                JSONObject response = new JSONObject(Main.connection.login(u, p));
                 System.out.println("The response is: " + response.getString("success"));
 
                 if (Boolean.valueOf(response.getString("success"))) {
@@ -174,6 +176,7 @@ public class login {
             warningPassword.setStyle("-fx-background-color: #5cb85c; -fx-text-fill:#ffffff; -fx-border-radius: 5");
         }
     }
+
 
 
 
