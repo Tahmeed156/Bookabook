@@ -44,9 +44,6 @@ public class User {
     @Column(name = "contact_no", length = 32)
     private String contact_no;
 
-    @Column(name = "rating", precision = 1, scale = 2)
-    private double rating;
-
     @Column(name = "location", length = 128)
     private String location;
 
@@ -70,6 +67,8 @@ public class User {
         id = i;
     }
 
+    // ================= MAIN FUNCTIONS
+
     public User (String u) {
         this.username = u;
     }
@@ -80,15 +79,21 @@ public class User {
         this.password = p;
         this.date_of_birth = d;
         this.email = e;
-        this.rating = 0;
         this.books_rented = 0;
         this.books_shared = 0;
         this.wallet = 1000;
     }
 
-    public String showName() {
-        return this.username + " | " + this.full_name;
+    public void edit_profile (String n, String w, String g,
+                              String e, String c) {
+        full_name = n;
+        work = w;
+        gender = g;
+        email = e;
+        contact_no = c;
     }
+
+    // ================= GETTERS
 
     public String getUsername() {
         return this.username;
@@ -132,10 +137,6 @@ public class User {
 
     public String getContact_no() {
         return contact_no;
-    }
-
-    public double getRating() {
-        return rating;
     }
 
     public String getLocation() {

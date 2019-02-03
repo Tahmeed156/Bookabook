@@ -126,13 +126,46 @@ public class Database {
         }
     }
 
-    public JSONObject rent_book (int b, int w, int rtr, int rte) {
+    // =========================================  DATA INPUT
+
+    public JSONObject edit_profile (
+            int uid,
+            String name,
+            String work,
+            String gender,
+            String email,
+            String contact_no
+    ) throws JSONException {
+        startSession();
+        JSONObject response = new JSONObject();
+
+        Query query = session.createQuery("from User where id = :i");
+        query.setParameter("i", uid);
+        try {
+            User u = (User) query.uniqueResult();
+            u.edit_profile(name, work, gender, email, contact_no);
+            response.put("success", "true");
+        }
+        catch (Exception e) {
+            response.put("success", "false");
+        }
+
+        endSession();
+        return response;
+    }
+
+    public JSONObject rent_book (int b, int w, int rtr, int rte) throws JSONException {
         startSession();
 
         JSONObject response = new JSONObject();
-        Rent r = new Rent(b, w, rtr, rte);
-        session.save(r);
-
+        try {
+            Rent r = new Rent(b, w, rtr, rte);
+            session.save(r);
+            response.put("success", "true");
+        }
+        catch (Exception e) {
+            response.put("success", "false");
+        }
         endSession();
         return response;
     }

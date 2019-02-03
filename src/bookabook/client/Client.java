@@ -140,22 +140,20 @@ public class Client {
         return send(request.toString());
     }
 
-    public boolean editProfile (int user_id, String name, String dob, String work,
-                                String gender, String email, String contact_no,
-                                String about) {
+    public boolean editProfile (int user_id, String name, String work,
+                                String gender, String email, String contact_no) {
         request = new JSONObject();
 
         try {
-            request.put("type", "edit_profile");
+            request.put("type", "profile/edit");
             request.put("user_id", user_id);
-            request.put("name",name);
-            request.put("dob",dob);
-            request.put("work",work);
-            request.put("gender",gender);
-            request.put("email",email);
-            request.put("contact_no",contact_no);
-            request.put("about",about);
-            //todo TMD: input image from user ?? Also DEFAULT IMAGE
+            request.put("name", name);
+            request.put("work", work);
+            request.put("gender", gender);
+            request.put("email", email);
+            request.put("contact_no", contact_no);
+            // todo NHS: input image from user
+            // todo TMD: accept image and save to server/ provide a default image
 
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");

@@ -144,15 +144,16 @@ class Connection extends Thread {
                         break;
                     }
 
-                    case "books/rent_out": {
-                        ArrayList<Bookser> books = db.rented_out_books();
-                        output.writeObject(books);
-                        System.out.println("Sending images: " + books.size());
-                        for (Bookser book : books) {
-                            book.sendImage(output);
-                        }
-                        System.out.println("Successfully sent all objects and images!");
-
+                    case "profile/edit": {
+                        response = db.edit_profile(
+                                request.getInt("user_id"),
+                                request.getString("name"),
+                                request.getString("work"),
+                                request.getString("gender"),
+                                request.getString("email"),
+                                request.getString("contact_no")
+                        );
+                        send(response);
                         break;
                     }
 

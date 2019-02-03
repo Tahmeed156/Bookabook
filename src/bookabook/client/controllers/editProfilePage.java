@@ -255,12 +255,10 @@ public class editProfilePage {
         Boolean success= Main.connection.editProfile(
                 1,
                 name.getText(),
-                dob,
                 work.getText(),
                 printRBtn,
                 email.getText(),
-                contactNo.getText(),
-                about.getText()
+                contactNo.getText()
         );
 
         if (success) {
