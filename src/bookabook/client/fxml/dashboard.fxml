@@ -111,7 +111,7 @@
                       <HBox alignment="CENTER_LEFT" prefHeight="300.0" prefWidth="1040.0">
                           <children>
                               <Region maxHeight="300.0" maxWidth="40.0" prefHeight="150.0" prefWidth="30.0" />
-                              <GridPane alignment="CENTER" prefHeight="295.0" prefWidth="528.0" style="-fx-background-color: #ffffff;">
+                              <GridPane alignment="CENTER" prefHeight="295.0" prefWidth="333.0" style="-fx-background-color: #ffffff;">
                                   <columnConstraints>
                                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   </columnConstraints>
@@ -256,7 +256,7 @@
                                   </children>
                               </GridPane>
                               <Region prefHeight="150.0" prefWidth="30.0" />
-                              <VBox alignment="CENTER" prefHeight="295.0" prefWidth="129.0" style="-fx-background-color: #3b3838;">
+                              <VBox alignment="CENTER" prefHeight="295.0" prefWidth="247.0" style="-fx-background-color: #3b3838;">
                                   <children>
                                       <Label text="Upcoming" textFill="WHITE">
                                           <font>

@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -84,13 +85,13 @@ public class messenger {
             "2:45","3:30","5:50","5:00","6:25","6:45","6:55","6:55","7:00","7:01",
             "7:02"));
 
-    List<String> online = new ArrayList<>(Arrays.asList("Jake","John","Martha","Snow","Hullalala","Hey",
-            "Jake","John","Martha","Snow","Hullalala","Hey","Jake","John","Martha","Snow","Hullalala","Hey",
-            "Jake","John","Martha","Snow","Hullalala","Hey"));
+    List<String> online = new ArrayList<>(Arrays.asList("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+           "p","q","r","s","t","u","v","w","x","y","z"));
 
 
     int index;
     int index1;
+    String lblStyle;
 
     public void initialize()
     {
@@ -101,17 +102,16 @@ public class messenger {
         parent.getChildren().add(toast.get());
 
         int start = 0;
-        int start1 = 0;
         if(user.size()>7) { start = user.size() - 7; }
-        if(online.size()>10) { start1 = online.size() - 10; }
 
         messageDisplay(start,user.size());
-        userDisplay(start1,online.size());
         if(start>0){ upArrow.setVisible(true);}
-        if(start1>0){ downArrow1.setVisible(true);}
         index = start;
-        index1 = start1;
 
+        index1 = online.size()-1;
+        lblStyle = "-fx-background-color:#ffffff; -fx-pref-width:100";
+        index1 = helper.initiate(online, onlineUsers, 10,100, lblStyle,
+                downArrow1, index1, 10, true);
 
 
     }
@@ -237,35 +237,16 @@ public class messenger {
 
     }
 
+    public void upArrow1Clicked(MouseEvent event)
+    {
+        index1 = helper.up_arrow_clicked(online, onlineUsers, 10,100, lblStyle,
+                downArrow1, upArrow1, index1, 10, true);
+    }
+
     public void downArrow1Clicked(MouseEvent event)
     {
-        //if up arrow clicked and more books available
-
-        //set left arrow visible
-        upArrow1.setVisible(true);
-
-        //delete all children
-        onlineUsers.getChildren().clear();
-
-
-        int postindex = index1;
-        int i = postindex - 10;
-        if (i<=0)
-        {
-            i = 0;
-        }
-
-        index1 = i;
-        userDisplay(i,postindex);
-
-
-        //making arrow disabled if no more books
-        //System.out.println(tIndex);
-        if (index1 == 0) {
-            downArrow1.setVisible(false);
-        }
-
-        //System.out.println(index);
+        index1 = helper.down_arrow_clicked(online, onlineUsers, 10,100, lblStyle,
+                downArrow1, upArrow1, index1, 10, true);
 
     }
 
@@ -299,35 +280,6 @@ public class messenger {
     }
 
 
-    public void upArrow1Clicked(MouseEvent event)
-    {
-
-
-        if (index1==0)
-        {
-            index1 = online.size()%10;
-            if(online.size()%10==0)
-            {
-                index1 = 10;
-            }
-        }
-        else
-        {
-            index1+=10;
-        }
-
-        userDisplay(index1,index1+10);
-
-
-        //if leftmost box contain last book then left arrow will be invisible
-        if((index1+10)==online.size())
-        {
-            upArrow1.setVisible(false);
-        }
-        downArrow1.setVisible(true);
-        //System.out.println(index);
-    }
-
     public void sendBtn(ActionEvent event){
         sendMessage();
     }
@@ -353,8 +305,13 @@ public class messenger {
         messageDisplay(index, user.size());
 
     }
+
     public void addOnlineUser(){
         // TODO: add online users from server
+
+        index1 = helper.initiate(online, onlineUsers, 10,100, lblStyle,
+                downArrow1, index1, 10, true);
+
     }
 
 
@@ -395,29 +352,6 @@ public class messenger {
         }
 
 
-    }
-
-
-
-    public void userDisplay(int initial, int limit)
-    {
-        onlineUsers.getChildren().clear();
-        for(int i=initial; i<limit ; i++)
-        {
-            HBox hb = new HBox();
-            hb.setAlignment(Pos.TOP_CENTER);
-            Label lb = new Label(online.get(i));
-            lb.setPadding(new Insets(10,10,10,10));
-            lb.setWrapText(true);
-            lb.setMaxWidth(100);
-            lb.setStyle("-fx-background-color:#ffffff; -fx-pref-width:100");
-            lb.setAlignment(Pos.CENTER);
-            hb.getChildren().add(lb);
-            Region rg = new Region();
-            rg.setPrefHeight(10);
-            rg.setPrefWidth(350);
-            onlineUsers.getChildren().addAll(hb,rg);
-        }
     }
 
 }
