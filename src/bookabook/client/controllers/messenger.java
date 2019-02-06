@@ -97,9 +97,9 @@ public class messenger {
     {
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk,searchStk,messagesStk,helpStk,profileStk,logoutStk};
-
-
         parent.getChildren().add(toast.get());
+
+        // todo NHS: load from server
 
         int start = 0;
         if(user.size()>7) { start = user.size() - 7; }
@@ -279,8 +279,19 @@ public class messenger {
         //System.out.println(index);
     }
 
+    public void onHoverBtn(MouseEvent e)
+    {
+        send.setStyle("-fx-border-color: #ffffff; -fx-border-radius:5; -fx-border-width:2;" +
+                " -fx-background-color: #0275d8");
+    }
 
+    public void endHoverBtn(MouseEvent e)
+    {
+        send.setStyle("-fx-border-color: #ffffff; -fx-border-radius:5; -fx-border-width:2;" +
+                " -fx-background-color: #3b3838");
+    }
     public void sendBtn(ActionEvent event){
+        // todo NHS: send to database too
         sendMessage();
     }
 
@@ -288,6 +299,7 @@ public class messenger {
     {
         if(e.getCode().equals(KeyCode.ENTER))
         {
+            // todo NHS: send to database too
             sendMessage();
         }
     }
@@ -312,6 +324,16 @@ public class messenger {
         index1 = helper.initiate(online, onlineUsers, 10,100, lblStyle,
                 downArrow1, index1, 10, true);
 
+    }
+
+    public void addMessage() {
+        // todo NHS: add messages from server
+        int start = 0;
+        if(user.size()>7) { start = user.size() - 7; }
+
+        messageDisplay(start,user.size());
+        if(start>0){ upArrow.setVisible(true);}
+        index = start;
     }
 
 

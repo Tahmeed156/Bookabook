@@ -71,6 +71,11 @@
                               </Label>
                           </children>
                       </StackPane>
+                  <ImageView fitHeight="150.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Pictures/title.PNG" />
+                     </image>
+                  </ImageView>
                   </children>
               </VBox>
           </left>

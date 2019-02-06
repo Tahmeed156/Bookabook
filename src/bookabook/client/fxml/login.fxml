@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -19,7 +20,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane fx:id="parent" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bookabook.client.controllers.login">
    <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" spacing="10.0" style="-fx-background-color: #3b3838;">
@@ -27,28 +27,6 @@
               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
           </padding>
           <children>
-              <Label alignment="CENTER" prefHeight="50.0" prefWidth="210.0" style="-fx-font-weight: Bold;" text="Login/Signup Page" textFill="WHITE">
-                  <font>
-                      <Font name="Calibri" size="22.0" />
-                  </font>
-                  <VBox.margin>
-                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </VBox.margin>
-                  <padding>
-                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </padding>
-              </Label>
-              <Label alignment="CENTER" prefHeight="66.0" prefWidth="353.0" style="-fx-font-weight: bold;" text="BOOK A BOOK" textFill="WHITE">
-                  <font>
-                      <Font name="Castellar" size="36.0" />
-                  </font>
-                  <VBox.margin>
-                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </VBox.margin>
-                  <padding>
-                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </padding>
-              </Label>
               <HBox alignment="CENTER" prefHeight="523.0" prefWidth="1160.0" spacing="10.0">
                   <VBox.margin>
                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -57,89 +35,98 @@
                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                   </padding>
                   <children>
-                      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0" spacing="10.0">
-                          <HBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                          </HBox.margin>
-                          <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                          </padding>
-                          <children>
-                              <GridPane prefHeight="200.0" prefWidth="480.0">
-                                  <columnConstraints>
-                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="197.0" />
-                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="280.0" />
-                                  </columnConstraints>
-                                  <rowConstraints>
-                                      <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
-                                      <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                                      <RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="19.0" vgrow="SOMETIMES" />
-                                  </rowConstraints>
-                                  <children>
-                                      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="190.0" style="-fx-font-weight: bold;" text="Username" textFill="#d9d9d9">
-                                          <font>
-                                              <Font name="Calibri" size="24.0" />
-                                          </font>
-                                          <GridPane.margin>
-                                              <Insets />
-                                          </GridPane.margin>
-                                          <padding>
-                                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                          </padding>
-                                      </Label>
-                                      <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="190.0" style="-fx-font-weight: bold;" text="Password" textFill="#d9d9d9" GridPane.rowIndex="1">
-                                          <font>
-                                              <Font name="Calibri" size="24.0" />
-                                          </font>
-                                          <padding>
-                                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                          </padding>
-                                      </Label>
-                                      <TextField fx:id="userNameLogin" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="240.0" style="-fx-background-color: #D9D9D9;" GridPane.columnIndex="1">
-                                          <padding>
-                                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                          </padding>
-                                          <GridPane.margin>
-                                              <Insets />
-                                          </GridPane.margin>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                                      </TextField>
-                                      <Label fx:id="toastlogin" prefHeight="42.0" prefWidth="262.0" style="-fx-border-radius: 5;" textFill="#d9d9d9" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                          <font>
-                                              <Font name="Calibri" size="15.0" />
-                                          </font>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                                      </Label>
-                              <PasswordField fx:id="password" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="240.0" style="-fx-background-color: #d9d9d9;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </PasswordField>
-                                  </children>
-                                  <VBox.margin>
-                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                  </VBox.margin>
-                                  <padding>
-                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                  </padding>
-                              </GridPane>
-                              <Button fx:id="logInBtn" mnemonicParsing="false" onMouseClicked="#onPress" onMouseEntered="#onHover" onMouseExited="#endHover" prefHeight="23.0" prefWidth="95.0" style="-fx-border-width: 3; -fx-border-color: #d9d9d9;" text="Login" textFill="#3b3838">
-                                  <font>
-                                      <Font size="18.0" />
-                                  </font>
-                                  <padding>
-                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                  </padding>
-                                  <VBox.margin>
-                                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                  </VBox.margin>
-                              </Button>
-                          </children>
-                      </VBox>
+                  <AnchorPane>
+                     <children>
+                            <VBox alignment="CENTER" layoutY="303.0" prefHeight="410.0" prefWidth="500.0" spacing="10.0">
+                                <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                </HBox.margin>
+                                <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                </padding>
+                                <children>
+                                    <GridPane prefHeight="186.0" prefWidth="460.0">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="235.0" minWidth="10.0" prefWidth="197.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="280.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                            <RowConstraints maxHeight="88.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                            <RowConstraints maxHeight="40.0" minHeight="0.0" prefHeight="19.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <children>
+                                            <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="190.0" style="-fx-font-weight: bold;" text="Username" textFill="#d9d9d9">
+                                                <font>
+                                                    <Font name="Calibri" size="24.0" />
+                                                </font>
+                                                <GridPane.margin>
+                                                    <Insets />
+                                                </GridPane.margin>
+                                                <padding>
+                                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                </padding>
+                                            </Label>
+                                            <Label minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="190.0" style="-fx-font-weight: bold;" text="Password" textFill="#d9d9d9" GridPane.rowIndex="1">
+                                                <font>
+                                                    <Font name="Calibri" size="24.0" />
+                                                </font>
+                                                <padding>
+                                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                </padding>
+                                            </Label>
+                                            <TextField fx:id="userNameLogin" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="240.0" style="-fx-background-color: #D9D9D9;" GridPane.columnIndex="1">
+                                                <padding>
+                                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                </padding>
+                                                <GridPane.margin>
+                                                    <Insets />
+                                                </GridPane.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                            </TextField>
+                                            <Label fx:id="toastlogin" prefHeight="42.0" prefWidth="262.0" style="-fx-border-radius: 5;" textFill="#d9d9d9" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                <font>
+                                                    <Font name="Calibri" size="15.0" />
+                                                </font>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                            </Label>
+                                    <PasswordField fx:id="password" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="240.0" style="-fx-background-color: #d9d9d9;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </PasswordField>
+                                        </children>
+                                        <VBox.margin>
+                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                        </VBox.margin>
+                                        <padding>
+                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                        </padding>
+                                    </GridPane>
+                                    <Button fx:id="logInBtn" mnemonicParsing="false" onMouseClicked="#onPress" onMouseEntered="#onHover" onMouseExited="#endHover" prefHeight="23.0" prefWidth="95.0" style="-fx-border-width: 3; -fx-border-color: #d9d9d9;" text="Login" textFill="#3b3838">
+                                        <font>
+                                            <Font name="System Bold" size="18.0" />
+                                        </font>
+                                        <padding>
+                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                        </padding>
+                                        <VBox.margin>
+                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                        </VBox.margin>
+                                    </Button>
+                                </children>
+                            </VBox>
+                        <ImageView fitHeight="303.0" fitWidth="437.0" layoutX="25.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Pictures/login.jpeg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
                       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0">
                           <children>
                               <GridPane alignment="TOP_CENTER" prefHeight="516.0" prefWidth="500.0">
@@ -152,8 +139,8 @@
                                       <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                                       <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
                                       <RowConstraints maxHeight="76.0" minHeight="10.0" prefHeight="76.0" valignment="TOP" vgrow="SOMETIMES" />
-                                      <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                      <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                      <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+                                      <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
                               <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
                                   </rowConstraints>
                                   <children>
@@ -265,7 +252,7 @@
                               </GridPane>
                               <Button fx:id="signUpBtn" mnemonicParsing="false" onMouseClicked="#onPress" onMouseEntered="#onHover" onMouseExited="#endHover" prefHeight="23.0" prefWidth="95.0" style="-fx-border-width: 3; -fx-border-color: #d9d9d9;" text="Signup" textFill="#3b3838">
                                   <font>
-                                      <Font size="18.0" />
+                                      <Font name="System Bold" size="18.0" />
                                   </font>
                                   <padding>
                                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

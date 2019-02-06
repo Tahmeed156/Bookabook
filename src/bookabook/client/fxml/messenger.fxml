@@ -148,10 +148,18 @@
                <children>
                   <Region prefHeight="78.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" />
                   <TextField fx:id="chat" onKeyPressed="#sendKey" prefHeight="34.0" prefWidth="599.0" promptText="Wirte your message" />
-                  <Button fx:id="send" mnemonicParsing="false" onAction="#sendBtn" prefHeight="33.0" prefWidth="71.0" text="Send" />
+                  <Button fx:id="send" mnemonicParsing="false" onAction="#sendBtn" onMouseEntered="#onHoverBtn" onMouseExited="#endHoverBtn" prefHeight="33.0" prefWidth="71.0" style="-fx-border-color: #ffffff; -fx-border-radius: 5; -fx-border-width: 2; -fx-background-color: #3b3838;" text="Send" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font></Button>
                </children>
             </HBox>
          </bottom>
       </BorderPane>
+      <ImageView fitHeight="150.0" fitWidth="160.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Pictures/title.PNG" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

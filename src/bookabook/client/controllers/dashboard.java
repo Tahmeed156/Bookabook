@@ -40,6 +40,7 @@ import java.util.prefs.Preferences;
 public class dashboard {
 
     static String userName;
+    static String user;
     static String rentedOutBooks;
     static String rentedBooks;
     static String wallet;
@@ -84,9 +85,17 @@ public class dashboard {
     @FXML
     private Button rentOutBtn;
     @FXML
-    private Circle imgCircle;
-    @FXML
-    private VBox upperRightVbox;
+    private Rectangle imgCircle;
+    @FXML private Label rentedBLbl;
+    @FXML private Label sharedBLbl;
+    @FXML private Label walletLbl;
+    @FXML private Label userNameLbl;
+    @FXML private Label userLbl;
+
+
+    @FXML private VBox upcoming;
+    @FXML private VBox sharedBooks;
+
 
     //center HBoxs
     @FXML
@@ -180,18 +189,45 @@ public class dashboard {
     private ImageView rLArrow;
     @FXML
     private ImageView rRArrow;
+    @FXML
+    private ImageView upArrow1;
+    @FXML
+    private ImageView upArrow2;
+    @FXML
+    private ImageView downArrow1;
+    @FXML
+    private ImageView downArrow2;
     ImageView[] arrows;
 
 
-    //    //list for trending
+    String lblStyle = "-fx-text-fill: #3b3838; -fx-font-weight: bold; -fx-font-size: 15";
+    // list for upcoming due dates
+    List<String>  upBook = new ArrayList<>(Arrays.asList("Harry Potter", "Game of thrones", "Percy Jackson",
+            "1984","Fantastic beasts and where to find them","Animal Farm","The Grand Theory"));
+    List<String>  upRenter = new ArrayList<>(Arrays.asList("Jon", "Sherlock", "Percy","Antik","Tanjim","Sadat","Kane"));
+    List<Integer>  udaysLeft = new ArrayList<>(Arrays.asList(1,3,2,4,5,6,7));
+    List<String> uLabel = new ArrayList<>();
+    int uIndex;
+
+
+    // list for booksShared
+    List<String>  sBook = new ArrayList<>(Arrays.asList("Harry Potter", "Game of thrones", "Percy Jackson",
+            "1984","Fantastic beasts and where to find them","Animal Farm","The Grand Theory"));
+    List<String>  sRenter = new ArrayList<>(Arrays.asList("Jon", "Sherlock", "Percy","Antik","Tanjim","Sadat","Kane"));
+    List<Integer>  sdaysLeft = new ArrayList<>(Arrays.asList(1,3,2,4,5,6,7));
+    List<String> sLabel = new ArrayList<>();
+    int sIndex;
+
+
+
+    // list for trending
     List<String> tname = new ArrayList<>();
     List<String> tauthor = new ArrayList<>();
-    //    Image[] timgs = new Image[50];
     List<Image> timgs = new ArrayList<>();
 
     List<Bookser> trendingBooks;
 
-    //list for recommended
+    // list for recommended
     List<String> rname = new ArrayList<>();
     List<String> rauthor = new ArrayList<>();
     List<Image> rimgs = new ArrayList<>();
@@ -219,15 +255,29 @@ public class dashboard {
         rimgv = new ImageView[]{rBookImage1, rBookImage2, rBookImage3};
         tVbox = new VBox[]{tVbox1, tVbox2, tVbox3};
         rVbox = new VBox[]{rVbox1, rVbox2, rVbox3};
-        arrows = new ImageView[]{tLArrow, tRArrow, rLArrow, rRArrow};
+        arrows = new ImageView[]{tLArrow, tRArrow, rLArrow, rRArrow,upArrow1,downArrow1,upArrow2,downArrow2};
 
+
+        //initiate uLabel and sLabel lists
+        for(int i=0; i<upBook.size(); i++)
+        {
+            uLabel.add(upBook.get(i) + " | " + upRenter.get(i) + "\n" + udaysLeft.get(i) + " days");
+        }
+
+
+        for(int i=0; i<sBook.size(); i++)
+        {
+            sLabel.add(sBook.get(i) + " | " + sRenter.get(i) + "\n" + sdaysLeft.get(i) + " days");
+        }
 
         Loading t = new Loading();
         new Thread(t).start();
 
         Preferences userCon = Main.userCon;
 
-        userName = userCon.get("username", "BookABook");
+        // todo NHS: take user full name as input
+        userName = userCon.get("full_name", "BookABook");
+        user = userCon.get("username", "admin");
         rentedBooks = userCon.get("books_rented", "0");
         rentedOutBooks = userCon.get("books_shared", "0");
         wallet = userCon.get("wallet", "0");
@@ -238,16 +288,19 @@ public class dashboard {
         imgCircle.setFill(new ImagePattern(imgperson));
 
 
-        //upperRightLabels
-        Label nameUser = new Label(userName);
-        nameUser.setStyle("-fx-font-weight:bold");
+        //upperLabels
+        userNameLbl.setText(userName);
+        userLbl.setText(user);
+        rentedBLbl.setText(rentedBooks);
+        sharedBLbl.setText(rentedOutBooks);
+        walletLbl.setText(wallet);
 
 
-        upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Rented Out: " + rentedOutBooks + " Books"),
-                new Label("Rented: " + rentedBooks + " Books"),
-                new Label("Money deposited:"),
-                new Label("Tk " + wallet));
+        //populate upcoming
+        uIndex = helper.initiate(uLabel, upcoming, 5, 370, lblStyle, downArrow1, uIndex,
+                3, true);
+        sIndex = helper.initiate(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2, sIndex,
+                3, true);
     }
 
     public void onHoverBox(MouseEvent event) {
@@ -306,14 +359,40 @@ public class dashboard {
         }
     }
 
+    public void uArrowClicked(MouseEvent event) {
+        if(event.getSource()==upArrow1){
+            uIndex = helper.up_arrow_clicked(uLabel, upcoming, 5, 370, lblStyle, downArrow1,
+                    upArrow1, uIndex, 3, true);
+        }
+        else{
+            sIndex = helper.up_arrow_clicked(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2,
+                    upArrow2, sIndex, 3, true);
+        }
+    }
+
+    public void dArrowClicked(MouseEvent event) {
+        if(event.getSource()==downArrow1){
+            uIndex = helper.down_arrow_clicked(uLabel, upcoming, 5, 370, lblStyle, downArrow1,
+                    upArrow1, uIndex, 3, true);
+        }
+        else{
+            sIndex = helper.down_arrow_clicked(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2,
+                    upArrow2, sIndex, 3, true);
+        }
+    }
+
 
     public void onHoverArrow(MouseEvent event) {
         for (int i = 0; i < arrows.length; i++) {
             if (arrows[i].isHover()) {
                 if (i == 1 || i == 3) {
                     arrows[i].setImage(new Image(new File(path + "rightAClicked.png").toURI().toString()));
-                } else {
+                } else if( i==0 || i==2){
                     arrows[i].setImage(new Image(new File(path + "leftAClicked.png").toURI().toString()));
+                } else if( i==4 || i==6){
+                    arrows[i].setImage(new Image(new File(path + "upAClicked.png").toURI().toString()));
+                }else {
+                    arrows[i].setImage(new Image(new File(path + "downAClicked.png").toURI().toString()));
                 }
             }
 
@@ -325,8 +404,12 @@ public class dashboard {
             if (!arrows[i].isHover()) {
                 if (i == 1 || i == 3) {
                     arrows[i].setImage(new Image(new File(path + "rightArrow.png").toURI().toString()));
-                } else {
+                } else if( i==0 || i==2){
                     arrows[i].setImage(new Image(new File(path + "leftArrow.png").toURI().toString()));
+                } else if( i==4 || i==6){
+                    arrows[i].setImage(new Image(new File(path + "upArrow.png").toURI().toString()));
+                }else {
+                    arrows[i].setImage(new Image(new File(path + "downArrow.png").toURI().toString()));
                 }
             }
 
@@ -352,6 +435,7 @@ public class dashboard {
     }
 
     public void bookPageClicked(MouseEvent event) {
+        // todo NHS: pass on book id to next page
         for (int i = 0; i < timgv.length; i++) {
             if (event.getSource() == timgv[i]) {
                 Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tlabel[i].getText());
@@ -396,6 +480,10 @@ public class dashboard {
                     rauthor.add(b.getAuthor());
                     rimgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
                 }
+
+
+                // todo NHS: use this thread to get back info on rent out and rented books
+
             } catch (Exception e) {
                 System.out.println("Couldn't load books");
             }
@@ -411,7 +499,11 @@ public class dashboard {
                     //populating latest
                     tIndex = helper.initiate(rname, rauthor, rimgs, rstckRArrow, rVbox, rlabel, rAuthorLabel, rimgv,
                             rIndex, 3);
-                }
+
+                    // todo NHS: populate rented and rented out books
+                    // todo NHS: rented -> how long;
+                    // todo NHS: rented out -> who rented , how long;
+                 }
             });
 
             return null;

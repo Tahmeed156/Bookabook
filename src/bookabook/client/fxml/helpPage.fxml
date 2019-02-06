@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
@@ -71,6 +72,11 @@
                                 </Label>
                             </children>
                         </StackPane>
+                  <ImageView fitHeight="150.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Pictures/title.PNG" />
+                     </image>
+                  </ImageView>
                     </children>
                 </VBox>
             </left>
@@ -105,6 +111,15 @@
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ededed" height="129.0" layoutX="654.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="172.0" />
+                  <AnchorPane layoutX="715.0" layoutY="506.0" prefHeight="125.0" prefWidth="311.0" style="-fx-background-color: #3b3838;">
+                     <children>
+                        <Label layoutX="14.0" layoutY="7.0" text="Contact us:&#10;&#10;Phone : +88019527154265&#10;Email  :  bookAbook@gmail.com" textFill="#ffbf00">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
          </center>
