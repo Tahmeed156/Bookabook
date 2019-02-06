@@ -135,7 +135,7 @@ public class rentOutPage {
                 new Label("Rented Out: " + rentedOutBooks + " Books"),
                 new Label("Rented: " + rentedBooks + " Books"),
                 new Label("Money deposited:"),
-                new Label("Tk " + deposit));
+                new Label("Tk " + wallet));
 
         //genre.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         condition.setItems(condList);
@@ -237,10 +237,7 @@ public class rentOutPage {
 
     public void uploadPic(MouseEvent event)
     {
-
-
-        //UPLOAD TO DATABASE
-        //MUST DOOOO
+        // todo NHS: upload pic to database
     }
 
     public void rentBook(MouseEvent event)
@@ -303,6 +300,7 @@ public class rentOutPage {
 
 
 
+        // todo NHS: give user id;
         boolean success = Main.connection.rentOutBook(
                 1,
                 book.getText(),

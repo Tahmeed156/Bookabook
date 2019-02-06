@@ -72,285 +72,147 @@
                               </Label>
                           </children>
                       </StackPane>
+                  <ImageView fitHeight="150.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Pictures/title.PNG" />
+                     </image>
+                  </ImageView>
                   </children>
               </VBox>
           </left>
           <top>
-              <HBox fx:id="headerHbx" prefHeight="144.0" prefWidth="1200.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
-                  <children>
+            <AnchorPane style="-fx-background-color: #3b3838;">
+               <children>
                       <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
                           <image>
                               <Image url="@../Pictures/logo.png" />
                           </image>
                       </ImageView>
-                      <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="732.0">
-                     <children>
-                        <AnchorPane>
-                           <children>
-                              <Button fx:id="rentOutBtn" alignment="CENTER" layoutX="500.0" layoutY="60.0" mnemonicParsing="false" onAction="#btnPressed" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="38.0" prefWidth="198.0" style="-fx-background-color: #44546a;" text="Rent Out Page" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="17.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                      </StackPane>
-                      <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
-                          <children>
-                              <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
-                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="CENTER_LEFT" />
-                          </children>
-                      </StackPane>
-                  </children>
-              </HBox>
+                  <Rectangle fx:id="imgCircle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="155.0" layoutX="1040.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
+                  <Label alignment="CENTER" layoutX="300.0" layoutY="50.0" text="Rented&#10;Books&#10;" textAlignment="CENTER" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="rentedBLbl" alignment="CENTER" layoutX="375.0" layoutY="60.0" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: #d9d9d9;" text="l1" textAlignment="CENTER" wrapText="true">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="sharedBLbl" alignment="CENTER" layoutX="555.0" layoutY="60.0" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: #d9d9d9;" text="l2" textAlignment="CENTER" wrapText="true">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="480.0" layoutY="50.0" text="Shared&#10;Books&#10;" textAlignment="CENTER" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="650.0" layoutY="64.0" text="Wallet&#10;" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="walletLbl" alignment="CENTER" layoutX="720.0" layoutY="60.0" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: #d9d9d9;" text="l3" textAlignment="CENTER" wrapText="true">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="rentOutBtn" alignment="CENTER" layoutX="179.0" layoutY="21.0" mnemonicParsing="false" onAction="#btnPressed" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="113.0" prefWidth="65.0" style="-fx-background-color: #44546a;" text="Rent&#10;Out&#10;Page" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="userLbl" alignment="CENTER_RIGHT" layoutX="839.0" layoutY="65.0" prefHeight="27.0" prefWidth="192.0" text="User" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="userNameLbl" alignment="CENTER_RIGHT" layoutX="797.0" layoutY="37.0" prefHeight="27.0" prefWidth="234.0" text="User Name" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
           </top>
           <center>
               <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
                   <children>
-                      <HBox alignment="CENTER_LEFT" prefHeight="300.0" prefWidth="1040.0">
-                          <children>
-                              <Region maxHeight="300.0" maxWidth="40.0" prefHeight="150.0" prefWidth="30.0" />
-                              <GridPane alignment="CENTER" prefHeight="295.0" prefWidth="333.0" style="-fx-background-color: #ffffff;">
-                                  <columnConstraints>
-                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  </columnConstraints>
-                                  <rowConstraints>
-                                      <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                      <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                      <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                      <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                      <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                                  </rowConstraints>
-                                  <children>
-                                      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="500.0">
-                                          <children>
-                                              <Label style="-fx-font-weight: BOLD; -fx-font-size: 18;" text="NEXT DEADLINE: ">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                              <Label text="11th October 2018">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                          </children>
-                                      </HBox>
-                                      <HBox alignment="CENTER" prefHeight="110.0" prefWidth="500.0" GridPane.rowIndex="1">
-                                          <children>
-                                              <Label style="-fx-font-weight: BOLD; -fx-font-size: 18;" text="TIME REMAINING:">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                              <Label text="12 Days">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                          </children>
-                                      </HBox>
-                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-                                          <children>
-                                              <Label style="-fx-font-weight: BOLD; -fx-font-size: 18;" text="BOOKS RENTED OUT:">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                              <Label text="12 Books">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                          </children>
-                                      </HBox>
-                                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-                                          <children>
-                                              <Label style="-fx-font-weight: BOLD; -fx-font-size: 18;" text="BOOKS TO RETURN">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                              <Label text="3 Books">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                          </children>
-                                      </HBox>
-                                      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="300.0" GridPane.rowIndex="4">
-                                          <children>
-                                              <Label style="-fx-font-weight: BOLD; -fx-font-size: 18;" text="TIME REMANING">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                              <Label text="11 Days">
-                                                  <font>
-                                                      <Font size="18.0" />
-                                                  </font>
-                                                  <HBox.margin>
-                                                      <Insets />
-                                                  </HBox.margin>
-                                                  <padding>
-                                                      <Insets right="10.0" top="10.0" />
-                                                  </padding>
-                                              </Label>
-                                          </children>
-                                      </HBox>
-                                  </children>
-                              </GridPane>
-                              <Region prefHeight="150.0" prefWidth="30.0" />
-                              <VBox alignment="CENTER" prefHeight="295.0" prefWidth="247.0" style="-fx-background-color: #3b3838;">
-                                  <children>
-                                      <Label text="Upcoming" textFill="WHITE">
-                                          <font>
-                                              <Font name="System Bold" size="20.0" />
-                                          </font>
-                                          <VBox.margin>
-                                              <Insets left="10.0" right="10.0" />
-                                          </VBox.margin>
-                              </Label>
-                                      <Label text="Due Dates" textFill="WHITE">
-                                          <font>
-                                              <Font name="System Bold" size="20.0" />
-                                          </font>
-                                          <VBox.margin>
-                                              <Insets left="10.0" right="10.0" />
-                                          </VBox.margin>
-                              </Label>
-                                  </children>
-                                  <HBox.margin>
-                                      <Insets />
-                                  </HBox.margin>
-                              </VBox>
+                      <Region prefHeight="23.0" prefWidth="1040.0" />
+                  <HBox prefHeight="241.0" prefWidth="1040.0">
+                     <children>
                         <Region prefHeight="150.0" prefWidth="30.0" />
-                        <VBox alignment="TOP_CENTER" prefHeight="295.0" prefWidth="285.0" style="-fx-background-color: #ffffff;">
+                        <StackPane prefHeight="241.0" prefWidth="121.0" style="-fx-background-color: #2f528f;">
                            <children>
-                              <Label style="-fx-font-weight: BOLD; -fx-font-size: 18;" text="LATEST BOOKS:">
+                              <Label alignment="CENTER" text="Upcoming&#10;Due &#10;Dates&#10;" textAlignment="CENTER" textFill="WHITE">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font name="System Bold" size="18.0" />
                                  </font>
-                                 <padding>
-                                    <Insets right="10.0" top="10.0" />
-                                 </padding>
-                              </Label>
-                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Hunger Games">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets right="10.0" top="10.0" />
-                                 </padding>
-                              </Label>
-                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="World of Wizards">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets right="10.0" top="10.0" />
-                                 </padding>
-                              </Label>
-                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Fire in Blood">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets right="10.0" top="10.0" />
-                                 </padding>
-                              </Label>
-                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Restore the posture">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets right="10.0" top="10.0" />
-                                 </padding>
-                              </Label>
-                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Win the Fin">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets right="10.0" top="10.0" />
-                                 </padding>
-                              </Label>
-                              <Label onMouseClicked="#labelClicked" onMouseEntered="#onLabelHover" onMouseExited="#endLabelHover" text="Winnie the Pooh">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets right="10.0" top="10.0" />
-                                 </padding>
                               </Label>
                            </children>
+                        </StackPane>
+                        <VBox alignment="TOP_CENTER" style="-fx-background-color: #ffffff;">
+                           <children>
+                              <ImageView fx:id="upArrow1" fitHeight="19.0" fitWidth="41.0" onMouseClicked="#uArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" visible="false">
+                                 <image>
+                                    <Image url="@../Pictures/upArrow.png" />
+                                 </image>
+                              </ImageView>
+                              <VBox fx:id="upcoming" prefHeight="241.0" prefWidth="376.0" />
+                              <ImageView fx:id="downArrow1" fitHeight="19.0" fitWidth="41.0" onMouseClicked="#dArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" visible="false">
+                                 <image>
+                                    <Image url="@../Pictures/downArrow.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
                         </VBox>
-                          </children>
-                      </HBox>
-                      <Region prefHeight="30.0" prefWidth="1040.0" />
+                        <Region prefHeight="150.0" prefWidth="30.0" />
+                        <StackPane prefHeight="241.0" prefWidth="121.0" style="-fx-background-color: #2f528f;">
+                           <children>
+                              <Label alignment="CENTER" text="Books&#10;Shared&#10;" textAlignment="CENTER" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </StackPane>
+                        <VBox alignment="TOP_CENTER" style="-fx-background-color: #ffffff;">
+                           <children>
+                              <ImageView fx:id="upArrow2" fitHeight="19.0" fitWidth="41.0" onMouseClicked="#uArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" visible="false">
+                                 <image>
+                                    <Image url="@../Pictures/upArrow.png" />
+                                 </image>
+                              </ImageView>
+                              <VBox fx:id="sharedBooks" prefHeight="241.0" prefWidth="376.0" />
+                              <ImageView fx:id="downArrow2" fitHeight="19.0" fitWidth="41.0" onMouseClicked="#dArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" visible="false">
+                                 <image>
+                                    <Image url="@../Pictures/downArrow.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Region prefHeight="30.0" prefWidth="1040.0" />
                       <HBox fx:id="trendHbx" prefHeight="120.0" prefWidth="1040.0">
                           <children>
                               <Region prefHeight="150.0" prefWidth="30.0" />
-                              <StackPane prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #2F528F;">
+                              <StackPane prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #2f528f;">
                                   <children>
                                       <Label alignment="CENTER" text="Trending&#10;Books" textAlignment="CENTER" textFill="WHITE">
                                           <font>
-                                              <Font size="18.0" />
+                                              <Font name="System Bold" size="18.0" />
                                           </font>
                                       </Label>
                                   </children>
@@ -435,11 +297,11 @@
                       <HBox fx:id="recHbx" prefHeight="120.0" prefWidth="200.0">
                           <children>
                               <Region prefHeight="100.0" prefWidth="30.0" />
-                              <StackPane prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #2F528F;">
+                              <StackPane prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #2f528f;">
                                   <children>
                                       <Label alignment="CENTER" text="Latest &#10;Books" textAlignment="CENTER" textFill="WHITE">
                                           <font>
-                                              <Font size="18.0" />
+                                              <Font name="System Bold" size="18.0" />
                                           </font>
                                       </Label>
                                   </children>

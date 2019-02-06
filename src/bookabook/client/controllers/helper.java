@@ -231,10 +231,10 @@ public class helper {
         for(start = 0 ; (index-start)>=0 && start<limit; start++)
         {
             HBox hb = new HBox();
-            hb.setAlignment(Pos.TOP_CENTER);
-            Label lb = new Label(list.get(index-start) + "  "+(index-start));
+            hb.setAlignment(Pos.CENTER_LEFT);
+            Label lb = new Label(list.get(index-start));
             lb.setPadding(new Insets(lblPadding));
-            lb.setWrapText(true);
+            //lb.setWrapText(true);
             lb.setMaxWidth(lblMaxWidth);
             lb.setStyle(lblStyle);
             lb.setAlignment(Pos.CENTER);
