@@ -27,6 +27,10 @@ public class Review {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date timestamp;
 
+    public Review() {
+
+    }
+
     public Review (int reviewer_id, int book_id, String b) {
         reviewer = new User(reviewer_id);
         book = new Book(book_id);

@@ -50,6 +50,14 @@ class Connection extends Thread {
         Database db = new Database();
         boolean success = false;
 
+        // Loggin in user
+        try {
+            login(input.readUTF());
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
         while (true) {
 
 
@@ -167,7 +175,7 @@ class Connection extends Thread {
                                 request.getInt("book_id"),
                                 request.getInt("week")
                         );
-                        send(response);
+                        send(response.toString());
                         break;
                     }
 
@@ -177,14 +185,14 @@ class Connection extends Thread {
                                 request.getInt("book_id"),
                                 request.getString("body")
                         );
-                        send(response);
+                        send(response.toString());
                         break;
                     }
 
                     case "review/get": {
                         JSONArray response_arr;
                         response_arr = db.get_reviews(request.getInt("book_id"));
-                        send(response_arr);
+                        send(response_arr.toString());
                         break;
                     }
 

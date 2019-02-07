@@ -1,6 +1,11 @@
 package bookabook.client.controllers;
 
 import bookabook.client.Main;
+import bookabook.objects.Bookser;
+import com.mysql.cj.xdevapi.JsonArray;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,9 +21,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -130,15 +138,17 @@ public class bookDetailsPage {
     //private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
-    List<String> reviewArr = new ArrayList<>(Arrays.asList("Book quite good",
-            "Maybe the world will be set right by this book",
-            "Look out for the journey of your lifetime",
-            "Dont mess with GRRM he is the fantasy king",
-            "Book was goood i guess"));
+    List<String> reviewArr = new ArrayList<>();
+//    (Arrays.asList("Book quite good",
+//            "Maybe the world will be set right by this book",
+//            "Look out for the journey of your lifetime",
+//            "Dont mess with GRRM he is the fantasy king",
+//            "Book was goood i guess"));
 
 
-    List<String> reviewers = new ArrayList<>(Arrays.asList("Mary  4.5 ★","Sherlock  5 ★",
-            "Watson 3.5 ★","Bruce  5 ★","Stark  2 ★"));
+    List<String> reviewers = new ArrayList<>();
+//    Arrays.asList("Mary  4.5 ★","Sherlock  5 ★",
+//            "Watson 3.5 ★","Bruce  5 ★","Stark  2 ★"));
 
 
     public void info(String str)
@@ -146,8 +156,7 @@ public class bookDetailsPage {
         s = str;
     }
 
-    public void initialize(String s)
-    {
+    public void initialize(String s) throws IOException, ClassNotFoundException {
         parent.getChildren().add(toast.get());
         System.out.println(s);
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
@@ -239,13 +248,24 @@ public class bookDetailsPage {
         }
 
 
-        //populating reviews
-        for(index = 0; index<3; index++)
+        //populating reviews\
+
+        JSONArray response_arr = new JSONArray(Main.connection.reviewGet(1));
+        for (int i=0; i<response_arr.length(); i++) {
+            JSONObject review = response_arr.getJSONObject(i);
+            // username
+            reviewers.add(review.getString("username"));
+            // body
+            reviewArr.add(review.getString("body"));
+        }
+
+        for(index = 0; index<3 && index<reviewers.size(); index++)
         {
             vbx[index].setVisible(true);
             revName[index].setText(reviewers.get(index));
             rev[index].setText(reviewArr.get(index));
         }
+
 
         //making right arrow visible
         if(reviewers.size()>3)
@@ -406,20 +426,20 @@ public class bookDetailsPage {
     }
 
 
-    public void rentBtnPressed(MouseEvent e){
+    public void rentBtnPressed(MouseEvent e) throws IOException, ClassNotFoundException {
 
         if(weeks.getText().isEmpty()){
             toast.set("PLEASE FILL IN THE NO OF WEEKS TEXTFIELD","#f0ad4e");
         }
         else {
-            Boolean success = Main.connection.rentBook(
+            JSONObject response = new JSONObject(Main.connection.rentBook(
                     1,
                     Integer.valueOf(weeks.getText()),
                     2,
                     2
-            );
+            ));
 
-            if (success) {
+            if (Boolean.valueOf(response.getString("success"))) {
                 toast.set("SUCCESSFULLY RENTED", "#5CB85C");
                 Preferences userCon = Main.userCon;
                 dashboard.rentedBooks = String.valueOf(Integer.valueOf(dashboard.rentedBooks) + 1);
@@ -429,7 +449,7 @@ public class bookDetailsPage {
                 dashboard.wallet = String.valueOf(Double.valueOf(dashboard.wallet) - payment);
                 userCon.put("wallet",dashboard.wallet);
 
-                Windows w = new Windows(rentBtn, "../fxml/profilePage.fxml");
+                new Windows(rentBtn, "../fxml/dashboard.fxml");
             } else {
                 toast.set("UNABLE TO RENT", "#D9534F");
             }
@@ -441,19 +461,26 @@ public class bookDetailsPage {
         Windows w = new Windows(messageBtn, "../fxml/messenger.fxml");
     }
 
-    public void sendBtnPressed(MouseEvent e){
+    public void sendBtnPressed(MouseEvent e) throws IOException, ClassNotFoundException {
         if(bookReview.getText().isEmpty())
         {
             toast.set("PLEASE ENTER YOUR REVIEW","#f0ad4e");
         }
         else
         {
+            JSONObject response = new JSONObject(Main.connection.reviewAdd(
+                    1,// static
+                    1,//static
+                    bookReview.getText()
+                    ));
+
+
             reviewers.add(0,dashboard.userName);
             reviewArr.add(0,bookReview.getText());
 
             stckLArrow.setVisible(false);
             //populating reviews
-            for(index = 0; index<3; index++)
+            for(index = 0; index<3 && index<reviewers.size(); index++)
             {
                 vbx[index].setVisible(true);
                 revName[index].setText(reviewers.get(index));
@@ -467,6 +494,37 @@ public class bookDetailsPage {
             }
         }
     }
+
+//    class Loading extends Task {
+//        @Override
+//        public Void call() throws Exception {
+//            try {
+//
+//            } catch (Exception e) {
+//                System.out.println("Couldn't load reviews");
+//            }
+//
+//
+//            Platform.runLater(new Runnable() {
+//                @Override
+//                public void run() {
+//                    //populating trending
+//                    tIndex = helper.initiate(tname, tauthor, timgs, tstckRArrow, tVbox, tlabel, tAuthorLabel, timgv,
+//                            tIndex, 3);
+//
+//                    //populating latest_
+//                    tIndex = helper.initiate(rname, rauthor, rimgs, rstckRArrow, rVbox, rlabel, rAuthorLabel, rimgv,
+//                            rIndex, 3);
+//
+//                    // todo NHS: populate rented and rented out books
+//                    // todo NHS: rented -> how long;
+//                    // todo NHS: rented out -> who rented , how long;
+//                }
+//            });
+//
+//            return null;
+//        }
+//    }
 
 
 

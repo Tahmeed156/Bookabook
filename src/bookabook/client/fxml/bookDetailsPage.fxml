@@ -335,7 +335,7 @@
                               </ImageView>
                            </children>
                         </StackPane>
-                        <VBox fx:id="Vbox1" alignment="TOP_CENTER" prefHeight="180.0" prefWidth="227.0" style="-fx-background-color: #cfd1d4;">
+                        <VBox fx:id="Vbox1" alignment="TOP_CENTER" prefHeight="180.0" prefWidth="227.0" style="-fx-background-color: #cfd1d4;" visible="false">
                            <children>
                               <Label fx:id="revName1" alignment="CENTER" prefHeight="47.0" prefWidth="227.0" style="-fx-background-color: #44546a;" text="Name        4.5/5  ★" textAlignment="CENTER" textFill="WHITE">
                                  <font>
@@ -350,7 +350,7 @@
                            </children>
                         </VBox>
                         <Region prefHeight="150.0" prefWidth="20.0" />
-                        <VBox fx:id="Vbox2" alignment="TOP_CENTER" prefHeight="180.0" prefWidth="227.0" style="-fx-background-color: #cfd1d4;">
+                        <VBox fx:id="Vbox2" alignment="TOP_CENTER" prefHeight="180.0" prefWidth="227.0" style="-fx-background-color: #cfd1d4;" visible="false">
                            <children>
                               <Label fx:id="revName2" alignment="CENTER" prefHeight="47.0" prefWidth="227.0" style="-fx-background-color: #44546a;" text="Name" textAlignment="CENTER" textFill="WHITE">
                                  <font>
@@ -365,7 +365,7 @@
                            </children>
                         </VBox>
                         <Region prefHeight="150.0" prefWidth="20.0" />
-                        <VBox fx:id="Vbox3" alignment="TOP_CENTER" prefHeight="180.0" prefWidth="227.0" style="-fx-background-color: #cfd1d4;">
+                        <VBox fx:id="Vbox3" alignment="TOP_CENTER" prefHeight="180.0" prefWidth="227.0" style="-fx-background-color: #cfd1d4;" visible="false">
                            <children>
                               <Label fx:id="revName3" alignment="CENTER" prefHeight="47.0" prefWidth="227.0" style="-fx-background-color: #44546a;" text="Name" textAlignment="CENTER" textFill="WHITE">
                                  <font>

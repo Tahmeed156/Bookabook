@@ -25,6 +25,7 @@ import bookabook.server.models.Book;
 import bookabook.server.models.User;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 
 
@@ -240,8 +241,7 @@ public class rentOutPage {
         // todo NHS: upload pic to database
     }
 
-    public void rentBook(MouseEvent event)
-    {
+    public void rentBook(MouseEvent event) throws IOException, ClassNotFoundException {
         // to get value of condition combo box
         // condition.getValue();
         // to get the value from genre list
@@ -301,7 +301,7 @@ public class rentOutPage {
 
 
         // todo NHS: give user id;
-        boolean success = Main.connection.rentOutBook(
+        JSONObject response = new JSONObject(Main.connection.rentOutBook(
                 1,
                 book.getText(),
                 author.getText(),
@@ -312,9 +312,9 @@ public class rentOutPage {
                 condition.getValue(),
                 review.getText(),
                 yearBought.getText()
-        );
+        ));
 
-        if (success) {
+        if (Boolean.valueOf(response.getString("success"))) {
             toast.set("SUCCESSFULLY RENTED OUT","#5CB85C");
             Windows w = new Windows(rent, "../fxml/dashboard.fxml");
         }
