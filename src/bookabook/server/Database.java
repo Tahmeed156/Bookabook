@@ -294,12 +294,46 @@ public class Database {
         JSONArray response = new JSONArray();
         Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
         List reviews = q.getResultList();
-        for (int i=0; i<reviews.size(); i++) {
-            Review r = (Review) reviews.get(i);
+        for (Object review1 : reviews) {
+            Review r = (Review) review1;
             JSONObject review = new JSONObject();
             review.put("username", r.getReviewer().getFull_name());
             review.put("body", r.getBody());
             response.put(review);
+        }
+        endSession();
+        return response;
+    }
+
+    // ========================================   MESSAGE
+
+    public JSONArray online(String username) {
+        JSONArray response = new JSONArray();
+        for (Connection c: Server.clients) {
+            if (c.isAlive() || !c.getName().equals(username))
+                response.put(c.getName());
+        }
+        return response;
+    }
+
+    public JSONArray get_messages() throws JSONException {
+        startSession();
+
+        JSONArray response = new JSONArray();
+        // Gets 25 messages from the database
+        Query q = session.createQuery("from Message order by timestamp desc").setFirstResult(0).setMaxResults(25);
+        List messages = q.getResultList();
+
+        for (Object mess : messages) {
+            Message m = (Message) mess;
+            // Create a JSONObject for each message
+            JSONObject message = new JSONObject();
+            message.put("username", m.getSender_name());
+            message.put("user_id", m.getSender_id());
+            message.put("body", m.getBody());
+            message.put("timestamp", m.getTimestamp().toString());
+            // Adds the created JSONObject to JSONArray
+            response.put(message);
         }
         endSession();
         return response;

@@ -97,6 +97,19 @@ class Connection extends Thread {
                         send(success);
                         break;
                     }
+
+                    case "messages/online": {
+                        JSONArray response_arr = db.online(request.getString("username"));
+                        send(response_arr);
+                        break;
+                    }
+
+                    case "messages/get": {
+                        JSONArray response_arr = db.get_messages();
+                        send(response_arr);
+                        break;
+                    }
+
                     case "books/latest": {
                         ArrayList<Bookser> books = db.latest_books();
                         output.writeObject(books);

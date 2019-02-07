@@ -44,6 +44,27 @@ public class Message {
         timestamp = new Date();
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public int getSender_id() {
+        return sender_id;
+    }
 
+    public String getSender_name() {
+        return sender_name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
 }
