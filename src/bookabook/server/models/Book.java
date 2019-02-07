@@ -46,6 +46,9 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private Set<Rent> rents;
 
+    @OneToMany(mappedBy = "book")
+    private Set<Review> reviews;
+
     public Book () {
 
     }

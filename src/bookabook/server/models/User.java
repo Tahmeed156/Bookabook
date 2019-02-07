@@ -59,6 +59,9 @@ public class User {
     @OneToMany(mappedBy = "rentee")
     private Set<Rent> rented_out_books;
 
+    @OneToMany(mappedBy = "reviewer")
+    private Set<Review> reviews;
+
     public User () {
 
     }

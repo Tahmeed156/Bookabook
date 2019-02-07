@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,7 +57,6 @@ public class Database {
         // Executing the generated input query and handling exception
         try {
             User u = (User) query.uniqueResult();
-            System.out.printf("%s logged in [%s]", u.getUsername(), Instant.now());
             // Creating response object
             JSONObject response = new JSONObject();
             response.put("success", "true");
@@ -79,13 +79,9 @@ public class Database {
         }
     }
 
-    public JSONObject signup (
-            String full_name,
-            String username,
-            String password,
-            String date,
-            String email
-    ) throws JSONException {
+    public JSONObject signup ( String full_name, String username,
+            String password, String date, String email)
+            throws JSONException {
         startSession();
 
         // Formatter to convert a string into a Date object
@@ -128,14 +124,8 @@ public class Database {
 
     // =========================================  DATA INPUT
 
-    public JSONObject edit_profile (
-            int uid,
-            String name,
-            String work,
-            String gender,
-            String email,
-            String contact_no
-    ) throws JSONException {
+    public JSONObject edit_profile ( int uid, String name, String work, String gender, String email, String contact_no)
+            throws JSONException {
         startSession();
         JSONObject response = new JSONObject();
 
@@ -192,7 +182,27 @@ public class Database {
     public ArrayList<Bookser> trending_books () {
         startSession();
 
+        // bug TMD: Number of rents to determine trending books
         Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        // bug TMD: Paginate all these
+        List books = q.getResultList();
+        ArrayList<Bookser> book_objects = new ArrayList<>();
+        for (int i=0; i<books.size(); i++) {
+            Book b = (Book) books.get(i);
+            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            book_objects.add(bser);
+        }
+
+        System.out.println("Successful queries!");
+        endSession();
+        return book_objects;
+    }
+
+    public ArrayList<Bookser> similar_books (String genre) {
+        startSession();
+
+        Query q = session.createQuery("from Book where genre = :gen order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        q.setParameter("gen", genre);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
@@ -260,6 +270,40 @@ public class Database {
         return book_objects;
     }
 
+    // ========================================   BOOK DETAILS PAGE
+
+    public JSONObject add_review(int reviewer_id, int book_id, String body) throws JSONException {
+        startSession();
+        JSONObject response = new JSONObject();
+
+        try {
+            Review r = new Review(reviewer_id, book_id, body);
+            session.save(r);
+            response.put("success", "true");
+        }
+        catch (Exception e) {
+            response.put("success", "false");
+        }
+        endSession();
+        return response;
+    }
+
+    public JSONArray get_reviews(int book_id) throws JSONException {
+        startSession();
+
+        JSONArray response = new JSONArray();
+        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        List reviews = q.getResultList();
+        for (int i=0; i<reviews.size(); i++) {
+            Review r = (Review) reviews.get(i);
+            JSONObject review = new JSONObject();
+            review.put("username", r.getReviewer().getFull_name());
+            review.put("body", r.getBody());
+            response.put(review);
+        }
+        endSession();
+        return response;
+    }
 
     public boolean send_message (int id, String name, String type, String body) {
         startSession();
