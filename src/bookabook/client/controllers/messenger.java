@@ -111,7 +111,7 @@ public class messenger {
         index1 = online.size()-1;
         lblStyle = "-fx-background-color:#ffffff; -fx-pref-width:100";
         index1 = helper.initiate(online, onlineUsers, 10,100, lblStyle,
-                downArrow1, index1, 10, true);
+                downArrow1, index1, 10, true, 1);
 
 
     }
@@ -240,13 +240,13 @@ public class messenger {
     public void upArrow1Clicked(MouseEvent event)
     {
         index1 = helper.up_arrow_clicked(online, onlineUsers, 10,100, lblStyle,
-                downArrow1, upArrow1, index1, 10, true);
+                downArrow1, upArrow1, index1, 10, true, 1);
     }
 
     public void downArrow1Clicked(MouseEvent event)
     {
         index1 = helper.down_arrow_clicked(online, onlineUsers, 10,100, lblStyle,
-                downArrow1, upArrow1, index1, 10, true);
+                downArrow1, upArrow1, index1, 10, true,1);
 
     }
 
@@ -322,7 +322,7 @@ public class messenger {
         // TODO: add online users from server
 
         index1 = helper.initiate(online, onlineUsers, 10,100, lblStyle,
-                downArrow1, index1, 10, true);
+                downArrow1, index1, 10, true,1 );
 
     }
 

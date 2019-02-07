@@ -298,9 +298,9 @@ public class dashboard {
 
         //populate upcoming
         uIndex = helper.initiate(uLabel, upcoming, 5, 370, lblStyle, downArrow1, uIndex,
-                3, true);
+                3, true, 0);
         sIndex = helper.initiate(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2, sIndex,
-                3, true);
+                3, true, 0);
     }
 
     public void onHoverBox(MouseEvent event) {
@@ -362,22 +362,22 @@ public class dashboard {
     public void uArrowClicked(MouseEvent event) {
         if(event.getSource()==upArrow1){
             uIndex = helper.up_arrow_clicked(uLabel, upcoming, 5, 370, lblStyle, downArrow1,
-                    upArrow1, uIndex, 3, true);
+                    upArrow1, uIndex, 3, true, 0);
         }
         else{
             sIndex = helper.up_arrow_clicked(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2,
-                    upArrow2, sIndex, 3, true);
+                    upArrow2, sIndex, 3, true, 0);
         }
     }
 
     public void dArrowClicked(MouseEvent event) {
         if(event.getSource()==downArrow1){
             uIndex = helper.down_arrow_clicked(uLabel, upcoming, 5, 370, lblStyle, downArrow1,
-                    upArrow1, uIndex, 3, true);
+                    upArrow1, uIndex, 3, true, 0);
         }
         else{
             sIndex = helper.down_arrow_clicked(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2,
-                    upArrow2, sIndex, 3, true);
+                    upArrow2, sIndex, 3, true, 0);
         }
     }
 

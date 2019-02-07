@@ -181,10 +181,10 @@ public class helper {
     //shows for index end to 0
 
     public static int initiate(List<String> list, VBox vb, int lblPadding, int lblMaxWidth, String lblStyle,
-                               ImageView downArrow, int index, int limit, boolean region)
+                               ImageView downArrow, int index, int limit, boolean region,int pos)
     {
         // INITIAL MUST BE LIST SIZE - 1
-        index = sortVBox(list,vb,lblPadding,lblMaxWidth,lblStyle,list.size()-1,limit,region);
+        index = sortVBox(list,vb,lblPadding,lblMaxWidth,lblStyle,list.size()-1,limit,region, pos);
         if(index-limit>=0)
         {
             downArrow.setVisible(true);
@@ -194,10 +194,10 @@ public class helper {
 
     public static int down_arrow_clicked(List<String> list, VBox vb, int lblPadding, int lblMaxWidth,
                                          String lblStyle, ImageView downArrow, ImageView upArrow, int index,
-                                         int limit, boolean region)
+                                         int limit, boolean region, int pos)
     {
         index -= limit;
-        index = sortVBox(list,vb,lblPadding,lblMaxWidth,lblStyle,index,limit,region);
+        index = sortVBox(list,vb,lblPadding,lblMaxWidth,lblStyle,index,limit,region, pos);
         upArrow.setVisible(true);
         if(index-limit>=0)
         {
@@ -210,10 +210,10 @@ public class helper {
 
     public static int up_arrow_clicked(List<String> list, VBox vb, int lblPadding, int lblMaxWidth,
                                        String lblStyle, ImageView downArrow, ImageView upArrow, int index,
-                                       int limit, boolean region)
+                                       int limit, boolean region, int pos)
     {
         index += limit;
-        index = sortVBox(list,vb,lblPadding,lblMaxWidth,lblStyle,index,limit,region);
+        index = sortVBox(list,vb,lblPadding,lblMaxWidth,lblStyle,index,limit,region, pos);
         if(index==(list.size()-1))
         {
             upArrow.setVisible(false);
@@ -224,20 +224,32 @@ public class helper {
 
 
     public static int sortVBox(List<String> list, VBox vb, int lblPadding, int lblMaxWidth, String lblStyle,
-                               int index, int limit, boolean region)
+                               int index, int limit, boolean region, int pos)
     {
         vb.getChildren().clear();
         int start;
         for(start = 0 ; (index-start)>=0 && start<limit; start++)
         {
             HBox hb = new HBox();
-            hb.setAlignment(Pos.CENTER_LEFT);
             Label lb = new Label(list.get(index-start));
             lb.setPadding(new Insets(lblPadding));
             //lb.setWrapText(true);
             lb.setMaxWidth(lblMaxWidth);
             lb.setStyle(lblStyle);
             lb.setAlignment(Pos.CENTER);
+            if(pos == 0) {
+                if ((index-start) == list.size()-1) {
+                    hb.setStyle("-fx-background-color:#3b3838");
+                    lb.setStyle("-fx-text-fill: #d9d9d9; -fx-font-weight: bold; -fx-font-size: 15");
+                    // hb.setAlignment(Pos.CENTER_RIGHT);
+                } else {
+                    hb.setAlignment(Pos.CENTER_LEFT);
+                }
+            }
+            else{
+                    hb.setAlignment(Pos.TOP_CENTER);
+                }
+            hb.setPadding(new Insets(0,10,0,10));
             hb.getChildren().add(lb);
             if(region) {
                 Region rg = new Region();
