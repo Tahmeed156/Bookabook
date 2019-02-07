@@ -123,7 +123,6 @@ public class Client {
         String user = userCon.get("username","Anonymous");
         request.put("username",user);
         request.put("type", "profile/login");
-        System.out.println("IDDDDDDDDD PAISA"+userCon.get("id","1"));
         request.put("id",userCon.get("id","1"));
         if(user.equals("")) {
             request.put("username", "Anon");
@@ -131,7 +130,6 @@ public class Client {
         else{
             output.writeUTF(request.toString());
             dashboard.proPic = ImageIO.read(input);
-            System.out.println("PAISI");
             input.skipBytes(16);
         }
 
@@ -256,6 +254,30 @@ public class Client {
 
     }
 
+    public String addMessage(int id, String username, String message_type, String body) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "messages/add");
+            request.put("id", id);
+            request.put("username",username);
+            request.put("message_type",message_type);
+            request.put("body",body);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
 
 
+    public String getMessage() throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "messages/get");
+        } catch (JSONException e) {
+            System.err.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
 }

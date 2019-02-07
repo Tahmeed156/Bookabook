@@ -310,7 +310,7 @@ public class Database {
 
         JSONArray response = new JSONArray();
         // Gets 25 messages from the database
-        Query q = session.createQuery("from Message order by timestamp desc").setFirstResult(0).setMaxResults(25);
+        Query q = session.createQuery("from Message order by timestamp").setFirstResult(0).setMaxResults(25);
         List messages = q.getResultList();
 
         for (Object mess : messages) {

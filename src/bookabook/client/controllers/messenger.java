@@ -1,4 +1,5 @@
 package bookabook.client.controllers;
+import bookabook.client.Main;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -19,9 +20,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,38 +73,48 @@ public class messenger {
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
-    List<String> user = new ArrayList<>(Arrays.asList("Hello","How are you?","I am fine thank you",
-            "For future use lets do this dont you think we should\n lets do aaaaaaaaaaaaaa" +
-                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaathis.","Hello","How are you?","I am fine thank you",
-            "For future use lets do this dont you think we should lets do this.","Hello","How are you?","I am fine thank you",
-            "For future use lets do this dont you think we should lets do this.","Hello","How are you?","I am fine thank you",
-            "For future use lets do this dont you think we should lets do this.","a"));
+    List<String> user = new ArrayList<>();
+//    Arrays.asList("Hello","How are you?","I am fine thank you",
+//            "For future use lets do this dont you think we should\n lets do aaaaaaaaaaaaaa" +
+//                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+//                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+//                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+//                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaathis.","Hello","How are you?","I am fine thank you",
+//            "For future use lets do this dont you think we should lets do this.","Hello","How are you?","I am fine thank you",
+//            "For future use lets do this dont you think we should lets do this.","Hello","How are you?","I am fine thank you",
+//            "For future use lets do this dont you think we should lets do this.","a"));
 
-    List<Integer> who = new ArrayList<>(Arrays.asList(0,0,1,1,0,1,1,1,0,0,0,1,0,0,1,1,0));
+    List<String> who = new ArrayList<>();
+    // Arrays.asList(0,0,1,1,0,1,1,1,0,0,0,1,0,0,1,1,0));
 
-    List<String> time = new ArrayList<>(Arrays.asList("1:30","2:15","2:16","2:17","2:18","2:30",
-            "2:45","3:30","5:50","5:00","6:25","6:45","6:55","6:55","7:00","7:01",
-            "7:02"));
+    List<String> time = new ArrayList<>();
+//        Arrays.asList("1:30","2:15","2:16","2:17","2:18","2:30",
+//            "2:45","3:30","5:50","5:00","6:25","6:45","6:55","6:55","7:00","7:01",
+//            "7:02"));
 
-    List<String> online = new ArrayList<>(Arrays.asList("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
-           "p","q","r","s","t","u","v","w","x","y","z"));
+    List<String> online = new ArrayList<>();
+//    Arrays.asList("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
+//           "p","q","r","s","t","u","v","w","x","y","z"));
 
 
     int index;
     int index1;
     String lblStyle;
 
-    public void initialize()
-    {
+    public void initialize() throws IOException, ClassNotFoundException {
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk,searchStk,messagesStk,helpStk,profileStk,logoutStk};
         parent.getChildren().add(toast.get());
 
         // todo NHS: load from server
-
+        JSONArray response_arr = new JSONArray(Main.connection.getMessage());
+        for (int i=0; i<response_arr.length(); i++) {
+            JSONObject messages = response_arr.getJSONObject(i);
+            //add  message
+            user.add(messages.getString("body"));
+            who.add(messages.getString("username"));
+            time.add(messages.getString("timestamp"));
+        }
 
         int start = 0;
         if(user.size()>7) { start = user.size() - 7; }
@@ -291,13 +305,12 @@ public class messenger {
         send.setStyle("-fx-border-color: #ffffff; -fx-border-radius:5; -fx-border-width:2;" +
                 " -fx-background-color: #3b3838");
     }
-    public void sendBtn(ActionEvent event){
+    public void sendBtn(ActionEvent event) throws IOException, ClassNotFoundException {
         // todo NHS: send to database too
         sendMessage();
     }
 
-    public void sendKey(KeyEvent e)
-    {
+    public void sendKey(KeyEvent e) throws IOException, ClassNotFoundException {
         if(e.getCode().equals(KeyCode.ENTER))
         {
             // todo NHS: send to database too
@@ -305,18 +318,16 @@ public class messenger {
         }
     }
 
-    public void sendMessage(){
+    public void sendMessage() throws IOException, ClassNotFoundException {
         user.add(chat.getText());
-        who.add(1);
+        who.add(dashboard.user);
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
         Calendar calendar = Calendar.getInstance();
         time.add(dateFormat.format(calendar.getTime()));
 
-        chat.clear();
-
         index+=1;
-        messageDisplay(index, user.size());
-
+        addMessage();
+        chat.clear();
     }
 
     public void addOnlineUser(){
@@ -327,7 +338,7 @@ public class messenger {
 
     }
 
-    public void addMessage() {
+    public void addMessage() throws IOException, ClassNotFoundException {
         // todo NHS: add messages from server
         int start = 0;
         if(user.size()>7) { start = user.size() - 7; }
@@ -335,6 +346,16 @@ public class messenger {
         messageDisplay(start,user.size());
         if(start>0){ upArrow.setVisible(true);}
         index = start;
+
+
+        // adding messages to server
+        String s = Main.connection.addMessage(
+                1,
+                dashboard.user,
+                "text",
+                chat.getText()
+        );
+        System.out.println("MESSAGE SENT");
     }
 
 
@@ -354,13 +375,13 @@ public class messenger {
             lb.setWrapText(true);
             lb.setMaxWidth(400);
             vb.setPadding(new Insets(10,0,0,0));
-            if(who.get(i) == 1) {
+            if(who.get(i).equals(dashboard.user)) {
                 vb.setAlignment(Pos.CENTER_RIGHT);
                 hb.setAlignment(Pos.CENTER_RIGHT);
                 lb.setStyle("-fx-background-color:#767171; -fx-background-radius:8; -fx-text-fill:#ffffff");
                 vb.getChildren().addAll(lb,timeStamp);}
             else{
-                Label username = new Label("USERNAME");
+                Label username = new Label(who.get(i));
                 username.setStyle("-fx-text-fill:#ffffff");
                 vb.setAlignment(Pos.CENTER_LEFT);
                 hb.setAlignment(Pos.CENTER_LEFT);

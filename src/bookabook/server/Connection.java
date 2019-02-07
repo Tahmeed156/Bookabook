@@ -101,19 +101,19 @@ class Connection extends Thread {
                                 request.getString("message_type"),
                                 request.getString("body")
                         );
-                        send(response);
+                        send(response.toString());
                         break;
                     }
 
                     case "messages/online": {
                         JSONArray response_arr = db.online(request.getString("username"));
-                        send(response_arr);
+                        send(response_arr.toString());
                         break;
                     }
 
                     case "messages/get": {
                         JSONArray response_arr = db.get_messages();
-                        send(response_arr);
+                        send(response_arr.toString());
                         break;
                     }
 

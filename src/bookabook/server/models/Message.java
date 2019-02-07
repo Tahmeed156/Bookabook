@@ -7,6 +7,8 @@ import java.util.Date;
 @Table(name = "message", schema = "bookabook")
 public class Message {
 
+    Message(){}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
