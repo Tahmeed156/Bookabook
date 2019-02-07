@@ -71,6 +71,11 @@
                               </Label>
                           </children>
                       </StackPane>
+                  <ImageView fitHeight="150.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Pictures/title.PNG" />
+                     </image>
+                  </ImageView>
                   </children>
               </VBox>
           </left>
@@ -228,7 +233,7 @@
                                       <Label fx:id="tBookAuthor1" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="tBookImage1" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="tBookImage1" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <Region prefHeight="150.0" prefWidth="30.0" />
                               <VBox fx:id="tVbox2" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
@@ -246,7 +251,7 @@
                                       <Label fx:id="tBookAuthor2" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="tBookImage2" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="tBookImage2" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <Region prefHeight="150.0" prefWidth="30.0" />
                               <VBox fx:id="tVbox3" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
@@ -264,7 +269,7 @@
                                       <Label fx:id="tBookAuthor3" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="tBookImage3" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="tBookImage3" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <Region prefHeight="150.0" prefWidth="30.0" />
                               <StackPane fx:id="tstckRArrow" visible="false">
                                   <children>
@@ -317,7 +322,7 @@
                                       <Label fx:id="bBookAuthor1" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="bBookImage1" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="bBookImage1" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <Region prefHeight="150.0" prefWidth="30.0" />
                               <VBox fx:id="bVbox2" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
@@ -335,7 +340,7 @@
                                       <Label fx:id="bBookAuthor2" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="bBookImage2" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="bBookImage2" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <Region prefHeight="150.0" prefWidth="30.0" />
                               <VBox fx:id="bVbox3" alignment="CENTER" prefHeight="150.0" prefWidth="130.0" style="-fx-background-color: #ffffff;" visible="false">
                                   <children>
@@ -353,7 +358,7 @@
                                       <Label fx:id="bBookAuthor3" />
                                   </children>
                               </VBox>
-                              <ImageView fx:id="bBookImage3" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="bBookImage3" fitHeight="150.0" fitWidth="100.0" onMouseClicked="#bookPageClicked" pickOnBounds="true" preserveRatio="true" />
                               <Region prefHeight="150.0" prefWidth="30.0" />
                               <StackPane fx:id="bstckRArrow" visible="false">
                                   <children>

@@ -390,6 +390,20 @@ public class profilePage {
         Windows w = new Windows(rentOutBtn, 9);
     }
 
+    public void bookPageClicked(MouseEvent event) {
+        // todo NHS: pass on book id to next page
+        for (int i = 0; i < timgv.length; i++) {
+            if (event.getSource() == timgv[i]) {
+                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tlabel[i].getText());
+            }
+        }
+
+        for (int i = 0; i < bimgv.length; i++) {
+            if (event.getSource() == bimgv[i]) {
+                Windows w = new Windows(bimgv[i], "../fxml/bookDetailsPage.fxml", blabel[i].getText());
+            }
+        }
+    }
 
     class Loading extends Task {
         @Override
