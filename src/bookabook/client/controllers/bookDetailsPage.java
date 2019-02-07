@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -71,9 +72,13 @@ public class bookDetailsPage {
 
     //borderpane top stuff
     @FXML
-    private Circle imgCircle;
-    @FXML
     private VBox upperRightVbox;
+    @FXML private Rectangle imgCircle;
+    @FXML private Label rentedBLbl;
+    @FXML private Label sharedBLbl;
+    @FXML private Label walletLbl;
+    @FXML private Label userNameLbl;
+    @FXML private Label userLbl;
 
     //body
     @FXML private Circle imgCircleCenter;
@@ -176,25 +181,18 @@ public class bookDetailsPage {
 
 
         //upperRightLabels
-
-        //profilePicture
-        Image imgperson = new Image(new File(path+"woman.png").toURI().toString());
+        Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
         imgCircle.setFill(new ImagePattern(imgperson));
-
-
-        Label nameUser = new Label(dashboard.userName);
-        nameUser.setStyle("-fx-font-weight:bold");
 
         String rentedOutBooks = dashboard.rentedOutBooks;
         String rentedBooks = dashboard.rentedBooks;
         String wallet = dashboard.wallet;
 
-        upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Rented Out: "+rentedOutBooks+" Books"),
-                new Label("Rented: "+rentedBooks+" Books"),
-                new Label("Money deposited:"),
-                new Label("Tk "+wallet));
-
+        userNameLbl.setText(dashboard.userName);
+        userLbl.setText(dashboard.user);
+        rentedBLbl.setText(rentedBooks);
+        sharedBLbl.setText(rentedOutBooks);
+        walletLbl.setText(wallet);
 
 
         //middleCenterLabels
@@ -219,36 +217,36 @@ public class bookDetailsPage {
 
 
 
-        JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(Integer.parseInt(id)));
-
-        for (int i=0; i<response_arr.length(); i++) {
-            JSONObject details = response_arr.getJSONObject(i);
-            // book name
-            BookName.setText(details.getString("book"));
-            // author name
-            BookAuthor.setText(details.getString("author"));
-            // book rent
-            book_rent = (int)details.getDouble("rent");
-            // book deposit
-            book_deposit = (int)details.getDouble("deposit");
-            // book print
-            print.setText(details.getString("print"));
-            // book condition
-            condition.setText(details.getString("condition"));
-            // year bought
-            yearBought.setText(details.getString("year"));
-            // times Rented
-            timesRented.setText(details.getString("times_rented"));
-            // review
-            reviewByRenter.setText(details.getString("review"));
-            // genre
-            genre.setText(details.getString("genre"));
-            // similar books
-            // a list of all similar books sorted by genre
-            // allSimilarBooks = details.getString("similar");
-
-            //todo TMD get image of book and renter
-        }
+//        JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(Integer.parseInt(id)));
+//
+//        for (int i=0; i<response_arr.length(); i++) {
+//            JSONObject details = response_arr.getJSONObject(i);
+//            // book name
+//            BookName.setText(details.getString("book"));
+//            // author name
+//            BookAuthor.setText(details.getString("author"));
+//            // book rent
+//            book_rent = (int)details.getDouble("rent");
+//            // book deposit
+//            book_deposit = (int)details.getDouble("deposit");
+//            // book print
+//            print.setText(details.getString("print"));
+//            // book condition
+//            condition.setText(details.getString("condition"));
+//            // year bought
+//            yearBought.setText(details.getString("year"));
+//            // times Rented
+//            timesRented.setText(details.getString("times_rented"));
+//            // review
+//            reviewByRenter.setText(details.getString("review"));
+//            // genre
+//            genre.setText(details.getString("genre"));
+//            // similar books
+//            // a list of all similar books sorted by genre
+//            // allSimilarBooks = details.getString("similar");
+//
+//            //todo TMD get image of book and renter
+//        }
 
 
 

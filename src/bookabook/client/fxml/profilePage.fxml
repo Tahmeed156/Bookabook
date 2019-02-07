@@ -79,28 +79,6 @@
                   </children>
               </VBox>
           </left>
-          <top>
-              <HBox fx:id="headerHbx" prefHeight="144.0" prefWidth="1200.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
-                  <children>
-                      <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
-                          <image>
-                              <Image url="@../Pictures/logo.png" />
-                          </image>
-                      </ImageView>
-                      <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="732.0">
-                          <children>
-                              <AnchorPane />
-                          </children>
-                      </StackPane>
-                      <StackPane alignment="CENTER_RIGHT" prefHeight="155.0" prefWidth="320.0">
-                          <children>
-                              <VBox fx:id="upperRightVbox" alignment="CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="140.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT" />
-                              <Circle fx:id="imgCircle" fill="DODGERBLUE" radius="70.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="CENTER_LEFT" />
-                          </children>
-                      </StackPane>
-                  </children>
-              </HBox>
-          </top>
           <center>
               <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
                   <children>
@@ -374,6 +352,67 @@
                   </children>
               </VBox>
           </center>
+         <top>
+            <AnchorPane style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Pictures/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="imgCircle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="155.0" layoutX="1040.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
+                  <Label alignment="CENTER" layoutX="300.0" layoutY="50.0" text="Rented&#10;Books&#10;" textAlignment="CENTER" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="rentedBLbl" alignment="CENTER" layoutX="375.0" layoutY="60.0" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: #d9d9d9;" text="l1" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="sharedBLbl" alignment="CENTER" layoutX="555.0" layoutY="60.0" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: #d9d9d9;" text="l2" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="480.0" layoutY="50.0" text="Shared&#10;Books&#10;" textAlignment="CENTER" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="650.0" layoutY="64.0" text="Wallet&#10;" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="walletLbl" alignment="CENTER" layoutX="720.0" layoutY="60.0" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: #d9d9d9;" text="l3" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <Label fx:id="userLbl" alignment="CENTER_RIGHT" layoutX="839.0" layoutY="65.0" prefHeight="27.0" prefWidth="192.0" text="User" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="userNameLbl" alignment="CENTER_RIGHT" layoutX="797.0" layoutY="37.0" prefHeight="27.0" prefWidth="234.0" text="User Name" textFill="#d9d9d9">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </top>
       </BorderPane>
    </children>
 </Pane>

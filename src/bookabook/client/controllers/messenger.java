@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -106,7 +108,7 @@ public class messenger {
         stck = new StackPane[]{dashBStk,searchStk,messagesStk,helpStk,profileStk,logoutStk};
         parent.getChildren().add(toast.get());
 
-        // todo NHS: load from server
+        // load message from server
         JSONArray response_arr = new JSONArray(Main.connection.getMessage());
         for (int i=0; i<response_arr.length(); i++) {
             JSONObject messages = response_arr.getJSONObject(i);
@@ -122,6 +124,12 @@ public class messenger {
         messageDisplay(start,user.size());
         if(start>0){ upArrow.setVisible(true);}
         index = start;
+
+        JSONArray response_arr1 = new JSONArray(Main.connection.getOnline(dashboard.userName));
+        for (int i=0; i<response_arr1.length(); i++) {
+            online.add(response_arr1.get(i).toString());
+        }
+
 
         index1 = online.size()-1;
         lblStyle = "-fx-background-color:#ffffff; -fx-pref-width:100";
@@ -321,9 +329,9 @@ public class messenger {
     public void sendMessage() throws IOException, ClassNotFoundException {
         user.add(chat.getText());
         who.add(dashboard.user);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
-        Calendar calendar = Calendar.getInstance();
-        time.add(dateFormat.format(calendar.getTime()));
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        time.add(dateFormat.format(now));
 
         index+=1;
         addMessage();
@@ -350,12 +358,13 @@ public class messenger {
 
         // adding messages to server
         String s = Main.connection.addMessage(
-                1,
+                Integer.parseInt(dashboard.userId),
                 dashboard.user,
                 "text",
                 chat.getText()
         );
-        System.out.println("MESSAGE SENT");
+        //System.out.println("MESSAGE SENT");
+        toast.set("MESSAGE SENT","#5cb85c");
     }
 
 
@@ -378,6 +387,7 @@ public class messenger {
             if(who.get(i).equals(dashboard.user)) {
                 vb.setAlignment(Pos.CENTER_RIGHT);
                 hb.setAlignment(Pos.CENTER_RIGHT);
+                lb.setAlignment(Pos.CENTER_RIGHT);
                 lb.setStyle("-fx-background-color:#767171; -fx-background-radius:8; -fx-text-fill:#ffffff");
                 vb.getChildren().addAll(lb,timeStamp);}
             else{
@@ -385,6 +395,7 @@ public class messenger {
                 username.setStyle("-fx-text-fill:#ffffff");
                 vb.setAlignment(Pos.CENTER_LEFT);
                 hb.setAlignment(Pos.CENTER_LEFT);
+                lb.setAlignment(Pos.CENTER_LEFT);
                 lb.setStyle("-fx-background-color:#ffffff; -fx-background-radius:8");
                 vb.getChildren().addAll(username, lb, timeStamp);
             }

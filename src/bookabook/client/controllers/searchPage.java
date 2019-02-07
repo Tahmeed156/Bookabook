@@ -55,7 +55,12 @@ public class searchPage{
     StackPane[] stck;// = {dashBStk,messagesStk,helpStk,profileStk,logoutStk};
 
     //borderpane top stuff
-    @FXML private Circle imgCircle;
+    @FXML private Rectangle imgCircle;
+    @FXML private Label rentedBLbl;
+    @FXML private Label sharedBLbl;
+    @FXML private Label walletLbl;
+    @FXML private Label userNameLbl;
+    @FXML private Label userLbl;
     @FXML private VBox upperRightVbox;
 
     //searchButton
@@ -169,25 +174,20 @@ public class searchPage{
         imgBtn.setFitWidth(25);
         searchButton.setGraphic(imgBtn);
 
-        //profilePicture
-        Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
-        imgCircle.setFill(new ImagePattern(imgperson));
-
 
         //upperRightLabels
-        Label nameUser = new Label(dashboard.userName);
-        nameUser.setStyle("-fx-font-weight:bold");
+        Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
+        imgCircle.setFill(new ImagePattern(imgperson));
 
         String rentedOutBooks = dashboard.rentedOutBooks;
         String rentedBooks = dashboard.rentedBooks;
         String wallet = dashboard.wallet;
 
-        upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Rented Out: "+rentedOutBooks+" Books"),
-                new Label("Rented: "+rentedBooks+" Books"),
-                new Label("Money deposited:"),
-                new Label("Tk "+wallet));
-
+        userNameLbl.setText(dashboard.userName);
+        userLbl.setText(dashboard.user);
+        rentedBLbl.setText(rentedBooks);
+        sharedBLbl.setText(rentedOutBooks);
+        walletLbl.setText(wallet);
     }
 
     public void onHoverBox(MouseEvent event)

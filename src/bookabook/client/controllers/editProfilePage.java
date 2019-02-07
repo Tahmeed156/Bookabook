@@ -3,6 +3,7 @@ package bookabook.client.controllers;
 import bookabook.client.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -68,7 +69,12 @@ public class editProfilePage {
 
     //borderpane top stuff
     @FXML private Button profilePageBtn;
-    @FXML private Circle imgCircle;
+    @FXML private Rectangle imgCircle;
+    @FXML private Label rentedBLbl;
+    @FXML private Label sharedBLbl;
+    @FXML private Label walletLbl;
+    @FXML private Label userNameLbl;
+    @FXML private Label userLbl;
     @FXML private VBox upperRightVbox;
 
 
@@ -110,27 +116,22 @@ public class editProfilePage {
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
         picBtn = new Button[]{profilePageBtn, changeProPic, upload};
-
-        Image imgperson = new Image(new File(path + "woman.png").toURI().toString());
-        imgCircle.setFill(new ImagePattern(imgperson));
-        proPicCircle.setFill(new ImagePattern(imgperson));
-
         rdbtn = new RadioButton[]{male,female};
 
         //upperRightLabels
-        Label nameUser = new Label(dashboard.userName);
-        nameUser.setStyle("-fx-font-weight:bold");
+        Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
+        imgCircle.setFill(new ImagePattern(imgperson));
+        proPicCircle.setFill(new ImagePattern(imgperson));
 
         String rentedOutBooks = dashboard.rentedOutBooks;
         String rentedBooks = dashboard.rentedBooks;
         String wallet = dashboard.wallet;
 
-        upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Rented Out: " + rentedOutBooks + " Books"),
-                new Label("Rented: " + rentedBooks + " Books"),
-                new Label("Money deposited:"),
-                new Label("Tk " + wallet));
-
+        userNameLbl.setText(dashboard.userName);
+        userLbl.setText(dashboard.user);
+        rentedBLbl.setText(rentedBooks);
+        sharedBLbl.setText(rentedOutBooks);
+        walletLbl.setText(wallet);
 
     }
 

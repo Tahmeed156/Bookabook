@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -68,10 +69,13 @@ public class profilePage {
     StackPane[] stck;// = {searchStk,messagesStk,helpStk,profileStk,logoutStk};
 
     //borderpane top stuff
-    @FXML
-    private Circle imgCircle;
-    @FXML
-    private VBox upperRightVbox;
+    @FXML private Rectangle imgCircle;
+    @FXML private Label rentedBLbl;
+    @FXML private Label sharedBLbl;
+    @FXML private Label walletLbl;
+    @FXML private Label userNameLbl;
+    @FXML private Label userLbl;
+    @FXML private VBox upperRightVbox;
 
     //middle part
     @FXML
@@ -227,46 +231,39 @@ public class profilePage {
         new Thread(l).start();
 
 
-        //profilePicture
-        File file4 = new File(path + "woman.png");
-        Image imgperson = new Image(file4.toURI().toString());
-        imgCircle.setFill(new ImagePattern(imgperson));
-
-        Image bigimgperson = new Image(file4.toURI().toString());
-        bigImgCircle.setFill(new ImagePattern(bigimgperson));
-
-
         //upperRightLabels
-        Label nameUser = new Label(dashboard.userName);
-        nameUser.setStyle("-fx-font-weight:bold");
+
+        Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
+        imgCircle.setFill(new ImagePattern(imgperson));
+        bigImgCircle.setFill(new ImagePattern(imgperson));
 
         String rentedOutBooks = dashboard.rentedOutBooks;
         String rentedBooks = dashboard.rentedBooks;
         String wallet = dashboard.wallet;
 
-        upperRightVbox.getChildren().addAll(nameUser,
-                new Label("Rented Out: " + rentedOutBooks + " Books"),
-                new Label("Rented: " + rentedBooks + " Books"),
-                new Label("Money deposited:"),
-                new Label("Tk " + wallet));
+        userNameLbl.setText(dashboard.userName);
+        userLbl.setText(dashboard.user);
+        rentedBLbl.setText(rentedBooks);
+        sharedBLbl.setText(rentedOutBooks);
+        walletLbl.setText(wallet);
 
 
 
-        JSONArray response_arr = new JSONArray(Main.connection.getProfile(Integer.parseInt(dashboard.userId)));
-
-        for (int i=0; i<response_arr.length(); i++) {
-            JSONObject details = response_arr.getJSONObject(i);
-            // work
-            work.setText(details.getString("work"));
-            // birth date
-            birthDate.setText(details.getString("birth_day"));
-            // location
-            loc.setText(details.getString("loc"));
-            // email
-            email.setText(details.getString("email"));
-            // contact no
-            contact.setText(details.getString("contact"));
-        }
+//        JSONArray response_arr = new JSONArray(Main.connection.getProfile(Integer.parseInt(dashboard.userId)));
+//
+//        for (int i=0; i<response_arr.length(); i++) {
+//            JSONObject details = response_arr.getJSONObject(i);
+//            // work
+//            work.setText(details.getString("work"));
+//            // birth date
+//            birthDate.setText(details.getString("birth_day"));
+//            // location
+//            loc.setText(details.getString("loc"));
+//            // email
+//            email.setText(details.getString("email"));
+//            // contact no
+//            contact.setText(details.getString("contact"));
+//        }
 
         bigName.setText("Ayan Antik Khan");
         work.setText("Intern at the king's guard");

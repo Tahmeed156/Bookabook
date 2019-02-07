@@ -284,6 +284,18 @@ public class Client {
         return (String) input.readObject();
     }
 
+    public String getOnline(String username) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "messages/online");
+            request.put("username",username);
+        } catch (JSONException e) {
+            System.err.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
+
     // todo REUSE THESE TWO FUNCTIONS FOR PROFILE PAGE
     public String getBooks(String type, int user_id) throws IOException, ClassNotFoundException {
         request = new JSONObject();
