@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.awt.print.Book;
 import java.io.*;
 import java.net.Socket;
@@ -48,18 +50,8 @@ class Connection extends Thread {
     public void run() {
 
         Database db = new Database();
-        boolean success = false;
-
-        // Loggin in user
-        try {
-            login(input.readUTF());
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
 
         while (true) {
-
 
             // Getting requests (Json objects)
             JSONObject request, response;
@@ -77,8 +69,9 @@ class Connection extends Thread {
                                 request.getString("username"),
                                 request.getString("password")
                         );
-                        login(response.getString("full_name"));
                         send(response.toString());
+                        if (Boolean.valueOf(response.getString("success"))
+                            login(response.getString("full_name"), response.getInt("user_id"));
                         break;
                     }
 
@@ -90,19 +83,24 @@ class Connection extends Thread {
                                 request.getString("dob"),
                                 request.getString("email")
                         );
-                        login(response.getString("full_name"));
                         send(response.toString());
+                        login(response.getString("full_name"), response.getInt("user_id"));
+                        break;
+                    }
+
+                    case "profile/login": {
+                        login(request.getString("username"), request.getInt("user_id"));
                         break;
                     }
 
                     case "messages/add": {
-                        success = db.send_message(
+                        response = db.send_message(
                                 request.getInt("id"),
                                 request.getString("username"),
                                 request.getString("message_type"),
                                 request.getString("body")
                         );
-                        send(success);
+                        send(response);
                         break;
                     }
 
@@ -265,9 +263,18 @@ class Connection extends Thread {
     }
 
     // Logging in users (showing status, setting thread name)
-    private void login(String name) {
-        setName(name);
-        System.out.println(getName() + " connected to the network");
+    private void login(String username, int id) {
+        setName(username);
+        System.out.println(username + " connected to the server");
+        BufferedImage image;
+        try {
+            image = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\client\\Pictures\\users\\" +
+                    String.valueOf(id) + ".png"));
+            ImageIO.write(image, "png", output);
+        }
+        catch (IOException e) {
+            System.out.println("Error sending profile picture to client");
+        }
     }
 
     // Sending objects from server to bookabook.client
