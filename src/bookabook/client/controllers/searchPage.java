@@ -170,10 +170,8 @@ public class searchPage{
         searchButton.setGraphic(imgBtn);
 
         //profilePicture
-        Image imgperson = new Image(new File(path+"woman.png").toURI().toString());
+        Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
         imgCircle.setFill(new ImagePattern(imgperson));
-
-
 
 
         //upperRightLabels

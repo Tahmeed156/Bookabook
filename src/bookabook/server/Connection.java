@@ -50,29 +50,16 @@ class Connection extends Thread {
     public void run() {
 
         Database db = new Database();
-        boolean success = false;
-
-        // Loggin in user
-        String response = null;
-        JSONObject user;
-        try {
-            response = input.readUTF();
-            user = new JSONObject(response);
-            login(user.getString("username"));
-            BufferedImage image = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\client\\Pictures\\users\\" +
-                    user.getString("id") + ".png"));
-            ImageIO.write(image, "png", output);
-        }
-        catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
 
         while (true) {
 
             // Getting requests (Json objects)
             JSONObject request, response;
             try {
-                request = new JSONObject(input.readUTF());
+                System.out.println("HELLO");
+                String line = input.readUTF();
+                System.out.println(line);
+                request = new JSONObject(line);
                 System.out.println(request.toString());
 
                 String type = request.getString("type");
@@ -81,11 +68,11 @@ class Connection extends Thread {
                 switch (type) {
 
                     case "login": {
+                        System.out.println("1");
                         response = db.login(
                                 request.getString("username"),
                                 request.getString("password")
                         );
-                        login(response.getString("full_name"));
                         send(response.toString());
                         break;
                     }
@@ -98,19 +85,23 @@ class Connection extends Thread {
                                 request.getString("dob"),
                                 request.getString("email")
                         );
-                        login(response.getString("full_name"));
                         send(response.toString());
                         break;
                     }
 
+                    case "profile/login": {
+                        login(request.getString("username"), request.getString("id"));
+                        break;
+                    }
+
                     case "messages/add": {
-                        success = db.send_message(
+                        response = db.send_message(
                                 request.getInt("id"),
                                 request.getString("username"),
                                 request.getString("message_type"),
                                 request.getString("body")
                         );
-                        send(success);
+                        send(response);
                         break;
                     }
 
@@ -242,10 +233,6 @@ class Connection extends Thread {
                         System.out.println("Successfully sent all objects and images!");
                         break;
                     }
-
-
-
-
                     default:
                         break;
                 }
@@ -273,9 +260,19 @@ class Connection extends Thread {
     }
 
     // Logging in users (showing status, setting thread name)
-    private void login(String name) {
-        setName(name);
-        System.out.println(getName() + " connected to the network");
+    private void login(String username, String id) {
+        System.out.println("3.5");
+        setName(username);
+        System.out.println(username + " connected to the server");
+        BufferedImage image;
+        try {
+            image = ImageIO.read(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\bookabook\\client\\Pictures\\users\\" +
+                    id + ".png"));
+            ImageIO.write(image, "png", output);
+        }
+        catch (IOException e) {
+            System.out.println("Error sending profile picture to client");
+        }
     }
 
     // Sending objects from server to bookabook.client

@@ -101,6 +101,7 @@ public class messenger {
 
         // todo NHS: load from server
 
+
         int start = 0;
         if(user.size()>7) { start = user.size() - 7; }
 

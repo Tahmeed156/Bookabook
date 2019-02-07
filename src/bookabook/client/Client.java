@@ -64,14 +64,6 @@ public class Client {
         // Setting up I/O
         input = new ObjectInputStream(socket.getInputStream());
         output = new DataOutputStream(socket.getOutputStream());
-        Preferences userCon = Main.userCon;
-        String user = userCon.get("full_name","Anonymous");
-        if(user.equals("")) {
-            output.writeUTF("Anonymous");
-        }
-        else{
-            output.writeUTF(user);
-        }
     }
 
     @Override
@@ -123,6 +115,26 @@ public class Client {
         }
         send(request.toString());
         return (String) input.readObject();
+    }
+
+    public void getProPic() throws IOException {
+        JSONObject request = new JSONObject();
+        Preferences userCon = Main.userCon;
+        String user = userCon.get("username","Anonymous");
+        request.put("username",user);
+        request.put("type", "profile/login");
+        System.out.println("IDDDDDDDDD PAISA"+userCon.get("id","1"));
+        request.put("id",userCon.get("id","1"));
+        if(user.equals("")) {
+            request.put("username", "Anon");
+        }
+        else{
+            output.writeUTF(request.toString());
+            dashboard.proPic = ImageIO.read(input);
+            System.out.println("PAISI");
+            input.skipBytes(16);
+        }
+
     }
 
     public String rentOutBook (int user_id, String book, String author, Double rent,
@@ -243,5 +255,7 @@ public class Client {
         return books;
 
     }
+
+
 
 }

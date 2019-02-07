@@ -26,8 +26,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +43,7 @@ import java.util.prefs.Preferences;
 public class dashboard {
 
     public static String userName;
+    public static BufferedImage proPic;
     static String user;
     static String rentedOutBooks;
     static String rentedBooks;
@@ -257,7 +261,16 @@ public class dashboard {
         rVbox = new VBox[]{rVbox1, rVbox2, rVbox3};
         arrows = new ImageView[]{tLArrow, tRArrow, rLArrow, rRArrow,upArrow1,downArrow1,upArrow2,downArrow2};
 
-
+//        Thread proPicThread = new Thread() {
+//            @Override
+//            public void run() {
+//                Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
+//                imgCircle.setFill(new ImagePattern(imgperson));
+//            }
+//        };
+//
+//        proPicThread.start();
+//        proPicThread.join();
         //initiate uLabel and sLabel lists
         for(int i=0; i<upBook.size(); i++)
         {
@@ -282,13 +295,9 @@ public class dashboard {
         rentedOutBooks = userCon.get("books_shared", "0");
         wallet = userCon.get("wallet", "0");
 
-        //profilePicture
-        File file4 = new File(path + "woman.png");
-        Image imgperson = new Image(file4.toURI().toString());
-        imgCircle.setFill(new ImagePattern(imgperson));
 
 
-        //upperLabels
+        // upperLabels
         userNameLbl.setText(userName);
         userLbl.setText(user);
         rentedBLbl.setText(rentedBooks);
@@ -466,6 +475,12 @@ public class dashboard {
         @Override
         public Void call() throws Exception {
             try {
+                if (dashboard.proPic==null) {
+                    Main.connection.getProPic();
+                }
+                Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
+                imgCircle.setFill(new ImagePattern(imgperson));
+
                 trendingBooks = Main.connection.latest_books("books/trending", "");
                 //Thread.sleep(5000);
                 for (Bookser b : trendingBooks) {
@@ -492,11 +507,11 @@ public class dashboard {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    //populating trending
+                    // populating trending
                     tIndex = helper.initiate(tname, tauthor, timgs, tstckRArrow, tVbox, tlabel, tAuthorLabel, timgv,
                             tIndex, 3);
 
-                    //populating latest
+                    // populating latest
                     tIndex = helper.initiate(rname, rauthor, rimgs, rstckRArrow, rVbox, rlabel, rAuthorLabel, rimgv,
                             rIndex, 3);
 

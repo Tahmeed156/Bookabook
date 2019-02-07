@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class profileRentedOutBooksPage{
     @FXML private Pane parent;
     @FXML private VBox left;
-    //left side labels;
+    // left side labels;
     @FXML private Label dashBLbl;
     @FXML private Label searchLbl;
     @FXML private Label messagesLbl;

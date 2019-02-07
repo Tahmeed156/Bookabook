@@ -32,18 +32,6 @@ public class Database {
         sessionFactory = new Configuration().configure("/bookabook/server/hibernate.cfg.xml").buildSessionFactory();
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        sessionFactory.close();
-    }
-
-    private void startSession () {
-        // Opening session
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-    }
-
     // =====================================   USER AUTHENTICATION
 
     public JSONObject login (String username, String password) throws JSONException {
@@ -306,7 +294,7 @@ public class Database {
         return response;
     }
 
-    // ========================================   MESSAGE
+    // ========================================   MESSAGES
 
     public JSONArray online(String username) {
         JSONArray response = new JSONArray();
@@ -340,22 +328,34 @@ public class Database {
         return response;
     }
 
-    public boolean send_message (int id, String name, String type, String body) {
+    public JSONObject send_message (int id, String name, String type, String body) throws JSONException {
         startSession();
-
+        JSONObject response = new JSONObject();
         try {
             Message m = new Message(id, name, type, body);
             session.save(m);
-            return true;
+            response.put("success", "true");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            return false;
+            response.put("success", "false");
         }
-        finally {
-            endSession();
-        }
+        endSession();
+        return response;
+    }
 
+    // ========================================   UTILITY
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        sessionFactory.close();
+    }
+
+    private void startSession () {
+        // Opening session
+        session = sessionFactory.openSession();
+        session.beginTransaction();
     }
 
     private void endSession () {
