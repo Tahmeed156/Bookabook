@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.awt.print.Book;
 import java.io.*;
 import java.net.Socket;
@@ -51,15 +53,21 @@ class Connection extends Thread {
         boolean success = false;
 
         // Loggin in user
+        String response = null;
+        JSONObject user;
         try {
-            login(input.readUTF());
+            response = input.readUTF();
+            user = new JSONObject(response);
+            login(user.getString("username"));
+            BufferedImage image = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\client\\Pictures\\users\\" +
+                    user.getString("id") + ".png"));
+            ImageIO.write(image, "png", output);
         }
-        catch (IOException e) {
+        catch (IOException | JSONException e) {
             e.printStackTrace();
         }
 
         while (true) {
-
 
             // Getting requests (Json objects)
             JSONObject request, response;
