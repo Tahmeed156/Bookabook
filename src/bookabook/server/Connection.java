@@ -3,8 +3,10 @@ package bookabook.server;
 
 import bookabook.objects.Bookser;
 import bookabook.server.models.User;
+import com.mysql.cj.xdevapi.JsonArray;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -67,6 +69,7 @@ class Connection extends Thread {
                                 request.getString("username"),
                                 request.getString("password")
                         );
+                        login(response.getString("full_name"));
                         send(response.toString());
                         break;
                     }
@@ -79,6 +82,7 @@ class Connection extends Thread {
                                 request.getString("dob"),
                                 request.getString("email")
                         );
+                        login(response.getString("full_name"));
                         send(response.toString());
                         break;
                     }
@@ -105,11 +109,21 @@ class Connection extends Thread {
                         break;
                     }
 
-
-
                     case "books/trending": {
 
                         ArrayList<Bookser> books = db.trending_books();
+                        output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+
+                        break;
+                    }
+
+                    case "books/similar": {
+                        ArrayList<Bookser> books = db.similar_books(request.getString("genre"));
                         output.writeObject(books);
                         System.out.println("Sending images: " + books.size());
                         for (Bookser book : books) {
@@ -141,6 +155,23 @@ class Connection extends Thread {
                                 request.getInt("week")
                         );
                         send(response);
+                        break;
+                    }
+
+                    case "review/add": {
+                        response = db.add_review(
+                                request.getInt("reviewer_id"),
+                                request.getInt("book_id"),
+                                request.getString("body")
+                        );
+                        send(response);
+                        break;
+                    }
+
+                    case "review/get": {
+                        JSONArray response_arr;
+                        response_arr = db.get_reviews(request.getInt("book_id"));
+                        send(response_arr);
                         break;
                     }
 
@@ -212,13 +243,11 @@ class Connection extends Thread {
 
     }
 
-
     // Logging in users (showing status, setting thread name)
     private void login(String name) {
         setName(name);
         System.out.println(getName() + " connected to the network");
     }
-
 
     // Sending objects from server to bookabook.client
     private void send(Object obj) {

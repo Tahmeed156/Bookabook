@@ -59,7 +59,7 @@
         <mapping class="bookabook.server.models.Book"/>
         <mapping class="bookabook.server.models.Message"/>
         <mapping class="bookabook.server.models.Rent"/>
-
+        <mapping class="bookabook.server.models.Review"/>
 
         <!-- List of XML mapping files -->
         <!--<mapping resource = "Employee.hbm.xml"/>-->
