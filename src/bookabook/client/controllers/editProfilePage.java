@@ -25,6 +25,7 @@ import bookabook.server.models.Book;
 import bookabook.server.models.User;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -231,8 +232,7 @@ public class editProfilePage {
         //MUST DOOOO
     }
 
-    public void saveProfile(MouseEvent event)
-    {
+    public void saveProfile(MouseEvent event) throws IOException, ClassNotFoundException {
 
         String printRBtn = "";
         for(int i=0; i<3; i++) {
@@ -249,7 +249,7 @@ public class editProfilePage {
 
 
 
-        Boolean success= Main.connection.editProfile(
+        JSONObject response = new JSONObject(Main.connection.editProfile(
                 1,
                 name.getText(),
                 //location.getText(),
@@ -257,9 +257,9 @@ public class editProfilePage {
                 printRBtn,
                 email.getText(),
                 contactNo.getText()
-        );
+        ));
 
-        if (success) {
+        if (Boolean.valueOf(response.getString("success"))) {
             toast.set("SUCCESSFULLY EDITED PROFILE","#5CB85C");
             Windows w = new Windows(save, "../fxml/dashboard.fxml");
         }

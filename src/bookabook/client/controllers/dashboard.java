@@ -39,7 +39,7 @@ import java.util.prefs.Preferences;
 
 public class dashboard {
 
-    static String userName;
+    public static String userName;
     static String user;
     static String rentedOutBooks;
     static String rentedBooks;

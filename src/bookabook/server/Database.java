@@ -292,12 +292,13 @@ public class Database {
         startSession();
 
         JSONArray response = new JSONArray();
-        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        Query q = session.createQuery("from Review order by timestamp desc").setFirstResult(0).setMaxResults(8);
         List reviews = q.getResultList();
         for (int i=0; i<reviews.size(); i++) {
             Review r = (Review) reviews.get(i);
             JSONObject review = new JSONObject();
             review.put("username", r.getReviewer().getFull_name());
+            System.out.println(r.getReviewer().getFull_name());
             review.put("body", r.getBody());
             response.put(review);
         }

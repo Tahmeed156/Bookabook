@@ -11,6 +11,9 @@ import java.io.*;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.prefs.Preferences;
+
+import bookabook.client.controllers.dashboard;
 
 public class Client {
 
@@ -61,7 +64,14 @@ public class Client {
         // Setting up I/O
         input = new ObjectInputStream(socket.getInputStream());
         output = new DataOutputStream(socket.getOutputStream());
-
+        Preferences userCon = Main.userCon;
+        String user = userCon.get("full_name","Anonymous");
+        if(user.equals("")) {
+            output.writeUTF("Anonymous");
+        }
+        else{
+            output.writeUTF(user);
+        }
     }
 
     @Override
@@ -115,9 +125,9 @@ public class Client {
         return (String) input.readObject();
     }
 
-    public boolean rentOutBook (int user_id, String book, String author, Double rent,
+    public String rentOutBook (int user_id, String book, String author, Double rent,
                                 Double deposit, String genre, String print, String condition,
-                                String review, String year_bought) {
+                                String review, String year_bought) throws IOException, ClassNotFoundException {
         request = new JSONObject();
 
         try {
@@ -137,11 +147,12 @@ public class Client {
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
-        return send(request.toString());
+        send(request.toString());
+        return (String) input.readObject();
     }
 
-    public boolean editProfile (int user_id, String name, String work,
-                                String gender, String email, String contact_no) {
+    public String editProfile (int user_id, String name, String work,
+                                String gender, String email, String contact_no) throws IOException, ClassNotFoundException {
         request = new JSONObject();
 
         try {
@@ -158,11 +169,12 @@ public class Client {
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
-        return send(request.toString());
+        send(request.toString());
+        return (String) input.readObject();
     }
 
-    public Boolean rentBook(int book_id,
-                            int week, int renter_id, int rentee_id) {
+    public String rentBook(int book_id,
+                            int week, int renter_id, int rentee_id) throws IOException, ClassNotFoundException {
         request = new JSONObject();
         try {
             request.put("type", "books/rent");
@@ -173,8 +185,37 @@ public class Client {
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
-        return send(request.toString());
+        send(request.toString());
+        return (String) input.readObject();
     }
+
+    public String reviewAdd(int reviewer_id, int book_id, String body) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "review/add");
+            request.put("reviewer_id", reviewer_id);
+            request.put("book_id", book_id);
+            request.put("body", body);
+
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
+
+    public String reviewGet(int book_id) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "review/get");
+            request.put("book_id",book_id);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
+
 
     public ArrayList<Bookser> latest_books(String type, String query) throws JSONException, IOException, ClassNotFoundException {
 
