@@ -129,7 +129,7 @@ public class bookDetailsPage {
     String[] allsimilarBooks;
     Integer index;
 
-    static String s;
+    static String id;
     int book_rent;
     int book_deposit;
 
@@ -151,9 +151,9 @@ public class bookDetailsPage {
 //            "Watson 3.5 ★","Bruce  5 ★","Stark  2 ★"));
 
 
-    public void info(String str)
+    public void info(String id)
     {
-        s = str;
+        this.id = id;
     }
 
     public void initialize(String s) throws IOException, ClassNotFoundException {
@@ -217,6 +217,41 @@ public class bookDetailsPage {
                 new Label("Rented: "+renterRentedBooks+" Books"),
                 new Label("Reviews: "+reviewsOfrenter));
 
+
+
+        JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(Integer.parseInt(id)));
+
+        for (int i=0; i<response_arr.length(); i++) {
+            JSONObject details = response_arr.getJSONObject(i);
+            // book name
+            BookName.setText(details.getString("book"));
+            // author name
+            BookAuthor.setText(details.getString("author"));
+            // book rent
+            book_rent = (int)details.getDouble("rent");
+            // book deposit
+            book_deposit = (int)details.getDouble("deposit");
+            // book print
+            print.setText(details.getString("print"));
+            // book condition
+            condition.setText(details.getString("condition"));
+            // year bought
+            yearBought.setText(details.getString("year"));
+            // times Rented
+            timesRented.setText(details.getString("times_rented"));
+            // review
+            reviewByRenter.setText(details.getString("review"));
+            // genre
+            genre.setText(details.getString("genre"));
+            // similar books
+            // a list of all similar books sorted by genre
+            // allSimilarBooks = details.getString("similar");
+
+            //todo TMD get image of book and renter
+        }
+
+
+
         //setting book details
         book_rent = 10;
         book_deposit = 300;
@@ -250,9 +285,9 @@ public class bookDetailsPage {
 
         //populating reviews\
 
-        JSONArray response_arr = new JSONArray(Main.connection.reviewGet(1));
-        for (int i=0; i<response_arr.length(); i++) {
-            JSONObject review = response_arr.getJSONObject(i);
+        JSONArray response_arr1 = new JSONArray(Main.connection.reviewGet(1));
+        for (int i=0; i<response_arr1.length(); i++) {
+            JSONObject review = response_arr1.getJSONObject(i);
             // username
             reviewers.add(review.getString("username"));
             // body

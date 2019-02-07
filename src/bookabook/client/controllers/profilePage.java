@@ -19,6 +19,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -204,7 +206,7 @@ public class profilePage {
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
-    public void initialize() {
+    public void initialize() throws IOException, ClassNotFoundException {
         parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk, helpStk, profileStk, logoutStk};
@@ -248,6 +250,23 @@ public class profilePage {
                 new Label("Money deposited:"),
                 new Label("Tk " + wallet));
 
+
+
+        JSONArray response_arr = new JSONArray(Main.connection.getProfile(Integer.parseInt(dashboard.userId)));
+
+        for (int i=0; i<response_arr.length(); i++) {
+            JSONObject details = response_arr.getJSONObject(i);
+            // work
+            work.setText(details.getString("work"));
+            // birth date
+            birthDate.setText(details.getString("birth_day"));
+            // location
+            loc.setText(details.getString("loc"));
+            // email
+            email.setText(details.getString("email"));
+            // contact no
+            contact.setText(details.getString("contact"));
+        }
 
         bigName.setText("Ayan Antik Khan");
         work.setText("Intern at the king's guard");
@@ -416,7 +435,7 @@ public class profilePage {
                     timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
                 }
 
-                rentedOutBooks = Main.connection.latest_books("books/rent_out", "");
+                rentedOutBooks = Main.connection.latest_books("books/rented_out", "");
                 for (Bookser b : rentedOutBooks) {
                     bname.add(b.getName());
                     bauthor.add(b.getAuthor());

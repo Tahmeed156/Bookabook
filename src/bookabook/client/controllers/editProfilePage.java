@@ -76,7 +76,7 @@ public class editProfilePage {
 
     //Components
     @FXML private TextField name;
-    @FXML private TextField location;
+    @FXML private TextField loc;
     @FXML private TextField work;
     @FXML private RadioButton male;
     @FXML private RadioButton female;
@@ -95,7 +95,7 @@ public class editProfilePage {
     File file;
 
     RadioButton[] rdbtn;
-
+    Image imgperson;
 
 
     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
@@ -219,7 +219,7 @@ public class editProfilePage {
             upload.setDisable(true);
         }
         else{
-            Image imgperson = new Image(file.toURI().toString());
+            imgperson = new Image(file.toURI().toString());
             proPicCircle.setFill(new ImagePattern(imgperson));
             upload.setDisable(false);
         }
@@ -250,13 +250,15 @@ public class editProfilePage {
 
 
         JSONObject response = new JSONObject(Main.connection.editProfile(
-                1,
+                Integer.parseInt(dashboard.userId),
                 name.getText(),
-                //location.getText(),
+                loc.getText(),
                 work.getText(),
                 printRBtn,
                 email.getText(),
-                contactNo.getText()
+                contactNo.getText(),
+                imgperson
+
         ));
 
         if (Boolean.valueOf(response.getString("success"))) {

@@ -56,7 +56,7 @@ class Connection extends Thread {
             // Getting requests (Json objects)
             JSONObject request, response;
             try {
-                System.out.println("HELLO");
+                // System.out.println("HELLO");
                 String line = input.readUTF();
                 System.out.println(line);
                 request = new JSONObject(line);
@@ -142,18 +142,6 @@ class Connection extends Thread {
                         break;
                     }
 
-                    case "books/similar": {
-                        ArrayList<Bookser> books = db.similar_books(request.getString("genre"));
-                        output.writeObject(books);
-                        System.out.println("Sending images: " + books.size());
-                        for (Bookser book : books) {
-                            book.sendImage(output);
-                        }
-                        System.out.println("Successfully sent all objects and images!");
-
-                        break;
-                    }
-
                     case "books/search": {
                         String str = request.getString("query");
                         ArrayList<Bookser> books = db.searching_books(str);
@@ -195,19 +183,51 @@ class Connection extends Thread {
                         break;
                     }
 
-                    //todo TMD loction field add
 
+
+                    //todo TMD Edit Profile Page
                     case "profile/edit": {
-                        response = db.edit_profile(
-                                request.getInt("user_id"),
-                                request.getString("name"),
-                                request.getString("work"),
-                                request.getString("gender"),
-                                request.getString("email"),
-                                request.getString("contact_no")
-                        );
-                        send(response);
+//                        response = db.edit_profile(
+//                                request.getInt("user_id"),
+//                                request.getString("name"),
+//                                request.getString("loc"),
+//                                request.getString("work"),
+//                                request.getString("gender"),
+//                                request.getString("email"),
+//                                request.getString("contact_no")
+//                        );
+//                        send(response);
+                        // todo send User Image to server
                         break;
+                    }
+
+                    //todo TMD Profile Page info
+                    case "profile/details": {
+                        // give work, birthdate, location, email, contact as jsonarray
+                    }
+
+                    // todo TMD for dashboard from getBooks function from Client
+                    case "books/upcoming": {
+                        // JsonArray containing book_name, renter_name, days_left. Shortest time left should be
+                        // at the end of the array
+                    }
+
+                    case "books/shared": {
+                        // JsonArray containing book_name, rentee_name, days_left. Shortest time left should be
+                        // at the end of the array
+                    }
+
+
+                    // todo TMD to rent out a book
+                    case "books/rent_out":{
+                        // see rentOutBook func from Client.
+                        // add mechanism to input book image
+                    }
+
+
+                    // todo TMD for book details page
+                    case "books/detail" : {
+                        //
                     }
 
                     // todo TMD do these two for profile page books request
@@ -223,7 +243,7 @@ class Connection extends Thread {
                         break;
                     }
 
-                    case "books/rent_out": {
+                    case "books/rented_out": {
                         ArrayList<Bookser> books = db.rented_out_books();
                         output.writeObject(books);
                         System.out.println("Sending images: " + books.size());
@@ -233,6 +253,7 @@ class Connection extends Thread {
                         System.out.println("Successfully sent all objects and images!");
                         break;
                     }
+
                     default:
                         break;
                 }

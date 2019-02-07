@@ -179,7 +179,6 @@ public class rentOutPage {
 
     }
 
-
     public void onHoverButton(MouseEvent event)
     {
         if(event.getSource()==rent)
@@ -198,7 +197,6 @@ public class rentOutPage {
         }
     }
 
-
     public void endHoverButton(MouseEvent event)
     {
         if(event.getSource()==rent)
@@ -216,7 +214,6 @@ public class rentOutPage {
             }
         }
     }
-
 
     public void choosePic(MouseEvent event)
     {
@@ -302,7 +299,7 @@ public class rentOutPage {
 
         // todo NHS: give user id;
         JSONObject response = new JSONObject(Main.connection.rentOutBook(
-                1,
+                Integer.parseInt(dashboard.userId),
                 book.getText(),
                 author.getText(),
                 Double.valueOf(rentPrice.getText()),
@@ -311,8 +308,10 @@ public class rentOutPage {
                 printRBtn,
                 condition.getValue(),
                 review.getText(),
-                yearBought.getText()
+                yearBought.getText(),
+                img.getImage()
         ));
+
 
         if (Boolean.valueOf(response.getString("success"))) {
             toast.set("SUCCESSFULLY RENTED OUT","#5CB85C");
@@ -324,7 +323,6 @@ public class rentOutPage {
 
 
     }
-
 
     public void btnPressed(ActionEvent e)
     {

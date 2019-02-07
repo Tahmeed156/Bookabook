@@ -212,7 +212,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="location" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <TextField fx:id="loc" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="370.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

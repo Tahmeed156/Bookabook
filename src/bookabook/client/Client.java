@@ -2,6 +2,7 @@ package bookabook.client;
 
 import bookabook.objects.Bookser;
 import javafx.application.Platform;
+import javafx.scene.image.Image;
 import org.json.JSONException;
 import org.json.JSONObject;
 import bookabook.client.controllers.toast;
@@ -137,7 +138,7 @@ public class Client {
 
     public String rentOutBook (int user_id, String book, String author, Double rent,
                                 Double deposit, String genre, String print, String condition,
-                                String review, String year_bought) throws IOException, ClassNotFoundException {
+                                String review, String year_bought, Image img) throws IOException, ClassNotFoundException {
         request = new JSONObject();
 
         try {
@@ -158,17 +159,19 @@ public class Client {
             System.out.println("Error creating/sending json");
         }
         send(request.toString());
+        // send Image
         return (String) input.readObject();
     }
 
-    public String editProfile (int user_id, String name, String work,
-                                String gender, String email, String contact_no) throws IOException, ClassNotFoundException {
+    public String editProfile (int user_id, String name, String loc, String work,
+                                String gender, String email, String contact_no,Image img) throws IOException, ClassNotFoundException {
         request = new JSONObject();
 
         try {
             request.put("type", "profile/edit");
             request.put("user_id", user_id);
             request.put("name", name);
+            request.put("loc", loc);
             request.put("work", work);
             request.put("gender", gender);
             request.put("email", email);
@@ -280,4 +283,43 @@ public class Client {
         send(request.toString());
         return (String) input.readObject();
     }
+
+    // todo REUSE THESE TWO FUNCTIONS FOR PROFILE PAGE
+    public String getBooks(String type, int user_id) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", type);
+            request.put("user_id",user_id);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
+
+    public String getBookDetails(int book_id) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "books/details");
+            request.put("book_id",book_id);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
+
+    public String getProfile(int user_id) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "profile/details");
+            request.put("user_id",user_id);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
+
+
 }

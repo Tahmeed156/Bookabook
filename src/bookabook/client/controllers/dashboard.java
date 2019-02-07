@@ -25,6 +25,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,6 +44,7 @@ import java.util.prefs.Preferences;
 public class dashboard {
 
     public static String userName;
+    public static String userId;
     public static BufferedImage proPic;
     static String user;
     static String rentedOutBooks;
@@ -261,36 +263,16 @@ public class dashboard {
         rVbox = new VBox[]{rVbox1, rVbox2, rVbox3};
         arrows = new ImageView[]{tLArrow, tRArrow, rLArrow, rRArrow,upArrow1,downArrow1,upArrow2,downArrow2};
 
-//        Thread proPicThread = new Thread() {
-//            @Override
-//            public void run() {
-//                Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
-//                imgCircle.setFill(new ImagePattern(imgperson));
-//            }
-//        };
-//
-//        proPicThread.start();
-//        proPicThread.join();
-        //initiate uLabel and sLabel lists
-        for(int i=0; i<upBook.size(); i++)
-        {
-            uLabel.add(upBook.get(i) + " | " + upRenter.get(i) + "\n" + udaysLeft.get(i) + " days");
-        }
-
-
-        for(int i=0; i<sBook.size(); i++)
-        {
-            sLabel.add(sBook.get(i) + " | " + sRenter.get(i) + "\n" + sdaysLeft.get(i) + " days");
-        }
 
         Loading t = new Loading();
         new Thread(t).start();
 
         Preferences userCon = Main.userCon;
 
-        // todo NHS: take user full name as input
+
         userName = userCon.get("full_name", "BookABook");
         user = userCon.get("username", "admin");
+        userId = userCon.get("user_id","1");
         rentedBooks = userCon.get("books_rented", "0");
         rentedOutBooks = userCon.get("books_shared", "0");
         wallet = userCon.get("wallet", "0");
@@ -478,8 +460,53 @@ public class dashboard {
                 if (dashboard.proPic==null) {
                     Main.connection.getProPic();
                 }
+
                 Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
                 imgCircle.setFill(new ImagePattern(imgperson));
+
+//                JSONArray response_arr = new JSONArray(Main.connection.getBooks(
+//                        "books/upcoming",
+//                        Integer.parseInt(dashboard.userId)
+//                ));
+//
+//                for (int i=0; i<response_arr.length(); i++) {
+//                    JSONObject upcoming = response_arr.getJSONObject(i);
+//                    // bookname
+//                    upBook.add(upcoming.getString("book"));
+//                    // renter
+//                    upRenter.add(upcoming.getString("renter"));
+//                    // time remaining
+//                    udaysLeft.add((int)upcoming.getDouble("days"));
+//                }
+//
+//
+//
+//                JSONArray response_arr1 = new JSONArray(Main.connection.getBooks(
+//                        "books/shared",
+//                        Integer.parseInt(dashboard.userId)
+//                ));
+//
+//                for (int i=0; i<response_arr1.length(); i++) {
+//                    JSONObject shared = response_arr1.getJSONObject(i);
+//                    // bookname
+//                    sBook.add(shared.getString("book"));
+//                    // renter
+//                    sRenter.add(shared.getString("renter"));
+//                    // time remaining
+//                    sdaysLeft.add((int)shared.getDouble("days"));
+//                }
+
+
+
+                //initiate uLabel and sLabel lists
+                for(int i=0; i<upBook.size(); i++)
+                {
+                    uLabel.add(upBook.get(i) + " | " + upRenter.get(i) + "\n" + udaysLeft.get(i) + " days");
+                }
+                for(int i=0; i<sBook.size(); i++)
+                {
+                    sLabel.add(sBook.get(i) + " | " + sRenter.get(i) + "\n" + sdaysLeft.get(i) + " days");
+                }
 
                 trendingBooks = Main.connection.latest_books("books/trending", "");
                 //Thread.sleep(5000);
