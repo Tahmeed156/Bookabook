@@ -424,6 +424,7 @@ public class profilePage {
                 }
 
             } catch (Exception e) {
+                toast.set("COULDN'T LOAD BOOKS","#f0ad4e");
                 System.out.println("Couldn't load books");
             }
 

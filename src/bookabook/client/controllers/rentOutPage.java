@@ -110,7 +110,6 @@ public class rentOutPage {
     //right image components
 
     @FXML private Button choose;
-    @FXML private Button upload;
     @FXML private Button rent;
     @FXML private ImageView img;
 
@@ -124,7 +123,7 @@ public class rentOutPage {
         parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
-        picBtn = new Button[]{choose,upload,mainPageBtn};
+        picBtn = new Button[]{choose,mainPageBtn};
 
 
         rdbtn = new RadioButton[]{original,whitePrint,newsPrint};
@@ -227,20 +226,15 @@ public class rentOutPage {
 
         if (file==null)
         {
-            upload.setDisable(true);
+            toast.set("INPUT FILE IS NULL","#f0ad4e");
         }
         else{
             img.setImage(new Image(file.toURI().toString()));
-            upload.setDisable(false);
             rectangle.setVisible(false);
         }
 
     }
 
-    public void uploadPic(MouseEvent event)
-    {
-        // todo NHS: upload pic to database
-    }
 
     public void rentBook(MouseEvent event) throws IOException, ClassNotFoundException, JSONException {
         // to get value of condition combo box
@@ -257,17 +251,15 @@ public class rentOutPage {
 //            }
 //        }
 
-        String printRBtn = "";
-        for(int i=0; i<3; i++) {
-            if(rdbtn[i].isSelected())
-            {
-                printRBtn = rdbtn[i].getText();
-                System.out.println(printRBtn);
-                break;
+        if(file!=null) {
+            String printRBtn = "";
+            for (int i = 0; i < 3; i++) {
+                if (rdbtn[i].isSelected()) {
+                    printRBtn = rdbtn[i].getText();
+                    System.out.println(printRBtn);
+                    break;
+                }
             }
-        }
-
-
 
 
 //        Book b = new Book();
@@ -300,29 +292,31 @@ public class rentOutPage {
 //        s.close();
 
 
+            // todo NHS: give user id;
+            JSONObject response = new JSONObject(Main.connection.rentOutBook(
+                    Integer.parseInt(dashboard.userId),
+                    book.getText(),
+                    author.getText(),
+                    Double.valueOf(rentPrice.getText()),
+                    Double.valueOf(deposit.getText()),
+                    genre.getSelectionModel().getSelectedItem(),
+                    printRBtn,
+                    condition.getValue(),
+                    review.getText(),
+                    yearBought.getText(),
+                    img.getImage()
+            ));
 
-        // todo NHS: give user id;
-        JSONObject response = new JSONObject(Main.connection.rentOutBook(
-                Integer.parseInt(dashboard.userId),
-                book.getText(),
-                author.getText(),
-                Double.valueOf(rentPrice.getText()),
-                Double.valueOf(deposit.getText()),
-                genre.getSelectionModel().getSelectedItem(),
-                printRBtn,
-                condition.getValue(),
-                review.getText(),
-                yearBought.getText(),
-                img.getImage()
-        ));
 
-
-        if (Boolean.valueOf(response.getString("success"))) {
-            toast.set("SUCCESSFULLY RENTED OUT","#5CB85C");
-            Windows w = new Windows(rent, "../fxml/dashboard.fxml");
+            if (Boolean.valueOf(response.getString("success"))) {
+                toast.set("SUCCESSFULLY RENTED OUT", "#5CB85C");
+                Windows w = new Windows(rent, "../fxml/dashboard.fxml");
+            } else {
+                toast.set("UNABLE TO RENT OUT", "#D9534F");
+            }
         }
-        else {
-            toast.set("UNABLE TO RENT OUT","#D9534F");
+        else{
+            toast.set("YOU MUST ENTER A BOOK IMAGE","#f0ad4e");
         }
 
 

@@ -210,6 +210,15 @@ public class searchPage{
                     lbl[i].setTextFill(Color.rgb(59, 56, 56));
                 }
             }
+
+            for(int i=0; i<imgv.length; i++)
+            {
+                if(imgv[i].isHover())
+                {
+                    Vbox1[i].setStyle("-fx-background-color: #d9d9d9");
+                    Vbox2[i].setStyle("-fx-background-color: #d9d9d9");
+                }
+            }
         }
 
     }
@@ -230,6 +239,15 @@ public class searchPage{
                 if (!stck[i].isHover()) {
                     stck[i].setStyle("-fx-background-color:#3b3838;");
                     lbl[i].setTextFill(Color.rgb(217, 217, 217));
+                }
+            }
+
+            for(int i=0; i<imgv.length; i++)
+            {
+                if(!imgv[i].isHover())
+                {
+                    Vbox1[i].setStyle("-fx-background-color: #ffffff");
+                    Vbox2[i].setStyle("-fx-background-color: #ffffff");
                 }
             }
         }
@@ -339,6 +357,7 @@ public class searchPage{
 
             }catch(Exception e)
             {
+                toast.set("COULDN'T LOAD BOOKS","#f0ad4e");
                 System.out.println("Couldn't load books");
             }
 

@@ -139,9 +139,9 @@ public class bookDetailsPage {
     int book_rent;
     int book_deposit;
 
-    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    // private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     List<String> reviewArr = new ArrayList<>();
@@ -164,7 +164,7 @@ public class bookDetailsPage {
 
     public void initialize(String s) throws IOException, ClassNotFoundException, JSONException {
         parent.getChildren().add(toast.get());
-        System.out.println(s);
+        //System.out.println(s);
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
         bookGenre = "Fantasy";
@@ -484,7 +484,7 @@ public class bookDetailsPage {
         else
         {
             JSONObject response = new JSONObject(Main.connection.reviewAdd(
-                    1,// static
+                    Integer.parseInt(dashboard.userId),
                     1,//static
                     bookReview.getText()
                     ));
