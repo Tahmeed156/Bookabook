@@ -199,19 +199,17 @@ public class dashboard {
 
     String lblStyle = "-fx-text-fill: #3b3838; -fx-font-weight: bold; -fx-font-size: 15";
     // list for upcoming due dates
-    List<String>  upBook = new ArrayList<>(Arrays.asList("Harry Potter", "Game of thrones", "Percy Jackson",
-            "1984","Fantastic beasts and where to find them","Animal Farm","The Grand Theory"));
-    List<String>  upRenter = new ArrayList<>(Arrays.asList("Jon", "Sherlock", "Percy","Antik","Tanjim","Sadat","Kane"));
-    List<Integer>  udaysLeft = new ArrayList<>(Arrays.asList(1,3,2,4,5,6,7));
+    List<String>  upBook = new ArrayList<>();
+    List<String>  upRenter = new ArrayList<>();
+    List<Integer>  udaysLeft = new ArrayList<>();
     List<String> uLabel = new ArrayList<>();
     int uIndex;
 
 
     // list for booksShared
-    List<String>  sBook = new ArrayList<>(Arrays.asList("Harry Potter", "Game of thrones", "Percy Jackson",
-            "1984","Fantastic beasts and where to find them","Animal Farm","The Grand Theory"));
-    List<String>  sRenter = new ArrayList<>(Arrays.asList("Jon", "Sherlock", "Percy","Antik","Tanjim","Sadat","Kane"));
-    List<Integer>  sdaysLeft = new ArrayList<>(Arrays.asList(1,3,2,4,5,6,7));
+    List<String>  sBook = new ArrayList<>();
+    List<String>  sRenter = new ArrayList<>();
+    List<Integer>  sdaysLeft = new ArrayList<>();
     List<String> sLabel = new ArrayList<>();
     int sIndex;
 
@@ -227,9 +225,9 @@ public class dashboard {
     List<Image> rimgs = new ArrayList<>();
     List<Bookser> latestBooks;
 
-     // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -257,7 +255,7 @@ public class dashboard {
         Preferences userCon = Main.userCon;
         userName = userCon.get("full_name", "BookABook");
         user = userCon.get("username", "admin");
-        userId = userCon.get("user_id","1");
+        userId = userCon.get("id","1");
         rentedBooks = userCon.get("books_rented", "0");
         rentedOutBooks = userCon.get("books_shared", "0");
         wallet = userCon.get("wallet", "0");

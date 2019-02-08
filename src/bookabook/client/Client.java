@@ -164,7 +164,8 @@ public class Client {
     }
 
     public String editProfile (int user_id, String name, String loc, String work,
-                                String gender, String email, String contact_no, Image image) throws IOException, ClassNotFoundException {
+                                String gender, String email, String contact_no,
+                               Boolean change_pic, File file) throws IOException, ClassNotFoundException {
         request = new JSONObject();
 
         try {
@@ -176,12 +177,17 @@ public class Client {
             request.put("gender", gender);
             request.put("email", email);
             request.put("contact_no", contact_no);
+            request.put("change_pic",change_pic);
 
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
         send(request.toString());
-        // ImageIO.write(image, output);
+        if(change_pic) {
+            BufferedImage image = ImageIO.read(file);
+            ImageIO.write(image, "png", output);
+            dashboard.proPic = null;
+        }
         return (String) input.readObject();
     }
 
@@ -325,7 +331,7 @@ public class Client {
         request = new JSONObject();
         try {
             request.put("type", "profile/details");
-            request.put("user_id",user_id);
+            request.put("id",user_id);
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }

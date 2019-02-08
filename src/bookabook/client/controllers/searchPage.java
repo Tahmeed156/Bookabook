@@ -139,9 +139,9 @@ public class searchPage{
     @FXML private ImageView lArrow;
     @FXML private ImageView rArrow;
 
-    // // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     //list for searched items
@@ -165,8 +165,8 @@ public class searchPage{
         Vbox1 = new VBox[]{Vbox11,Vbox21,Vbox31,Vbox41,Vbox51,Vbox61};
         Vbox2 = new VBox[]{Vbox12,Vbox22,Vbox32,Vbox42,Vbox52,Vbox62};
 
-        // Loading l = new Loading();
-        // new Thread(l).start();
+         Loading l = new Loading();
+         new Thread(l).start();
 
         //search Button
         ImageView imgBtn = new ImageView(new Image(new File(path+"searchLogo.jpg").toURI().toString()));

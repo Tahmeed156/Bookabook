@@ -80,6 +80,7 @@ public class login {
                     dashboard.rentedBooks = userCon.get("books_rented", "0");
                     dashboard.rentedOutBooks = userCon.get("books_shared","0");
                     dashboard.wallet = userCon.get("wallet","0");
+                    dashboard.userId = userCon.get("id","1");
 
                     toast.set("LOGIN SUCCESSFUL","#5cb85c");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
@@ -113,6 +114,7 @@ public class login {
                         dob,
                         emailAddress.getText()
                 );
+
                 JSONObject response = new JSONObject(line);
 
                 if (Boolean.valueOf(response.getString("success"))) {
@@ -130,6 +132,7 @@ public class login {
                     dashboard.rentedBooks = userCon.get("books_rented", "0");
                     dashboard.rentedOutBooks = userCon.get("books_shared","0");
                     dashboard.wallet = userCon.get("wallet","0");
+                    dashboard.userId = userCon.get("id","1");
 
                     toast.set("SUCCESSFULLY SIGNED UP","#5CB85C");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");

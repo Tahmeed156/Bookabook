@@ -30,6 +30,7 @@ public class Windows {
                 userCon.put("username", "");
                 userCon.put("id", "");
                 userCon.put("full_name", "");
+                dashboard.proPic = null;
             }
             cornerCase(name[i]);
             root = FXMLLoader.load(getClass().getResource("../fxml/"+name[i]));

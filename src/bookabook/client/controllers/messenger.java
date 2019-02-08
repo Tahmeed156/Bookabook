@@ -70,9 +70,9 @@ public class messenger {
     @FXML private ImageView downArrow1;
 
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -305,14 +305,14 @@ public class messenger {
 
     public void onHoverBtn(MouseEvent e)
     {
-        send.setStyle("-fx-border-color: #ffffff; -fx-border-radius:5; -fx-border-width:2;" +
-                " -fx-background-color: #0275d8");
+        send.setStyle("-fx-background-color:#d9d9d9; -fx-border-radius: 5; " +
+                "-fx-border-width: 3; -fx-text-fill:#3b3838");
     }
 
     public void endHoverBtn(MouseEvent e)
     {
-        send.setStyle("-fx-border-color: #ffffff; -fx-border-radius:5; -fx-border-width:2;" +
-                " -fx-background-color: #3b3838");
+        send.setStyle("-fx-background-color: #3b3838; -fx-border-radius: 5; " +
+                "-fx-border-width: 3; -fx-border-color: #d9d9d9; fx-text-fill: #ffffff");
     }
     public void sendBtn(ActionEvent event) throws IOException, ClassNotFoundException {
         // todo NHS: send to database too

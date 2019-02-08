@@ -141,7 +141,7 @@ public class bookDetailsPage {
 
     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    //private String dir = "D:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     List<String> reviewArr = new ArrayList<>();
@@ -216,9 +216,9 @@ public class bookDetailsPage {
                 new Label("Rented: "+renterRentedBooks+" Books"),
                 new Label("Reviews: "+reviewsOfrenter));
 
-//        JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(Integer.parseInt(id)));
-       JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(1));
-        System.out.println(response_arr.toString());
+//       JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(Integer.parseInt(id)));
+//       JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(1));
+//       System.out.println(response_arr.toString());
 //
 //        for (int i=0; i<response_arr.length(); i++) {
 //            JSONObject details = response_arr.getJSONObject(i);

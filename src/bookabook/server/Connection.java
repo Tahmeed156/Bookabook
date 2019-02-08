@@ -15,6 +15,13 @@ import java.util.ArrayList;
 @SuppressWarnings("Duplicates")
 class Connection extends Thread {
 
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "A:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
+    private String path = dir + "Bookabook\\src\\bookabook\\server\\images\\users\\";
+
+
+
     private DataInputStream input;
     private ObjectOutputStream output;
     private Socket socket;
@@ -117,7 +124,7 @@ class Connection extends Thread {
                     case "books/trending": {
 
                         ArrayList<Bookser> books = db.trending_books();
-                        // output.writeObject(books);
+                        output.writeObject(books);
                         System.out.println("Sending images: " + books.size());
                         for (Bookser book : books) {
                             book.sendImage(output);
@@ -194,22 +201,27 @@ class Connection extends Thread {
                                 request.getString("work"),
                                 request.getString("gender"),
                                 request.getString("email"),
-                                request.getString("contact_no")
+                                request.getString("contact_no"),
+                                request.getBoolean("change_pic")
                         );
 
                         // receiving and saving profile picture
-                        // BufferedImage image = ImageIO.read(input);
-                        // ImageIO.write(image, "png", new File("D:\\Bookabook\\src\\bookabook\\server\\images\\users\\" + String.valueOf(request.getInt("user_id")) + ".png" ));
-                        // input.skipBytes(16);
+                        if(response.getBoolean("change_pic")) {
+                            BufferedImage image = ImageIO.read(input);
+                            ImageIO.write(image, "png", new File(path + request.getInt("user_id") + ".png"));
+                            input.skipBytes(16);
+                        }
 
                         // return response
-                        send(response);
+                        send(response.toString());
                         break;
                     }
 
-                    //todo TMD Profile Page info
                     case "profile/details": {
-                        // give work, birthdate, location, email, contact as jsonarray
+                        // give work, birthdate, location, email, contact
+                        response = db.profile_info(request.getInt("id"));
+                        send(response.toString());
+                        break;
                     }
 
                     // todo TMD for dashboard from getBooks function from Client
@@ -270,6 +282,7 @@ class Connection extends Thread {
                 break;
             }
             catch (JSONException e) {
+                e.printStackTrace();
                 System.out.println("Error reading json.");
                 break;
             }
@@ -293,8 +306,7 @@ class Connection extends Thread {
         System.err.println(username + " connected to the server");
         BufferedImage image;
         try {
-            image = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\server\\images\\users\\" +
-                    id + ".png"));
+            image = ImageIO.read(new File(path + id + ".png"));
             ImageIO.write(image, "png", output);
         }
         catch (IOException e) {

@@ -69,19 +69,16 @@ public class profilePage {
     StackPane[] stck;// = {searchStk,messagesStk,helpStk,profileStk,logoutStk};
 
     //borderpane top stuff
-    @FXML private Rectangle imgCircle;
     @FXML private Label rentedBLbl;
     @FXML private Label sharedBLbl;
     @FXML private Label walletLbl;
-    @FXML private Label userNameLbl;
-    @FXML private Label userLbl;
-    @FXML private VBox upperRightVbox;
-
     //middle part
     @FXML
-    private Circle bigImgCircle;
+    private Rectangle bigImgCircle;
     @FXML
     private Label bigName;
+    @FXML
+    private Label user;
     @FXML
     private Label work;
     @FXML
@@ -97,10 +94,6 @@ public class profilePage {
     private Button rentBookBtn;
     @FXML
     private Button editProfileBtn;
-    @FXML
-    private Button rentOutBtn;
-    @FXML
-    private Button rentedBtn;
     Button[] btn;
 
 
@@ -204,9 +197,9 @@ public class profilePage {
     List<Image> bimgs = new ArrayList<>();
     List<Bookser> rentedOutBooks;
 
-    // // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -224,7 +217,7 @@ public class profilePage {
         tVbox = new VBox[]{tVbox1, tVbox2, tVbox3};
         bVbox = new VBox[]{bVbox1, bVbox2, bVbox3};
         arrows = new ImageView[]{tLArrow, tRArrow, bLArrow, bRArrow};
-        btn = new Button[]{rentBookBtn, editProfileBtn, rentOutBtn, rentedBtn};
+        btn = new Button[]{rentBookBtn, editProfileBtn};
 
 
         Loading l = new Loading();
@@ -234,15 +227,13 @@ public class profilePage {
         //upperRightLabels
 
         Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
-        imgCircle.setFill(new ImagePattern(imgperson));
         bigImgCircle.setFill(new ImagePattern(imgperson));
 
         String rentedOutBooks = dashboard.rentedOutBooks;
         String rentedBooks = dashboard.rentedBooks;
         String wallet = dashboard.wallet;
 
-        userNameLbl.setText(dashboard.userName);
-        userLbl.setText(dashboard.user);
+        user.setText(dashboard.user);
         rentedBLbl.setText(rentedBooks);
         sharedBLbl.setText(rentedOutBooks);
         walletLbl.setText(wallet);
@@ -265,12 +256,12 @@ public class profilePage {
 //            contact.setText(details.getString("contact"));
 //        }
 
-        bigName.setText("Ayan Antik Khan");
-        work.setText("Intern at the king's guard");
-        birthDate.setText("11th March 2018");
-        loc.setText("Winterfell");
-        email.setText("jmike@gmail.com");
-        contact.setText("54654685");
+        bigName.setText(dashboard.userName);
+//        work.setText("Intern at the king's guard");
+//        birthDate.setText("11th March 2018");
+//        loc.setText("Winterfell");
+//        email.setText("jmike@gmail.com");
+//        contact.setText("54654685");
 
 
     }
@@ -362,31 +353,22 @@ public class profilePage {
 
     public void onHoverButton(MouseEvent event) {
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             if (event.getSource() == btn[i]) {
-                if (i == 0 || i == 1) {
-                    btn[i].setStyle("-fx-background-color:#92a2b9");
-                } else {
-                    btn[i].setStyle("-fx-background-color:#92e25d");
+                    btn[i].setStyle("-fx-background-color:#d9d9d9; -fx-border-width: 3; -fx-text-fill:#3b3838");
                 }
             }
-        }
-
     }
 
 
     public void endHoverButton(MouseEvent event) {
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             if (event.getSource() == btn[i]) {
-                if (i == 0 || i == 1) {
-                    btn[i].setStyle("-fx-background-color:#44546a");
-                } else {
-                    btn[i].setStyle("-fx-background-color:#70ad47");
-                }
+                btn[i].setStyle("-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" +
+                        "fx-text-fill: #ffffff");
             }
         }
-
     }
 
 
@@ -398,13 +380,6 @@ public class profilePage {
         Windows w = new Windows(rentBookBtn, 6);
     }
 
-    public void rentedBooksClicked(MouseEvent e) {
-        Windows w = new Windows(rentedBtn, 8);
-    }
-
-    public void rentedOutBooksClicked(MouseEvent e) {
-        Windows w = new Windows(rentOutBtn, 9);
-    }
 
     public void bookPageClicked(MouseEvent event) {
         // todo NHS: pass on book id to next page
@@ -425,6 +400,15 @@ public class profilePage {
         @Override
         public Void call() throws Exception {
             try {
+                JSONObject response = new JSONObject(Main.connection.getProfile(Integer.parseInt(dashboard.userId)));
+                if (Boolean.valueOf(response.getString("success"))){
+                    work.setText(response.optString("work","N/A"));
+                    birthDate.setText(response.optString("date_of_birth","N/A"));
+                    loc.setText(response.optString("location","N/A"));
+                    email.setText(response.optString("email","N/A"));
+                    contact.setText(response.optString("contact_no","N/A"));
+                }
+
                 rentedBooks = Main.connection.latest_books("books/rented", "");
                 for (Bookser b : rentedBooks) {
                     tname.add(b.getName());

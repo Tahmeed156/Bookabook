@@ -17,6 +17,11 @@
           <left>
               <VBox fx:id="left" prefHeight="644.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
                   <children>
+                  <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@../Pictures/logo.png" />
+                     </image>
+                  </ImageView>
                       <StackPane fx:id="dashBStk" onMouseEntered="#onHoverBox" onMouseExited="#endHoverBox" onMousePressed="#pressed" prefHeight="100.0" prefWidth="160.0">
                           <children>
                               <Label fx:id="dashBLbl" text="Dashboard" textFill="#d9d9d9">
@@ -82,95 +87,111 @@
           <center>
               <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #ededed;" BorderPane.alignment="CENTER">
                   <children>
-                      <HBox prefHeight="300.0" prefWidth="1040.0">
-                          <children>
-                              <Region maxHeight="300.0" maxWidth="40.0" prefHeight="150.0" prefWidth="30.0" />
-                        <AnchorPane>
-                           <children>
-                              <Circle fx:id="bigImgCircle" fill="DODGERBLUE" layoutX="104.0" layoutY="137.0" radius="114.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="791.0">
-                           <children>
-                              <Label fx:id="bigName" layoutX="22.0" layoutY="14.0" prefHeight="36.0" prefWidth="277.0">
-                                 <font>
-                                    <Font name="System Bold" size="25.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="22.0" layoutY="48.0" prefHeight="33.0" prefWidth="112.0" text="Work           :" textFill="#7f7f7f">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="22.0" layoutY="89.0" prefHeight="33.0" prefWidth="112.0" text="Birth  Date  :" textFill="#7f7f7f">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="22.0" layoutY="173.0" prefHeight="33.0" prefWidth="112.0" text="Email           :" textFill="#7f7f7f">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="22.0" layoutY="212.0" prefHeight="33.0" prefWidth="112.0" text="Contact no  :" textFill="#7f7f7f">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="work" layoutX="149.0" layoutY="48.0" prefHeight="27.0" prefWidth="280.0">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="birthDate" layoutX="149.0" layoutY="92.0" prefHeight="27.0" prefWidth="280.0">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="email" layoutX="149.0" layoutY="176.0" prefHeight="27.0" prefWidth="280.0">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="contact" layoutX="149.0" layoutY="215.0" prefHeight="27.0" prefWidth="280.0">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="rentBookBtn" layoutX="456.0" layoutY="102.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#rentABookClicked" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Rent a Book" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="17.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="editProfileBtn" layoutX="457.0" layoutY="162.0" mnemonicParsing="false" onMouseClicked="#editProClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="35.0" prefWidth="140.0" style="-fx-background-color: #44546a;" text="Edit Profile" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="17.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="rentOutBtn" layoutX="614.0" layoutY="100.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#rentedOutBooksClicked" prefHeight="38.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented out Books" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="17.0" />
-                                 </font>
-                              </Button>
-                              <Button fx:id="rentedBtn" layoutX="614.0" layoutY="164.0" mnemonicParsing="false" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" onMousePressed="#rentedBooksClicked" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #70ad47;" text="Rented Books" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="17.0" />
-                                 </font>
-                              </Button>
-                              <Label layoutX="22.0" layoutY="128.0" prefHeight="33.0" prefWidth="112.0" text="Location      :" textFill="#7f7f7f">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="loc" layoutX="149.0" layoutY="131.0" prefHeight="27.0" prefWidth="280.0">
-                                 <font>
-                                    <Font name="System Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                          </children>
-                      </HBox>
+                  <AnchorPane prefHeight="416.0" prefWidth="1040.0" style="-fx-background-color: #3b3838;">
+                     <children>
+                        <Rectangle fx:id="bigImgCircle" arcHeight="5.0" arcWidth="5.0" fill="#3b3838" height="200.0" layoutX="23.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                        <Label fx:id="bigName" layoutX="248.0" layoutY="23.0" prefHeight="47.0" prefWidth="493.0" text="Username" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="32.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="248.0" layoutY="126.0" prefHeight="33.0" prefWidth="112.0" text="W O R K" textFill="#7f7f7f">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="work" alignment="TOP_LEFT" layoutX="248.0" layoutY="156.0" prefHeight="88.0" prefWidth="225.0" text="Gravity Manager at NSA" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="248.0" layoutY="249.0" prefHeight="33.0" prefWidth="133.0" text="A D D R E S S " textFill="#7f7f7f">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="loc" alignment="TOP_LEFT" layoutX="248.0" layoutY="282.0" prefHeight="113.0" prefWidth="236.0" text="126/5 Staff Road, Dhaka Cantonment, Dhaka" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="529.0" layoutY="90.0" prefHeight="33.0" prefWidth="112.0" text="B O R N" textFill="#7f7f7f">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="birthDate" alignment="TOP_LEFT" layoutX="529.0" layoutY="123.0" prefHeight="39.0" prefWidth="225.0" text="11th March, 1991" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="529.0" layoutY="167.0" prefHeight="33.0" prefWidth="112.0" text="E M A I L" textFill="#7f7f7f">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="email" alignment="TOP_LEFT" layoutX="529.0" layoutY="204.0" prefHeight="39.0" prefWidth="225.0" text="johnmike@gmail.com" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="529.0" layoutY="249.0" prefHeight="33.0" prefWidth="112.0" text="C O N T A C T" textFill="#7f7f7f">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="contact" alignment="TOP_LEFT" layoutX="529.0" layoutY="282.0" prefHeight="39.0" prefWidth="225.0" text="01924852596" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="editProfileBtn" layoutX="783.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#editProClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="44.0" prefWidth="76.0" style="-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" text="E d i t" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="rentBookBtn" layoutX="885.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#rentABookClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="44.0" prefWidth="86.0" style="-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" text="R e n t" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="783.0" layoutY="90.0" prefHeight="33.0" prefWidth="112.0" text="R E N T E D" textFill="#7f7f7f">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="rentedBLbl" alignment="TOP_LEFT" layoutX="783.0" layoutY="123.0" prefHeight="39.0" prefWidth="225.0" text="3 Books" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="783.0" layoutY="167.0" prefHeight="33.0" prefWidth="112.0" text="S H A R E D" textFill="#7f7f7f">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="sharedBLbl" alignment="TOP_LEFT" layoutX="783.0" layoutY="204.0" prefHeight="39.0" prefWidth="225.0" text="2 Books" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="783.0" layoutY="249.0" prefHeight="33.0" prefWidth="112.0" text="W A L L E T" textFill="#7f7f7f">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="walletLbl" alignment="TOP_LEFT" layoutX="783.0" layoutY="282.0" prefHeight="39.0" prefWidth="225.0" text="2000 taka" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="user" alignment="TOP_LEFT" layoutX="248.0" layoutY="84.0" prefHeight="39.0" prefWidth="225.0" text="user" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="System Bold Italic" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                       <Region prefHeight="30.0" prefWidth="1040.0" />
                       <HBox prefHeight="120.0" prefWidth="1040.0">
                           <children>
@@ -352,67 +373,6 @@
                   </children>
               </VBox>
           </center>
-         <top>
-            <AnchorPane style="-fx-background-color: #3b3838;" BorderPane.alignment="CENTER">
-               <children>
-                  <ImageView fitHeight="155.0" fitWidth="160.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../Pictures/logo.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="imgCircle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="155.0" layoutX="1040.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="160.0" />
-                  <Label alignment="CENTER" layoutX="300.0" layoutY="50.0" text="Rented&#10;Books&#10;" textAlignment="CENTER" textFill="#d9d9d9">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="rentedBLbl" alignment="CENTER" layoutX="375.0" layoutY="60.0" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: #d9d9d9;" text="l1" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="sharedBLbl" alignment="CENTER" layoutX="555.0" layoutY="60.0" prefHeight="30.0" prefWidth="32.0" style="-fx-background-color: #d9d9d9;" text="l2" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label alignment="CENTER" layoutX="480.0" layoutY="50.0" text="Shared&#10;Books&#10;" textAlignment="CENTER" textFill="#d9d9d9">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="650.0" layoutY="64.0" text="Wallet&#10;" textFill="#d9d9d9">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="walletLbl" alignment="CENTER" layoutX="720.0" layoutY="60.0" prefHeight="37.0" prefWidth="86.0" style="-fx-background-color: #d9d9d9;" text="l3" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </Label>
-                  <Label fx:id="userLbl" alignment="CENTER_RIGHT" layoutX="839.0" layoutY="65.0" prefHeight="27.0" prefWidth="192.0" text="User" textFill="#d9d9d9">
-                     <font>
-                        <Font name="System Bold Italic" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="userNameLbl" alignment="CENTER_RIGHT" layoutX="797.0" layoutY="37.0" prefHeight="27.0" prefWidth="234.0" text="User Name" textFill="#d9d9d9">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
-         </top>
       </BorderPane>
    </children>
 </Pane>

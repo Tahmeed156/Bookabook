@@ -94,7 +94,6 @@ public class editProfilePage {
     //right image components
     @FXML private Button changeProPic;
     @FXML private Button save;
-    @FXML private Button upload;
     @FXML private Circle proPicCircle;
 
     Button[] picBtn;
@@ -103,10 +102,12 @@ public class editProfilePage {
     RadioButton[] rdbtn;
     Image imgperson;
 
+    Boolean changePic = false;
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -115,7 +116,7 @@ public class editProfilePage {
         parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
-        picBtn = new Button[]{profilePageBtn, changeProPic, upload};
+        picBtn = new Button[]{profilePageBtn, changeProPic};
         rdbtn = new RadioButton[]{male,female};
 
         //upperRightLabels
@@ -215,25 +216,19 @@ public class editProfilePage {
         //fc.getExtensionFilters().add( new FileChooser.ExtensionFilter("Text Document","*.txt"));
         file = fc.showOpenDialog(null);
 
-        if (file==null)
-        {
-            upload.setDisable(true);
-        }
-        else{
-            imgperson = new Image(file.toURI().toString());
-            proPicCircle.setFill(new ImagePattern(imgperson));
-            upload.setDisable(false);
-        }
+        imgperson = new Image(file.toURI().toString());
+        proPicCircle.setFill(new ImagePattern(imgperson));
 
     }
 
-    public void uploadPic(MouseEvent event)
-    {
-        //UPLOAD TO DATABASE
-        //MUST DOOOO
-    }
 
     public void saveProfile(MouseEvent event) throws IOException, ClassNotFoundException, JSONException {
+
+        // to know whether the user uploaded an image
+        if(file!=null)
+        {
+            changePic = true;
+        }
 
         String printRBtn = "";
         for(int i=0; i<3; i++) {
@@ -252,7 +247,8 @@ public class editProfilePage {
                 printRBtn,
                 email.getText(),
                 contactNo.getText(),
-                imgperson
+                changePic,
+                file
         ));
 
         if (Boolean.valueOf(response.getString("success"))) {
@@ -262,7 +258,7 @@ public class editProfilePage {
         else {
             toast.set("UNABLE TO EDIT PROFILE","#D9534F");
         }
-         new Windows(save, "../fxml/dashboard.fxml");
+
     }
 
 

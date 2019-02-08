@@ -109,7 +109,8 @@ public class Database {
 
     // =========================================  DATA INPUT
 
-    public JSONObject edit_profile ( int uid, String name, String loc, String work, String gender, String email, String contact_no)
+    public JSONObject edit_profile ( int uid, String name, String loc, String work, String gender, String email, String contact_no,
+                                     Boolean changePic)
             throws JSONException {
         startSession();
         JSONObject response = new JSONObject();
@@ -120,6 +121,11 @@ public class Database {
             User u = (User) query.uniqueResult();
             u.edit_profile(name, loc, work, gender, email, contact_no);
             response.put("success", "true");
+            if(changePic)
+            {
+                response.put("change_pic","true");
+            }
+            else {response.put("change_pic","false");}
         }
         catch (Exception e) {
             response.put("success", "false");
@@ -127,6 +133,36 @@ public class Database {
 
         endSession();
         return response;
+    }
+
+    public JSONObject profile_info (int uid) throws JSONException {
+        startSession();
+        JSONObject response = new JSONObject();
+
+        // Generating an input query
+        Query query = session.createQuery("from User where id = :i");
+        query.setParameter("i", uid);
+        // Executing the generated input query and handling exception
+        try {
+            User u = (User) query.uniqueResult();
+            // Creating response object
+            response.put("success", "true");
+            response.put("work",u.getWork());
+            response.put("date_of_birth", u.getDate_of_birth().toString());
+            response.put("location", u.getLocation());
+            response.put("email", u.getEmail());
+            response.put("contact_no", u.getContact_no());
+            return response;
+        }
+        catch (Exception e) {
+            // In case user is not found
+            System.out.println("Wrong credentials | " + e.getMessage());
+            response.put("success", "false");
+            return response;
+        }
+        finally {
+            endSession();
+        }
     }
 
     public JSONObject rent_book (int b, int w, int rtr, int rte) throws JSONException {

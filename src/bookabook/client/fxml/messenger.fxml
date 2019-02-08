@@ -144,16 +144,17 @@
             </VBox>
          </right>
          <bottom>
-            <HBox prefHeight="58.0" prefWidth="1200.0" style="-fx-background-color: #404040;" BorderPane.alignment="CENTER">
+            <AnchorPane style="-fx-background-color: #404040;" BorderPane.alignment="CENTER">
                <children>
-                  <Region prefHeight="78.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" />
-                  <TextField fx:id="chat" onKeyPressed="#sendKey" prefHeight="34.0" prefWidth="599.0" promptText="Wirte your message" />
-                  <Button fx:id="send" mnemonicParsing="false" onAction="#sendBtn" onMouseEntered="#onHoverBtn" onMouseExited="#endHoverBtn" prefHeight="33.0" prefWidth="71.0" style="-fx-border-color: #ffffff; -fx-border-radius: 5; -fx-border-width: 2; -fx-background-color: #3b3838;" text="Send" textFill="WHITE">
+                  <Button fx:id="send" layoutX="769.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#sendBtn" onMouseEntered="#onHoverBtn" onMouseExited="#endHoverBtn" prefHeight="37.0" prefWidth="71.0" style="-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9; -fx-border-radius: 5;" text="Send" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
-                     </font></Button>
+                     </font>
+                  </Button>
+                  <Region prefHeight="78.0" prefWidth="160.0" style="-fx-background-color: #3b3838;" />
+                  <TextField fx:id="chat" layoutX="170.0" layoutY="3.0" onKeyPressed="#sendKey" prefHeight="34.0" prefWidth="599.0" promptText="Write your message" />
                </children>
-            </HBox>
+            </AnchorPane>
          </bottom>
       </BorderPane>
       <ImageView fitHeight="150.0" fitWidth="160.0" layoutY="650.0" pickOnBounds="true" preserveRatio="true">

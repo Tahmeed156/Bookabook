@@ -16,9 +16,9 @@ public class Bookser implements Serializable {
     private double deposit;
     private transient BufferedImage image;
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\server\\images\\books\\";
 
     public Bookser(String n, String a, double r, double d) {
