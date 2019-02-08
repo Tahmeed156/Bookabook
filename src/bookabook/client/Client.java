@@ -118,7 +118,7 @@ public class Client {
         return (String) input.readObject();
     }
 
-    public void getProPic() throws IOException {
+    public void getProPic() throws IOException, JSONException {
         JSONObject request = new JSONObject();
         Preferences userCon = Main.userCon;
         String user = userCon.get("username","Anonymous");
@@ -164,7 +164,7 @@ public class Client {
     }
 
     public String editProfile (int user_id, String name, String loc, String work,
-                                String gender, String email, String contact_no,Image img) throws IOException, ClassNotFoundException {
+                                String gender, String email, String contact_no, Image image) throws IOException, ClassNotFoundException {
         request = new JSONObject();
 
         try {
@@ -176,13 +176,12 @@ public class Client {
             request.put("gender", gender);
             request.put("email", email);
             request.put("contact_no", contact_no);
-            // todo NHS: input image from user
-            // todo TMD: accept image and save to server/ provide a default image
 
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
         send(request.toString());
+        // ImageIO.write(image, output);
         return (String) input.readObject();
     }
 
@@ -236,7 +235,7 @@ public class Client {
         request.put("type", type);
         request.put("query", query);
         send(request.toString());
-       // System.out.println(request.toString());
+        // System.out.println(request.toString());
 
         System.out.println("Started reading array list");
         ArrayList books_objects = (ArrayList) input.readObject();
@@ -313,8 +312,9 @@ public class Client {
         request = new JSONObject();
         try {
             request.put("type", "books/details");
-            request.put("book_id",book_id);
-        } catch (JSONException e) {
+            request.put("book_id", book_id);
+        }
+        catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
         send(request.toString());

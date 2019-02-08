@@ -101,9 +101,9 @@ public class rentOutPage {
     ObservableList<String> condList = FXCollections.observableArrayList("Perfect",
             "A little bit of tear", "Some tear", "Heavily used" );
 
-    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    //private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -242,7 +242,7 @@ public class rentOutPage {
         // todo NHS: upload pic to database
     }
 
-    public void rentBook(MouseEvent event) throws IOException, ClassNotFoundException {
+    public void rentBook(MouseEvent event) throws IOException, ClassNotFoundException, JSONException {
         // to get value of condition combo box
         // condition.getValue();
         // to get the value from genre list

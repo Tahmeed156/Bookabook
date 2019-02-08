@@ -24,12 +24,9 @@ import java.util.List;
 @SuppressWarnings("Duplicates")
 public class Database {
 
-    private SessionFactory sessionFactory;
     private Session session;
 
     Database () {
-        // Configuring hibernate
-        sessionFactory = new Configuration().configure("/bookabook/server/hibernate.cfg.xml").buildSessionFactory();
     }
 
     // =====================================   USER AUTHENTICATION
@@ -112,7 +109,7 @@ public class Database {
 
     // =========================================  DATA INPUT
 
-    public JSONObject edit_profile ( int uid, String name, String work, String gender, String email, String contact_no)
+    public JSONObject edit_profile ( int uid, String name, String loc, String work, String gender, String email, String contact_no)
             throws JSONException {
         startSession();
         JSONObject response = new JSONObject();
@@ -121,7 +118,7 @@ public class Database {
         query.setParameter("i", uid);
         try {
             User u = (User) query.uniqueResult();
-            u.edit_profile(name, work, gender, email, contact_no);
+            u.edit_profile(name, loc, work, gender, email, contact_no);
             response.put("success", "true");
         }
         catch (Exception e) {
@@ -180,7 +177,6 @@ public class Database {
             Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
-
         System.out.println("Successful queries!");
         endSession();
         return book_objects;
@@ -299,7 +295,7 @@ public class Database {
     public JSONArray online(String username) {
         JSONArray response = new JSONArray();
         for (Connection c: Server.clients) {
-            if (c.isAlive() || !c.getName().equals(username))
+            if (c.isAlive() &&  !c.getName().equals(username))
                 response.put(c.getName());
         }
         return response;
@@ -346,15 +342,9 @@ public class Database {
 
     // ========================================   UTILITY
 
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        sessionFactory.close();
-    }
-
     private void startSession () {
         // Opening session
-        session = sessionFactory.openSession();
+        session = Server.sessionFactory.openSession();
         session.beginTransaction();
     }
 

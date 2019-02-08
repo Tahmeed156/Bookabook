@@ -10,10 +10,6 @@ import javafx.embed.swing.SwingFXUtils;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -22,15 +18,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -224,31 +215,26 @@ public class dashboard {
     List<String> sLabel = new ArrayList<>();
     int sIndex;
 
-
-
     // list for trending
     List<String> tname = new ArrayList<>();
     List<String> tauthor = new ArrayList<>();
     List<Image> timgs = new ArrayList<>();
-
     List<Bookser> trendingBooks;
 
     // list for recommended
     List<String> rname = new ArrayList<>();
     List<String> rauthor = new ArrayList<>();
     List<Image> rimgs = new ArrayList<>();
-
     List<Bookser> latestBooks;
 
-    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+     // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    //private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
-    public void initialize() throws IOException, JSONException, ClassNotFoundException, InterruptedException {
+    public void initialize() {
         parent.getChildren().add(toast.get());
-
 
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk, helpStk, profileStk, logoutStk};
@@ -263,13 +249,12 @@ public class dashboard {
         rVbox = new VBox[]{rVbox1, rVbox2, rVbox3};
         arrows = new ImageView[]{tLArrow, tRArrow, rLArrow, rRArrow,upArrow1,downArrow1,upArrow2,downArrow2};
 
-
+        // Starting thread for loading books and user information
         Loading t = new Loading();
         new Thread(t).start();
 
+        // Getting client info from registry
         Preferences userCon = Main.userCon;
-
-
         userName = userCon.get("full_name", "BookABook");
         user = userCon.get("username", "admin");
         userId = userCon.get("user_id","1");
@@ -277,15 +262,12 @@ public class dashboard {
         rentedOutBooks = userCon.get("books_shared", "0");
         wallet = userCon.get("wallet", "0");
 
-
-
         // upperLabels
         userNameLbl.setText(userName);
         userLbl.setText(user);
         rentedBLbl.setText(rentedBooks);
         sharedBLbl.setText(rentedOutBooks);
         walletLbl.setText(wallet);
-
 
         //populate upcoming
         uIndex = helper.initiate(uLabel, upcoming, 5, 370, lblStyle, downArrow1, uIndex,
@@ -453,10 +435,14 @@ public class dashboard {
         Windows w = new Windows((Label) event.getSource(), "../fxml/bookDetailsPage.fxml", ((Label) event.getSource()).getText());
     }
 
+    // One thread class to load them all
+
     class Loading extends Task {
         @Override
         public Void call() throws Exception {
             try {
+
+                // Gets profile picture from the server
                 if (dashboard.proPic==null) {
                     Main.connection.getProPic();
                 }
@@ -497,8 +483,7 @@ public class dashboard {
 //                }
 
 
-
-                //initiate uLabel and sLabel lists
+                // initiate uLabel and sLabel lists
                 for(int i=0; i<upBook.size(); i++)
                 {
                     uLabel.add(upBook.get(i) + " | " + upRenter.get(i) + "\n" + udaysLeft.get(i) + " days");
@@ -508,14 +493,16 @@ public class dashboard {
                     sLabel.add(sBook.get(i) + " | " + sRenter.get(i) + "\n" + sdaysLeft.get(i) + " days");
                 }
 
+                // Getting trending books from server
                 trendingBooks = Main.connection.latest_books("books/trending", "");
-                //Thread.sleep(5000);
+                // Thread.sleep(5000);
                 for (Bookser b : trendingBooks) {
                     tname.add(b.getName());
                     tauthor.add(b.getAuthor());
                     timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
                 }
 
+                // Getting latest books from server
                 latestBooks = Main.connection.latest_books("books/latest", "");
                 for (Bookser b : latestBooks) {
                     rname.add(b.getName());
@@ -529,7 +516,6 @@ public class dashboard {
             } catch (Exception e) {
                 System.out.println("Couldn't load books");
             }
-
 
             Platform.runLater(new Runnable() {
                 @Override

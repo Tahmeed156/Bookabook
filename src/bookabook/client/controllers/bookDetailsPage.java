@@ -23,6 +23,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -161,7 +162,7 @@ public class bookDetailsPage {
         this.id = id;
     }
 
-    public void initialize(String s) throws IOException, ClassNotFoundException {
+    public void initialize(String s) throws IOException, ClassNotFoundException, JSONException {
         parent.getChildren().add(toast.get());
         System.out.println(s);
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
@@ -215,9 +216,9 @@ public class bookDetailsPage {
                 new Label("Rented: "+renterRentedBooks+" Books"),
                 new Label("Reviews: "+reviewsOfrenter));
 
-
-
 //        JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(Integer.parseInt(id)));
+       JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(1));
+        System.out.println(response_arr.toString());
 //
 //        for (int i=0; i<response_arr.length(); i++) {
 //            JSONObject details = response_arr.getJSONObject(i);
@@ -248,8 +249,6 @@ public class bookDetailsPage {
 //            //todo TMD get image of book and renter
 //        }
 
-
-
         //setting book details
         book_rent = 10;
         book_deposit = 300;
@@ -268,21 +267,14 @@ public class bookDetailsPage {
         reviewByRenter.setText("The book is undoubtedly a masterpiece created by George R R Martin. Best thing" +
                 "that happened to the world after J.K.Rowling.");
 
-
-
-
-
         genre.setText(bookGenre);
-
 
         for(String a:allsimilarBooks)
         {
             similarBook.setText(similarBook.getText().concat(a + '\n'));
         }
 
-
-        //populating reviews\
-
+        // Populating reviews
         JSONArray response_arr1 = new JSONArray(Main.connection.reviewGet(1));
         for (int i=0; i<response_arr1.length(); i++) {
             JSONObject review = response_arr1.getJSONObject(i);
@@ -300,7 +292,7 @@ public class bookDetailsPage {
         }
 
 
-        //making right arrow visible
+        // Making right arrow visible
         if(reviewers.size()>3)
         {
             stckRArrow.setVisible(true);
@@ -308,8 +300,6 @@ public class bookDetailsPage {
 
 
     }
-
-
 
     public void onHoverBox(MouseEvent event) {
         for (int i = 0; i < stck.length; i++) {
@@ -342,10 +332,6 @@ public class bookDetailsPage {
 
     }
 
-
-
-
-
     public void onHoverButton(MouseEvent event)
     {
         for(int i=0; i<btn.length; i++)
@@ -357,7 +343,6 @@ public class bookDetailsPage {
         }
 
     }
-
 
     public void endHoverButton(MouseEvent event)
     {
@@ -396,8 +381,6 @@ public class bookDetailsPage {
             lArrow.setImage(new Image(new File(path+"leftArrow.png").toURI().toString()));
         }
     }
-
-
 
     public void rArrowClicked(MouseEvent event)
     {
@@ -458,8 +441,7 @@ public class bookDetailsPage {
         stckRArrow.setVisible(true);
     }
 
-
-    public void rentBtnPressed(MouseEvent e) throws IOException, ClassNotFoundException {
+    public void rentBtnPressed(MouseEvent e) throws IOException, ClassNotFoundException, JSONException {
 
         if(weeks.getText().isEmpty()){
             toast.set("PLEASE FILL IN THE NO OF WEEKS TEXTFIELD","#f0ad4e");
@@ -494,7 +476,7 @@ public class bookDetailsPage {
         Windows w = new Windows(messageBtn, "../fxml/messenger.fxml");
     }
 
-    public void sendBtnPressed(MouseEvent e) throws IOException, ClassNotFoundException {
+    public void sendBtnPressed(MouseEvent e) throws IOException, ClassNotFoundException, JSONException {
         if(bookReview.getText().isEmpty())
         {
             toast.set("PLEASE ENTER YOUR REVIEW","#f0ad4e");

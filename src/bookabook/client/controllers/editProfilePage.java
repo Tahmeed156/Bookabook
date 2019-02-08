@@ -104,9 +104,9 @@ public class editProfilePage {
     Image imgperson;
 
 
-    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    //private String dir = "D:\\"; // Tahmeed config
+    private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
@@ -233,7 +233,7 @@ public class editProfilePage {
         //MUST DOOOO
     }
 
-    public void saveProfile(MouseEvent event) throws IOException, ClassNotFoundException {
+    public void saveProfile(MouseEvent event) throws IOException, ClassNotFoundException, JSONException {
 
         String printRBtn = "";
         for(int i=0; i<3; i++) {
@@ -244,12 +244,6 @@ public class editProfilePage {
             }
         }
 
-        //DO THIS
-        //MUST DO
-        //MOST IMPORTANT PART
-
-
-
         JSONObject response = new JSONObject(Main.connection.editProfile(
                 Integer.parseInt(dashboard.userId),
                 name.getText(),
@@ -259,7 +253,6 @@ public class editProfilePage {
                 email.getText(),
                 contactNo.getText(),
                 imgperson
-
         ));
 
         if (Boolean.valueOf(response.getString("success"))) {
@@ -269,6 +262,7 @@ public class editProfilePage {
         else {
             toast.set("UNABLE TO EDIT PROFILE","#D9534F");
         }
+         new Windows(save, "../fxml/dashboard.fxml");
     }
 
 

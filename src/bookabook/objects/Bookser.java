@@ -16,11 +16,10 @@ public class Bookser implements Serializable {
     private double deposit;
     private transient BufferedImage image;
 
-
-     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    //private String dir = "D:\\"; // Tahmeed config
-    private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
+    private String dir = "D:\\"; // Tahmeed config
+    private String path = dir + "Bookabook\\src\\bookabook\\server\\images\\books\\";
 
     public Bookser(String n, String a, double r, double d) {
         name = n;
@@ -31,15 +30,18 @@ public class Bookser implements Serializable {
 
     public void sendImage (ObjectOutputStream out) {
         try {
-
             image = ImageIO.read(new File(path + name + ".png"));
+            System.out.println("Read done!");
             System.out.println("Sending image for book: " + name);
             ImageIO.write(image, "png", out);
+            System.out.println("SENT!");
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.out.println("Couldn't send image - " +
             name + " | " + author);
         }
+        System.out.println("Sent image for book: " + name);
     }
 
     public void saveImage (BufferedImage img) {
@@ -51,17 +53,6 @@ public class Bookser implements Serializable {
 //            System.out.println("Could not save image - " + name);
 //        }
     }
-
-    // nice: image receiving, storing code
-//    // Receiving, logging, saving images
-//    BufferedImage image = ImageIO.read(inputStream);
-//    System.out.printf("Successfully saved image: %sx%s\n", image.getWidth(), image.getHeight());
-//    ImageIO.write(image, "png", new File("E:\\Coding\\Code\\Gava\\src\\server\\upload\\" + String.valueOf(std.getId()) + ".png"));
-//
-//    // Clearing out leftover bytes
-//    System.out.println("Lefover bytes: " + inputStream.available());
-//    inputStream.skipBytes(20);
-
 
     public String getName() {
         return name;

@@ -87,9 +87,10 @@ public class User {
         this.wallet = 1000;
     }
 
-    public void edit_profile (String n, String w, String g,
+    public void edit_profile (String n, String l, String w, String g,
                               String e, String c) {
         full_name = n;
+        location = l;
         work = w;
         gender = g;
         email = e;

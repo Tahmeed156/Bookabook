@@ -11,6 +11,7 @@ public class Server {
 
     public static ArrayList<Connection> clients = new ArrayList<>();
     private static ThreadGroup clientGroup = new ThreadGroup("clients");
+    public static SessionFactory sessionFactory;
 
     public static void main (String [] args) throws IOException {
 
@@ -18,6 +19,9 @@ public class Server {
         ServerSocket server = new ServerSocket(9899);
         Socket socket;
         System.out.println("Server running!");
+
+        // Configuring hibernate
+        sessionFactory = new Configuration().configure("/bookabook/server/hibernate.cfg.xml").buildSessionFactory();
 
         // Accepting new clients
         while (true) {

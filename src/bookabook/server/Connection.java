@@ -2,26 +2,15 @@ package bookabook.server;
 
 
 import bookabook.objects.Bookser;
-import bookabook.server.models.User;
-import com.mysql.cj.xdevapi.JsonArray;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.print.Book;
 import java.io.*;
 import java.net.Socket;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 @SuppressWarnings("Duplicates")
 class Connection extends Thread {
@@ -56,14 +45,9 @@ class Connection extends Thread {
             // Getting requests (Json objects)
             JSONObject request, response;
             try {
-                // System.out.println("HELLO");
-                String line = input.readUTF();
-                System.out.println(line);
-                request = new JSONObject(line);
-                System.out.println(request.toString());
-
+                request = new JSONObject(input.readUTF());
+                System.out.println(getName() + " sent request: " + request.toString());
                 String type = request.getString("type");
-                System.out.println("The message type is: " + type);
 
                 switch (type) {
 
@@ -101,6 +85,7 @@ class Connection extends Thread {
                                 request.getString("message_type"),
                                 request.getString("body")
                         );
+                        broadcast(request.getString("body"), request.getString("username"));
                         send(response.toString());
                         break;
                     }
@@ -132,6 +117,18 @@ class Connection extends Thread {
                     case "books/trending": {
 
                         ArrayList<Bookser> books = db.trending_books();
+                        // output.writeObject(books);
+                        System.out.println("Sending images: " + books.size());
+                        for (Bookser book : books) {
+                            book.sendImage(output);
+                        }
+                        System.out.println("Successfully sent all objects and images!");
+
+                        break;
+                    }
+
+                    case "books/similar": {
+                        ArrayList<Bookser> books = db.similar_books(request.getString("genre"));
                         output.writeObject(books);
                         System.out.println("Sending images: " + books.size());
                         for (Bookser book : books) {
@@ -166,6 +163,12 @@ class Connection extends Thread {
                         break;
                     }
 
+                    case "books/details": {
+//                        response = db.rent_book(
+//
+//                        )
+                    }
+
                     case "review/add": {
                         response = db.add_review(
                                 request.getInt("reviewer_id"),
@@ -183,21 +186,24 @@ class Connection extends Thread {
                         break;
                     }
 
-
-
-                    //todo TMD Edit Profile Page
                     case "profile/edit": {
-//                        response = db.edit_profile(
-//                                request.getInt("user_id"),
-//                                request.getString("name"),
-//                                request.getString("loc"),
-//                                request.getString("work"),
-//                                request.getString("gender"),
-//                                request.getString("email"),
-//                                request.getString("contact_no")
-//                        );
-//                        send(response);
-                        // todo send User Image to server
+                        response = db.edit_profile(
+                                request.getInt("user_id"),
+                                request.getString("name"),
+                                request.getString("loc"),
+                                request.getString("work"),
+                                request.getString("gender"),
+                                request.getString("email"),
+                                request.getString("contact_no")
+                        );
+
+                        // receiving and saving profile picture
+                        // BufferedImage image = ImageIO.read(input);
+                        // ImageIO.write(image, "png", new File("D:\\Bookabook\\src\\bookabook\\server\\images\\users\\" + String.valueOf(request.getInt("user_id")) + ".png" ));
+                        // input.skipBytes(16);
+
+                        // return response
+                        send(response);
                         break;
                     }
 
@@ -284,10 +290,10 @@ class Connection extends Thread {
     private void login(String username, String id) {
         System.out.println("3.5");
         setName(username);
-        System.out.println(username + " connected to the server");
+        System.err.println(username + " connected to the server");
         BufferedImage image;
         try {
-            image = ImageIO.read(new File("E:\\Projects\\CSE\\BookABook\\Code\\Bookabook\\src\\bookabook\\client\\Pictures\\users\\" +
+            image = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\server\\images\\users\\" +
                     id + ".png"));
             ImageIO.write(image, "png", output);
         }
@@ -303,6 +309,16 @@ class Connection extends Thread {
         }
         catch (IOException e) {
             log("Cannot output to client");
+        }
+    }
+
+    // Sending the message to all users
+    private void broadcast(String body, String username) {
+        for (Connection c: Server.clients) {
+            // Skip broadcast if user is same
+            if (c.getName().equals(username))
+                continue;
+            send(body);
         }
     }
 
