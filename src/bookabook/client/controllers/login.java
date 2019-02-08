@@ -134,6 +134,7 @@ public class login {
                     dashboard.wallet = userCon.get("wallet","0");
                     dashboard.userId = userCon.get("id","1");
 
+
                     toast.set("SUCCESSFULLY SIGNED UP","#5CB85C");
                     Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
                 }

@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.Socket;
@@ -76,6 +77,13 @@ class Connection extends Thread {
                                 request.getString("dob"),
                                 request.getString("email")
                         );
+                        if(Boolean.valueOf(response.getString("success")))
+                        {
+                            File file = new File(path+"default.png");
+                            BufferedImage bi = ImageIO.read(file);
+                            File outputfile = new File(path + response.getInt("id")+".png");
+                            ImageIO.write(bi, "png", outputfile);
+                        }
                         send(response.toString());
                         break;
                     }

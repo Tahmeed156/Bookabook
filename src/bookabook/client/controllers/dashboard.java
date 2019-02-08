@@ -284,6 +284,23 @@ public class dashboard {
             }
         }
 
+        for(int i = 0; i<tVbox.length; i++)
+        {
+            if(timgv[i].isHover())
+            {
+                tVbox[i].setStyle("-fx-background-color: #d9d9d9");
+            }
+        }
+
+
+        for(int i = 0; i<rVbox.length; i++)
+        {
+            if(rimgv[i].isHover())
+            {
+                rVbox[i].setStyle("-fx-background-color: #d9d9d9");
+            }
+        }
+
     }
 
     public void endHoverBox(MouseEvent event) {
@@ -291,6 +308,24 @@ public class dashboard {
             if (!stck[i].isHover()) {
                 stck[i].setStyle("-fx-background-color:#3b3838;");
                 lbl[i].setTextFill(Color.rgb(217, 217, 217));
+            }
+        }
+
+
+        for(int i = 0; i<tVbox.length; i++)
+        {
+            if(!timgv[i].isHover())
+            {
+                tVbox[i].setStyle("-fx-background-color: #ffffff");
+            }
+        }
+
+
+        for(int i = 0; i<rVbox.length; i++)
+        {
+            if(!rimgv[i].isHover())
+            {
+                rVbox[i].setStyle("-fx-background-color: #ffffff");
             }
         }
 
@@ -439,7 +474,6 @@ public class dashboard {
         @Override
         public Void call() throws Exception {
             try {
-
                 // Gets profile picture from the server
                 if (dashboard.proPic==null) {
                     Main.connection.getProPic();
@@ -512,6 +546,7 @@ public class dashboard {
                 // todo NHS: use this thread to get back info on rent out and rented books
 
             } catch (Exception e) {
+                toast.set("COULDN'T LOAD BOOKS","#f0ad4e");
                 System.out.println("Couldn't load books");
             }
 

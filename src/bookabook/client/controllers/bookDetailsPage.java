@@ -164,7 +164,7 @@ public class bookDetailsPage {
 
     public void initialize(String s) throws IOException, ClassNotFoundException, JSONException {
         parent.getChildren().add(toast.get());
-        System.out.println(s);
+        //System.out.println(s);
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
         bookGenre = "Fantasy";
@@ -484,7 +484,7 @@ public class bookDetailsPage {
         else
         {
             JSONObject response = new JSONObject(Main.connection.reviewAdd(
-                    1,// static
+                    Integer.parseInt(dashboard.userId),
                     1,//static
                     bookReview.getText()
                     ));

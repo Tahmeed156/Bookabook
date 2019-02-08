@@ -132,6 +132,7 @@ public class Client {
             output.writeUTF(request.toString());
             dashboard.proPic = ImageIO.read(input);
             input.skipBytes(16);
+            System.out.println("1");
         }
 
     }
