@@ -19,9 +19,8 @@ class Connection extends Thread {
     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
-    private String path = dir + "Bookabook\\src\\bookabook\\server\\images\\users\\";
-
-
+    private String path_user = dir + "Bookabook\\src\\bookabook\\server\\images\\users\\";
+    private String path_book = dir + "Bookabook\\src\\bookabook\\server\\images\\books\\";
 
     private DataInputStream input;
     private ObjectOutputStream output;
@@ -79,9 +78,9 @@ class Connection extends Thread {
                         );
                         if(Boolean.valueOf(response.getString("success")))
                         {
-                            File file = new File(path+"default.png");
+                            File file = new File(path_user+"default.png");
                             BufferedImage bi = ImageIO.read(file);
-                            File outputfile = new File(path + response.getInt("id")+".png");
+                            File outputfile = new File(path_user + response.getInt("id")+".png");
                             ImageIO.write(bi, "png", outputfile);
                         }
                         send(response.toString());
@@ -216,7 +215,7 @@ class Connection extends Thread {
                         // receiving and saving profile picture
                         if(response.getBoolean("change_pic")) {
                             BufferedImage image = ImageIO.read(input);
-                            ImageIO.write(image, "png", new File(path + request.getInt("user_id") + ".png"));
+                            ImageIO.write(image, "png", new File(path_user + request.getInt("user_id") + ".png"));
                             input.skipBytes(16);
                         }
 
@@ -246,8 +245,26 @@ class Connection extends Thread {
 
                     // todo TMD to rent out a book
                     case "books/rent_out":{
-                        // see rentOutBook func from Client.
-                        // add mechanism to input book image
+                        response = db.rent_out_book(
+                                request.getInt("user_id"),
+                                request.getString("book"),
+                                request.getString("author"),
+                                request.getDouble("rent"),
+                                request.getDouble("deposit"),
+                                request.getString("genre"),
+                                request.getString("print"),
+                                request.getString("condition"),
+                                request.getString("review"),
+                                request.getString("year_bought")
+                        );
+                        if(Boolean.valueOf(response.getString("success")))
+                        {
+                            BufferedImage image = ImageIO.read(input);
+                            ImageIO.write(image, "png", new File(path_book + request.getString("book") + ".png"));
+                            input.skipBytes(16);
+                        }
+                        send(response.toString());
+                        break;
                     }
 
 
@@ -314,7 +331,7 @@ class Connection extends Thread {
         System.err.println(username + " connected to the server");
         BufferedImage image;
         try {
-            image = ImageIO.read(new File(path + id + ".png"));
+            image = ImageIO.read(new File(path_user + id + ".png"));
             ImageIO.write(image, "png", output);
         }
         catch (IOException e) {

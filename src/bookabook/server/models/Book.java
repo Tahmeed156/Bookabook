@@ -62,7 +62,8 @@ public class Book {
         author = a;
     }
 
-    public void rent (String n, String a, double r, double d, String i, String g) {
+    public void rent (int uid, String n, String a, double r, double d, String i, String g) {
+        owner = new User(uid);
         name = n;
         author = a;
         rent = r;

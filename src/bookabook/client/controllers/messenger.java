@@ -126,7 +126,7 @@ public class messenger {
         if(start>0){ upArrow.setVisible(true);}
         index = start;
 
-        JSONArray response_arr1 = new JSONArray(Main.connection.getOnline(dashboard.userName));
+        JSONArray response_arr1 = new JSONArray(Main.connection.getOnline(dashboard.user));
         for (int i=0; i<response_arr1.length(); i++) {
             online.add(response_arr1.get(i).toString());
         }

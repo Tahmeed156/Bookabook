@@ -534,6 +534,20 @@ public class dashboard {
                     timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
                 }
 
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // populating trending
+                        tIndex = helper.initiate(tname, tauthor, timgs, tstckRArrow, tVbox, tlabel, tAuthorLabel, timgv,
+                                tIndex, 3);
+
+                        // todo NHS: populate rented and rented out books
+                        // todo NHS: rented -> how long;
+                        // todo NHS: rented out -> who rented , how long;
+                    }
+                });
+
                 // Getting latest books from server
                 latestBooks = Main.connection.latest_books("books/latest", "");
                 for (Bookser b : latestBooks) {
@@ -553,10 +567,6 @@ public class dashboard {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    // populating trending
-                    tIndex = helper.initiate(tname, tauthor, timgs, tstckRArrow, tVbox, tlabel, tAuthorLabel, timgv,
-                            tIndex, 3);
-
                     // populating latest
                     tIndex = helper.initiate(rname, rauthor, rimgs, rstckRArrow, rVbox, rlabel, rAuthorLabel, rimgv,
                             rIndex, 3);

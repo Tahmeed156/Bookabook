@@ -1,13 +1,10 @@
 package bookabook.server;
 
-import antlr.debug.MessageAdapter;
 import bookabook.objects.Bookser;
 import bookabook.server.models.*;
 
 // Hibernate components
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -181,6 +178,40 @@ public class Database {
         return response;
     }
 
+    public JSONObject rent_out_book (
+            int uid, String n, String a, double rent, double d,
+            String g, String p, String c, String review, String y
+    ) throws JSONException {
+        startSession();
+        Book b = new Book();
+        JSONObject bookInfo = new JSONObject();
+        try {
+            bookInfo.put("print", p);
+            bookInfo.put("condition", c);
+            bookInfo.put("review", review);
+            bookInfo.put("year_bought", y);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        b.rent(
+                uid,
+                n,
+                a,
+                rent,
+                d,
+                bookInfo.toString(),
+                g
+        );
+        session.save(b);
+        JSONObject response = new JSONObject();
+        response.put("success","true");
+        endSession();
+        return response;
+
+    }
+
     // =========================================  DASHBOARD BOOKS
 
     public ArrayList<Bookser> latest_books () {
@@ -331,7 +362,7 @@ public class Database {
     public JSONArray online(String username) {
         JSONArray response = new JSONArray();
         for (Connection c: Server.clients) {
-            if (c.isAlive() &&  !c.getName().equals(username))
+            if (c.isAlive() && !c.getName().equals(username))
                 response.put(c.getName());
         }
         return response;
