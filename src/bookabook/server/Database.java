@@ -14,9 +14,7 @@ import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @SuppressWarnings("Duplicates")
 public class Database {
@@ -274,8 +272,8 @@ public class Database {
         q.setParameter("str", str);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
-        for (int i=0; i<books.size(); i++) {
-            Book b = (Book) books.get(i);
+        for (Object book : books) {
+            Book b = (Book) book;
             Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
@@ -283,18 +281,117 @@ public class Database {
         System.out.println("Successful queries!");
         endSession();
         return book_objects;
+    }
+
+    public JSONArray upcoming_books(int user_id) throws JSONException {
+        startSession();
+
+        Query q = session.createQuery("from Rent where rentee = :r");
+        q.setParameter("r", new User(user_id));
+
+        List results = q.getResultList();
+        List<JSONObject> jsonValues = new ArrayList<>();
+
+        for (Object obj: results) {
+            Rent r = (Rent) obj;
+            // Determining number of days till submission
+            Date n = new Date();
+            int date = (int) (r.getRenturn_date().getTime() - n.getTime())/(1000*3600*24);
+            // Preparing JSONObject for each entry
+            JSONObject rj = new JSONObject();
+            rj.put("book_name", r.getBook().getName());
+            rj.put("renter_name", r.getRenter().getFull_name());
+            rj.put("date", date);
+            jsonValues.add(rj);
+        }
+
+        // Sorting the list
+        jsonValues.sort((a, b) -> {
+            Integer valB;
+            Integer valA;
+            try {
+                valB = b.getInt("date");
+                valA = a.getInt("date");
+                return valA.compareTo(valB);
+            } catch (JSONException e) {
+                // Can't sort list
+                e.printStackTrace();
+                return 0;
+            }
+        });
+
+        // Take elements from the sorted list and put it in JSONArray
+        JSONArray response = new JSONArray();
+        for (JSONObject j: jsonValues) {
+            response.put(j);
+        }
+
+        endSession();
+        return response;
+    }
+
+    public JSONArray shared_books(int user_id) throws JSONException {
+        startSession();
+
+        Query q = session.createQuery("from Rent where renter = :r");
+        q.setParameter("r", new User(user_id));
+
+        List results = q.getResultList();
+        List<JSONObject> jsonValues = new ArrayList<>();
+
+        for (Object obj: results) {
+            Rent r = (Rent) obj;
+            // Determining number of days till submission
+            Date n = new Date();
+            int date = (int) (r.getRenturn_date().getTime() - n.getTime())/(1000*3600*24);
+            // Preparing JSONObject for each entry
+            JSONObject rj = new JSONObject();
+            rj.put("book_name", r.getBook().getName());
+            rj.put("rentee_name", r.getRentee().getFull_name());
+            rj.put("date", date);
+            // Adding JSONObject to the list
+            jsonValues.add(rj);
+        }
+
+        // Sorting the list
+        jsonValues.sort((a, b) -> {
+            Integer valB;
+            Integer valA;
+            try {
+                valB = b.getInt("date");
+                valA = a.getInt("date");
+                return valA.compareTo(valB);
+            } catch (JSONException e) {
+                // Can't sort list
+                e.printStackTrace();
+                return 0;
+            }
+        });
+
+        // Take elements from the sorted list and put it in JSONArray
+        JSONArray response = new JSONArray();
+        for (JSONObject j: jsonValues) {
+            response.put(j);
+        }
+
+        endSession();
+        return response;
     }
 
     // ========================================   PROFILE PAGE BOOKS
 
-    public ArrayList<Bookser> rented_books() {
+    public ArrayList<Bookser> rented_books(int user_id) {
         startSession();
 
-        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
-        List books = q.getResultList();
+        Query q = session.createQuery("from Rent where rentee = :r").setFirstResult(0).setMaxResults(8);
+        q.setParameter("r", new User (user_id));
+
+        List rents = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
-        for (int i=0; i<books.size(); i++) {
-            Book b = (Book) books.get(i);
+
+        for (Object rent: rents) {
+            Rent r = (Rent) rent;
+            Book b = r.getBook();
             Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
@@ -304,14 +401,18 @@ public class Database {
         return book_objects;
     }
 
-    public ArrayList<Bookser> rented_out_books () {
+    public ArrayList<Bookser> rented_out_books (int user_id) {
         startSession();
 
-        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
-        List books = q.getResultList();
+        Query q = session.createQuery("from Rent where renter = :r").setFirstResult(0).setMaxResults(8);
+        q.setParameter("r", new User (user_id));
+
+        List rents = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
-        for (int i=0; i<books.size(); i++) {
-            Book b = (Book) books.get(i);
+
+        for (Object rent: rents) {
+            Rent r = (Rent) rent;
+            Book b = r.getBook();
             Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
@@ -374,7 +475,9 @@ public class Database {
         startSession();
 
         JSONArray response = new JSONArray();
-        Query q = session.createQuery("from Review order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        // todo TMD: remove limit or paginate
+        Query q = session.createQuery("from Review where Book = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        q.setParameter("b", new Book(book_id));
         List reviews = q.getResultList();
         for (Object review1 : reviews) {
             Review r = (Review) review1;

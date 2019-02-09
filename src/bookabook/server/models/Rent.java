@@ -45,4 +45,27 @@ public class Rent {
         renturn_date = calendar.getTime();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public Date getRent_date() {
+        return rent_date;
+    }
+
+    public Date getRenturn_date() {
+        return renturn_date;
+    }
+
+    public User getRenter() {
+        return renter;
+    }
+
+    public User getRentee() {
+        return rentee;
+    }
 }

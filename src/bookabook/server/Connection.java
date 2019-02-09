@@ -239,15 +239,20 @@ class Connection extends Thread {
                         break;
                     }
 
-                    // todo TMD for dashboard from getBooks function from Client
                     case "books/upcoming": {
-                        // JsonArray containing book_name, renter_name, days_left. Shortest time left should be
-                        // at the end of the array
+                        JSONArray response_arr = db.upcoming_books(
+                                request.getInt("user_id")
+                        );
+                        send(response_arr.toString());
+                        break;
                     }
 
                     case "books/shared": {
-                        // JsonArray containing book_name, rentee_name, days_left. Shortest time left should be
-                        // at the end of the array
+                        JSONArray response_arr = db.shared_books(
+                                request.getInt("user_id")
+                        );
+                        send(response_arr.toString());
+                        break;
                     }
 
 
@@ -275,10 +280,8 @@ class Connection extends Thread {
                         break;
                     }
 
-
-                    // todo TMD for book details page
                     case "books/detail" : {
-                        //
+
                     }
 
                     // todo TMD do these two for profile page books request
