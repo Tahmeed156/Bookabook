@@ -163,11 +163,32 @@ public class Database {
     public JSONObject rent_book (int b, int w, int rtr, int rte) throws JSONException {
         startSession();
 
+        // Changing the number of times rented
+        Query query_1 = session.createQuery("from Book where id = :b");
+        query_1.setParameter("b", b);
+        Book book = (Book) query_1.uniqueResult();
+        book.increase_times_rented();
+        session.save(book);
+
+        // Changing wallet for renter
+        Query query_2 = session.createQuery("from User where id = :rtr");
+        query_2.setParameter("rtr", rtr);
+        User renter = (User) query_2.uniqueResult();
+        double renter_wallet = renter.increment_wallet(w*book.getRent() + book.getDeposit());
+
+        // Changing wallet for rentee
+        Query query_3 = session.createQuery("from User where id = :rte");
+        query_3.setParameter("rte", rte);
+        User rentee = (User) query_3.uniqueResult();
+        double rentee_wallet = rentee.decrement_wallet(w*book.getRent() + book.getDeposit());
+
         JSONObject response = new JSONObject();
         try {
             Rent r = new Rent(b, w, rtr, rte);
             session.save(r);
             response.put("success", "true");
+            response.put("renter_wallet", renter_wallet);
+            response.put("rentee_wallet", rentee_wallet);
         }
         catch (Exception e) {
             response.put("success", "false");
@@ -232,8 +253,7 @@ public class Database {
     public ArrayList<Bookser> trending_books () {
         startSession();
 
-        // bug TMD: Number of rents to determine trending books
-        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        Query q = session.createQuery("from Book order by times_rented").setFirstResult(0).setMaxResults(8);
         // bug TMD: Paginate all these
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();

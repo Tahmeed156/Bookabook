@@ -97,6 +97,16 @@ public class User {
         contact_no = c;
     }
 
+    public double increment_wallet(double x) {
+        wallet = wallet + x;
+        return wallet;
+    }
+
+    public double decrement_wallet(double x) {
+        wallet = wallet - x;
+        return wallet;
+    }
+
     // ================= GETTERS
 
     public String getUsername() {

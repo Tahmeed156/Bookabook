@@ -91,6 +91,10 @@ public class Book {
         this.available = available;
     }
 
+    public void increase_times_rented() {
+        times_rented++;
+    }
+
     public int getId() {
         return id;
     }
