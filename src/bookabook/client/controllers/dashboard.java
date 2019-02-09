@@ -19,7 +19,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 
 import java.awt.image.BufferedImage;
@@ -218,12 +220,14 @@ public class dashboard {
     List<String> tauthor = new ArrayList<>();
     List<Image> timgs = new ArrayList<>();
     List<Bookser> trendingBooks;
+    List<Integer> tID = new ArrayList<>();
 
     // list for recommended
     List<String> rname = new ArrayList<>();
     List<String> rauthor = new ArrayList<>();
     List<Image> rimgs = new ArrayList<>();
     List<Bookser> latestBooks;
+    List<Integer> rID = new ArrayList<>();
 
     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
@@ -267,11 +271,7 @@ public class dashboard {
         sharedBLbl.setText(rentedOutBooks);
         walletLbl.setText(wallet);
 
-        //populate upcoming
-        uIndex = helper.initiate(uLabel, upcoming, 5, 370, lblStyle, downArrow1, uIndex,
-                3, true, 0);
-        sIndex = helper.initiate(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2, sIndex,
-                3, true, 0);
+
     }
 
     public void onHoverBox(MouseEvent event) {
@@ -444,29 +444,17 @@ public class dashboard {
         // todo NHS: pass on book id to next page
         for (int i = 0; i < timgv.length; i++) {
             if (event.getSource() == timgv[i]) {
-                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tlabel[i].getText());
+                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tID.get(tIndex+i));
             }
         }
 
         for (int i = 0; i < rimgv.length; i++) {
             if (event.getSource() == rimgv[i]) {
-                Windows w = new Windows(rimgv[i], "../fxml/bookDetailsPage.fxml", rlabel[i].getText());
+                Windows w = new Windows(rimgv[i], "../fxml/bookDetailsPage.fxml",1);// rlabel[i].getText());
             }
         }
     }
 
-    public void onLabelHover(MouseEvent event) {
-        ((Label) event.getSource()).setUnderline(true);
-    }
-
-
-    public void endLabelHover(MouseEvent event) {
-        ((Label) event.getSource()).setUnderline(false);
-    }
-
-    public void labelClicked(MouseEvent event) {
-        Windows w = new Windows((Label) event.getSource(), "../fxml/bookDetailsPage.fxml", ((Label) event.getSource()).getText());
-    }
 
     // One thread class to load them all
 
@@ -482,53 +470,68 @@ public class dashboard {
                 Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
                 imgCircle.setFill(new ImagePattern(imgperson));
 
-//                JSONArray response_arr = new JSONArray(Main.connection.getBooks(
-//                        "books/upcoming",
-//                        Integer.parseInt(dashboard.userId)
-//                ));
-//
-//                for (int i=0; i<response_arr.length(); i++) {
-//                    JSONObject upcoming = response_arr.getJSONObject(i);
-//                    // bookname
-//                    upBook.add(upcoming.getString("book"));
-//                    // renter
-//                    upRenter.add(upcoming.getString("renter"));
-//                    // time remaining
-//                    udaysLeft.add((int)upcoming.getDouble("days"));
-//                }
-//
-//
-//
-//                JSONArray response_arr1 = new JSONArray(Main.connection.getBooks(
-//                        "books/shared",
-//                        Integer.parseInt(dashboard.userId)
-//                ));
-//
-//                for (int i=0; i<response_arr1.length(); i++) {
-//                    JSONObject shared = response_arr1.getJSONObject(i);
-//                    // bookname
-//                    sBook.add(shared.getString("book"));
-//                    // renter
-//                    sRenter.add(shared.getString("renter"));
-//                    // time remaining
-//                    sdaysLeft.add((int)shared.getDouble("days"));
-//                }
+                JSONArray response_arr = new JSONArray(Main.connection.getBooks(
+                        "books/upcoming",
+                        Integer.parseInt(dashboard.userId)
+                ));
+
+                for (int i=0; i<response_arr.length(); i++) {
+                    JSONObject upcoming = response_arr.getJSONObject(i);
+                    // bookname
+                    upBook.add(upcoming.getString("book_name"));
+                    // renter
+                    upRenter.add(upcoming.getString("renter_name"));
+                    // time remaining
+                    udaysLeft.add((int)upcoming.getDouble("date"));
+                }
 
 
-                // initiate uLabel and sLabel lists
-                for(int i=0; i<upBook.size(); i++)
-                {
-                    uLabel.add(upBook.get(i) + " | " + upRenter.get(i) + "\n" + udaysLeft.get(i) + " days");
+
+
+                JSONArray response_arr1 = new JSONArray(Main.connection.getBooks(
+                        "books/shared",
+                        Integer.parseInt(dashboard.userId)
+                ));
+
+                for (int i=0; i<response_arr1.length(); i++) {
+                    JSONObject shared = response_arr1.getJSONObject(i);
+                    // bookname
+                    sBook.add(shared.getString("book_name"));
+                    // renter
+                    sRenter.add(shared.getString("rentee_name"));
+                    // time remaining
+                    sdaysLeft.add((int)shared.getDouble("date"));
                 }
-                for(int i=0; i<sBook.size(); i++)
-                {
-                    sLabel.add(sBook.get(i) + " | " + sRenter.get(i) + "\n" + sdaysLeft.get(i) + " days");
-                }
+
+
+
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // initiate uLabel and sLabel lists
+                        for(int i=0; i<upBook.size(); i++)
+                        {
+                            uLabel.add(upBook.get(i) + " | " + upRenter.get(i) + "\n" + udaysLeft.get(i) + " days");
+                        }
+                        for(int i=0; i<sBook.size(); i++)
+                        {
+                            sLabel.add(sBook.get(i) + " | " + sRenter.get(i) + "\n" + sdaysLeft.get(i) + " days");
+                        }
+
+                        //populate upcoming
+                        uIndex = helper.initiate(uLabel, upcoming, 5, 370, lblStyle, downArrow1, uIndex,
+                                3, true, 0);
+                        sIndex = helper.initiate(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2, sIndex,
+                                3, true, 0);
+                    }
+                });
 
                 // Getting trending books from server
-                trendingBooks = Main.connection.latest_books("books/trending", "");
+                trendingBooks = Main.connection.latest_books(Integer.valueOf(dashboard.userId),"books/trending", "");
                 // Thread.sleep(5000);
                 for (Bookser b : trendingBooks) {
+                    tID.add(b.getId());
                     tname.add(b.getName());
                     tauthor.add(b.getAuthor());
                     timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
@@ -549,8 +552,9 @@ public class dashboard {
                 });
 
                 // Getting latest books from server
-                latestBooks = Main.connection.latest_books("books/latest", "");
+                latestBooks = Main.connection.latest_books(Integer.valueOf(dashboard.userId),"books/latest", "");
                 for (Bookser b : latestBooks) {
+                    rID.add(b.getId());
                     rname.add(b.getName());
                     rauthor.add(b.getAuthor());
                     rimgs.add(SwingFXUtils.toFXImage(b.getImage(), null));

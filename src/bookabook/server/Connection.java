@@ -168,11 +168,11 @@ class Connection extends Thread {
 
                     case "books/rent": {
                         response = db.rent_book(
-                                request.getInt("renter_id"),
-                                request.getInt("rentee_id"),
                                 request.getInt("book_id"),
-                                request.getInt("week")
-                        );
+                                request.getInt("week"),
+                                request.getInt("renter_id"),
+                                request.getInt("rentee_id")
+                                );
                         send(response.toString());
                         break;
                     }
@@ -181,12 +181,13 @@ class Connection extends Thread {
                         response = db.book_details(
                                 request.getInt("book_id")
                         );
-                        send(response);
+                        System.out.println(response.toString());
+                        send(response.toString());
                         // Getting and sending image for book
-                        BufferedImage image  = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\server\\images\\books\\" + response.getString("book") + ".png"));
+                        BufferedImage image  = ImageIO.read(new File(path_book + response.getString("book") + ".png"));
                         ImageIO.write(image, "png", output);
                         // Getting and sending image for user
-                        image  = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\server\\images\\books\\" + String.valueOf(response.getInt("owner_id")) + ".png"));
+                        image  = ImageIO.read(new File(path_user + String.valueOf(response.getInt("owner_id")) + ".png"));
                         ImageIO.write(image, "png", output);
                         break;
                     }
@@ -286,7 +287,7 @@ class Connection extends Thread {
 
                     // todo TMD do these two for profile page books request
                     case "books/rented": {
-                        ArrayList<Bookser> books = db.rented_books();
+                        ArrayList<Bookser> books = db.rented_books(request.getInt("user_id"));
                         output.writeObject(books);
                         System.out.println("Sending images: " + books.size());
                         for (Bookser book : books) {
@@ -298,7 +299,7 @@ class Connection extends Thread {
                     }
 
                     case "books/rented_out": {
-                        ArrayList<Bookser> books = db.rented_out_books();
+                        ArrayList<Bookser> books = db.rented_out_books(request.getInt("user_id"));
                         output.writeObject(books);
                         System.out.println("Sending images: " + books.size());
                         for (Bookser book : books) {

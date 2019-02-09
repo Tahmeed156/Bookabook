@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
 import bookabook.client.controllers.dashboard;
+import bookabook.client.controllers.bookDetailsPage;
 
 public class Client {
 
@@ -132,7 +133,6 @@ public class Client {
             output.writeUTF(request.toString());
             dashboard.proPic = ImageIO.read(input);
             input.skipBytes(16);
-            System.out.println("1");
         }
 
     }
@@ -238,11 +238,12 @@ public class Client {
     }
 
 
-    public ArrayList<Bookser> latest_books(String type, String query) throws JSONException, IOException, ClassNotFoundException {
+    public ArrayList<Bookser> latest_books(int user_id, String type, String query) throws JSONException, IOException, ClassNotFoundException {
 
         JSONObject request = new JSONObject();
         request.put("type", type);
         request.put("query", query);
+        request.put("user_id",user_id);
         send(request.toString());
         // System.out.println(request.toString());
 
@@ -327,7 +328,14 @@ public class Client {
             System.out.println("Error creating/sending json");
         }
         send(request.toString());
-        return (String) input.readObject();
+        String reply = (String) input.readObject();
+
+        bookDetailsPage.book_image = ImageIO.read(input);
+        input.skipBytes(16);
+        bookDetailsPage.renter_image = ImageIO.read(input);
+        input.skipBytes(16);
+
+        return reply;
     }
 
     public String getProfile(int user_id) throws IOException, ClassNotFoundException {

@@ -312,7 +312,7 @@ public class Database {
             try {
                 valB = b.getInt("date");
                 valA = a.getInt("date");
-                return valA.compareTo(valB);
+                return -valA.compareTo(valB);
             } catch (JSONException e) {
                 // Can't sort list
                 e.printStackTrace();
@@ -360,8 +360,9 @@ public class Database {
             try {
                 valB = b.getInt("date");
                 valA = a.getInt("date");
-                return valA.compareTo(valB);
-            } catch (JSONException e) {
+                return -valA.compareTo(valB);
+            }
+            catch (JSONException e) {
                 // Can't sort list
                 e.printStackTrace();
                 return 0;
@@ -435,6 +436,7 @@ public class Database {
         JSONObject book_info = new JSONObject(book.getBook_info());
         JSONObject response = new JSONObject();
 
+        response.put("success","true");
         response.put("book", book.getName());
         response.put("author", book.getAuthor());
         response.put("rent", book.getRent());
@@ -450,6 +452,7 @@ public class Database {
         response.put("owner_id", owner.getId());
         response.put("owner_name", owner.getFull_name());
         response.put("owner_location", owner.getLocation());
+        response.put("owner_contact", owner.getContact_no());
 
         endSession();
         return response;
@@ -476,18 +479,25 @@ public class Database {
 
         JSONArray response = new JSONArray();
         // todo TMD: remove limit or paginate
-        Query q = session.createQuery("from Review where Book = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
-        q.setParameter("b", new Book(book_id));
-        List reviews = q.getResultList();
-        for (Object review1 : reviews) {
-            Review r = (Review) review1;
-            JSONObject review = new JSONObject();
-            review.put("username", r.getReviewer().getFull_name());
-            System.out.println(r.getReviewer().getFull_name());
-            review.put("body", r.getBody());
-            response.put(review);
+        try {
+            Query q = session.createQuery("from Review where Book = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
+            q.setParameter("b", new Book(book_id));
+            List reviews = q.getResultList();
+            for (Object review1 : reviews) {
+                Review r = (Review) review1;
+                JSONObject review = new JSONObject();
+                review.put("username", r.getReviewer().getFull_name());
+                System.out.println(r.getReviewer().getFull_name());
+                review.put("body", r.getBody());
+                response.put(review);
+            }
         }
-        endSession();
+        catch (Exception e) {
+            System.out.println("No results | " + e.getMessage());
+        }
+        finally {
+            endSession();
+        }
         return response;
     }
 

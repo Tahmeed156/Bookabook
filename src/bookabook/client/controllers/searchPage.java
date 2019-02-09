@@ -309,7 +309,7 @@ public class searchPage{
         // todo NHS: pass on book id
         for (int i = 0; i < imgv.length; i++) {
             if (event.getSource() == imgv[i]) {
-                Windows w = new Windows(imgv[i], "../fxml/bookDetailsPage.fxml", name.get(i));
+                Windows w = new Windows(imgv[i], "../fxml/bookDetailsPage.fxml",1);// name.get(i));
             }
         }
     }
@@ -322,7 +322,7 @@ public class searchPage{
         rent.clear();
         depositArr.clear();
         imgs.clear();
-        searchResults = Main.connection.latest_books("books/search", searchTxt.getText());
+        searchResults = Main.connection.latest_books(Integer.valueOf(dashboard.userId),"books/search", searchTxt.getText());
         for (Bookser b: searchResults) {
             name.add(b.getName());
             author.add(b.getAuthor());
@@ -346,7 +346,7 @@ public class searchPage{
         @Override
         public Void call() throws Exception {
             try {
-                searchResults = Main.connection.latest_books("books/search","");
+                searchResults = Main.connection.latest_books(Integer.valueOf(dashboard.userId),"books/search","");
                 for (Bookser b: searchResults) {
                     name.add(b.getName());
                     author.add(b.getAuthor());

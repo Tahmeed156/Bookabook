@@ -93,7 +93,7 @@ public class rentOutPage {
     @FXML private TextField yearBought;
 
     @FXML private ListView<String> genre;
-    ObservableList<String> genreList = FXCollections.observableArrayList("Action","Comedy","Horror",
+    ObservableList<String> genreList = FXCollections.observableArrayList("Fantasy","Action","Comedy","Horror",
             "Drama","History","Young-Adult","Kids","Classic","Fiction","Non-Fiction","Science");
 
 

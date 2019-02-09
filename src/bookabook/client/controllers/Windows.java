@@ -72,7 +72,7 @@ public class Windows {
         }
     }
 
-    Windows (ImageView b, String n, String book) {
+    Windows (ImageView b, String n, int book) {
         try {
             cornerCase(n);
 
@@ -91,7 +91,7 @@ public class Windows {
     }
 
 
-    Windows (Label b, String n, String book) {
+    Windows (Label b, String n, int book) {
         try {
             cornerCase(n);
 

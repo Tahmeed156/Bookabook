@@ -385,13 +385,13 @@ public class profilePage {
         // todo NHS: pass on book id to next page
         for (int i = 0; i < timgv.length; i++) {
             if (event.getSource() == timgv[i]) {
-                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tlabel[i].getText());
+                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", 1);//tlabel[i].getText());
             }
         }
 
         for (int i = 0; i < bimgv.length; i++) {
             if (event.getSource() == bimgv[i]) {
-                Windows w = new Windows(bimgv[i], "../fxml/bookDetailsPage.fxml", blabel[i].getText());
+                Windows w = new Windows(bimgv[i], "../fxml/bookDetailsPage.fxml",1);// blabel[i].getText());
             }
         }
     }
@@ -409,14 +409,14 @@ public class profilePage {
                     contact.setText(response.optString("contact_no","N/A"));
                 }
 
-                rentedBooks = Main.connection.latest_books("books/rented", "");
+                rentedBooks = Main.connection.latest_books(Integer.valueOf(dashboard.userId), "books/rented", "");
                 for (Bookser b : rentedBooks) {
                     tname.add(b.getName());
                     tauthor.add(b.getAuthor());
                     timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
                 }
 
-                rentedOutBooks = Main.connection.latest_books("books/rented_out", "");
+                rentedOutBooks = Main.connection.latest_books(Integer.valueOf(dashboard.userId),"books/rented_out", "");
                 for (Bookser b : rentedOutBooks) {
                     bname.add(b.getName());
                     bauthor.add(b.getAuthor());

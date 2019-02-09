@@ -79,4 +79,8 @@ public class Bookser implements Serializable {
     public BufferedImage getImage() {
         return image;
     }
+
+    public int getId() {
+        return id;
+    }
 }

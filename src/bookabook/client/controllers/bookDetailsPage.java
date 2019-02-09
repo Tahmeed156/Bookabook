@@ -27,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,6 +37,11 @@ import java.util.prefs.Preferences;
 
 
 public class bookDetailsPage {
+    public static BufferedImage book_image;
+    public static BufferedImage renter_image;
+
+    int renter_id;
+
     @FXML private Pane parent;
     @FXML
     private VBox left;
@@ -84,6 +90,10 @@ public class bookDetailsPage {
     //body
     @FXML private Circle imgCircleCenter;
     @FXML private VBox middleRightVBox;
+    //Labels
+    @FXML private Label owner;
+    @FXML private Label address;
+    @FXML private Label contact;
 
     //book
     @FXML private Label BookName;
@@ -110,6 +120,13 @@ public class bookDetailsPage {
     @FXML private Text similarBook; //use '\n' between the book links;
 
 
+    @FXML private Label lb1;
+    @FXML private Label lb2;
+    @FXML private Label lb3;
+    @FXML private Label lb4;
+    @FXML private Label lb5;
+    Label[] lb;
+
     //Reviews Section
     @FXML private StackPane stckLArrow;
     @FXML private StackPane stckRArrow;
@@ -135,7 +152,7 @@ public class bookDetailsPage {
     String[] allsimilarBooks;
     Integer index;
 
-    static String id;
+    static int id;
     int book_rent;
     int book_deposit;
 
@@ -157,18 +174,16 @@ public class bookDetailsPage {
 //            "Watson 3.5 ★","Bruce  5 ★","Stark  2 ★"));
 
 
-    public void info(String id)
-    {
-        this.id = id;
-    }
 
-    public void initialize(String s) throws IOException, ClassNotFoundException, JSONException {
+    public void initialize(int book_id) throws IOException, ClassNotFoundException, JSONException {
         parent.getChildren().add(toast.get());
-        //System.out.println(s);
+        System.out.println(book_id);
+        id = book_id;
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
         bookGenre = "Fantasy";
         allsimilarBooks = new String[]{"Harry Potter","Lord of the Rings","Percy Jackson"};
+        lb = new Label[]{lb1,lb2,lb3,lb4,lb5};
 
 
         vbx = new VBox[]{Vbox1,Vbox2,Vbox3};
@@ -196,82 +211,36 @@ public class bookDetailsPage {
         walletLbl.setText(wallet);
 
 
-        //middleCenterLabels
-
-        //profilePicture
-        Image imgperson1 = new Image(new File(path+"jon.png").toURI().toString());
-        imgCircleCenter.setFill(new ImagePattern(imgperson1));
 
 
-        Label nameUser1 = new Label("Jon Snow ");
-        nameUser1.setStyle("-fx-font-weight:bold");
 
-
-        Integer renterRentedBooks = 3;
-        //create a ratings Label???
-        Integer reviewsOfrenter = 10;
-
-
-        middleRightVBox.getChildren().addAll(nameUser1,
-                new Label("Rented: "+renterRentedBooks+" Books"),
-                new Label("Reviews: "+reviewsOfrenter));
-
-//       JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(Integer.parseInt(id)));
-//       JSONArray response_arr = new JSONArray(Main.connection.getBookDetails(1));
-//       System.out.println(response_arr.toString());
+//        //setting book details
+//        book_rent = 10;
+//        book_deposit = 300;
+//        BookName.setText("Game of Thrones");
+//        BookAuthor.setText("George R R Martin");
+//        BookRent.setText("Tk "+book_rent+" per week");
+//        BookDeposit.setText("Tk "+book_deposit);
 //
-//        for (int i=0; i<response_arr.length(); i++) {
-//            JSONObject details = response_arr.getJSONObject(i);
-//            // book name
-//            BookName.setText(details.getString("book"));
-//            // author name
-//            BookAuthor.setText(details.getString("author"));
-//            // book rent
-//            book_rent = (int)details.getDouble("rent");
-//            // book deposit
-//            book_deposit = (int)details.getDouble("deposit");
-//            // book print
-//            print.setText(details.getString("print"));
-//            // book condition
-//            condition.setText(details.getString("condition"));
-//            // year bought
-//            yearBought.setText(details.getString("year"));
-//            // times Rented
-//            timesRented.setText(details.getString("times_rented"));
-//            // review
-//            reviewByRenter.setText(details.getString("review"));
-//            // genre
-//            genre.setText(details.getString("genre"));
-//            // similar books
-//            // a list of all similar books sorted by genre
-//            // allSimilarBooks = details.getString("similar");
 //
-//            //todo TMD get image of book and renter
-//        }
+//        BookImg.setImage(new Image(new File(path+"pj.png").toURI().toString()));
+//
+//        print.setText("Original");
+//        condition.setText("Optimal");
+//        yearBought.setText("2017");
+//        timesRented.setText("3");
+//        reviewByRenter.setText("The book is undoubtedly a masterpiece created by George R R Martin. Best thing" +
+//                "that happened to the world after J.K.Rowling.");
+//
+//        genre.setText(bookGenre);
 
-        //setting book details
-        book_rent = 10;
-        book_deposit = 300;
-        BookName.setText("Game of Thrones");
-        BookAuthor.setText("George R R Martin");
-        BookRent.setText("Tk "+book_rent+" per week");
-        BookDeposit.setText("Tk "+book_deposit);
-
-
-        BookImg.setImage(new Image(new File(path+"pj.png").toURI().toString()));
-
-        print.setText("Original");
-        condition.setText("Optimal");
-        yearBought.setText("2017");
-        timesRented.setText("3");
-        reviewByRenter.setText("The book is undoubtedly a masterpiece created by George R R Martin. Best thing" +
-                "that happened to the world after J.K.Rowling.");
-
-        genre.setText(bookGenre);
-
-        for(String a:allsimilarBooks)
+        for(int i = 0; i<5; i++)
         {
-            similarBook.setText(similarBook.getText().concat(a + '\n'));
+            if(i>=allsimilarBooks.length)
+            {
+                lb[i].setText("");
+            }
+            else{lb[i].setText(allsimilarBooks[i]);}
         }
 
         Loading l = new Loading();
@@ -427,10 +396,10 @@ public class bookDetailsPage {
         }
         else {
             JSONObject response = new JSONObject(Main.connection.rentBook(
-                    1,
+                    id,
                     Integer.valueOf(weeks.getText()),
-                    2,
-                    2
+                    renter_id,
+                    Integer.parseInt(dashboard.userId)
             ));
 
             if (Boolean.valueOf(response.getString("success"))) {
@@ -489,12 +458,33 @@ public class bookDetailsPage {
         }
     }
 
+    public void onLabelHover(MouseEvent event) {
+        ((Label) event.getSource()).setUnderline(true);
+    }
+
+
+    public void endLabelHover(MouseEvent event) {
+        ((Label) event.getSource()).setUnderline(false);
+    }
+
+    public void labelClicked(MouseEvent event) {
+        Windows w = new Windows((Label) event.getSource(), "../fxml/bookDetailsPage.fxml", 1);
+    }
+
     class Loading extends Task {
         @Override
         public Void call() throws Exception {
             try {
+                //populate info
+                //JSONObject response = new JSONObject(Main.connection.getBookDetails(Integer.parseInt(id)));
+                //System.out.println(response.toString());
+
+
+
+
+
                 // Populating reviews
-                JSONArray response_arr1 = new JSONArray(Main.connection.reviewGet(1));
+                JSONArray response_arr1 = new JSONArray(Main.connection.reviewGet(id));
                 for (int i=0; i<response_arr1.length(); i++) {
                     JSONObject review = response_arr1.getJSONObject(i);
                     // username
@@ -518,15 +508,57 @@ public class bookDetailsPage {
                 }
 
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("Couldn't load reviews");
+
             }
 
 
-//            Platform.runLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                }
-//            });
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject response = null;
+                    try {
+                        response = new JSONObject(Main.connection.getBookDetails(id));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    if (Boolean.valueOf(response.getString("success"))){
+                        BookName.setText(response.getString("book"));
+                        // author name
+                        BookAuthor.setText(response.getString("author"));
+                        // book rent
+                        book_rent = (int)response.getDouble("rent");
+                        // book deposit
+                        book_deposit = (int)response.getDouble("deposit");
+                        // book print
+                        print.setText(response.getString("print"));
+                        // book condition
+                        condition.setText(response.getString("condition"));
+                        // year bought
+                        yearBought.setText(response.getString("year_bought"));
+                        // times Rented
+                        timesRented.setText(String.valueOf(response.getInt("times_rented")));
+                        // review
+                        reviewByRenter.setText(response.getString("review"));
+                        // genre
+                        genre.setText(response.getString("genre"));
+                        //get renter id
+                        renter_id = response.getInt("owner_id");
+                        owner.setText(response.getString("owner_name"));
+                        address.setText(response.getString("owner_location"));
+                        contact.setText(response.getString("owner_contact"));
+                    }
+
+                    BookRent.setText(Integer.toString(book_rent));
+                    BookDeposit.setText(Integer.toString(book_deposit));
+                    BookImg.setImage(SwingFXUtils.toFXImage(book_image, null));
+                    Image imgperson1 = SwingFXUtils.toFXImage(renter_image, null);
+                    imgCircleCenter.setFill(new ImagePattern(imgperson1));
+                }
+            });
 
             return null;
         }

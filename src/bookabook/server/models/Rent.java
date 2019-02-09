@@ -33,6 +33,10 @@ public class Rent {
     @JoinColumn(name = "rentee_id", nullable = false)
     private User rentee;
 
+    public Rent () {
+
+    }
+
     public Rent (int b, int w, int rtr, int rte) {
         rent_date = new Date();
         renter = new User(rtr);
