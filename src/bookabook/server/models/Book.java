@@ -17,7 +17,6 @@ public class Book {
     private String name;
 
     @Column(name = "author", length = 32, nullable = false)
-
     private String author;
 
     @ManyToOne
@@ -29,6 +28,9 @@ public class Book {
 
     @Column(name = "deposit", scale = 4, precision = 2) // Deposit (initial)
     private double deposit;
+
+    @Column(name = "times_rented")
+    private int times_rented;
 
     @Column(name = "timestamp")
     @Temporal(value = TemporalType.TIMESTAMP)
@@ -62,7 +64,8 @@ public class Book {
         author = a;
     }
 
-    public void rent (String n, String a, double r, double d, String i, String g) {
+    public void rent (int uid, String n, String a, double r, double d, String i, String g) {
+        owner = new User(uid);
         name = n;
         author = a;
         rent = r;
@@ -122,5 +125,9 @@ public class Book {
 
     public boolean isAvailable() {
         return available;
+    }
+
+    public int getTimes_rented() {
+        return times_rented;
     }
 }

@@ -258,7 +258,7 @@ public class rentOutPage {
                     condition.getValue(),
                     review.getText(),
                     yearBought.getText(),
-                    img.getImage()
+                    file
             ));
 
 

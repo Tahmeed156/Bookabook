@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class Bookser implements Serializable {
 
     private static final long serialVersionUID = 12345L;
+    private int id;
     private String name;
     private String author;
     private double rent;
@@ -21,7 +22,8 @@ public class Bookser implements Serializable {
     // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\server\\images\\books\\";
 
-    public Bookser(String n, String a, double r, double d) {
+    public Bookser(int i, String n, String a, double r, double d) {
+        id = i;
         name = n;
         author = a;
         rent = r;

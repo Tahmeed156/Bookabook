@@ -182,6 +182,7 @@ public class Database {
             int uid, String n, String a, double rent, double d,
             String g, String p, String c, String review, String y
     ) throws JSONException {
+        startSession();
         Book b = new Book();
         JSONObject bookInfo = new JSONObject();
         try {
@@ -195,6 +196,7 @@ public class Database {
         }
 
         b.rent(
+                uid,
                 n,
                 a,
                 rent,
@@ -202,6 +204,12 @@ public class Database {
                 bookInfo.toString(),
                 g
         );
+        session.save(b);
+        JSONObject response = new JSONObject();
+        response.put("success","true");
+        endSession();
+        return response;
+
     }
 
     // =========================================  DASHBOARD BOOKS
@@ -214,7 +222,7 @@ public class Database {
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
             Book b = (Book) books.get(i);
-            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
 
@@ -233,7 +241,7 @@ public class Database {
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
             Book b = (Book) books.get(i);
-            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
         System.out.println("Successful queries!");
@@ -250,7 +258,7 @@ public class Database {
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
             Book b = (Book) books.get(i);
-            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
 
@@ -268,7 +276,7 @@ public class Database {
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
             Book b = (Book) books.get(i);
-            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
 
@@ -287,7 +295,7 @@ public class Database {
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
             Book b = (Book) books.get(i);
-            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
 
@@ -304,7 +312,7 @@ public class Database {
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
             Book b = (Book) books.get(i);
-            Bookser bser = new Bookser(b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
+            Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
 
@@ -314,6 +322,37 @@ public class Database {
     }
 
     // ========================================   BOOK DETAILS PAGE
+
+    public JSONObject book_details(int book_id) throws JSONException {
+        startSession();
+
+        Query query = session.createQuery("from Book where id = :i");
+        query.setParameter("i", book_id);
+
+        Book book = (Book) query.uniqueResult();
+        User owner = (User) book.getOwner();
+        JSONObject book_info = new JSONObject(book.getBook_info());
+        JSONObject response = new JSONObject();
+
+        response.put("book", book.getName());
+        response.put("author", book.getAuthor());
+        response.put("rent", book.getRent());
+        response.put("deposit", book.getDeposit());
+        response.put("genre", book.getGenre());
+        response.put("times_rented", book.getTimes_rented());
+
+        response.put("print", book_info.getString("print"));
+        response.put("condition", book_info.getString("condition"));
+        response.put("year_bought", book_info.getString("year_bought"));
+        response.put("review", book_info.getString("review"));
+
+        response.put("owner_id", owner.getId());
+        response.put("owner_name", owner.getFull_name());
+        response.put("owner_location", owner.getLocation());
+
+        endSession();
+        return response;
+    }
 
     public JSONObject add_review(int reviewer_id, int book_id, String body) throws JSONException {
         startSession();
@@ -401,13 +440,13 @@ public class Database {
 
     // ========================================   UTILITY
 
-    private void startSession () {
+    private void startSession() {
         // Opening session
         session = Server.sessionFactory.openSession();
         session.beginTransaction();
     }
 
-    private void endSession () {
+    private void endSession() {
         // Closing session
         session.getTransaction().commit();
         session.close();

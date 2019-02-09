@@ -19,7 +19,8 @@ class Connection extends Thread {
     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
-    private String path = dir + "Bookabook\\src\\bookabook\\server\\images\\users\\";
+    private String path_user = dir + "Bookabook\\src\\bookabook\\server\\images\\users\\";
+    private String path_book = dir + "Bookabook\\src\\bookabook\\server\\images\\books\\";
 
     private DataInputStream input;
     private ObjectOutputStream output;
@@ -77,9 +78,9 @@ class Connection extends Thread {
                         );
                         if(Boolean.valueOf(response.getString("success")))
                         {
-                            File file = new File(path+"default.png");
+                            File file = new File(path_user+"default.png");
                             BufferedImage bi = ImageIO.read(file);
-                            File outputfile = new File(path + response.getInt("id")+".png");
+                            File outputfile = new File(path_user + response.getInt("id")+".png");
                             ImageIO.write(bi, "png", outputfile);
                         }
                         send(response.toString());
@@ -177,9 +178,17 @@ class Connection extends Thread {
                     }
 
                     case "books/details": {
-//                        response = db.rent_book(
-//
-//                        )
+                        response = db.book_details(
+                                request.getInt("book_id")
+                        );
+                        send(response);
+                        // Getting and sending image for book
+                        BufferedImage image  = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\server\\images\\books\\" + response.getString("book") + ".png"));
+                        ImageIO.write(image, "png", output);
+                        // Getting and sending image for user
+                        image  = ImageIO.read(new File("D:\\Bookabook\\src\\bookabook\\server\\images\\books\\" + String.valueOf(response.getInt("owner_id")) + ".png"));
+                        ImageIO.write(image, "png", output);
+                        break;
                     }
 
                     case "review/add": {
@@ -214,7 +223,7 @@ class Connection extends Thread {
                         // receiving and saving profile picture
                         if(response.getBoolean("change_pic")) {
                             BufferedImage image = ImageIO.read(input);
-                            ImageIO.write(image, "png", new File(path + request.getInt("user_id") + ".png"));
+                            ImageIO.write(image, "png", new File(path_user + request.getInt("user_id") + ".png"));
                             input.skipBytes(16);
                         }
 
@@ -256,7 +265,13 @@ class Connection extends Thread {
                                 request.getString("review"),
                                 request.getString("year_bought")
                         );
-                        send(response);
+                        if(Boolean.valueOf(response.getString("success")))
+                        {
+                            BufferedImage image = ImageIO.read(input);
+                            ImageIO.write(image, "png", new File(path_book + request.getString("book") + ".png"));
+                            input.skipBytes(16);
+                        }
+                        send(response.toString());
                         break;
                     }
 
@@ -324,7 +339,7 @@ class Connection extends Thread {
         System.err.println(username + " connected to the server");
         BufferedImage image;
         try {
-            image = ImageIO.read(new File(path + id + ".png"));
+            image = ImageIO.read(new File(path_user + id + ".png"));
             ImageIO.write(image, "png", output);
         }
         catch (IOException e) {

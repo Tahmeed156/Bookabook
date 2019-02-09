@@ -139,7 +139,7 @@ public class Client {
 
     public String rentOutBook (int user_id, String book, String author, Double rent,
                                 Double deposit, String genre, String print, String condition,
-                                String review, String year_bought, Image img) throws IOException, ClassNotFoundException {
+                                String review, String year_bought, File file) throws IOException, ClassNotFoundException {
         request = new JSONObject();
 
         try {
@@ -161,6 +161,8 @@ public class Client {
         }
         send(request.toString());
         // send Image
+        BufferedImage image = ImageIO.read(file);
+        ImageIO.write(image, "png", output);
         return (String) input.readObject();
     }
 

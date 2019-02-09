@@ -139,9 +139,9 @@ public class bookDetailsPage {
     int book_rent;
     int book_deposit;
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
-    private String dir = "D:\\"; // Tahmeed config
+    // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
     List<String> reviewArr = new ArrayList<>();
@@ -258,7 +258,7 @@ public class bookDetailsPage {
         BookDeposit.setText("Tk "+book_deposit);
 
 
-        BookImg.setImage(new Image(new File(path+"book.png").toURI().toString()));
+        BookImg.setImage(new Image(new File(path+"pj.png").toURI().toString()));
 
         print.setText("Original");
         condition.setText("Optimal");
@@ -274,29 +274,8 @@ public class bookDetailsPage {
             similarBook.setText(similarBook.getText().concat(a + '\n'));
         }
 
-        // Populating reviews
-        JSONArray response_arr1 = new JSONArray(Main.connection.reviewGet(1));
-        for (int i=0; i<response_arr1.length(); i++) {
-            JSONObject review = response_arr1.getJSONObject(i);
-            // username
-            reviewers.add(review.getString("username"));
-            // body
-            reviewArr.add(review.getString("body"));
-        }
-
-        for(index = 0; index<3 && index<reviewers.size(); index++)
-        {
-            vbx[index].setVisible(true);
-            revName[index].setText(reviewers.get(index));
-            rev[index].setText(reviewArr.get(index));
-        }
-
-
-        // Making right arrow visible
-        if(reviewers.size()>3)
-        {
-            stckRArrow.setVisible(true);
-        }
+        Loading l = new Loading();
+        new Thread(l).start();
 
 
     }
@@ -444,7 +423,7 @@ public class bookDetailsPage {
     public void rentBtnPressed(MouseEvent e) throws IOException, ClassNotFoundException, JSONException {
 
         if(weeks.getText().isEmpty()){
-            toast.set("PLEASE FILL IN THE NO OF WEEKS TEXTFIELD","#f0ad4e");
+            toast.set("PLEASE FILL THE NO OF WEEKS YOU WANT TO RENT","#f0ad4e");
         }
         else {
             JSONObject response = new JSONObject(Main.connection.rentBook(
@@ -510,36 +489,48 @@ public class bookDetailsPage {
         }
     }
 
-//    class Loading extends Task {
-//        @Override
-//        public Void call() throws Exception {
-//            try {
-//
-//            } catch (Exception e) {
-//                System.out.println("Couldn't load reviews");
-//            }
-//
-//
+    class Loading extends Task {
+        @Override
+        public Void call() throws Exception {
+            try {
+                // Populating reviews
+                JSONArray response_arr1 = new JSONArray(Main.connection.reviewGet(1));
+                for (int i=0; i<response_arr1.length(); i++) {
+                    JSONObject review = response_arr1.getJSONObject(i);
+                    // username
+                    reviewers.add(review.getString("username"));
+                    // body
+                    reviewArr.add(review.getString("body"));
+                }
+
+                for(index = 0; index<3 && index<reviewers.size(); index++)
+                {
+                    vbx[index].setVisible(true);
+                    revName[index].setText(reviewers.get(index));
+                    rev[index].setText(reviewArr.get(index));
+                }
+
+
+                // Making right arrow visible
+                if(reviewers.size()>3)
+                {
+                    stckRArrow.setVisible(true);
+                }
+
+            } catch (Exception e) {
+                System.out.println("Couldn't load reviews");
+            }
+
+
 //            Platform.runLater(new Runnable() {
 //                @Override
 //                public void run() {
-//                    //populating trending
-//                    tIndex = helper.initiate(tname, tauthor, timgs, tstckRArrow, tVbox, tlabel, tAuthorLabel, timgv,
-//                            tIndex, 3);
-//
-//                    //populating latest_
-//                    tIndex = helper.initiate(rname, rauthor, rimgs, rstckRArrow, rVbox, rlabel, rAuthorLabel, rimgv,
-//                            rIndex, 3);
-//
-//                    // todo NHS: populate rented and rented out books
-//                    // todo NHS: rented -> how long;
-//                    // todo NHS: rented out -> who rented , how long;
 //                }
 //            });
-//
-//            return null;
-//        }
-//    }
+
+            return null;
+        }
+    }
 
 
 
