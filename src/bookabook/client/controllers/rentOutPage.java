@@ -108,7 +108,6 @@ public class rentOutPage {
 
 
     //right image components
-
     @FXML private Button choose;
     @FXML private Button rent;
     @FXML private ImageView img;
@@ -235,21 +234,7 @@ public class rentOutPage {
 
     }
 
-
     public void rentBook(MouseEvent event) throws IOException, ClassNotFoundException, JSONException {
-        // to get value of condition combo box
-        // condition.getValue();
-        // to get the value from genre list
-        // ObservableList<String> selectedGenre = genre.getSelectionModel().getSelectedItems();
-        // to get value from bookprint
-
-//        for(int i=0; i<3; i++) {
-//            if(rdbtn[i].isSelected())
-//            {
-//                System.out.println(rdbtn[i].getText());
-//                break;
-//            }
-//        }
 
         if(file!=null) {
             String printRBtn = "";
@@ -260,37 +245,6 @@ public class rentOutPage {
                     break;
                 }
             }
-
-
-//        Book b = new Book();
-//        JSONObject bookInfo = new JSONObject();
-//        try {
-//            bookInfo.put("print", printRBtn);
-//            bookInfo.put("condition", condition.getValue());
-//            bookInfo.put("review", review.getText());
-//            bookInfo.put("year_bought", "2017");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        b.rent(
-//                book.getText(),
-//                author.getText(),
-//                Double.valueOf(rentPrice.getText()),
-//                Double.valueOf(deposit.getText()),
-//                bookInfo.toString()
-//        );
-//
-//
-//
-//
-//        SessionFactory sf = new Configuration().configure("/bookabook/client/hibernate.cfg.xml").buildSessionFactory();
-//        Session s = sf.openSession();
-//        s.beginTransaction();
-//        s.save(b);
-//        s.getTransaction().commit();
-//        s.close();
-
 
             // todo NHS: give user id;
             JSONObject response = new JSONObject(Main.connection.rentOutBook(

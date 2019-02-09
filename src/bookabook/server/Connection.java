@@ -21,8 +21,6 @@ class Connection extends Thread {
     // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\server\\images\\users\\";
 
-
-
     private DataInputStream input;
     private ObjectOutputStream output;
     private Socket socket;
@@ -246,8 +244,20 @@ class Connection extends Thread {
 
                     // todo TMD to rent out a book
                     case "books/rent_out":{
-                        // see rentOutBook func from Client.
-                        // add mechanism to input book image
+                        response = db.rent_out_book(
+                                request.getInt("user_id"),
+                                request.getString("book"),
+                                request.getString("author"),
+                                request.getDouble("rent"),
+                                request.getDouble("deposit"),
+                                request.getString("genre"),
+                                request.getString("print"),
+                                request.getString("condition"),
+                                request.getString("review"),
+                                request.getString("year_bought")
+                        );
+                        send(response);
+                        break;
                     }
 
 

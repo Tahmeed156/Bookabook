@@ -37,7 +37,7 @@ public class Client {
                         toast.set("SUCCESSFULLY CONNECTED TO SERVER", "#5cb85c");
                     }
                 });
-                // todo:message disappears immediately after connecting
+                // todo: message disappears immediately after connecting
 
 
                 break;
