@@ -238,7 +238,7 @@ public class Database {
     public ArrayList<Bookser> latest_books () {
         startSession();
 
-        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(10);
+        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
@@ -255,7 +255,7 @@ public class Database {
     public ArrayList<Bookser> trending_books () {
         startSession();
 
-        Query q = session.createQuery("from Book order by times_rented desc").setFirstResult(0).setMaxResults(10);
+        Query q = session.createQuery("from Book order by times_rented desc").setFirstResult(0);
         // bug TMD: Paginate all these
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
@@ -272,7 +272,7 @@ public class Database {
     public ArrayList<Bookser> similar_books (String genre, int book_id) {
         startSession();
 
-        Query q = session.createQuery("from Book where genre = :gen order by timestamp desc").setFirstResult(0).setMaxResults(6);
+        Query q = session.createQuery("from Book where genre = :gen order by timestamp desc").setFirstResult(0);
         q.setParameter("gen", genre);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
@@ -292,7 +292,7 @@ public class Database {
     public ArrayList<Bookser> searching_books (String str) {
         startSession();
 
-        Query q = session.createQuery("from Book where name LIKE CONCAT('%', :str,'%')").setFirstResult(0).setMaxResults(8);
+        Query q = session.createQuery("from Book where name LIKE CONCAT('%', :str,'%')").setFirstResult(0);
         q.setParameter("str", str);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
@@ -310,8 +310,9 @@ public class Database {
     public JSONArray upcoming_books(int user_id) throws JSONException {
         startSession();
 
-        Query q = session.createQuery("from Rent where rentee = :r");
+        Query q = session.createQuery("from Rent where rentee = :r and status = :s ");
         q.setParameter("r", new User(user_id));
+        q.setParameter("s", "rented");
 
         List results = q.getResultList();
         List<JSONObject> jsonValues = new ArrayList<>();
@@ -357,8 +358,9 @@ public class Database {
     public JSONArray shared_books(int user_id) throws JSONException {
         startSession();
 
-        Query q = session.createQuery("from Rent where renter = :r");
+        Query q = session.createQuery("from Rent where renter = :r and status = :s");
         q.setParameter("r", new User(user_id));
+        q.setParameter("s", "rented");
 
         List results = q.getResultList();
         List<JSONObject> jsonValues = new ArrayList<>();
@@ -403,12 +405,49 @@ public class Database {
         return response;
     }
 
+
+    public JSONObject request_book(int book_id, int renter_id) throws JSONException {
+            startSession();
+        JSONObject response = new JSONObject();
+
+        Query q = session.createQuery("from Rent where book = :b and renter = :u");
+        q.setParameter("b", book_id);
+        q.setParameter("u", new User(renter_id));
+        Rent rent = (Rent) q.uniqueResult();
+        Email.initializeMailSender();
+        Email.sendReturnMail(
+                rent.getRentee().getEmail(),
+                rent.getRentee().getFull_name(),
+                rent.getBook().getName(),
+                rent.getRenter().getFull_name()
+        );
+        response.put("success", "true");
+
+        endSession();
+        return response;
+    }
+
+    public JSONObject return_book(int book_id, int rentee_id) throws JSONException {
+        startSession();
+        JSONObject response = new JSONObject();
+
+        Query q = session.createQuery("from Rent where book = :b and rentee = :u");
+        q.setParameter("b", book_id);
+        q.setParameter("u", new User(rentee_id));
+        Rent rent = (Rent) q.uniqueResult();
+        rent.return_book();
+        response.put("success", "true");
+
+        endSession();
+        return response;
+    }
+
     // ========================================   PROFILE PAGE BOOKS
 
     public ArrayList<Bookser> rented_books(int user_id) {
         startSession();
 
-        Query q = session.createQuery("from Rent where rentee = :r").setFirstResult(0).setMaxResults(8);
+        Query q = session.createQuery("from Rent where rentee = :r").setFirstResult(0);
         q.setParameter("r", new User (user_id));
 
         List rents = q.getResultList();
@@ -429,7 +468,7 @@ public class Database {
     public ArrayList<Bookser> rented_out_books (int user_id) {
         startSession();
 
-        Query q = session.createQuery("from Rent where renter = :r").setFirstResult(0).setMaxResults(8);
+        Query q = session.createQuery("from Rent where renter = :r").setFirstResult(0);
         q.setParameter("r", new User (user_id));
 
         List rents = q.getResultList();
@@ -506,12 +545,7 @@ public class Database {
         // todo TMD: remove limit or paginate
         try {
 
-            //NHS
-//            Query q = session.createQuery("from Review where book_id = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
-//            q.setParameter("b", book_id);
-
-            //TT
-            Query q = session.createQuery("from Review where book = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
+            Query q = session.createQuery("from Review where book = :b order by timestamp desc").setFirstResult(0);
             q.setParameter("b", new Book(book_id));
 
             List reviews = q.getResultList();
@@ -549,7 +583,7 @@ public class Database {
 
         JSONArray response = new JSONArray();
         // Gets 25 messages from the database
-        Query q = session.createQuery("from Message order by timestamp").setFirstResult(0).setMaxResults(100);
+        Query q = session.createQuery("from Message order by timestamp desc").setFirstResult(0).setMaxResults(30);
         List messages = q.getResultList();
 
         for (Object mess : messages) {

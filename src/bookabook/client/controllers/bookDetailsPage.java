@@ -480,54 +480,60 @@ public class bookDetailsPage {
                         e.printStackTrace();
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    if (Boolean.valueOf(response.getString("success"))){
-                        BookName.setText(response.getString("book"));
-                        // author name
-                        BookAuthor.setText(response.getString("author"));
-                        // book rent
-                        book_rent = (int)response.getDouble("rent");
-                        // book deposit
-                        book_deposit = (int)response.getDouble("deposit");
-                        // book print
-                        print.setText(response.getString("print"));
-                        // book condition
-                        condition.setText(response.getString("condition"));
-                        // year bought
-                        yearBought.setText(response.getString("year_bought"));
-                        // times Rented
-                        timesRented.setText(String.valueOf(response.getInt("times_rented")));
-                        // review
-                        reviewByRenter.setText(response.getString("review"));
-                        // genre
-                        genre.setText(response.getString("genre"));
-                        //get renter id
-                        renter_id = response.getInt("owner_id");
-                        owner.setText(response.getString("owner_name"));
-                        address.setText(response.getString("owner_location"));
-                        contact.setText(response.getString("owner_contact"));
+                    try {
+                        if (Boolean.valueOf(response.getString("success"))){
+                            BookName.setText(response.getString("book"));
+                            // author name
+                            BookAuthor.setText(response.getString("author"));
+                            // book rent
+                            book_rent = (int)response.getDouble("rent");
+                            // book deposit
+                            book_deposit = (int)response.getDouble("deposit");
+                            // book print
+                            print.setText(response.getString("print"));
+                            // book condition
+                            condition.setText(response.getString("condition"));
+                            // year bought
+                            yearBought.setText(response.getString("year_bought"));
+                            // times Rented
+                            timesRented.setText(String.valueOf(response.getInt("times_rented")));
+                            // review
+                            reviewByRenter.setText(response.getString("review"));
+                            // genre
+                            genre.setText(response.getString("genre"));
+                            //get renter id
+                            renter_id = response.getInt("owner_id");
+                            owner.setText(response.getString("owner_name"));
+                            address.setText(response.getString("owner_location"));
+                            contact.setText(response.getString("owner_contact"));
 
-                        // disable the rent button
-                        // if the renter is the rentee
-                        // if the book is unavailable
-                        if(!response.getBoolean("available") || Integer.parseInt(dashboard.userId) == renter_id)
-                        {
-                            System.out.println("Not available");
-                            rentBtn.setDisable(true);
-                            Platform.runLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if(Integer.parseInt(dashboard.userId) == renter_id)
-                                    {
-                                        toast.set("THIS BOOK BELONGS TO USER","#f0ad4e");
+                            // disable the rent button
+                            // if the renter is the rentee
+                            // if the book is unavailable
+                            if(!response.getBoolean("available") || Integer.parseInt(dashboard.userId) == renter_id)
+                            {
+                                System.out.println("Not available");
+                                rentBtn.setDisable(true);
+                                Platform.runLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if(Integer.parseInt(dashboard.userId) == renter_id)
+                                        {
+                                            toast.set("THIS BOOK BELONGS TO USER","#f0ad4e");
+                                        }
+                                        else
+                                        {
+                                            toast.set("THIS BOOK IS NOT AVAILABLE AT THE MOMENT","#f0ad4e");
+                                        }
                                     }
-                                    else
-                                    {
-                                        toast.set("THIS BOOK IS NOT AVAILABLE AT THE MOMENT","#f0ad4e");
-                                    }
-                                }
-                            });
+                                });
+                            }
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
                     try {

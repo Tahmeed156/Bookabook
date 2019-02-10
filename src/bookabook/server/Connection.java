@@ -16,8 +16,8 @@ import java.util.ArrayList;
 @SuppressWarnings("Duplicates")
 class Connection extends Thread {
 
-    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
-    // private String dir = "A:\\"; // Tahmeed config
+    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
     private String path_user = dir + "Bookabook\\src\\bookabook\\server\\images\\users\\";
     private String path_book = dir + "Bookabook\\src\\bookabook\\server\\images\\books\\";
@@ -100,7 +100,8 @@ class Connection extends Thread {
                                 request.getString("message_type"),
                                 request.getString("body")
                         );
-                        broadcast(request.getString("body"), request.getString("username"));
+                        // Set message type to "text"
+                        broadcast(request.getString("body"), "text", request.getString("username"));
                         //send(response.toString());
                         break;
                     }
@@ -117,16 +118,22 @@ class Connection extends Thread {
                         break;
                     }
 
+                    // todo NHS: Make this "messages/status"
                     case "messages/stop": {
                         messageable = request.getBoolean("messageable");
-                        if(!messageable) {
+                        if (!messageable) {
                             response = new JSONObject();
                             response.put("stop", "true");
                             send(response.toString());
+                            // tells everyone that the user just went offline
+                            broadcast("offline", "status", getName());
+                        }
+                        else {
+                            // tells everyone that the user just came online
+                            broadcast("online", "status", getName());
                         }
                         break;
                     }
-
 
                     case "books/latest": {
                         ArrayList<Bookser> books = db.latest_books();
@@ -296,8 +303,26 @@ class Connection extends Thread {
                         break;
                     }
 
-                    case "books/detail" : {
+                    case "books/request" : {
+                        // Requesting the user to return the book
+                        response = db.request_book(
+                                request.getInt("book_id"),
+                                // The person requesting the book
+                                request.getInt("user_id")
+                        );
+                        send(response);
+                        break;
+                    }
 
+                    case "books/return": {
+                        // Changing the status to 'returned'
+                        response = db.return_book(
+                            request.getInt("book_id"),
+                            // The person making the return (the rentee)
+                            request.getInt("user_id")
+                        );
+                        send(response);
+                        break;
                     }
 
                     // todo TMD do these two for profile page books request
@@ -353,7 +378,6 @@ class Connection extends Thread {
 
     // Logging in users (showing status, setting thread name)
     private void login(String username, String id) {
-        System.out.println("3.5");
         setName(username);
         System.err.println(username + " connected to the server");
         BufferedImage image;
@@ -377,8 +401,9 @@ class Connection extends Thread {
     }
 
     // Sending the message to all users
-    private void broadcast(String body, String username) {
+    private void broadcast(String body, String type, String username) throws JSONException {
         JSONObject response = new JSONObject();
+        response.put("type", type);
         response.put("body", body);
         response.put("username", username);
         for (Connection c: Server.clients) {

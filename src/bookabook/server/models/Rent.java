@@ -33,6 +33,9 @@ public class Rent {
     @JoinColumn(name = "rentee_id", nullable = false)
     private User rentee;
 
+    @Column(name = "status", nullable = false)
+    private String status;
+
     public Rent () {
 
     }
@@ -42,11 +45,16 @@ public class Rent {
         renter = new User(rtr);
         rentee = new User(rte);
         book = new Book(b);
+        status = "rented";
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(rent_date);
         calendar.add(Calendar.DAY_OF_YEAR, w*7);
         renturn_date = calendar.getTime();
+    }
+
+    public void return_book () {
+        status = "returned";
     }
 
     public int getId() {
