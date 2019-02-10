@@ -314,6 +314,17 @@ class Connection extends Thread {
                         break;
                     }
 
+                    case "books/return/confirm": {
+                        // Requesting the user to return the book
+                        response = db.return_confirmation(
+                                request.getInt("book_id"),
+                                // The person requesting the book
+                                request.getInt("user_id")
+                        );
+                        send(response);
+                        break;
+                    }
+
                     case "books/return": {
                         // Changing the status to 'returned'
                         response = db.return_book(

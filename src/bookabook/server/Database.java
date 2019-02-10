@@ -168,6 +168,7 @@ public class Database {
         query_1.setParameter("b", b);
         Book book = (Book) query_1.uniqueResult();
         book.increase_times_rented();
+        book.setAvailable(false);
         session.save(book);
 
         // Changing wallet for renter
@@ -436,6 +437,27 @@ public class Database {
         q.setParameter("u", new User(rentee_id));
         Rent rent = (Rent) q.uniqueResult();
         rent.return_book();
+        response.put("success", "true");
+
+        endSession();
+        return response;
+    }
+
+    public JSONObject return_confirmation(int book_id, int renter_id) throws JSONException {
+        startSession();
+        JSONObject response = new JSONObject();
+
+        Query q = session.createQuery("from Rent where book = :b and renter = :u");
+        q.setParameter("b", book_id);
+        q.setParameter("u", new User(renter_id));
+        Rent rent = (Rent) q.uniqueResult();
+        double deposit = rent.getBook().getDeposit();
+        // Making transactions
+        rent.getRenter().decrement_wallet(deposit);
+        rent.getRenter().change_shared(-1);
+        rent.getBook().setAvailable(true);
+        rent.getRentee().increment_wallet(deposit);
+        rent.getRentee().change_rented(-1);
         response.put("success", "true");
 
         endSession();

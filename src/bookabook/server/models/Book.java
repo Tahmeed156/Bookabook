@@ -135,4 +135,8 @@ public class Book {
     public int getTimes_rented() {
         return times_rented;
     }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 }
