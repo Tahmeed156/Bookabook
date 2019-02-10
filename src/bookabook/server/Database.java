@@ -507,12 +507,12 @@ public class Database {
         try {
 
             //NHS
-            Query q = session.createQuery("from Review where book_id = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
-            q.setParameter("b", book_id);
+//            Query q = session.createQuery("from Review where book_id = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
+//            q.setParameter("b", book_id);
 
-//            //TT
-//            Query q = session.createQuery("from Review where Book = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
-//            q.setParameter("b", new Book(book_id));
+            //TT
+            Query q = session.createQuery("from Review where book = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
+            q.setParameter("b", new Book(book_id));
 
             List reviews = q.getResultList();
             for (Object review1 : reviews) {
