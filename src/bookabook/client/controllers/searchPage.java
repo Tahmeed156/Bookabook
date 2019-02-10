@@ -308,7 +308,7 @@ public class searchPage{
     public void bookPageClicked(MouseEvent event) {
         for (int i = 0; i < imgv.length; i++) {
             if (event.getSource() == imgv[i]) {
-                Windows w = new Windows(imgv[i], "../fxml/bookDetailsPage.fxml",bID.get(index + i));
+                Windows w = new Windows(imgv[i], "/bookabook/client/fxml/bookDetailsPage.fxml",bID.get(index + i));
             }
         }
     }

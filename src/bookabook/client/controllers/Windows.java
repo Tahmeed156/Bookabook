@@ -32,7 +32,7 @@ public class Windows {
                 dashboard.user = null;
             }
             cornerCase(name[i]);
-            root = FXMLLoader.load(getClass().getResource("../fxml/"+name[i]));
+            root = FXMLLoader.load(getClass().getResource("/bookabook/client/fxml/"+name[i]));
             Scene scene = new Scene(root);
             Stage window = (Stage)(s.getScene().getWindow());
             window.setScene(scene);
@@ -46,7 +46,7 @@ public class Windows {
     Windows (Button b, int i) {
         try {
             cornerCase(name[i]);
-            root = FXMLLoader.load(getClass().getResource("../fxml/"+name[i]));
+            root = FXMLLoader.load(getClass().getResource("/bookabook/client/fxml/"+name[i]));
             Scene scene = new Scene(root);
             Stage window = (Stage)(b.getScene().getWindow());
             window.setScene(scene);

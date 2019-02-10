@@ -16,8 +16,8 @@ import java.util.ArrayList;
 @SuppressWarnings("Duplicates")
 class Connection extends Thread {
 
-    // private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
-    private String dir = "A:\\"; // Tahmeed config
+    private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
+    // private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
     private String path_user = dir + "Bookabook\\src\\bookabook\\server\\images\\users\\";
     private String path_book = dir + "Bookabook\\src\\bookabook\\server\\images\\books\\";
@@ -118,8 +118,7 @@ class Connection extends Thread {
                         break;
                     }
 
-                    // todo NHS: Make this "messages/status"
-                    case "messages/stop": {
+                    case "messages/status": {
                         messageable = request.getBoolean("messageable");
                         if (!messageable) {
                             response = new JSONObject();
@@ -310,7 +309,7 @@ class Connection extends Thread {
                                 // The person requesting the book
                                 request.getInt("user_id")
                         );
-                        send(response);
+                        send(response.toString());
                         break;
                     }
 
@@ -321,7 +320,7 @@ class Connection extends Thread {
                                 // The person requesting the book
                                 request.getInt("user_id")
                         );
-                        send(response);
+                        send(response.toString());
                         break;
                     }
 
@@ -332,7 +331,7 @@ class Connection extends Thread {
                             // The person making the return (the rentee)
                             request.getInt("user_id")
                         );
-                        send(response);
+                        send(response.toString());
                         break;
                     }
 
@@ -397,6 +396,7 @@ class Connection extends Thread {
             ImageIO.write(image, "png", output);
         }
         catch (IOException e) {
+            e.printStackTrace();
             System.out.println("Error sending profile picture to client");
         }
     }

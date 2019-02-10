@@ -192,6 +192,15 @@ public class dashboard {
     private ImageView downArrow2;
     ImageView[] arrows;
 
+    @FXML private Button ret1;
+    @FXML private Button ret2;
+    @FXML private Button ret3;
+    @FXML private Button req1;
+    @FXML private Button req2;
+    @FXML private Button req3;
+    static Button[] btn;
+
+
 
     String lblStyle = "-fx-text-fill: #3b3838; -fx-font-weight: bold; -fx-font-size: 15";
     // list for upcoming due dates
@@ -199,6 +208,7 @@ public class dashboard {
     List<String>  upRenter = new ArrayList<>();
     List<Integer>  udaysLeft = new ArrayList<>();
     List<String> uLabel = new ArrayList<>();
+    List<Integer> uID = new ArrayList<>();
     int uIndex;
 
 
@@ -207,7 +217,9 @@ public class dashboard {
     List<String>  sRenter = new ArrayList<>();
     List<Integer>  sdaysLeft = new ArrayList<>();
     List<String> sLabel = new ArrayList<>();
+    List<Integer> sID = new ArrayList<>();
     int sIndex;
+    static List<String> sStatus = new ArrayList<>();
 
     // list for trending
     List<String> tname = new ArrayList<>();
@@ -227,9 +239,10 @@ public class dashboard {
     // private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
+    // private String path = "Pictures\\";
 
 
-    public void initialize() {
+    public void initialize() throws IOException, ClassNotFoundException {
         parent.getChildren().add(toast.get());
 
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
@@ -244,17 +257,25 @@ public class dashboard {
         tVbox = new VBox[]{tVbox1, tVbox2, tVbox3};
         rVbox = new VBox[]{rVbox1, rVbox2, rVbox3};
         arrows = new ImageView[]{tLArrow, tRArrow, rLArrow, rRArrow,upArrow1,downArrow1,upArrow2,downArrow2};
+        btn = new Button[]{ret1, ret2, ret3, req1, req2, req3, rentOutBtn};
+
+        // Getting client info from registry
+        Preferences userCon = Main.userCon;
+        userName = userCon.get("full_name", "BookABook");
+        user = userCon.get("username", "admin");
+        userId = userCon.get("id","1");
+
+        JSONObject response = new JSONObject(Main.connection.getProfile(Integer.parseInt(dashboard.userId)));
+        if (Boolean.valueOf(response.getString("success"))){
+            userCon.put("wallet", response.getString("wallet"));
+            userCon.put("books_rented", response.getString("books_rented"));
+            userCon.put("books_shared", response.getString("books_shared"));
+        }
 
         // Starting thread for loading books and user information
         Loading t = new Loading();
         new Thread(t).start();
 
-        // Getting client info from registry
-        Preferences userCon = Main.userCon;
-
-        userName = userCon.get("full_name", "BookABook");
-        user = userCon.get("username", "admin");
-        userId = userCon.get("id","1");
         rentedBooks = userCon.get("books_rented", "0");
         rentedOutBooks = userCon.get("books_shared", "0");
         wallet = userCon.get("wallet", "0");
@@ -365,13 +386,24 @@ public class dashboard {
 
     public void onHoverButton(MouseEvent event) {
 
-        rentOutBtn.setStyle("-fx-background-color:#92a2b9");
+        for (int i = 0; i < btn.length; i++) {
+            if (event.getSource() == btn[i]) {
+                if(i==6){ btn[i].setStyle("-fx-background-color:#92a2b9"); }
+                else { btn[i].setStyle("-fx-background-color:#d9d9d9; -fx-border-width: 3; -fx-text-fill:#3b3838");}
+            }
+        }
 
     }
 
     public void endHoverButton(MouseEvent event) {
 
-        rentOutBtn.setStyle("-fx-background-color:#44546a");
+        for (int i = 0; i < btn.length; i++) {
+            if (event.getSource() == btn[i]) {
+                if(i==6){ btn[i].setStyle("-fx-background-color:#44546a"); }
+                else { btn[i].setStyle("-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9; " +
+                        "fx-text-fill: #ffffff");}
+            }
+        }
 
     }
 
@@ -417,7 +449,7 @@ public class dashboard {
         }
         else{
             sIndex = helper.up_arrow_clicked(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2,
-                    upArrow2, sIndex, 3, true, 0);
+                    upArrow2, sIndex, 3, true, 3);
         }
     }
 
@@ -428,7 +460,7 @@ public class dashboard {
         }
         else{
             sIndex = helper.down_arrow_clicked(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2,
-                    upArrow2, sIndex, 3, true, 0);
+                    upArrow2, sIndex, 3, true, 3);
         }
     }
 
@@ -440,15 +472,67 @@ public class dashboard {
     public void bookPageClicked(MouseEvent event) {
         for (int i = 0; i < timgv.length; i++) {
             if (event.getSource() == timgv[i]) {
-                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tID.get(tIndex+i));
+                Windows w = new Windows(timgv[i], "/bookabook/client/fxml/bookDetailsPage.fxml", tID.get(tIndex+i));
             }
         }
 
         for (int i = 0; i < rimgv.length; i++) {
             if (event.getSource() == rimgv[i]) {
-                Windows w = new Windows(rimgv[i], "../fxml/bookDetailsPage.fxml",rID.get(tIndex+i));
+                Windows w = new Windows(rimgv[i], "/bookabook/client/fxml/bookDetailsPage.fxml",rID.get(rIndex+i));
             }
         }
+    }
+
+    public void requestClicked(MouseEvent e) throws IOException, ClassNotFoundException {
+        for(int i=3; i<6; i++) {
+            if (btn[i] == e.getSource()) {
+                if (btn[i].getText().equals("Request")) {
+                    JSONObject response = new JSONObject(Main.connection.requestBook(
+                            sID.get(sIndex - (i - 3)),
+                            Integer.parseInt(userId)
+                    ));
+
+                    if (Boolean.valueOf(response.getString("success"))) {
+                        toast.set("REQUEST SUCCESSFULLY SENT", "#5cb85c");
+                    } else {
+                        toast.set("UNABLE TO SEND REQUEST", "#f0ad4e");
+                    }
+                } else {
+                    JSONObject response = new JSONObject(Main.connection.confirmBook(
+                            sID.get(sIndex - (i - 3)),
+                            Integer.parseInt(userId)
+                    ));
+                    if (Boolean.valueOf(response.getString("success"))) {
+                        Windows w = new Windows(btn[i], 0);
+                        toast.set("SUCCESSFULLY CONFIRMED", "#5cb85c");
+                    } else {
+                        toast.set("UNABLE TO CONFIRM", "#f0ad4e");
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    public void returnClicked(MouseEvent e) throws IOException, ClassNotFoundException {
+        for(int i=0; i<3; i++){
+            if(btn[i] == e.getSource())
+            {
+                JSONObject response = new JSONObject(Main.connection.returnBook(
+                        uID.get(uIndex - i),
+                        Integer.parseInt(userId)
+                ));
+
+                if(Boolean.valueOf(response.getString("success")))
+                {
+                    Windows w = new Windows(btn[i], 0);
+                    toast.set("BOOK SUCCESSFULLY RETURNED","#5cb85c");
+                }
+                else {toast.set("UNABLE TO RETURN BOOK","#f0ad4e");}
+                break;
+            }
+        }
+
     }
 
 
@@ -479,8 +563,9 @@ public class dashboard {
                     upRenter.add(upcoming.getString("renter_name"));
                     // time remaining
                     udaysLeft.add((int)upcoming.getDouble("date"));
+                    // book id
+                    uID.add(upcoming.getInt("book_id"));
                 }
-
 
 
 
@@ -497,6 +582,10 @@ public class dashboard {
                     sRenter.add(shared.getString("rentee_name"));
                     // time remaining
                     sdaysLeft.add((int)shared.getDouble("date"));
+                    // book id
+                    sID.add(shared.getInt("book_id"));
+                    // get book status
+                    sStatus.add(shared.getString("status"));
                 }
 
 
@@ -519,7 +608,7 @@ public class dashboard {
                         uIndex = helper.initiate(uLabel, upcoming, 5, 370, lblStyle, downArrow1, uIndex,
                                 3, true, 0);
                         sIndex = helper.initiate(sLabel, sharedBooks, 5, 370, lblStyle, downArrow2, sIndex,
-                                3, true, 0);
+                                3, true, 3);
                     }
                 });
 
@@ -560,6 +649,7 @@ public class dashboard {
                     public void run() {
                         toast.set("COULDN'T LOAD BOOKS","#f0ad4e");
                     }});
+                e.printStackTrace();
                 System.out.println("Couldn't load books");
             }
 

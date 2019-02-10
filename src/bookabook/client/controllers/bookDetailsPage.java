@@ -369,7 +369,7 @@ public class bookDetailsPage {
                 dashboard.wallet = String.valueOf(Double.valueOf(dashboard.wallet) - payment);
                 userCon.put("wallet",dashboard.wallet);
 
-                new Windows(rentBtn, "../fxml/dashboard.fxml");
+                new Windows(rentBtn, "/bookabook/client/fxml/dashboard.fxml");
             } else {
                 toast.set("UNABLE TO RENT", "#D9534F");
             }
@@ -378,7 +378,7 @@ public class bookDetailsPage {
     }
 
     public void messageBtnPressed(MouseEvent e){
-        Windows w = new Windows(messageBtn, "../fxml/messenger.fxml");
+        Windows w = new Windows(messageBtn, "/bookabook/client/fxml/messenger.fxml");
     }
 
     public void sendBtnPressed(MouseEvent e) throws IOException, ClassNotFoundException, JSONException {
@@ -417,11 +417,11 @@ public class bookDetailsPage {
 
     public void labelClicked(MouseEvent event) {
 
-        //Windows w = new Windows((Label) event.getSource(), "../fxml/bookDetailsPage.fxml", 1);
+        //Windows w = new Windows((Label) event.getSource(), "/bookabook/client/fxml/bookDetailsPage.fxml", 1);
         for (int i = 0; i < similarBooks.size(); i++) {
             if(event.getSource() == lb[i])
             {
-                Windows w = new Windows(lb[i], "../fxml/bookDetailsPage.fxml", sbID.get(i));
+                Windows w = new Windows(lb[i], "/bookabook/client/fxml/bookDetailsPage.fxml", sbID.get(i));
             }
         }
     }
@@ -510,26 +510,22 @@ public class bookDetailsPage {
                             address.setText(response.getString("owner_location"));
                             contact.setText(response.getString("owner_contact"));
 
-                            // disable the rent button
-                            // if the renter is the rentee
-                            // if the book is unavailable
-                            if(!response.getBoolean("available") || Integer.parseInt(dashboard.userId) == renter_id)
-                            {
-                                System.out.println("Not available");
-                                rentBtn.setDisable(true);
-                                Platform.runLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if(Integer.parseInt(dashboard.userId) == renter_id)
-                                        {
-                                            toast.set("THIS BOOK BELONGS TO USER","#f0ad4e");
-                                        }
-                                        else
-                                        {
-                                            toast.set("THIS BOOK IS NOT AVAILABLE AT THE MOMENT","#f0ad4e");
-                                        }
+                        // disable the rent button
+                        // if the renter is the rentee
+                        // if the book is unavailable
+                        if(!response.getBoolean("available") || Integer.parseInt(dashboard.userId) == renter_id)
+                        {
+                            System.out.println("Not available");
+                            rentBtn.setDisable(true);
+                            weeks.setDisable(true);
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(Integer.parseInt(dashboard.userId) == renter_id)
+                                    {
+                                        toast.set("THIS BOOK BELONGS TO USER","#f0ad4e");
                                     }
-                                });
+                                }});
                             }
                         }
                     } catch (JSONException e) {

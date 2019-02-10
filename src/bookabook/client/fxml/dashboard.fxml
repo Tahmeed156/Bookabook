@@ -162,14 +162,37 @@
                               </Label>
                            </children>
                         </StackPane>
-                        <VBox alignment="TOP_CENTER" style="-fx-background-color: #ffffff;">
+                        <VBox alignment="TOP_CENTER" prefHeight="241.0" prefWidth="392.0" style="-fx-background-color: #ffffff;">
                            <children>
                               <ImageView fx:id="upArrow1" fitHeight="19.0" fitWidth="41.0" onMouseClicked="#uArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../Pictures/upArrow.png" />
                                  </image>
                               </ImageView>
-                              <VBox fx:id="upcoming" prefHeight="241.0" prefWidth="376.0" />
+                              <StackPane>
+                                 <children>
+                                    <VBox fx:id="upcoming" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="376.0" />
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="ret1" layoutX="295.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#returnClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="37.0" prefWidth="84.0" style="-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" text="Return" textFill="WHITE" visible="false">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="ret2" layoutX="295.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#returnClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="37.0" prefWidth="84.0" style="-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" text="Return" textFill="WHITE" visible="false">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="ret3" layoutX="295.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#returnClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="37.0" prefWidth="84.0" style="-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" text="Return" textFill="WHITE" visible="false">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </StackPane>
                               <ImageView fx:id="downArrow1" fitHeight="19.0" fitWidth="41.0" onMouseClicked="#dArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../Pictures/downArrow.png" />
@@ -177,7 +200,7 @@
                               </ImageView>
                            </children>
                         </VBox>
-                        <Region prefHeight="150.0" prefWidth="30.0" />
+                        <Region prefHeight="241.0" prefWidth="26.0" />
                         <StackPane prefHeight="241.0" prefWidth="121.0" style="-fx-background-color: #2f528f;">
                            <children>
                               <Label alignment="CENTER" text="Books&#10;Shared&#10;" textAlignment="CENTER" textFill="WHITE">
@@ -187,14 +210,37 @@
                               </Label>
                            </children>
                         </StackPane>
-                        <VBox alignment="TOP_CENTER" style="-fx-background-color: #ffffff;">
+                        <VBox alignment="TOP_CENTER" prefHeight="241.0" prefWidth="391.0" style="-fx-background-color: #ffffff;">
                            <children>
                               <ImageView fx:id="upArrow2" fitHeight="19.0" fitWidth="41.0" onMouseClicked="#uArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../Pictures/upArrow.png" />
                                  </image>
                               </ImageView>
-                              <VBox fx:id="sharedBooks" prefHeight="241.0" prefWidth="376.0" />
+                              <StackPane>
+                                 <children>
+                                    <VBox fx:id="sharedBooks" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="376.0" />
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="req1" layoutX="293.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#requestClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="37.0" prefWidth="84.0" style="-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" text="Request" textFill="WHITE" visible="false">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="req2" layoutX="293.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#requestClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="37.0" prefWidth="84.0" style="-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" text="Request" textFill="WHITE" visible="false">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                          <Button fx:id="req3" layoutX="293.0" layoutY="133.0" mnemonicParsing="false" onMouseClicked="#requestClicked" onMouseEntered="#onHoverButton" onMouseExited="#endHoverButton" prefHeight="37.0" prefWidth="84.0" style="-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" text="Request" textFill="WHITE" visible="false">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </StackPane>
                               <ImageView fx:id="downArrow2" fitHeight="19.0" fitWidth="41.0" onMouseClicked="#dArrowClicked" onMouseEntered="#onHoverArrow" onMouseExited="#endHoverArrow" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../Pictures/downArrow.png" />

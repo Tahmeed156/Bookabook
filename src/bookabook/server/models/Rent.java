@@ -54,7 +54,15 @@ public class Rent {
     }
 
     public void return_book () {
+        status = "returning";
+    }
+
+    public void return_confirm() {
         status = "returned";
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public int getId() {

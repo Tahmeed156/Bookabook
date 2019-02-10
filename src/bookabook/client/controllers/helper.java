@@ -2,6 +2,7 @@ package bookabook.client.controllers;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -226,7 +227,9 @@ public class helper {
     public static int sortVBox(List<String> list, VBox vb, int lblPadding, int lblMaxWidth, String lblStyle,
                                int index, int limit, boolean region, int pos)
     {
+        System.out.println("the start index is "+index);
         vb.getChildren().clear();
+        if (pos == 0 || pos == 3) { btnInvisible(dashboard.btn, pos);}
         int start;
         for(start = 0 ; (index-start)>=0 && start<limit; start++)
         {
@@ -237,7 +240,15 @@ public class helper {
             lb.setMaxWidth(lblMaxWidth);
             lb.setStyle(lblStyle);
             lb.setAlignment(Pos.CENTER);
-            if(pos == 0) {
+            if(pos == 0 || pos == 3) {
+                dashboard.btn[pos + start].setVisible(true);
+                if(pos==3) {
+                    if(dashboard.sStatus.get(index - start).equals("returning"))
+                    {
+                        dashboard.btn[pos+start].setText("Confirm");
+                    }
+                    else {dashboard.btn[pos+start].setText("Request");}
+                }
                 if ((index-start) == list.size()-1) {
                     hb.setStyle("-fx-background-color:#3b3838");
                     lb.setStyle("-fx-text-fill: #d9d9d9; -fx-font-weight: bold; -fx-font-size: 15");
@@ -262,7 +273,16 @@ public class helper {
                 vb.getChildren().add(hb);
             }
         }
+        System.out.println("the end index is "+index);
         return index;
+    }
+
+    public static void btnInvisible(Button[] b, int start)
+    {
+        for(int i = start; i<start+3; i++)
+        {
+            b[i].setVisible(false);
+        }
     }
 
 }

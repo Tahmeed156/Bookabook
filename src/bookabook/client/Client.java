@@ -367,12 +367,52 @@ public class Client {
     public void endMessage(Boolean messageable){
         request = new JSONObject();
         try {
-            request.put("type", "messages/stop");
+            request.put("type", "messages/status");
             request.put("messageable", messageable);
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
         send(request.toString());
+    }
+
+    public String requestBook(int book_id, int user_id) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "books/request");
+            request.put("book_id",book_id);
+            request.put("user_id",user_id);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
+
+    public String returnBook(int book_id, int user_id) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "books/return");
+            request.put("book_id",book_id);
+            request.put("user_id",user_id);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
+    }
+
+
+    public String confirmBook(int book_id, int user_id) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "books/return/confirm");
+            request.put("book_id",book_id);
+            request.put("user_id",user_id);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (String) input.readObject();
     }
 
 }

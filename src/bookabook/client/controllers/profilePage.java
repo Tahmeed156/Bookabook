@@ -395,13 +395,13 @@ public class profilePage {
         // todo NHS: pass on book id to next page
         for (int i = 0; i < timgv.length; i++) {
             if (event.getSource() == timgv[i]) {
-                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tID.get(tIndex + i));
+                Windows w = new Windows(timgv[i], "/bookabook/client/fxml/bookDetailsPage.fxml", tID.get(tIndex + i));
             }
         }
 
         for (int i = 0; i < bimgv.length; i++) {
             if (event.getSource() == bimgv[i]) {
-                Windows w = new Windows(bimgv[i], "../fxml/bookDetailsPage.fxml",bID.get(bIndex + i));
+                Windows w = new Windows(bimgv[i], "/bookabook/client/fxml/bookDetailsPage.fxml",bID.get(bIndex + i));
             }
         }
     }

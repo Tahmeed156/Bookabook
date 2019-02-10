@@ -142,6 +142,10 @@ public class Database {
             User u = (User) query.uniqueResult();
             // Creating response object
             response.put("success", "true");
+            response.put("wallet", String.valueOf(u.getWallet()));
+            response.put("books_shared", String.valueOf(u.getBooks_shared()));
+            response.put("books_rented", String.valueOf(u.getBooks_rented()));
+
             response.put("work",u.getWork());
             response.put("date_of_birth", u.getDate_of_birth().toString());
             response.put("location", u.getLocation());
@@ -316,6 +320,7 @@ public class Database {
         q.setParameter("s", "rented");
 
         List results = q.getResultList();
+        System.out.println(results.toString());
         List<JSONObject> jsonValues = new ArrayList<>();
 
         for (Object obj: results) {
@@ -327,6 +332,7 @@ public class Database {
             JSONObject rj = new JSONObject();
             rj.put("book_name", r.getBook().getName());
             rj.put("renter_name", r.getRenter().getFull_name());
+            rj.put("book_id", r.getBook().getId());
             rj.put("date", date);
             jsonValues.add(rj);
         }
@@ -361,7 +367,8 @@ public class Database {
 
         Query q = session.createQuery("from Rent where renter = :r and status = :s");
         q.setParameter("r", new User(user_id));
-        q.setParameter("s", "rented");
+        q.setParameter("s", "returning");
+        // todo TMD : implement returning
 
         List results = q.getResultList();
         List<JSONObject> jsonValues = new ArrayList<>();
@@ -375,6 +382,8 @@ public class Database {
             JSONObject rj = new JSONObject();
             rj.put("book_name", r.getBook().getName());
             rj.put("rentee_name", r.getRentee().getFull_name());
+            rj.put("book_id", r.getBook().getId());
+            rj.put("status",r.getStatus());
             rj.put("date", date);
             // Adding JSONObject to the list
             jsonValues.add(rj);
@@ -411,7 +420,9 @@ public class Database {
             startSession();
         JSONObject response = new JSONObject();
 
-        Query q = session.createQuery("from Rent where book = :b and renter = :u");
+        // ASK TT
+        // Query q = session.createQuery("from Rent where book = :b and renter = :u");
+        Query q = session.createQuery("from Rent where book_id = :b and renter = :u");
         q.setParameter("b", book_id);
         q.setParameter("u", new User(renter_id));
         Rent rent = (Rent) q.uniqueResult();
@@ -432,7 +443,9 @@ public class Database {
         startSession();
         JSONObject response = new JSONObject();
 
-        Query q = session.createQuery("from Rent where book = :b and rentee = :u");
+        // ASK TT
+        // Query q = session.createQuery("from Rent where book = :b and rentee = :u");
+        Query q = session.createQuery("from Rent where book_id = :b and rentee = :u");
         q.setParameter("b", book_id);
         q.setParameter("u", new User(rentee_id));
         Rent rent = (Rent) q.uniqueResult();
@@ -447,7 +460,9 @@ public class Database {
         startSession();
         JSONObject response = new JSONObject();
 
-        Query q = session.createQuery("from Rent where book = :b and renter = :u");
+        // ASK TT
+        //Query q = session.createQuery("from Rent where book = :b and renter = :u");
+        Query q = session.createQuery("from Rent where book_id = :b and renter = :u");
         q.setParameter("b", book_id);
         q.setParameter("u", new User(renter_id));
         Rent rent = (Rent) q.uniqueResult();
@@ -458,6 +473,7 @@ public class Database {
         rent.getBook().setAvailable(true);
         rent.getRentee().increment_wallet(deposit);
         rent.getRentee().change_rented(-1);
+        rent.return_confirm();
         response.put("success", "true");
 
         endSession();

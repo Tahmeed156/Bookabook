@@ -245,7 +245,7 @@ public class editProfilePage {
 
         if (Boolean.valueOf(response.getString("success"))) {
             toast.set("SUCCESSFULLY EDITED PROFILE","#5CB85C");
-            Windows w = new Windows(save, "../fxml/dashboard.fxml");
+            Windows w = new Windows(save, "/bookabook/client/fxml/dashboard.fxml");
         }
         else {
             toast.set("UNABLE TO EDIT PROFILE","#D9534F");

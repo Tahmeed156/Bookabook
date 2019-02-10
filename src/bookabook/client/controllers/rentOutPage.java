@@ -261,7 +261,7 @@ public class rentOutPage {
 
             if (Boolean.valueOf(response.getString("success"))) {
                 toast.set("SUCCESSFULLY RENTED OUT", "#5CB85C");
-                Windows w = new Windows(rent, "../fxml/dashboard.fxml");
+                Windows w = new Windows(rent, "/bookabook/client/fxml/dashboard.fxml");
             } else {
                 toast.set("UNABLE TO RENT OUT", "#D9534F");
             }

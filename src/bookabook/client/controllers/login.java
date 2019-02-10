@@ -82,7 +82,7 @@ public class login {
                     dashboard.userId = userCon.get("id","1");
 
                     toast.set("LOGIN SUCCESSFUL","#5cb85c");
-                    Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
+                    Windows w = new Windows(logInBtn, "/bookabook/client/fxml/dashboard.fxml");
                 }
                 else {
                     toast.set("WRONG USERNAME OR PASSWORD","#D9534F");
@@ -136,7 +136,7 @@ public class login {
 
 
                     toast.set("SUCCESSFULLY SIGNED UP","#5CB85C");
-                    Windows w = new Windows(logInBtn, "../fxml/dashboard.fxml");
+                    Windows w = new Windows(logInBtn, "/bookabook/client/fxml/dashboard.fxml");
                 }
                 else {
                     toast.set("UNABLE TO CREATE NEW USER","#D9534F");
