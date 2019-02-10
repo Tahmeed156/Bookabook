@@ -19,7 +19,7 @@ import bookabook.client.controllers.bookDetailsPage;
 
 public class Client {
 
-    private ObjectInputStream input;
+    public ObjectInputStream input;
     private DataOutputStream output;
     private Socket socket;
     private JSONObject request;
@@ -266,7 +266,7 @@ public class Client {
 
     }
 
-    public String addMessage(int id, String username, String message_type, String body) throws IOException, ClassNotFoundException {
+    public void addMessage(int id, String username, String message_type, String body) throws IOException, ClassNotFoundException {
         request = new JSONObject();
         try {
             request.put("type", "messages/add");
@@ -278,7 +278,18 @@ public class Client {
             System.out.println("Error creating/sending json");
         }
         send(request.toString());
-        return (String) input.readObject();
+        //return (String) input.readObject();
+    }
+
+    //to signal the CLIENT AND the server to stop sending messages
+    public void endMessage(){
+        request = new JSONObject();
+        try {
+            request.put("type", "messages/stop");
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
     }
 
 
@@ -318,6 +329,19 @@ public class Client {
         return (String) input.readObject();
     }
 
+    public ArrayList<Bookser> getSimilarBooks(String genre, int book_id) throws IOException, ClassNotFoundException {
+        request = new JSONObject();
+        try {
+            request.put("type", "books/similar");
+            request.put("genre",genre);
+            request.put("book_id",book_id);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+        return (ArrayList<Bookser>) input.readObject();
+    }
+
     public String getBookDetails(int book_id) throws IOException, ClassNotFoundException {
         request = new JSONObject();
         try {
@@ -350,5 +374,14 @@ public class Client {
         return (String) input.readObject();
     }
 
-
+    public void makeMessageable(Boolean messageable){
+        request = new JSONObject();
+        try {
+            request.put("type", "messageable");
+            request.put("messageable", messageable);
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+    }
 }

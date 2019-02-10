@@ -174,12 +174,14 @@ public class Database {
         Query query_2 = session.createQuery("from User where id = :rtr");
         query_2.setParameter("rtr", rtr);
         User renter = (User) query_2.uniqueResult();
+        renter.change_shared(1);
         double renter_wallet = renter.increment_wallet(w*book.getRent() + book.getDeposit());
 
         // Changing wallet for rentee
         Query query_3 = session.createQuery("from User where id = :rte");
         query_3.setParameter("rte", rte);
         User rentee = (User) query_3.uniqueResult();
+        rentee.change_rented(1);
         double rentee_wallet = rentee.decrement_wallet(w*book.getRent() + book.getDeposit());
 
         JSONObject response = new JSONObject();
@@ -267,15 +269,17 @@ public class Database {
         return book_objects;
     }
 
-    public ArrayList<Bookser> similar_books (String genre) {
+    public ArrayList<Bookser> similar_books (String genre, int book_id) {
         startSession();
 
-        Query q = session.createQuery("from Book where genre = :gen order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        Query q = session.createQuery("from Book where genre = :gen order by timestamp desc").setFirstResult(0).setMaxResults(6);
         q.setParameter("gen", genre);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
             Book b = (Book) books.get(i);
+            System.out.println("book id is "+b.getId());
+            if(b.getId() == book_id) {continue;} //skip its own name
             Bookser bser = new Bookser(b.getId(), b.getName(), b.getAuthor(), b.getRent(), b.getDeposit());
             book_objects.add(bser);
         }
@@ -537,7 +541,7 @@ public class Database {
 
         JSONArray response = new JSONArray();
         // Gets 25 messages from the database
-        Query q = session.createQuery("from Message order by timestamp").setFirstResult(0).setMaxResults(25);
+        Query q = session.createQuery("from Message order by timestamp").setFirstResult(0).setMaxResults(100);
         List messages = q.getResultList();
 
         for (Object mess : messages) {
@@ -555,7 +559,7 @@ public class Database {
         return response;
     }
 
-    public JSONObject send_message (int id, String name, String type, String body) throws JSONException {
+    public void send_message (int id, String name, String type, String body) throws JSONException {
         startSession();
         JSONObject response = new JSONObject();
         try {
@@ -568,7 +572,7 @@ public class Database {
             response.put("success", "false");
         }
         endSession();
-        return response;
+        //return response;
     }
 
     // ========================================   UTILITY

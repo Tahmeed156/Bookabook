@@ -151,6 +151,7 @@ public class searchPage{
     List<Integer> depositArr = new ArrayList<>();
     List<Image> imgs = new ArrayList<>();
     List<Bookser> searchResults;
+    List<Integer> bID = new ArrayList<>();
 
     public void initialize() throws IOException, JSONException, ClassNotFoundException {
         parent.getChildren().add(toast.get());
@@ -309,7 +310,7 @@ public class searchPage{
         // todo NHS: pass on book id
         for (int i = 0; i < imgv.length; i++) {
             if (event.getSource() == imgv[i]) {
-                Windows w = new Windows(imgv[i], "../fxml/bookDetailsPage.fxml",1);// name.get(i));
+                Windows w = new Windows(imgv[i], "../fxml/bookDetailsPage.fxml",bID.get(index + i));
             }
         }
     }
@@ -348,6 +349,7 @@ public class searchPage{
             try {
                 searchResults = Main.connection.latest_books(Integer.valueOf(dashboard.userId),"books/search","");
                 for (Bookser b: searchResults) {
+                    bID.add(b.getId());
                     name.add(b.getName());
                     author.add(b.getAuthor());
                     rent.add((int)b.getRent());

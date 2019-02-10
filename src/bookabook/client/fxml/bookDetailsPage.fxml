@@ -119,43 +119,7 @@
                                       <Label fx:id="BookDeposit" />
                                   </children>
                               </VBox>
-                              <Region prefHeight="157.0" prefWidth="52.0" />
-                              <StackPane alignment="CENTER_RIGHT" prefHeight="174.0" prefWidth="330.0">
-                                  <children>
-                                      <VBox fx:id="middleRightVBox" alignment="TOP_CENTER" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="230.0" style="-fx-background-color: #ffffff;" StackPane.alignment="CENTER_RIGHT">
-                                 <children>
-                                    <Label fx:id="owner" prefHeight="27.0" prefWidth="105.0" text="Owner">
-                                       <font>
-                                          <Font name="System Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <AnchorPane prefHeight="109.0" prefWidth="230.0">
-                                       <children>
-                                          <Label layoutX="66.0" layoutY="4.0" text="Address:">
-                                             <font>
-                                                <Font name="System Bold Italic" size="15.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="address" layoutX="67.0" layoutY="25.0" prefHeight="50.0" prefWidth="164.0" wrapText="true" />
-                                          <Label layoutX="66.0" layoutY="77.0" text="Contact No:">
-                                             <font>
-                                                <Font name="System Bold Italic" size="15.0" />
-                                             </font>
-                                          </Label>
-                                          <Label fx:id="contact" layoutX="66.0" layoutY="104.0" prefHeight="21.0" prefWidth="167.0" />
-                                       </children>
-                                    </AnchorPane>
-                                 </children>
-                                 <StackPane.margin>
-                                    <Insets />
-                                 </StackPane.margin>
-                                 <padding>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </padding>
-                              </VBox>
-                                      <Circle fx:id="imgCircleCenter" fill="DODGERBLUE" radius="79.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="CENTER_LEFT" />
-                                  </children>
-                              </StackPane>
+                              <Region prefHeight="181.0" prefWidth="8.0" />
                               <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="220.0" spacing="10.0">
                                   <children>
                               <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
@@ -184,13 +148,55 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                               </VBox>
+                        <Region prefHeight="181.0" prefWidth="14.0" />
+                        <AnchorPane prefHeight="181.0" prefWidth="375.0">
+                           <children>
+                              <Rectangle fx:id="imgCircleCenter" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="163.0" layoutX="-6.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="171.0" />
+                              <VBox fx:id="middleRightVBox" fillWidth="false" layoutX="164.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="162.0" prefWidth="243.0" style="-fx-background-color: #3b3838;">
+                                 <children>
+                                    <Label fx:id="owner" prefHeight="27.0" prefWidth="230.0" text="Owner" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <AnchorPane prefHeight="109.0" prefWidth="230.0">
+                                       <children>
+                                          <Label layoutY="4.0" text="Address:" textFill="#d9d9d9">
+                                             <font>
+                                                <Font name="System Bold Italic" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="address" layoutX="-1.0" layoutY="25.0" prefHeight="50.0" prefWidth="232.0" textFill="WHITE" wrapText="true">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="-1.0" layoutY="80.0" text="Contact No:" textFill="#d9d9d9">
+                                             <font>
+                                                <Font name="System Bold Italic" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label fx:id="contact" layoutX="-1.0" layoutY="101.0" prefHeight="21.0" prefWidth="233.0" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
                           </children>
                       </HBox>
                       <Region maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="1040.0" />
                       <HBox prefHeight="195.0" prefWidth="1040.0">
                           <children>
                               <Region maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="40.0" />
-                              <VBox fx:id="Vbox1211" alignment="CENTER" maxHeight="220.0" maxWidth="306.0" prefHeight="214.0" prefWidth="245.0" style="-fx-background-color: #ffffff;">
+                              <VBox fx:id="Vbox1211" alignment="CENTER" maxHeight="220.0" maxWidth="306.0" prefHeight="214.0" prefWidth="275.0" style="-fx-background-color: #ffffff;">
                                   <children>
                                       <GridPane alignment="CENTER" prefHeight="165.0" prefWidth="240.0">
                                           <columnConstraints>

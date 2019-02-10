@@ -1,5 +1,7 @@
 package bookabook.client.controllers;
 import bookabook.client.Main;
+import com.mysql.cj.xdevapi.JsonArray;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -30,14 +32,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
 public class messenger {
+    Thread t;
     @FXML private Pane parent;
     @FXML private VBox left;
     //left side labels;
@@ -103,6 +103,8 @@ public class messenger {
     int index;
     int index1;
     String lblStyle;
+    static int inThread;
+    static Boolean isOnline;
 
     public void initialize() throws IOException, ClassNotFoundException, JSONException {
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
@@ -126,6 +128,54 @@ public class messenger {
         if(start>0){ upArrow.setVisible(true);}
         index = start;
 
+        t = new Thread () {
+            @Override
+            public void run() {
+                while(isOnline) {
+                    try {
+                        System.out.println("Starting");
+                        String line = (String) Main.connection.input.readObject();
+                        JSONObject response = new JSONObject(line);
+                        if(response.has("stop")){
+                            break;
+                        }else {
+                            user.add(response.getString("body"));
+                            who.add(response.getString("username"));
+                            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                            LocalDateTime now = LocalDateTime.now();
+                            time.add(dateFormat.format(now));
+
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    inThread = 0;
+                                    if (user.size() > 7) {
+                                        inThread = user.size() - 7;
+                                    }
+
+                                    messageDisplay(inThread, user.size());
+                                    if (inThread > 0) {
+                                        upArrow.setVisible(true);
+                                    }
+                                    index = inThread;
+                                }
+                            });
+                        }
+                        System.out.println("Ending");
+
+
+                    } catch (IOException e) {
+                        //System.out.println("running");
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+
+
         JSONArray response_arr1 = new JSONArray(Main.connection.getOnline(dashboard.user));
         for (int i=0; i<response_arr1.length(); i++) {
             online.add(response_arr1.get(i).toString());
@@ -138,6 +188,9 @@ public class messenger {
                 downArrow1, index1, 10, true, 1);
 
 
+        isOnline = true;
+        Main.connection.makeMessageable(true);
+        t.start();
     }
 
     public void onHoverBox(MouseEvent event)
@@ -170,6 +223,10 @@ public class messenger {
 
     public void pressed(MouseEvent event)
     {
+        isOnline = false;
+        Main.connection.makeMessageable(false);
+        Main.connection.endMessage();
+
         for(int i=0; i<stck.length; i++)
         {
             if(stck[i].isPressed() && i!=2)
@@ -358,7 +415,7 @@ public class messenger {
 
 
         // adding messages to server
-        String s = Main.connection.addMessage(
+        Main.connection.addMessage(
                 Integer.parseInt(dashboard.userId),
                 dashboard.user,
                 "text",

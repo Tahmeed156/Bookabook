@@ -25,6 +25,7 @@ class Connection extends Thread {
     private DataInputStream input;
     private ObjectOutputStream output;
     private Socket socket;
+    private boolean messageable = false;
 
     Connection(Socket soc, ThreadGroup tg) {
         super(tg, "Anonymous");
@@ -87,20 +88,25 @@ class Connection extends Thread {
                         break;
                     }
 
+                    case "messageable": {
+                        messageable = request.getBoolean("messageable");
+                        break;
+                    }
+
                     case "profile/login": {
                         login(request.getString("username"), request.getString("id"));
                         break;
                     }
 
                     case "messages/add": {
-                        response = db.send_message(
+                        db.send_message(
                                 request.getInt("id"),
                                 request.getString("username"),
                                 request.getString("message_type"),
                                 request.getString("body")
                         );
                         broadcast(request.getString("body"), request.getString("username"));
-                        send(response.toString());
+                        //send(response.toString());
                         break;
                     }
 
@@ -115,6 +121,14 @@ class Connection extends Thread {
                         send(response_arr.toString());
                         break;
                     }
+
+                    case "messages/stop": {
+                        response = new JSONObject();
+                        response.put("stop","true");
+                        send(response.toString());
+                        break;
+                    }
+
 
                     case "books/latest": {
                         ArrayList<Bookser> books = db.latest_books();
@@ -142,13 +156,16 @@ class Connection extends Thread {
                     }
 
                     case "books/similar": {
-                        ArrayList<Bookser> books = db.similar_books(request.getString("genre"));
+                        ArrayList<Bookser> books = db.similar_books(
+                                request.getString("genre"),
+                                request.getInt("book_id")
+                                );
                         output.writeObject(books);
-                        System.out.println("Sending images: " + books.size());
-                        for (Bookser book : books) {
-                            book.sendImage(output);
-                        }
-                        System.out.println("Successfully sent all objects and images!");
+//                        System.out.println("Sending images: " + books.size());
+//                        for (Bookser book : books) {
+//                            book.sendImage(output);
+//                        }
+//                        System.out.println("Successfully sent all objects and images!");
 
                         break;
                     }
@@ -363,12 +380,19 @@ class Connection extends Thread {
 
     // Sending the message to all users
     private void broadcast(String body, String username) {
+        JSONObject response = new JSONObject();
+        response.put("body", body);
+        response.put("username", username);
         for (Connection c: Server.clients) {
             // Skip broadcast if user is same
-            if (c.getName().equals(username))
+            if (c.isAlive() && c.isMessageable() && c.getName().equals(username))
                 continue;
-            send(body);
+            c.send(response.toString());
         }
+    }
+
+    private boolean isMessageable() {
+        return messageable;
     }
 
     private void log(String str) {

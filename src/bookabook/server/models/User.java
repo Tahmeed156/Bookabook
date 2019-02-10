@@ -107,6 +107,16 @@ public class User {
         return wallet;
     }
 
+    public int change_rented (int n) {
+        books_rented = books_rented + n;
+        return books_rented;
+    }
+
+    public int change_shared (int n) {
+        books_shared = books_shared + n;
+        return books_shared;
+    }
+
     // ================= GETTERS
 
     public String getUsername() {

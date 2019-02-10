@@ -257,12 +257,14 @@ public class dashboard {
 
         // Getting client info from registry
         Preferences userCon = Main.userCon;
-        userName = userCon.get("full_name", "BookABook");
-        user = userCon.get("username", "admin");
-        userId = userCon.get("id","1");
-        rentedBooks = userCon.get("books_rented", "0");
-        rentedOutBooks = userCon.get("books_shared", "0");
-        wallet = userCon.get("wallet", "0");
+        if(user == null) {
+            userName = userCon.get("full_name", "BookABook");
+            user = userCon.get("username", "admin");
+            userId = userCon.get("id","1");
+            rentedBooks = userCon.get("books_rented", "0");
+            rentedOutBooks = userCon.get("books_shared", "0");
+            wallet = userCon.get("wallet", "0");
+        }
 
         // upperLabels
         userNameLbl.setText(userName);
@@ -450,7 +452,7 @@ public class dashboard {
 
         for (int i = 0; i < rimgv.length; i++) {
             if (event.getSource() == rimgv[i]) {
-                Windows w = new Windows(rimgv[i], "../fxml/bookDetailsPage.fxml",1);// rlabel[i].getText());
+                Windows w = new Windows(rimgv[i], "../fxml/bookDetailsPage.fxml",rID.get(tIndex+i));
             }
         }
     }
@@ -564,7 +566,11 @@ public class dashboard {
                 // todo NHS: use this thread to get back info on rent out and rented books
 
             } catch (Exception e) {
-                toast.set("COULDN'T LOAD BOOKS","#f0ad4e");
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast.set("COULDN'T LOAD BOOKS","#f0ad4e");
+                    }});
                 System.out.println("Couldn't load books");
             }
 

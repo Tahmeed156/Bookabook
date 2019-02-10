@@ -88,7 +88,7 @@ public class bookDetailsPage {
     @FXML private Label userLbl;
 
     //body
-    @FXML private Circle imgCircleCenter;
+    @FXML private Rectangle imgCircleCenter;
     @FXML private VBox middleRightVBox;
     //Labels
     @FXML private Label owner;
@@ -160,6 +160,8 @@ public class bookDetailsPage {
     // private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
+    List<Bookser> similarBooks;
+    List<Integer> sbID = new ArrayList<>();
 
     List<String> reviewArr = new ArrayList<>();
 //    (Arrays.asList("Book quite good",
@@ -234,14 +236,7 @@ public class bookDetailsPage {
 //
 //        genre.setText(bookGenre);
 
-        for(int i = 0; i<5; i++)
-        {
-            if(i>=allsimilarBooks.length)
-            {
-                lb[i].setText("");
-            }
-            else{lb[i].setText(allsimilarBooks[i]);}
-        }
+
 
         Loading l = new Loading();
         new Thread(l).start();
@@ -468,7 +463,14 @@ public class bookDetailsPage {
     }
 
     public void labelClicked(MouseEvent event) {
-        Windows w = new Windows((Label) event.getSource(), "../fxml/bookDetailsPage.fxml", 1);
+
+        //Windows w = new Windows((Label) event.getSource(), "../fxml/bookDetailsPage.fxml", 1);
+        for (int i = 0; i < similarBooks.size(); i++) {
+            if(event.getSource() == lb[i])
+            {
+                Windows w = new Windows(lb[i], "../fxml/bookDetailsPage.fxml", sbID.get(i));
+            }
+        }
     }
 
     class Loading extends Task {
@@ -551,6 +553,29 @@ public class bookDetailsPage {
                         address.setText(response.getString("owner_location"));
                         contact.setText(response.getString("owner_contact"));
                     }
+
+                    try {
+                        similarBooks = Main.connection.getSimilarBooks(genre.getText(), id);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    for(int i = 0; i<5; i++)
+                    {
+                        if(i>=similarBooks.size())
+                        {
+                            lb[i].setText("");
+                        }
+                        else{
+                            lb[i].setText(similarBooks.get(i).getName());
+                            sbID.add(similarBooks.get(i).getId());
+                        }
+                    }
+
+
 
                     BookRent.setText(Integer.toString(book_rent));
                     BookDeposit.setText(Integer.toString(book_deposit));
