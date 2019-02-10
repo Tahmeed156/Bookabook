@@ -189,12 +189,14 @@ public class profilePage {
     List<String> tauthor = new ArrayList<>();
     List<Image> timgs = new ArrayList<>();
     List<Bookser> rentedBooks;
+    List<Integer> tID = new ArrayList<>();
 
     //list for rented books
     List<String> bname = new ArrayList<>();
     List<String> bauthor = new ArrayList<>();
     List<Image> bimgs = new ArrayList<>();
     List<Bookser> rentedOutBooks;
+    List<Integer> bID = new ArrayList<>();
 
     private String dir = "E:\\Projects\\CSE\\BookABook\\Code\\"; // Najib config
     // private String dir = "A:\\"; // Tahmeed config
@@ -251,6 +253,24 @@ public class profilePage {
             }
         }
 
+
+        for(int i = 0; i<tVbox.length; i++)
+        {
+            if(timgv[i].isHover())
+            {
+                tVbox[i].setStyle("-fx-background-color: #d9d9d9");
+            }
+        }
+
+
+        for(int i = 0; i<bVbox.length; i++)
+        {
+            if(bimgv[i].isHover())
+            {
+                bVbox[i].setStyle("-fx-background-color: #d9d9d9");
+            }
+        }
+
     }
 
     public void endHoverBox(MouseEvent event) {
@@ -258,6 +278,24 @@ public class profilePage {
             if (!stck[i].isHover() && i != 4) {
                 stck[i].setStyle("-fx-background-color:#3b3838;");
                 lbl[i].setTextFill(Color.rgb(217, 217, 217));
+            }
+        }
+
+
+        for(int i = 0; i<tVbox.length; i++)
+        {
+            if(!timgv[i].isHover())
+            {
+                tVbox[i].setStyle("-fx-background-color: #ffffff");
+            }
+        }
+
+
+        for(int i = 0; i<bVbox.length; i++)
+        {
+            if(!bimgv[i].isHover())
+            {
+                bVbox[i].setStyle("-fx-background-color: #ffffff");
             }
         }
 
@@ -357,13 +395,13 @@ public class profilePage {
         // todo NHS: pass on book id to next page
         for (int i = 0; i < timgv.length; i++) {
             if (event.getSource() == timgv[i]) {
-                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", 1);//tlabel[i].getText());
+                Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tID.get(tIndex + i));
             }
         }
 
         for (int i = 0; i < bimgv.length; i++) {
             if (event.getSource() == bimgv[i]) {
-                Windows w = new Windows(bimgv[i], "../fxml/bookDetailsPage.fxml",1);// blabel[i].getText());
+                Windows w = new Windows(bimgv[i], "../fxml/bookDetailsPage.fxml",bID.get(bIndex + i));
             }
         }
     }
@@ -384,6 +422,7 @@ public class profilePage {
 
                 rentedBooks = Main.connection.latest_books(Integer.valueOf(dashboard.userId), "books/rented", "");
                 for (Bookser b : rentedBooks) {
+                    tID.add(b.getId());
                     tname.add(b.getName());
                     tauthor.add(b.getAuthor());
                     timgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
@@ -391,6 +430,7 @@ public class profilePage {
 
                 rentedOutBooks = Main.connection.latest_books(Integer.valueOf(dashboard.userId),"books/rented_out", "");
                 for (Bookser b : rentedOutBooks) {
+                    bID.add(b.getId());
                     bname.add(b.getName());
                     bauthor.add(b.getAuthor());
                     bimgs.add(SwingFXUtils.toFXImage(b.getImage(), null));

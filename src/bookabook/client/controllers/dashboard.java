@@ -251,14 +251,14 @@ public class dashboard {
 
         // Getting client info from registry
         Preferences userCon = Main.userCon;
-        if(user == null) {
-            userName = userCon.get("full_name", "BookABook");
-            user = userCon.get("username", "admin");
-            userId = userCon.get("id","1");
-            rentedBooks = userCon.get("books_rented", "0");
-            rentedOutBooks = userCon.get("books_shared", "0");
-            wallet = userCon.get("wallet", "0");
-        }
+
+        userName = userCon.get("full_name", "BookABook");
+        user = userCon.get("username", "admin");
+        userId = userCon.get("id","1");
+        rentedBooks = userCon.get("books_rented", "0");
+        rentedOutBooks = userCon.get("books_shared", "0");
+        wallet = userCon.get("wallet", "0");
+
 
         // upperLabels
         userNameLbl.setText(userName);

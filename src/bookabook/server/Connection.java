@@ -88,11 +88,6 @@ class Connection extends Thread {
                         break;
                     }
 
-                    case "messageable": {
-                        messageable = request.getBoolean("messageable");
-                        break;
-                    }
-
                     case "profile/login": {
                         login(request.getString("username"), request.getString("id"));
                         break;
@@ -123,9 +118,12 @@ class Connection extends Thread {
                     }
 
                     case "messages/stop": {
-                        response = new JSONObject();
-                        response.put("stop","true");
-                        send(response.toString());
+                        messageable = request.getBoolean("messageable");
+                        if(!messageable) {
+                            response = new JSONObject();
+                            response.put("stop", "true");
+                            send(response.toString());
+                        }
                         break;
                     }
 

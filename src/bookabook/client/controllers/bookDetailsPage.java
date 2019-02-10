@@ -390,7 +390,7 @@ public class bookDetailsPage {
         {
             JSONObject response = new JSONObject(Main.connection.reviewAdd(
                     Integer.parseInt(dashboard.userId),
-                    1,//static
+                    id,
                     bookReview.getText()
                     ));
 
@@ -506,6 +506,28 @@ public class bookDetailsPage {
                         owner.setText(response.getString("owner_name"));
                         address.setText(response.getString("owner_location"));
                         contact.setText(response.getString("owner_contact"));
+
+                        // disable the rent button
+                        // if the renter is the rentee
+                        // if the book is unavailable
+                        if(!response.getBoolean("available") || Integer.parseInt(dashboard.userId) == renter_id)
+                        {
+                            System.out.println("Not available");
+                            rentBtn.setDisable(true);
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(Integer.parseInt(dashboard.userId) == renter_id)
+                                    {
+                                        toast.set("THIS BOOK BELONGS TO USER","#f0ad4e");
+                                    }
+                                    else
+                                    {
+                                        toast.set("THIS BOOK IS NOT AVAILABLE AT THE MOMENT","#f0ad4e");
+                                    }
+                                }
+                            });
+                        }
                     }
 
                     try {

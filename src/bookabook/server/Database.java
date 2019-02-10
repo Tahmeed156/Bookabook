@@ -238,7 +238,7 @@ public class Database {
     public ArrayList<Bookser> latest_books () {
         startSession();
 
-        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(8);
+        Query q = session.createQuery("from Book order by timestamp desc").setFirstResult(0).setMaxResults(10);
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
         for (int i=0; i<books.size(); i++) {
@@ -255,7 +255,7 @@ public class Database {
     public ArrayList<Bookser> trending_books () {
         startSession();
 
-        Query q = session.createQuery("from Book order by times_rented").setFirstResult(0).setMaxResults(8);
+        Query q = session.createQuery("from Book order by times_rented desc").setFirstResult(0).setMaxResults(10);
         // bug TMD: Paginate all these
         List books = q.getResultList();
         ArrayList<Bookser> book_objects = new ArrayList<>();
@@ -467,6 +467,7 @@ public class Database {
         response.put("deposit", book.getDeposit());
         response.put("genre", book.getGenre());
         response.put("times_rented", book.getTimes_rented());
+        response.put("available",book.isAvailable());
 
         response.put("print", book_info.getString("print"));
         response.put("condition", book_info.getString("condition"));
@@ -504,8 +505,15 @@ public class Database {
         JSONArray response = new JSONArray();
         // todo TMD: remove limit or paginate
         try {
-            Query q = session.createQuery("from Review where Book = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
-            q.setParameter("b", new Book(book_id));
+
+            //NHS
+            Query q = session.createQuery("from Review where book_id = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
+            q.setParameter("b", book_id);
+
+//            //TT
+//            Query q = session.createQuery("from Review where Book = :b order by timestamp desc").setFirstResult(0).setMaxResults(8);
+//            q.setParameter("b", new Book(book_id));
+
             List reviews = q.getResultList();
             for (Object review1 : reviews) {
                 Review r = (Review) review1;

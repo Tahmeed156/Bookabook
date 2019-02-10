@@ -73,6 +73,7 @@ public class Book {
         book_info = i;
         genre = g;
         timestamp = new Date();
+        available = false;
     }
 
     public User getOwner() {

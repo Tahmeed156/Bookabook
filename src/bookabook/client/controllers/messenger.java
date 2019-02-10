@@ -172,7 +172,7 @@ public class messenger {
 
         // tell the server the client can receive messages now
         isOnline = true;
-        Main.connection.makeMessageable(true);
+        Main.connection.endMessage(isOnline);
         t.start();
     }
 
@@ -269,8 +269,7 @@ public class messenger {
     public void pressed(MouseEvent event)
     {
         isOnline = false;
-        Main.connection.makeMessageable(false);
-        Main.connection.endMessage();
+        Main.connection.endMessage(isOnline);
 
         for(int i=0; i<stck.length; i++)
         {

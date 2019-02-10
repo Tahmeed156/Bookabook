@@ -363,22 +363,12 @@ public class Client {
         return (String) input.readObject();
     }
 
-    public void makeMessageable(Boolean messageable){
-        request = new JSONObject();
-        try {
-            request.put("type", "messageable");
-            request.put("messageable", messageable);
-        } catch (JSONException e) {
-            System.out.println("Error creating/sending json");
-        }
-        send(request.toString());
-    }
-
     //to signal the CLIENT AND the server to stop sending messages
-    public void endMessage(){
+    public void endMessage(Boolean messageable){
         request = new JSONObject();
         try {
             request.put("type", "messages/stop");
+            request.put("messageable", messageable);
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");
         }
