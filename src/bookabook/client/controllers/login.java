@@ -40,11 +40,9 @@ public class login {
     @FXML private Button logInBtn;
     @FXML private Button signUpBtn;
 
-    public void initialize()
-    {
-
+    public void initialize() {
+        // add toast to the page
         parent.getChildren().add(toast.get());
-
     }
 
 
@@ -76,6 +74,7 @@ public class login {
                     userCon.put("books_rented", response.getString("books_rented"));
                     userCon.put("books_shared", response.getString("books_shared"));
 
+                    // sending information to dashboard
                     dashboard.user = userCon.get("username","BookABook");
                     dashboard.rentedBooks = userCon.get("books_rented", "0");
                     dashboard.rentedOutBooks = userCon.get("books_shared","0");
@@ -128,6 +127,7 @@ public class login {
                     userCon.put("books_rented", response.getString("books_rented"));
                     userCon.put("books_shared", response.getString("books_shared"));
 
+                    // sending information to dashboard
                     dashboard.user = userCon.get("username","BookABook");
                     dashboard.rentedBooks = userCon.get("books_rented", "0");
                     dashboard.rentedOutBooks = userCon.get("books_shared","0");

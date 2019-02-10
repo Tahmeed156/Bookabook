@@ -48,8 +48,7 @@ public class rentOutPage {
     @FXML
     private Label logoutLbl;
     @FXML
-    private Label[] lbl;// = {dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl}; //cant do this
-    //because of how fxml loader acts
+    private Label[] lbl;
 
     //left side stacks
     @FXML
@@ -64,7 +63,7 @@ public class rentOutPage {
     private StackPane profileStk;
     @FXML
     private StackPane logoutStk;
-    StackPane[] stck;// = {dashBStk,messagesStk,helpStk,profileStk,logoutStk};
+    StackPane[] stck;
 
     //borderpane top stuff
     @FXML private Button mainPageBtn;
@@ -76,8 +75,6 @@ public class rentOutPage {
     @FXML private Label walletLbl;
     @FXML private Label userNameLbl;
     @FXML private Label userLbl;
-
-
 
 
     //Components
@@ -146,8 +143,7 @@ public class rentOutPage {
 
     }
 
-
-
+    // ========================== ON HOVER FUNCTIONS ========================
     public void onHoverBox(MouseEvent event) {
         for (int i = 1; i < stck.length; i++) {
             if (stck[i].isHover()) {
@@ -164,18 +160,6 @@ public class rentOutPage {
             if (!stck[i].isHover()) {
                 stck[i].setStyle("-fx-background-color:#3b3838;");
                 lbl[i].setTextFill(Color.rgb(217, 217, 217));
-            }
-        }
-
-    }
-
-    public void pressed(MouseEvent event)
-    {
-        for(int i=1; i<stck.length; i++)
-        {
-            if(stck[i].isPressed())
-            {
-                Windows w = new Windows(stck[i], i);
             }
         }
 
@@ -215,6 +199,19 @@ public class rentOutPage {
                 }
             }
         }
+    }
+
+    // ========================== ON PRESSED FUNCTIONS ========================
+    public void pressed(MouseEvent event)
+    {
+        for(int i=1; i<stck.length; i++)
+        {
+            if(stck[i].isPressed())
+            {
+                Windows w = new Windows(stck[i], i);
+            }
+        }
+
     }
 
     public void choosePic(MouseEvent event)
@@ -278,6 +275,7 @@ public class rentOutPage {
 
     public void btnPressed(ActionEvent e)
     {
+        // return to main page
         Windows w = new Windows(mainPageBtn, 0);
     }
 

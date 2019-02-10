@@ -49,8 +49,7 @@ public class editProfilePage {
     @FXML
     private Label logoutLbl;
     @FXML
-    private Label[] lbl;// = {dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl}; //cant do this
-    //because of how fxml loader acts
+    private Label[] lbl;
 
     //left side stacks
     @FXML
@@ -65,7 +64,7 @@ public class editProfilePage {
     private StackPane profileStk;
     @FXML
     private StackPane logoutStk;
-    StackPane[] stck;// = {dashBStk,messagesStk,helpStk,profileStk,logoutStk};
+    StackPane[] stck;
 
     //borderpane top stuff
     @FXML private Button profilePageBtn;
@@ -76,8 +75,6 @@ public class editProfilePage {
     @FXML private Label userNameLbl;
     @FXML private Label userLbl;
     @FXML private VBox upperRightVbox;
-
-
 
 
     //Components
@@ -111,7 +108,6 @@ public class editProfilePage {
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
 
 
-
     public void initialize() {
         parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
@@ -133,11 +129,9 @@ public class editProfilePage {
         rentedBLbl.setText(rentedBooks);
         sharedBLbl.setText(rentedOutBooks);
         walletLbl.setText(wallet);
-
     }
 
-
-
+    // ========================== ON HOVER FUNCTIONS ========================
     public void onHoverBox(MouseEvent event) {
         for (int i = 0; i < stck.length; i++) {
             if (stck[i].isHover() && i!=4) {
@@ -158,19 +152,6 @@ public class editProfilePage {
         }
 
     }
-
-    public void pressed(MouseEvent event)
-    {
-        for(int i=0; i<stck.length; i++)
-        {
-            if(stck[i].isPressed() && i!=4)
-            {
-                Windows w = new Windows(stck[i], i);
-            }
-        }
-
-    }
-
 
     public void onHoverButton(MouseEvent event)
     {
@@ -209,6 +190,18 @@ public class editProfilePage {
         }
     }
 
+    // ========================== ON PRESSED FUNCTIONS ========================
+    public void pressed(MouseEvent event)
+    {
+        for(int i=0; i<stck.length; i++)
+        {
+            if(stck[i].isPressed() && i!=4)
+            {
+                Windows w = new Windows(stck[i], i);
+            }
+        }
+
+    }
 
     public void choosePic(MouseEvent event)
     {
@@ -220,7 +213,6 @@ public class editProfilePage {
         proPicCircle.setFill(new ImagePattern(imgperson));
 
     }
-
 
     public void saveProfile(MouseEvent event) throws IOException, ClassNotFoundException, JSONException {
 
@@ -261,10 +253,9 @@ public class editProfilePage {
 
     }
 
-
-
     public void btnPressed(ActionEvent e)
     {
+        // back to profile page
         Windows w = new Windows(profilePageBtn, 4);
     }
 

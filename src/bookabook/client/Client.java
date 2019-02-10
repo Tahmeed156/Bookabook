@@ -19,6 +19,8 @@ import bookabook.client.controllers.bookDetailsPage;
 
 public class Client {
 
+
+    // To communicate with server
     public ObjectInputStream input;
     private DataOutputStream output;
     private Socket socket;
@@ -281,18 +283,6 @@ public class Client {
         //return (String) input.readObject();
     }
 
-    //to signal the CLIENT AND the server to stop sending messages
-    public void endMessage(){
-        request = new JSONObject();
-        try {
-            request.put("type", "messages/stop");
-        } catch (JSONException e) {
-            System.out.println("Error creating/sending json");
-        }
-        send(request.toString());
-    }
-
-
     public String getMessage() throws IOException, ClassNotFoundException {
         request = new JSONObject();
         try {
@@ -316,7 +306,6 @@ public class Client {
         return (String) input.readObject();
     }
 
-    // todo REUSE THESE TWO FUNCTIONS FOR PROFILE PAGE
     public String getBooks(String type, int user_id) throws IOException, ClassNotFoundException {
         request = new JSONObject();
         try {
@@ -384,4 +373,16 @@ public class Client {
         }
         send(request.toString());
     }
+
+    //to signal the CLIENT AND the server to stop sending messages
+    public void endMessage(){
+        request = new JSONObject();
+        try {
+            request.put("type", "messages/stop");
+        } catch (JSONException e) {
+            System.out.println("Error creating/sending json");
+        }
+        send(request.toString());
+    }
+
 }

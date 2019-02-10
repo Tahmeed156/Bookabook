@@ -50,8 +50,7 @@ public class profilePage {
     @FXML
     private Label logoutLbl;
     @FXML
-    private Label[] lbl;// = {searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl}; //cant do this
-    //because of how fxml loader acts
+    private Label[] lbl;
 
     //left side stacks
     @FXML
@@ -66,7 +65,7 @@ public class profilePage {
     private StackPane profileStk;
     @FXML
     private StackPane logoutStk;
-    StackPane[] stck;// = {searchStk,messagesStk,helpStk,profileStk,logoutStk};
+    StackPane[] stck;
 
     //borderpane top stuff
     @FXML private Label rentedBLbl;
@@ -237,35 +236,11 @@ public class profilePage {
         rentedBLbl.setText(rentedBooks);
         sharedBLbl.setText(rentedOutBooks);
         walletLbl.setText(wallet);
-
-
-
-//        JSONArray response_arr = new JSONArray(Main.connection.getProfile(Integer.parseInt(dashboard.userId)));
-//
-//        for (int i=0; i<response_arr.length(); i++) {
-//            JSONObject details = response_arr.getJSONObject(i);
-//            // work
-//            work.setText(details.getString("work"));
-//            // birth date
-//            birthDate.setText(details.getString("birth_day"));
-//            // location
-//            loc.setText(details.getString("loc"));
-//            // email
-//            email.setText(details.getString("email"));
-//            // contact no
-//            contact.setText(details.getString("contact"));
-//        }
-
         bigName.setText(dashboard.userName);
-//        work.setText("Intern at the king's guard");
-//        birthDate.setText("11th March 2018");
-//        loc.setText("Winterfell");
-//        email.setText("jmike@gmail.com");
-//        contact.setText("54654685");
-
-
     }
 
+
+    // ========================== ON HOVER FUNCTIONS ========================
     public void onHoverBox(MouseEvent event) {
 
 
@@ -288,6 +263,53 @@ public class profilePage {
 
     }
 
+    public void onHoverArrow(MouseEvent event) {
+        for (int i = 0; i < arrows.length; i++) {
+            if (arrows[i].isHover()) {
+                if (i == 1 || i == 3) {
+                    arrows[i].setImage(new Image(new File(path + "rightAClicked.png").toURI().toString()));
+                } else {
+                    arrows[i].setImage(new Image(new File(path + "leftAClicked.png").toURI().toString()));
+                }
+            }
+
+        }
+    }
+
+    public void endHoverArrow(MouseEvent event) {
+        for (int i = 0; i < arrows.length; i++) {
+            if (!arrows[i].isHover()) {
+                if (i == 1 || i == 3) {
+                    arrows[i].setImage(new Image(new File(path + "rightArrow.png").toURI().toString()));
+                } else {
+                    arrows[i].setImage(new Image(new File(path + "leftArrow.png").toURI().toString()));
+                }
+            }
+
+        }
+    }
+
+    public void onHoverButton(MouseEvent event) {
+
+        for (int i = 0; i < 2; i++) {
+            if (event.getSource() == btn[i]) {
+                btn[i].setStyle("-fx-background-color:#d9d9d9; -fx-border-width: 3; -fx-text-fill:#3b3838");
+            }
+        }
+    }
+
+    public void endHoverButton(MouseEvent event) {
+
+        for (int i = 0; i < 2; i++) {
+            if (event.getSource() == btn[i]) {
+                btn[i].setStyle("-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" +
+                        "fx-text-fill: #ffffff");
+            }
+        }
+    }
+
+
+    // ========================== ON PRESSED FUNCTIONS ========================
     public void pressed(MouseEvent event) {
         for (int i = 0; i < stck.length; i++) {
             if (stck[i].isPressed() && i != 4) {
@@ -323,55 +345,6 @@ public class profilePage {
         }
     }
 
-
-    public void onHoverArrow(MouseEvent event) {
-        for (int i = 0; i < arrows.length; i++) {
-            if (arrows[i].isHover()) {
-                if (i == 1 || i == 3) {
-                    arrows[i].setImage(new Image(new File(path + "rightAClicked.png").toURI().toString()));
-                } else {
-                    arrows[i].setImage(new Image(new File(path + "leftAClicked.png").toURI().toString()));
-                }
-            }
-
-        }
-    }
-
-    public void endHoverArrow(MouseEvent event) {
-        for (int i = 0; i < arrows.length; i++) {
-            if (!arrows[i].isHover()) {
-                if (i == 1 || i == 3) {
-                    arrows[i].setImage(new Image(new File(path + "rightArrow.png").toURI().toString()));
-                } else {
-                    arrows[i].setImage(new Image(new File(path + "leftArrow.png").toURI().toString()));
-                }
-            }
-
-        }
-    }
-
-
-    public void onHoverButton(MouseEvent event) {
-
-        for (int i = 0; i < 2; i++) {
-            if (event.getSource() == btn[i]) {
-                    btn[i].setStyle("-fx-background-color:#d9d9d9; -fx-border-width: 3; -fx-text-fill:#3b3838");
-                }
-            }
-    }
-
-
-    public void endHoverButton(MouseEvent event) {
-
-        for (int i = 0; i < 2; i++) {
-            if (event.getSource() == btn[i]) {
-                btn[i].setStyle("-fx-background-color: #3b3838; -fx-border-width: 3; -fx-border-color: #d9d9d9;" +
-                        "fx-text-fill: #ffffff");
-            }
-        }
-    }
-
-
     public void editProClicked(MouseEvent e) {
         Windows w = new Windows(editProfileBtn, 7);
     }
@@ -379,7 +352,6 @@ public class profilePage {
     public void rentABookClicked(MouseEvent e) {
         Windows w = new Windows(rentBookBtn, 6);
     }
-
 
     public void bookPageClicked(MouseEvent event) {
         // todo NHS: pass on book id to next page
@@ -396,6 +368,7 @@ public class profilePage {
         }
     }
 
+    // One thread to load them alls
     class Loading extends Task {
         @Override
         public Void call() throws Exception {

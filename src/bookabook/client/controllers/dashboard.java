@@ -62,8 +62,7 @@ public class dashboard {
     @FXML
     private Label logoutLbl;
     @FXML
-    private Label[] lbl;// = {searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl}; //cant do this
-    //because of how fxml loader acts
+    private Label[] lbl;
 
     //left side stacks
     @FXML
@@ -78,7 +77,7 @@ public class dashboard {
     private StackPane profileStk;
     @FXML
     private StackPane logoutStk;
-    StackPane[] stck;// = {searchStk,messagesStk,helpStk,profileStk,logoutStk};
+    StackPane[] stck;
 
     //borderpane top stuff
     @FXML
@@ -96,11 +95,6 @@ public class dashboard {
     @FXML private VBox sharedBooks;
 
 
-    //center HBoxs
-    @FXML
-    private HBox trendHbx;
-    @FXML
-    private HBox recHbx;
 
     public int tIndex = 0;
     public int rIndex = 0;
@@ -273,8 +267,10 @@ public class dashboard {
         sharedBLbl.setText(rentedOutBooks);
         walletLbl.setText(wallet);
 
-
     }
+
+
+    // ========================== ON HOVER FUNCTIONS ========================
 
     public void onHoverBox(MouseEvent event) {
 
@@ -333,6 +329,53 @@ public class dashboard {
 
     }
 
+    public void onHoverArrow(MouseEvent event) {
+        for (int i = 0; i < arrows.length; i++) {
+            if (arrows[i].isHover()) {
+                if (i == 1 || i == 3) {
+                    arrows[i].setImage(new Image(new File(path + "rightAClicked.png").toURI().toString()));
+                } else if( i==0 || i==2){
+                    arrows[i].setImage(new Image(new File(path + "leftAClicked.png").toURI().toString()));
+                } else if( i==4 || i==6){
+                    arrows[i].setImage(new Image(new File(path + "upAClicked.png").toURI().toString()));
+                }else {
+                    arrows[i].setImage(new Image(new File(path + "downAClicked.png").toURI().toString()));
+                }
+            }
+
+        }
+    }
+
+    public void endHoverArrow(MouseEvent event) {
+        for (int i = 0; i < arrows.length; i++) {
+            if (!arrows[i].isHover()) {
+                if (i == 1 || i == 3) {
+                    arrows[i].setImage(new Image(new File(path + "rightArrow.png").toURI().toString()));
+                } else if( i==0 || i==2){
+                    arrows[i].setImage(new Image(new File(path + "leftArrow.png").toURI().toString()));
+                } else if( i==4 || i==6){
+                    arrows[i].setImage(new Image(new File(path + "upArrow.png").toURI().toString()));
+                }else {
+                    arrows[i].setImage(new Image(new File(path + "downArrow.png").toURI().toString()));
+                }
+            }
+
+        }
+    }
+
+    public void onHoverButton(MouseEvent event) {
+
+        rentOutBtn.setStyle("-fx-background-color:#92a2b9");
+
+    }
+
+    public void endHoverButton(MouseEvent event) {
+
+        rentOutBtn.setStyle("-fx-background-color:#44546a");
+
+    }
+
+    // ========================== ON PRESSED FUNCTIONS ========================
     public void pressed(MouseEvent event) {
         for (int i = 1; i < stck.length; i++) {
             if (stck[i].isPressed()) {
@@ -389,61 +432,12 @@ public class dashboard {
         }
     }
 
-
-    public void onHoverArrow(MouseEvent event) {
-        for (int i = 0; i < arrows.length; i++) {
-            if (arrows[i].isHover()) {
-                if (i == 1 || i == 3) {
-                    arrows[i].setImage(new Image(new File(path + "rightAClicked.png").toURI().toString()));
-                } else if( i==0 || i==2){
-                    arrows[i].setImage(new Image(new File(path + "leftAClicked.png").toURI().toString()));
-                } else if( i==4 || i==6){
-                    arrows[i].setImage(new Image(new File(path + "upAClicked.png").toURI().toString()));
-                }else {
-                    arrows[i].setImage(new Image(new File(path + "downAClicked.png").toURI().toString()));
-                }
-            }
-
-        }
-    }
-
-    public void endHoverArrow(MouseEvent event) {
-        for (int i = 0; i < arrows.length; i++) {
-            if (!arrows[i].isHover()) {
-                if (i == 1 || i == 3) {
-                    arrows[i].setImage(new Image(new File(path + "rightArrow.png").toURI().toString()));
-                } else if( i==0 || i==2){
-                    arrows[i].setImage(new Image(new File(path + "leftArrow.png").toURI().toString()));
-                } else if( i==4 || i==6){
-                    arrows[i].setImage(new Image(new File(path + "upArrow.png").toURI().toString()));
-                }else {
-                    arrows[i].setImage(new Image(new File(path + "downArrow.png").toURI().toString()));
-                }
-            }
-
-        }
-    }
-
     public void btnPressed(ActionEvent e) {
+        // to open rent out page
         Windows w = new Windows(rentOutBtn, 6);
     }
 
-
-    public void onHoverButton(MouseEvent event) {
-
-        rentOutBtn.setStyle("-fx-background-color:#92a2b9");
-
-    }
-
-
-    public void endHoverButton(MouseEvent event) {
-
-        rentOutBtn.setStyle("-fx-background-color:#44546a");
-
-    }
-
     public void bookPageClicked(MouseEvent event) {
-        // todo NHS: pass on book id to next page
         for (int i = 0; i < timgv.length; i++) {
             if (event.getSource() == timgv[i]) {
                 Windows w = new Windows(timgv[i], "../fxml/bookDetailsPage.fxml", tID.get(tIndex+i));
@@ -459,7 +453,6 @@ public class dashboard {
 
 
     // One thread class to load them all
-
     class Loading extends Task {
         @Override
         public Void call() throws Exception {
@@ -469,6 +462,7 @@ public class dashboard {
                     Main.connection.getProPic();
                 }
 
+                // sets profile picture
                 Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
                 imgCircle.setFill(new ImagePattern(imgperson));
 
@@ -547,9 +541,6 @@ public class dashboard {
                         tIndex = helper.initiate(tname, tauthor, timgs, tstckRArrow, tVbox, tlabel, tAuthorLabel, timgv,
                                 tIndex, 3);
 
-                        // todo NHS: populate rented and rented out books
-                        // todo NHS: rented -> how long;
-                        // todo NHS: rented out -> who rented , how long;
                     }
                 });
 
@@ -562,8 +553,6 @@ public class dashboard {
                     rimgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
                 }
 
-
-                // todo NHS: use this thread to get back info on rent out and rented books
 
             } catch (Exception e) {
                 Platform.runLater(new Runnable() {
@@ -578,12 +567,8 @@ public class dashboard {
                 @Override
                 public void run() {
                     // populating latest
-                    tIndex = helper.initiate(rname, rauthor, rimgs, rstckRArrow, rVbox, rlabel, rAuthorLabel, rimgv,
+                    rIndex = helper.initiate(rname, rauthor, rimgs, rstckRArrow, rVbox, rlabel, rAuthorLabel, rimgv,
                             rIndex, 3);
-
-                    // todo NHS: populate rented and rented out books
-                    // todo NHS: rented -> how long;
-                    // todo NHS: rented out -> who rented , how long;
                  }
             });
 

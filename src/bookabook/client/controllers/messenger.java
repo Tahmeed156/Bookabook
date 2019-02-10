@@ -47,8 +47,7 @@ public class messenger {
     @FXML private Label helpLbl;
     @FXML private Label profileLbl;
     @FXML private Label logoutLbl;
-    @FXML private Label[] lbl;// = {searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl}; //cant do this
-    //because of how fxml loader acts
+    @FXML private Label[] lbl;
 
     //left side stacks
     @FXML private StackPane dashBStk;
@@ -57,8 +56,7 @@ public class messenger {
     @FXML private StackPane helpStk;
     @FXML private StackPane profileStk;
     @FXML private StackPane logoutStk;
-    StackPane[] stck;// = {searchStk,messagesStk,helpStk,profileStk,logoutStk};
-
+    StackPane[] stck;
 
     @FXML private TextField chat;
     @FXML private VBox message;
@@ -77,27 +75,12 @@ public class messenger {
 
 
     List<String> user = new ArrayList<>();
-//    Arrays.asList("Hello","How are you?","I am fine thank you",
-//            "For future use lets do this dont you think we should\n lets do aaaaaaaaaaaaaa" +
-//                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-//                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-//                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-//                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaathis.","Hello","How are you?","I am fine thank you",
-//            "For future use lets do this dont you think we should lets do this.","Hello","How are you?","I am fine thank you",
-//            "For future use lets do this dont you think we should lets do this.","Hello","How are you?","I am fine thank you",
-//            "For future use lets do this dont you think we should lets do this.","a"));
 
     List<String> who = new ArrayList<>();
-    // Arrays.asList(0,0,1,1,0,1,1,1,0,0,0,1,0,0,1,1,0));
 
     List<String> time = new ArrayList<>();
-//        Arrays.asList("1:30","2:15","2:16","2:17","2:18","2:30",
-//            "2:45","3:30","5:50","5:00","6:25","6:45","6:55","6:55","7:00","7:01",
-//            "7:02"));
 
     List<String> online = new ArrayList<>();
-//    Arrays.asList("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o",
-//           "p","q","r","s","t","u","v","w","x","y","z"));
 
 
     int index;
@@ -121,21 +104,24 @@ public class messenger {
             time.add(messages.getString("timestamp"));
         }
 
+        // display message
         int start = 0;
         if(user.size()>7) { start = user.size() - 7; }
-
         messageDisplay(start,user.size());
         if(start>0){ upArrow.setVisible(true);}
         index = start;
 
+        // thread to read messages from server
         t = new Thread () {
             @Override
             public void run() {
+                // continue reading messages while the user is in messages page
                 while(isOnline) {
                     try {
-                        System.out.println("Starting");
                         String line = (String) Main.connection.input.readObject();
                         JSONObject response = new JSONObject(line);
+                        // stop this thread when input has key "stop"
+                        // else continue reading
                         if(response.has("stop")){
                             break;
                         }else {
@@ -152,7 +138,6 @@ public class messenger {
                                     if (user.size() > 7) {
                                         inThread = user.size() - 7;
                                     }
-
                                     messageDisplay(inThread, user.size());
                                     if (inThread > 0) {
                                         upArrow.setVisible(true);
@@ -161,8 +146,6 @@ public class messenger {
                                 }
                             });
                         }
-                        System.out.println("Ending");
-
 
                     } catch (IOException e) {
                         //System.out.println("running");
@@ -176,23 +159,24 @@ public class messenger {
 
 
 
+        // get the users who are online
         JSONArray response_arr1 = new JSONArray(Main.connection.getOnline(dashboard.user));
         for (int i=0; i<response_arr1.length(); i++) {
             online.add(response_arr1.get(i).toString());
         }
-
 
         index1 = online.size()-1;
         lblStyle = "-fx-background-color:#ffffff; -fx-pref-width:100";
         index1 = helper.initiate(online, onlineUsers, 10,100, lblStyle,
                 downArrow1, index1, 10, true, 1);
 
-
+        // tell the server the client can receive messages now
         isOnline = true;
         Main.connection.makeMessageable(true);
         t.start();
     }
 
+    // ========================== ON HOVER FUNCTIONS ========================
     public void onHoverBox(MouseEvent event)
     {
 
@@ -216,22 +200,6 @@ public class messenger {
             {
                 stck[i].setStyle("-fx-background-color:#3b3838;");
                 lbl[i].setTextFill(Color.rgb(217,217,217));
-            }
-        }
-
-    }
-
-    public void pressed(MouseEvent event)
-    {
-        isOnline = false;
-        Main.connection.makeMessageable(false);
-        Main.connection.endMessage();
-
-        for(int i=0; i<stck.length; i++)
-        {
-            if(stck[i].isPressed() && i!=2)
-            {
-                Windows w = new Windows(stck[i], i);
             }
         }
 
@@ -285,6 +253,34 @@ public class messenger {
         }
     }
 
+    public void onHoverBtn(MouseEvent e)
+    {
+        send.setStyle("-fx-background-color:#d9d9d9; -fx-border-radius: 5; " +
+                "-fx-border-width: 3; -fx-text-fill:#3b3838");
+    }
+
+    public void endHoverBtn(MouseEvent e)
+    {
+        send.setStyle("-fx-background-color: #3b3838; -fx-border-radius: 5; " +
+                "-fx-border-width: 3; -fx-border-color: #d9d9d9; fx-text-fill: #ffffff");
+    }
+
+    // ========================== ON PRESSED FUNCTIONS ========================
+    public void pressed(MouseEvent event)
+    {
+        isOnline = false;
+        Main.connection.makeMessageable(false);
+        Main.connection.endMessage();
+
+        for(int i=0; i<stck.length; i++)
+        {
+            if(stck[i].isPressed() && i!=2)
+            {
+                Windows w = new Windows(stck[i], i);
+            }
+        }
+
+    }
 
     public void upArrowClicked(MouseEvent event)
     {
@@ -324,13 +320,6 @@ public class messenger {
                 downArrow1, upArrow1, index1, 10, true, 1);
     }
 
-    public void downArrow1Clicked(MouseEvent event)
-    {
-        index1 = helper.down_arrow_clicked(online, onlineUsers, 10,100, lblStyle,
-                downArrow1, upArrow1, index1, 10, true,1);
-
-    }
-
     public void downArrowClicked(MouseEvent event)
     {
 
@@ -360,30 +349,26 @@ public class messenger {
         //System.out.println(index);
     }
 
-    public void onHoverBtn(MouseEvent e)
+    public void downArrow1Clicked(MouseEvent event)
     {
-        send.setStyle("-fx-background-color:#d9d9d9; -fx-border-radius: 5; " +
-                "-fx-border-width: 3; -fx-text-fill:#3b3838");
+        index1 = helper.down_arrow_clicked(online, onlineUsers, 10,100, lblStyle,
+                downArrow1, upArrow1, index1, 10, true,1);
+
     }
 
-    public void endHoverBtn(MouseEvent e)
-    {
-        send.setStyle("-fx-background-color: #3b3838; -fx-border-radius: 5; " +
-                "-fx-border-width: 3; -fx-border-color: #d9d9d9; fx-text-fill: #ffffff");
-    }
     public void sendBtn(ActionEvent event) throws IOException, ClassNotFoundException {
-        // todo NHS: send to database too
         sendMessage();
     }
 
     public void sendKey(KeyEvent e) throws IOException, ClassNotFoundException {
         if(e.getCode().equals(KeyCode.ENTER))
         {
-            // todo NHS: send to database too
             sendMessage();
         }
     }
 
+
+    // ========================== HELPER FUNCTIONS ========================
     public void sendMessage() throws IOException, ClassNotFoundException {
         user.add(chat.getText());
         who.add(dashboard.user);
@@ -405,7 +390,6 @@ public class messenger {
     }
 
     public void addMessage() throws IOException, ClassNotFoundException {
-        // todo NHS: add messages from server
         int start = 0;
         if(user.size()>7) { start = user.size() - 7; }
 
@@ -425,8 +409,6 @@ public class messenger {
         toast.set("MESSAGE SENT","#5cb85c");
     }
 
-
-
     public void messageDisplay(int initial, int limit)
     {
         message.getChildren().clear();
@@ -438,7 +420,6 @@ public class messenger {
             timeStamp.setStyle("-fx-text-fill:#ffffff; -fx-font-size:10");
             Label lb = new Label(user.get(i));
             lb.setPadding(new Insets(5,5,5,5));
-            //todo NHS && TMD text doesn't get wrapped if bottom padding is set
             lb.setWrapText(true);
             lb.setMaxWidth(400);
             vb.setPadding(new Insets(10,0,0,0));

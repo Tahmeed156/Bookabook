@@ -30,11 +30,6 @@ public class toast {
         text(a);
     }
 
-//    public static void setColor(String colorBG)
-//    {
-//        lb.setStyle("-fx-background-color:"+colorBG+";  -fx-background-radius:10; -fx-text-fill:#ffffff;" +
-//                "-fx-border-color:#ffffff; -fx-border-radius:10");
-//    }
 
     public static void text(String a)
     {

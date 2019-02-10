@@ -59,8 +59,7 @@ public class bookDetailsPage {
     @FXML
     private Label logoutLbl;
     @FXML
-    private Label[] lbl;// = {dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl}; //cant do this
-    //because of how fxml loader acts
+    private Label[] lbl;
 
     //left side stacks
     @FXML
@@ -75,11 +74,9 @@ public class bookDetailsPage {
     private StackPane profileStk;
     @FXML
     private StackPane logoutStk;
-    StackPane[] stck;// = {dashBStk,messagesStk,helpStk,profileStk,logoutStk};
-
+    StackPane[] stck;
     //borderpane top stuff
-    @FXML
-    private VBox upperRightVbox;
+
     @FXML private Rectangle imgCircle;
     @FXML private Label rentedBLbl;
     @FXML private Label sharedBLbl;
@@ -89,7 +86,6 @@ public class bookDetailsPage {
 
     //body
     @FXML private Rectangle imgCircleCenter;
-    @FXML private VBox middleRightVBox;
     //Labels
     @FXML private Label owner;
     @FXML private Label address;
@@ -117,7 +113,6 @@ public class bookDetailsPage {
 
     @FXML private TextArea reviewByRenter;
     @FXML private Text genre; //use '\n' between the genres;
-    @FXML private Text similarBook; //use '\n' between the book links;
 
 
     @FXML private Label lb1;
@@ -160,22 +155,11 @@ public class bookDetailsPage {
     // private String dir = "A:\\"; // Tahmeed config
     // private String dir = "D:\\"; // Tahmeed config
     private String path = dir + "Bookabook\\src\\bookabook\\client\\Pictures\\";
+
     List<Bookser> similarBooks;
     List<Integer> sbID = new ArrayList<>();
-
     List<String> reviewArr = new ArrayList<>();
-//    (Arrays.asList("Book quite good",
-//            "Maybe the world will be set right by this book",
-//            "Look out for the journey of your lifetime",
-//            "Dont mess with GRRM he is the fantasy king",
-//            "Book was goood i guess"));
-
-
     List<String> reviewers = new ArrayList<>();
-//    Arrays.asList("Mary  4.5 ★","Sherlock  5 ★",
-//            "Watson 3.5 ★","Bruce  5 ★","Stark  2 ★"));
-
-
 
     public void initialize(int book_id) throws IOException, ClassNotFoundException, JSONException {
         parent.getChildren().add(toast.get());
@@ -187,16 +171,11 @@ public class bookDetailsPage {
         allsimilarBooks = new String[]{"Harry Potter","Lord of the Rings","Percy Jackson"};
         lb = new Label[]{lb1,lb2,lb3,lb4,lb5};
 
-
         vbx = new VBox[]{Vbox1,Vbox2,Vbox3};
         revName = new Label[]{revName1,revName2,revName3};
         rev = new Text[]{review1,review2,review3};
 
-
-
-
         btn = new Button[]{rentBtn,messageBtn,sendBtn};
-
 
         //upperRightLabels
         Image imgperson = SwingFXUtils.toFXImage(dashboard.proPic, null);
@@ -212,38 +191,11 @@ public class bookDetailsPage {
         sharedBLbl.setText(rentedOutBooks);
         walletLbl.setText(wallet);
 
-
-
-
-
-//        //setting book details
-//        book_rent = 10;
-//        book_deposit = 300;
-//        BookName.setText("Game of Thrones");
-//        BookAuthor.setText("George R R Martin");
-//        BookRent.setText("Tk "+book_rent+" per week");
-//        BookDeposit.setText("Tk "+book_deposit);
-//
-//
-//        BookImg.setImage(new Image(new File(path+"pj.png").toURI().toString()));
-//
-//        print.setText("Original");
-//        condition.setText("Optimal");
-//        yearBought.setText("2017");
-//        timesRented.setText("3");
-//        reviewByRenter.setText("The book is undoubtedly a masterpiece created by George R R Martin. Best thing" +
-//                "that happened to the world after J.K.Rowling.");
-//
-//        genre.setText(bookGenre);
-
-
-
         Loading l = new Loading();
         new Thread(l).start();
-
-
     }
 
+    // ========================== ON HOVER FUNCTIONS ========================
     public void onHoverBox(MouseEvent event) {
         for (int i = 0; i < stck.length; i++) {
             if (stck[i].isHover()) {
@@ -260,16 +212,6 @@ public class bookDetailsPage {
             if (!stck[i].isHover()) {
                 stck[i].setStyle("-fx-background-color:#3b3838;");
                 lbl[i].setTextFill(Color.rgb(217, 217, 217));
-            }
-        }
-
-    }
-
-    public void pressed(MouseEvent event) {
-        for (int i = 0; i < stck.length; i++) {
-            if(stck[i].isPressed())
-            {
-                Windows w = new Windows(stck[i], i);
             }
         }
 
@@ -323,6 +265,26 @@ public class bookDetailsPage {
         {
             lArrow.setImage(new Image(new File(path+"leftArrow.png").toURI().toString()));
         }
+    }
+
+    public void onLabelHover(MouseEvent event) {
+        ((Label) event.getSource()).setUnderline(true);
+    }
+
+    public void endLabelHover(MouseEvent event) {
+        ((Label) event.getSource()).setUnderline(false);
+    }
+
+
+    // ========================== ON PRESSED FUNCTIONS ========================
+    public void pressed(MouseEvent event) {
+        for (int i = 0; i < stck.length; i++) {
+            if(stck[i].isPressed())
+            {
+                Windows w = new Windows(stck[i], i);
+            }
+        }
+
     }
 
     public void rArrowClicked(MouseEvent event)
@@ -453,15 +415,6 @@ public class bookDetailsPage {
         }
     }
 
-    public void onLabelHover(MouseEvent event) {
-        ((Label) event.getSource()).setUnderline(true);
-    }
-
-
-    public void endLabelHover(MouseEvent event) {
-        ((Label) event.getSource()).setUnderline(false);
-    }
-
     public void labelClicked(MouseEvent event) {
 
         //Windows w = new Windows((Label) event.getSource(), "../fxml/bookDetailsPage.fxml", 1);
@@ -473,6 +426,7 @@ public class bookDetailsPage {
         }
     }
 
+    // One thread to load them all
     class Loading extends Task {
         @Override
         public Void call() throws Exception {
@@ -574,8 +528,6 @@ public class bookDetailsPage {
                             sbID.add(similarBooks.get(i).getId());
                         }
                     }
-
-
 
                     BookRent.setText(Integer.toString(book_rent));
                     BookDeposit.setText(Integer.toString(book_deposit));

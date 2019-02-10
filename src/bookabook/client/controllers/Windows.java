@@ -15,17 +15,15 @@ import java.util.prefs.Preferences;
 
 public class Windows {
 
-
     Parent root;
     String[] name = new String[]{"dashboard.fxml", "searchPage.fxml", "messenger.fxml",
             "helpPage.fxml","profilePage.fxml","login.fxml","rentOutPage.fxml",
-            "editProfilePage.fxml","profileRentedBooksPage.fxml","profileRentedOutBooksPage.fxml","bookDetailsPage.fxml"};
+            "editProfilePage.fxml","","","bookDetailsPage.fxml"};
 
     Windows(StackPane s, int i) {
         try {
             if (name[i].equals("login.fxml")) {
                 Preferences userCon = Preferences.userRoot().node("bookabook/user");
-
                 // Deleting information from the registry
                 userCon.put("username", "");
                 userCon.put("id", "");
@@ -91,7 +89,6 @@ public class Windows {
         }
     }
 
-
     Windows (Label b, String n, int book) {
         try {
             cornerCase(n);
@@ -116,8 +113,6 @@ public class Windows {
             toast.set("SUCCESSFULLY LOGGED OUT","#5cb85c");
         }
     }
-
-
 
 
 }

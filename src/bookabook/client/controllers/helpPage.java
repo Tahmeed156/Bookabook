@@ -46,8 +46,7 @@ public class helpPage {
     @FXML
     private Label logoutLbl;
     @FXML
-    private Label[] lbl;// = {dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl}; //cant do this
-    //because of how fxml loader acts
+    private Label[] lbl;
 
     //left side stacks
     @FXML
@@ -62,7 +61,7 @@ public class helpPage {
     private StackPane profileStk;
     @FXML
     private StackPane logoutStk;
-    StackPane[] stck;// = {dashBStk,messagesStk,helpStk,profileStk,logoutStk};
+    StackPane[] stck;
 
     //borderpane top stuff
     @FXML private Rectangle imgCircle;
@@ -104,8 +103,7 @@ public class helpPage {
 
     }
 
-
-
+    // ========================== ON HOVER FUNCTIONS ========================
     public void onHoverBox(MouseEvent event) {
         for (int i = 0; i < stck.length; i++) {
             if (stck[i].isHover() && i!=3) {
@@ -127,6 +125,7 @@ public class helpPage {
 
     }
 
+    // ========================== ON HOVER FUNCTIONS ========================
     public void pressed(MouseEvent event)
     {
         for(int i=0; i<stck.length; i++)

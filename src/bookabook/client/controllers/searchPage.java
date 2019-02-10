@@ -42,8 +42,7 @@ public class searchPage{
     @FXML private Label helpLbl;
     @FXML private Label profileLbl;
     @FXML private Label logoutLbl;
-    @FXML private Label[] lbl;// = {dashBLbl, messagesLbl, helpLbl, profileLbl, logoutLbl}; //cant do this
-    //because of how fxml loader acts
+    @FXML private Label[] lbl;
 
     //left side stacks
     @FXML private StackPane dashBStk;
@@ -52,7 +51,7 @@ public class searchPage{
     @FXML private StackPane helpStk;
     @FXML private StackPane profileStk;
     @FXML private StackPane logoutStk;
-    StackPane[] stck;// = {dashBStk,messagesStk,helpStk,profileStk,logoutStk};
+    StackPane[] stck;
 
     //borderpane top stuff
     @FXML private Rectangle imgCircle;
@@ -191,6 +190,7 @@ public class searchPage{
         walletLbl.setText(wallet);
     }
 
+    // ========================== ON HOVER FUNCTIONS ========================
     public void onHoverBox(MouseEvent event)
     {
 
@@ -254,31 +254,6 @@ public class searchPage{
         }
     }
 
-    public void pressed(MouseEvent event)
-    {
-        for(int i=0; i<stck.length; i++)
-        {
-            if(stck[i].isPressed() && i!=1)
-            {
-                Windows w = new Windows(stck[i], i);
-            }
-        }
-
-    }
-
-
-    public void rArrowClicked(MouseEvent event)
-    {
-        index = helper.right_arrow_clicked(name,author,rent,depositArr,imgs,stckRArrow,stckLArrow,Vbox1,Vbox2,
-                bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
-    }
-
-    public void lArrowClicked(MouseEvent event)
-    {
-        index = helper.left_arrow_clicked(name,author,rent,depositArr,imgs,stckRArrow,stckLArrow,Vbox1,Vbox2,
-                bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
-    }
-
     public void onHoverArrow(MouseEvent event)
     {
         if(rArrow.isHover())
@@ -305,9 +280,32 @@ public class searchPage{
         }
     }
 
+    // ========================== ON PRESSED FUNCTIONS ========================
+    public void rArrowClicked(MouseEvent event)
+    {
+        index = helper.right_arrow_clicked(name,author,rent,depositArr,imgs,stckRArrow,stckLArrow,Vbox1,Vbox2,
+                bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
+    }
+
+    public void lArrowClicked(MouseEvent event)
+    {
+        index = helper.left_arrow_clicked(name,author,rent,depositArr,imgs,stckRArrow,stckLArrow,Vbox1,Vbox2,
+                bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
+    }
+
+    public void pressed(MouseEvent event)
+    {
+        for(int i=0; i<stck.length; i++)
+        {
+            if(stck[i].isPressed() && i!=1)
+            {
+                Windows w = new Windows(stck[i], i);
+            }
+        }
+
+    }
 
     public void bookPageClicked(MouseEvent event) {
-        // todo NHS: pass on book id
         for (int i = 0; i < imgv.length; i++) {
             if (event.getSource() == imgv[i]) {
                 Windows w = new Windows(imgv[i], "../fxml/bookDetailsPage.fxml",bID.get(index + i));
@@ -315,6 +313,7 @@ public class searchPage{
         }
     }
 
+    // search function
     public void searchedItem(MouseEvent event) throws IOException, JSONException, ClassNotFoundException {
         searchResults.clear();
         stckRArrow.setVisible(false);
@@ -343,6 +342,7 @@ public class searchPage{
                 bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
     }
 
+    // One thread class to load them all
     class Loading extends Task {
         @Override
         public Void call() throws Exception {
@@ -359,7 +359,11 @@ public class searchPage{
 
             }catch(Exception e)
             {
-                toast.set("COULDN'T LOAD BOOKS","#f0ad4e");
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        toast.set("COULDN'T LOAD BOOKS","#f0ad4e");
+                    }});
                 System.out.println("Couldn't load books");
             }
 
