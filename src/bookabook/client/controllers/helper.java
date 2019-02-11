@@ -243,8 +243,10 @@ public class helper {
             if(pos == 0 || pos == 3) {
                 dashboard.btn[pos + start].setVisible(true);
                 if(pos==3) {
+                    System.out.println("should be returning");
                     if(dashboard.sStatus.get(index - start).equals("returning"))
                     {
+                        System.out.println("is returning");
                         dashboard.btn[pos+start].setText("Confirm");
                     }
                     else {dashboard.btn[pos+start].setText("Request");}

@@ -244,6 +244,7 @@ public class dashboard {
 
     public void initialize() throws IOException, ClassNotFoundException {
         parent.getChildren().add(toast.get());
+        sStatus.clear();
 
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk, helpStk, profileStk, logoutStk};
