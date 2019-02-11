@@ -266,6 +266,7 @@ public class dashboard {
         userId = userCon.get("id","1");
 
         JSONObject response = new JSONObject(Main.connection.getProfile(Integer.parseInt(dashboard.userId)));
+        System.out.println(response.toString());
         if (Boolean.valueOf(response.getString("success"))){
             userCon.put("wallet", response.getString("wallet"));
             userCon.put("books_rented", response.getString("books_rented"));

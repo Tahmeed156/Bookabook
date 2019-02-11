@@ -168,7 +168,7 @@ public class User {
     }
 
     public String getWork() {
-        System.out.println("WORK IS "+work);
+        //System.out.println("WORK IS "+work);
         return work;
     }
 

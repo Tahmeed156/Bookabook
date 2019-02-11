@@ -151,6 +151,7 @@ public class Database {
             response.put("location", u.getLocation());
             response.put("email", u.getEmail());
             response.put("contact_no", u.getContact_no());
+            System.out.println(response.toString());
             return response;
         }
         catch (Exception e) {
@@ -365,9 +366,10 @@ public class Database {
     public JSONArray shared_books(int user_id) throws JSONException {
         startSession();
 
-        Query q = session.createQuery("from Rent where renter = :r and status = :s");
+        Query q = session.createQuery("from Rent where renter = :r and (status = :s or status = :p)");
         q.setParameter("r", new User(user_id));
-        q.setParameter("s", "returning");
+        q.setParameter("s", "rented");
+        q.setParameter("p","returning");
         // todo TMD : implement returning
 
         List results = q.getResultList();
@@ -422,8 +424,8 @@ public class Database {
 
         // ASK TT
         // Query q = session.createQuery("from Rent where book = :b and renter = :u");
-        Query q = session.createQuery("from Rent where book_id = :b and renter = :u");
-        q.setParameter("b", book_id);
+        Query q = session.createQuery("from Rent where book = :b and renter = :u");
+        q.setParameter("b", new Book(book_id));
         q.setParameter("u", new User(renter_id));
         Rent rent = (Rent) q.uniqueResult();
         Email.initializeMailSender();
@@ -610,7 +612,7 @@ public class Database {
     public JSONArray online(String username) {
         JSONArray response = new JSONArray();
         for (Connection c: Server.clients) {
-            if (c.isAlive() && !c.getName().equals(username))
+            if (c.isAlive() && c.isMessageable() && !c.getName().equals(username))
                 response.put(c.getName());
         }
         return response;
@@ -621,7 +623,7 @@ public class Database {
 
         JSONArray response = new JSONArray();
         // Gets 25 messages from the database
-        Query q = session.createQuery("from Message order by timestamp desc").setFirstResult(0).setMaxResults(30);
+        Query q = session.createQuery("from Message order by timestamp").setFirstResult(0).setMaxResults(30);
         List messages = q.getResultList();
 
         for (Object mess : messages) {

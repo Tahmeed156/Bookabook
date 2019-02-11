@@ -70,28 +70,24 @@ class MailThread implements Runnable {
 
             ((MimeMessage) message).setSubject(subject);
             ((MimeMessage) message).setText(text);
-        } catch (AddressException e) {
+        }
+        catch (AddressException e) {
             e.printStackTrace();
-        } catch (MessagingException e) {
+        }
+        catch (MessagingException e) {
             e.printStackTrace();
         }
     }
 
     @Override
     public void run() {
-
         try {
-
             Transport.send(message);
             System.out.println("Email is sent to " + to);
-        } catch (MessagingException e) {
+        }
+        catch (MessagingException e) {
             System.out.println("Technical problem !");
             e.printStackTrace();
-
         }
-
-
     }
-
-
 }

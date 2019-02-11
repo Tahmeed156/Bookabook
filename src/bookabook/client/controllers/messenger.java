@@ -124,7 +124,26 @@ public class messenger {
                         // else continue reading
                         if(response.has("stop")){
                             break;
-                        }else {
+                        }
+                        else if(response.getString("type").equals("status")) {
+                            if (response.getString("body").equals("online")) {
+                                online.add(response.getString("username"));
+                            } else if (response.getString("body").equals("offline")) {
+                                online.remove(response.getString("username"));
+                            }
+
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    index1 = online.size()-1;
+                                    lblStyle = "-fx-background-color:#ffffff; -fx-pref-width:100";
+                                    index1 = helper.initiate(online, onlineUsers, 10,100,
+                                            lblStyle, downArrow1, index1, 10, true, 1);
+
+                                }
+                            });
+                        }
+                        else {
                             user.add(response.getString("body"));
                             who.add(response.getString("username"));
                             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -158,8 +177,6 @@ public class messenger {
                 }
             }
         };
-
-
 
         // get the users who are online
         JSONArray response_arr1 = new JSONArray(Main.connection.getOnline(dashboard.user));

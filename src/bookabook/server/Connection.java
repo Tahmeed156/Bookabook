@@ -124,6 +124,7 @@ class Connection extends Thread {
                             response = new JSONObject();
                             response.put("stop", "true");
                             send(response.toString());
+                            System.out.println(response.toString());
                             // tells everyone that the user just went offline
                             broadcast("offline", "status", getName());
                         }
@@ -419,13 +420,14 @@ class Connection extends Thread {
         response.put("username", username);
         for (Connection c: Server.clients) {
             // Skip broadcast if user is same
-            if (c.isAlive() && c.isMessageable() && c.getName().equals(username))
-                continue;
-            c.send(response.toString());
+            System.out.println(c.getName() + " searching ");
+            if (c.isAlive() && c.isMessageable() && !c.getName().equals(username)) {
+                c.send(response.toString());
+            }
         }
     }
 
-    private boolean isMessageable() {
+    public boolean isMessageable() {
         return messageable;
     }
 

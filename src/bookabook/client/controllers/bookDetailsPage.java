@@ -525,6 +525,10 @@ public class bookDetailsPage {
                                     {
                                         toast.set("THIS BOOK BELONGS TO USER","#f0ad4e");
                                     }
+                                    else
+                                    {
+                                        toast.set("THIS BOOK IS NOT AVAILABLE","#f0ad4e");
+                                    }
                                 }});
                             }
                         }
