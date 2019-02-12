@@ -5,12 +5,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -56,6 +58,7 @@ public class Main extends Application {
             System.out.println(e.getMessage());
         }
         finally {
+            // primaryStage.getIcons().add(new Image("/bookabook/client/Pictures/icon.ico"));
             primaryStage.resizableProperty().setValue(Boolean.FALSE);
             primaryStage.setTitle("Book A Book");
             primaryStage.setScene(new Scene(root, 1200, 800));

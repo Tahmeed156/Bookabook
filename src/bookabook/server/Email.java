@@ -50,7 +50,7 @@ class Email {
 
         String subject = "Bookabook - book return";
         String text = "Dear " + username + ",\nYou were supposed to return the book - " + bookname + " to "
-                + sharer_name + ".Please return the book as soon as possible";
+                + sharer_name + ". Please return the book as soon as possible";
         Thread t = new Thread(new MailThread(mailSender, to, subject, text));
         t.start();
 

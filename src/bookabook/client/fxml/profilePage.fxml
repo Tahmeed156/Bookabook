@@ -130,7 +130,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="email" alignment="TOP_LEFT" layoutX="529.0" layoutY="204.0" prefHeight="39.0" prefWidth="225.0" text="johnmike@gmail.com" textFill="WHITE" wrapText="true">
+                        <Label fx:id="email" alignment="TOP_LEFT" layoutX="529.0" layoutY="204.0" prefHeight="56.0" prefWidth="251.0" text="johnmike@gmail.com" textFill="WHITE" wrapText="true">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
