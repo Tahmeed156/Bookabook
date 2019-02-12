@@ -169,7 +169,7 @@ public class searchPage{
          new Thread(l).start();
 
         //search Button
-        ImageView imgBtn = new ImageView(new Image(new File(path+"searchLogo.jpg").toURI().toString()));
+        ImageView imgBtn = new ImageView(new Image(getClass().getResourceAsStream("/searchLogo.jpg")));
         imgBtn.setFitHeight(25);
         imgBtn.setFitWidth(25);
         searchButton.setGraphic(imgBtn);
@@ -198,7 +198,7 @@ public class searchPage{
         if(event.getSource()==searchButton)
         {
             searchButton.setStyle("-fx-background-color:#595656");
-            ImageView imgBtn = new ImageView(new Image(new File(path+"searchLogoChanged.jpg").toURI().toString()));
+            ImageView imgBtn = new ImageView(new Image(getClass().getResourceAsStream("/searchLogoChanged.jpg")));
             imgBtn.setFitHeight(25);
             imgBtn.setFitWidth(25);
             searchButton.setGraphic(imgBtn);
@@ -229,7 +229,7 @@ public class searchPage{
         if(event.getSource()==searchButton)
         {
             searchButton.setStyle("-fx-background-color:#000000");
-            ImageView imgBtn = new ImageView(new Image(new File(path+"searchLogo.jpg").toURI().toString()));
+            ImageView imgBtn = new ImageView(new Image(getClass().getResourceAsStream("/searchLogo.jpg")));
             imgBtn.setFitHeight(25);
             imgBtn.setFitWidth(25);
             searchButton.setGraphic(imgBtn);
@@ -258,12 +258,12 @@ public class searchPage{
     {
         if(rArrow.isHover())
         {
-            rArrow.setImage(new Image(new File(path+"rightAClicked.png").toURI().toString()));
+            rArrow.setImage(new Image(getClass().getResourceAsStream("/rightAClicked.png")));
         }
 
         if(lArrow.isHover())
         {
-            lArrow.setImage(new Image(new File(path+"leftAClicked.png").toURI().toString()));
+            lArrow.setImage(new Image(getClass().getResourceAsStream("/leftAClicked.png")));
         }
     }
 
@@ -271,12 +271,12 @@ public class searchPage{
     {
         if(!rArrow.isHover())
         {
-            rArrow.setImage(new Image(new File(path+"rightArrow.png").toURI().toString()));
+            rArrow.setImage(new Image(getClass().getResourceAsStream("/rightArrow.png")));
         }
 
         if(!lArrow.isHover())
         {
-            lArrow.setImage(new Image(new File(path+"leftArrow.png").toURI().toString()));
+            lArrow.setImage(new Image(getClass().getResourceAsStream("/leftArrow.png")));
         }
     }
 
@@ -317,6 +317,7 @@ public class searchPage{
     public void searchedItem(MouseEvent event) throws IOException, JSONException, ClassNotFoundException {
         searchResults.clear();
         stckRArrow.setVisible(false);
+        stckLArrow.setVisible(false);
         name.clear();
         author.clear();
         rent.clear();
@@ -337,6 +338,7 @@ public class searchPage{
                 imgv[boxIn].setImage(null);
             }
 
+        index = 0;
         //populating the box
         index = helper.initiate(name,author,rent,depositArr,imgs,stckRArrow,Vbox1,Vbox2,
                 bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);

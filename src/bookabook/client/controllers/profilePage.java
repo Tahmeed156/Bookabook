@@ -305,9 +305,9 @@ public class profilePage {
         for (int i = 0; i < arrows.length; i++) {
             if (arrows[i].isHover()) {
                 if (i == 1 || i == 3) {
-                    arrows[i].setImage(new Image(new File(path + "rightAClicked.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/rightAClicked.png")));
                 } else {
-                    arrows[i].setImage(new Image(new File(path + "leftAClicked.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/leftAClicked.png")));
                 }
             }
 
@@ -318,9 +318,9 @@ public class profilePage {
         for (int i = 0; i < arrows.length; i++) {
             if (!arrows[i].isHover()) {
                 if (i == 1 || i == 3) {
-                    arrows[i].setImage(new Image(new File(path + "rightArrow.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/rightArrow.png")));
                 } else {
-                    arrows[i].setImage(new Image(new File(path + "leftArrow.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/leftArrow.png")));
                 }
             }
 
@@ -392,7 +392,6 @@ public class profilePage {
     }
 
     public void bookPageClicked(MouseEvent event) {
-        // todo NHS: pass on book id to next page
         for (int i = 0; i < timgv.length; i++) {
             if (event.getSource() == timgv[i]) {
                 Windows w = new Windows(timgv[i], "/bookabook/client/fxml/bookDetailsPage.fxml", tID.get(tIndex + i));

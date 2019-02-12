@@ -279,7 +279,6 @@ class Connection extends Thread {
                     }
 
 
-                    // todo TMD to rent out a book
                     case "books/rent_out":{
                         response = db.rent_out_book(
                                 request.getInt("user_id"),
@@ -336,7 +335,7 @@ class Connection extends Thread {
                         break;
                     }
 
-                    // todo TMD do these two for profile page books request
+
                     case "books/rented": {
                         ArrayList<Bookser> books = db.rented_books(request.getInt("user_id"));
                         output.writeObject(books);

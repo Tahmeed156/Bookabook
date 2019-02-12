@@ -245,12 +245,12 @@ public class bookDetailsPage {
     {
         if(rArrow.isHover())
         {
-            rArrow.setImage(new Image(new File(path+"rightAClicked.png").toURI().toString()));
+            rArrow.setImage(new Image(getClass().getResourceAsStream("/rightAClicked.png")));
         }
 
         if(lArrow.isHover())
         {
-            lArrow.setImage(new Image(new File(path+"leftAClicked.png").toURI().toString()));
+            lArrow.setImage(new Image(getClass().getResourceAsStream("/leftAClicked.png")));
         }
     }
 
@@ -258,12 +258,12 @@ public class bookDetailsPage {
     {
         if(!rArrow.isHover())
         {
-            rArrow.setImage(new Image(new File(path+"rightArrow.png").toURI().toString()));
+            rArrow.setImage(new Image(getClass().getResourceAsStream("/rightArrow.png")));
         }
 
         if(!lArrow.isHover())
         {
-            lArrow.setImage(new Image(new File(path+"leftArrow.png").toURI().toString()));
+            lArrow.setImage(new Image(getClass().getResourceAsStream("/leftArrow.png")));
         }
     }
 
@@ -436,9 +436,6 @@ public class bookDetailsPage {
                 //System.out.println(response.toString());
 
 
-
-
-
                 // Populating reviews
                 JSONArray response_arr1 = new JSONArray(Main.connection.reviewGet(id));
                 for (int i=0; i<response_arr1.length(); i++) {
@@ -507,8 +504,9 @@ public class bookDetailsPage {
                             //get renter id
                             renter_id = response.getInt("owner_id");
                             owner.setText(response.getString("owner_name"));
-                            address.setText(response.getString("owner_location"));
-                            contact.setText(response.getString("owner_contact"));
+
+                            address.setText(response.optString("owner_location","N/A"));
+                            contact.setText(response.optString("owner_contact","N/A"));
 
                         // disable the rent button
                         // if the renter is the rentee

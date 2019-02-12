@@ -31,16 +31,16 @@ public class Client {
         while (true) {
             try {
                 // Tries again and again until connecting
+                // socket = new Socket("127.0.0.1", 9899);
                 socket = new Socket("192.168.43.200", 9899);
                 System.out.println("Successfully connected!");
-                // todo NHS: Reference to toasts in both cases
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
                         toast.set("SUCCESSFULLY CONNECTED TO SERVER", "#5cb85c");
                     }
                 });
-                // todo: message disappears immediately after connecting
+
 
 
                 break;
@@ -156,7 +156,6 @@ public class Client {
             request.put("condition", condition);
             request.put("review", review);
             request.put("year_bought", year_bought);
-            //todo TMD: input image from user ??
 
         } catch (JSONException e) {
             System.out.println("Error creating/sending json");

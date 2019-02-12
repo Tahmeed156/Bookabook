@@ -29,19 +29,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        // try to  connect to server
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    // Configuring an object to be used, starting sockets
-                    connection = new Client();
-                }catch (Exception e)
-                {
-                    System.out.println("Can't connect with server");
-                }
-            }
-        }.start();
+        try {
+            // Configuring an object to be used, starting sockets
+            connection = new Client();
+        }catch (Exception e)
+        {
+            System.out.println("Can't connect with server");
+        }
 
 
         Parent root = FXMLLoader.load(getClass().getResource("fxml/login.fxml"));

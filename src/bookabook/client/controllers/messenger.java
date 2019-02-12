@@ -228,22 +228,22 @@ public class messenger {
     {
         if (event.getSource()==upArrow)
         {
-            Image img = new Image(new File(path+"upAClicked.png").toURI().toString());
+            Image img = new Image(getClass().getResourceAsStream("/upAClicked.png"));
             upArrow.setImage(img);
         }
         else if (event.getSource()==upArrow1)
         {
-            Image img = new Image(new File(path+"upAClicked.png").toURI().toString());
+            Image img = new Image(getClass().getResourceAsStream("/upAClicked.png"));
             upArrow1.setImage(img);
         }
         else if (event.getSource()==downArrow1)
         {
-            Image img = new Image(new File(path+"downAClicked.png").toURI().toString());
+            Image img = new Image(getClass().getResourceAsStream("/downAClicked.png"));
             downArrow1.setImage(img);
         }
         else if (event.getSource()==downArrow)
         {
-            Image img = new Image(new File(path+"downAClicked.png").toURI().toString());
+            Image img = new Image(getClass().getResourceAsStream("/downAClicked.png"));
             downArrow.setImage(img);
         }
     }
@@ -252,22 +252,22 @@ public class messenger {
     {
         if (event.getSource()==upArrow)
         {
-            Image img = new Image(new File(path+"upArrow.png").toURI().toString());
+            Image img = new Image(getClass().getResourceAsStream("/upArrow.png"));
             upArrow.setImage(img);
         }
         else if (event.getSource()==upArrow1)
         {
-            Image img = new Image(new File(path+"upArrow.png").toURI().toString());
+            Image img = new Image(getClass().getResourceAsStream("/upArrow.png"));
             upArrow1.setImage(img);
         }
         else if (event.getSource()==downArrow1)
         {
-            Image img = new Image(new File(path+"downArrow.png").toURI().toString());
+            Image img = new Image(getClass().getResourceAsStream("/downArrow.png"));
             downArrow1.setImage(img);
         }
         else if (event.getSource()==downArrow)
         {
-            Image img = new Image(new File(path+"downArrow.png").toURI().toString());
+            Image img = new Image(getClass().getResourceAsStream("/downArrow.png"));
             downArrow.setImage(img);
         }
     }
@@ -399,13 +399,6 @@ public class messenger {
         chat.clear();
     }
 
-    public void addOnlineUser(){
-        // TODO: add online users from server
-
-        index1 = helper.initiate(online, onlineUsers, 10,100, lblStyle,
-                downArrow1, index1, 10, true,1 );
-
-    }
 
     public void addMessage() throws IOException, ClassNotFoundException {
         int start = 0;

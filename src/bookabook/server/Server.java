@@ -26,6 +26,7 @@ public class Server {
         // Accepting new clients
         while (true) {
             socket = server.accept();
+            System.out.println("Got you");
             clients.add(new Connection(socket, clientGroup));
         }
 

@@ -356,13 +356,13 @@ public class dashboard {
         for (int i = 0; i < arrows.length; i++) {
             if (arrows[i].isHover()) {
                 if (i == 1 || i == 3) {
-                    arrows[i].setImage(new Image(new File(path + "rightAClicked.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/rightAClicked.png")));
                 } else if( i==0 || i==2){
-                    arrows[i].setImage(new Image(new File(path + "leftAClicked.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/leftAClicked.png")));
                 } else if( i==4 || i==6){
-                    arrows[i].setImage(new Image(new File(path + "upAClicked.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/upAClicked.png")));
                 }else {
-                    arrows[i].setImage(new Image(new File(path + "downAClicked.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/downAClicked.png")));
                 }
             }
 
@@ -373,13 +373,13 @@ public class dashboard {
         for (int i = 0; i < arrows.length; i++) {
             if (!arrows[i].isHover()) {
                 if (i == 1 || i == 3) {
-                    arrows[i].setImage(new Image(new File(path + "rightArrow.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/rightArrow.png")));
                 } else if( i==0 || i==2){
-                    arrows[i].setImage(new Image(new File(path + "leftArrow.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/leftArrow.png")));
                 } else if( i==4 || i==6){
-                    arrows[i].setImage(new Image(new File(path + "upArrow.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/upArrow.png")));
                 }else {
-                    arrows[i].setImage(new Image(new File(path + "downArrow.png").toURI().toString()));
+                    arrows[i].setImage(new Image(getClass().getResourceAsStream("/downArrow.png")));
                 }
             }
 

@@ -243,27 +243,35 @@ public class rentOutPage {
                 }
             }
 
-            // todo NHS: give user id;
-            JSONObject response = new JSONObject(Main.connection.rentOutBook(
-                    Integer.parseInt(dashboard.userId),
-                    book.getText(),
-                    author.getText(),
-                    Double.valueOf(rentPrice.getText()),
-                    Double.valueOf(deposit.getText()),
-                    genre.getSelectionModel().getSelectedItem(),
-                    printRBtn,
-                    condition.getValue(),
-                    review.getText(),
-                    yearBought.getText(),
-                    file
-            ));
+            if(book.getText().isEmpty() || author.getText().isEmpty() || rentPrice.getText().isEmpty()
+            || deposit.getText().isEmpty() || genre.getSelectionModel().getSelectedItems().isEmpty()
+            || printRBtn.equals("")||review.getText().isEmpty()||condition.getValue().isEmpty()||
+            yearBought.getText().isEmpty()){
+                toast.set("PLEASE FILL ALL THE INFORMATION", "#D9534F");
+            }
+            else {
+
+                JSONObject response = new JSONObject(Main.connection.rentOutBook(
+                        Integer.parseInt(dashboard.userId),
+                        book.getText(),
+                        author.getText(),
+                        Double.valueOf(rentPrice.getText()),
+                        Double.valueOf(deposit.getText()),
+                        genre.getSelectionModel().getSelectedItem(),
+                        printRBtn,
+                        condition.getValue(),
+                        review.getText(),
+                        yearBought.getText(),
+                        file
+                ));
 
 
-            if (Boolean.valueOf(response.getString("success"))) {
-                toast.set("SUCCESSFULLY RENTED OUT", "#5CB85C");
-                Windows w = new Windows(rent, "/bookabook/client/fxml/dashboard.fxml");
-            } else {
-                toast.set("UNABLE TO RENT OUT", "#D9534F");
+                if (Boolean.valueOf(response.getString("success"))) {
+                    toast.set("SUCCESSFULLY RENTED OUT", "#5CB85C");
+                    Windows w = new Windows(rent, "/bookabook/client/fxml/dashboard.fxml");
+                } else {
+                    toast.set("UNABLE TO RENT OUT", "#D9534F");
+                }
             }
         }
         else{
