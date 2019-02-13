@@ -243,6 +243,7 @@ public class dashboard {
 
 
     public void initialize() throws IOException, ClassNotFoundException {
+        left.setDisable(true);
         parent.getChildren().add(toast.get());
         sStatus.clear();
 
@@ -661,6 +662,7 @@ public class dashboard {
                     // populating latest
                     rIndex = helper.initiate(rname, rauthor, rimgs, rstckRArrow, rVbox, rlabel, rAuthorLabel, rimgv,
                             rIndex, 3);
+                    left.setDisable(false);
                  }
             });
 

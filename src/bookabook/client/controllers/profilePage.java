@@ -205,6 +205,7 @@ public class profilePage {
 
 
     public void initialize() throws IOException, ClassNotFoundException {
+        left.setDisable(true);
         parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk, helpStk, profileStk, logoutStk};
@@ -451,6 +452,8 @@ public class profilePage {
                     //populating bottom (rented books)
                     bIndex = helper.initiate(bname, bauthor, bimgs, bstckRArrow, bVbox, blabel, bAuthorLabel, bimgv,
                             bIndex, 3);
+
+                    left.setDisable(false);
 
                 }
             });

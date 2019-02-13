@@ -162,6 +162,7 @@ public class bookDetailsPage {
     List<String> reviewers = new ArrayList<>();
 
     public void initialize(int book_id) throws IOException, ClassNotFoundException, JSONException {
+        left.setDisable(true);
         parent.getChildren().add(toast.get());
         System.out.println(book_id);
         id = book_id;
@@ -560,6 +561,7 @@ public class bookDetailsPage {
                     BookImg.setImage(SwingFXUtils.toFXImage(book_image, null));
                     Image imgperson1 = SwingFXUtils.toFXImage(renter_image, null);
                     imgCircleCenter.setFill(new ImagePattern(imgperson1));
+                    left.setDisable(false);
                 }
             });
 

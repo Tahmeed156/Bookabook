@@ -153,6 +153,7 @@ public class searchPage{
     List<Integer> bID = new ArrayList<>();
 
     public void initialize() throws IOException, JSONException, ClassNotFoundException {
+        left.setDisable(true);
         parent.getChildren().add(toast.get());
         lbl = new Label[]{dashBLbl, searchLbl, messagesLbl, helpLbl, profileLbl, logoutLbl};
         stck = new StackPane[]{dashBStk, searchStk, messagesStk,helpStk,profileStk,logoutStk};
@@ -323,6 +324,8 @@ public class searchPage{
         rent.clear();
         depositArr.clear();
         imgs.clear();
+        bID.clear();
+        left.setDisable(true);
         searchResults = Main.connection.latest_books(Integer.valueOf(dashboard.userId),"books/search", searchTxt.getText());
         for (Bookser b: searchResults) {
             name.add(b.getName());
@@ -330,7 +333,9 @@ public class searchPage{
             rent.add((int)b.getRent());
             depositArr.add((int)b.getDeposit());
             imgs.add(SwingFXUtils.toFXImage(b.getImage(), null));
+            bID.add(b.getId());
         }
+        left.setDisable(false);
 
         for (int boxIn = 5; boxIn >= 0; boxIn--) {
                 Vbox1[boxIn].setVisible(false);
@@ -375,7 +380,7 @@ public class searchPage{
                     //populating the box
                     index = helper.initiate(name,author,rent,depositArr,imgs,stckRArrow,Vbox1,Vbox2,
                             bookLabel,authorLabel,rentLabel,depositLabel,imgv,index,6);
-
+                    left.setDisable(false);
                 }
             });
 
