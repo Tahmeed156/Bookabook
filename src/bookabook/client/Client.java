@@ -31,8 +31,8 @@ public class Client {
         while (true) {
             try {
                 // Tries again and again until connecting
-                // socket = new Socket("127.0.0.1", 9899);
-                socket = new Socket("192.168.43.200", 9899);
+                socket = new Socket("127.0.0.1", 9899);
+                // socket = new Socket("192.168.43.200", 9899);
                 System.out.println("Successfully connected!");
                 Platform.runLater(new Runnable() {
                     @Override
