@@ -1,34 +1,94 @@
-# Bookabook
+<h1>Bookabook</h1>
 
-An online peer-to-peer book sharing platform 
+An online peer-to-peer book sharing platform. Term project of CSE 108.
 
-### Core showcase features
+Project Developers : Tahmeed Tarek (1705039)<br/>
+Najibul Haque Sarker (1705044)
 
-1. A solid recommendation system from scratch
-2. A real-time chat application
-3. Working with time and providing up-to-date notifications
-4. Storing information in database - reviews, books
-5. Authentication system
+<br/>
+<h1>Core showcase features</h1>
 
-### Features
+1. Login System<br/>
+<img src="ScreenShots/Login.PNG" width="600">
 
-1. Real-time messaging options to send and receive messages. Also shows if user is typing
-2. Shows if user is online/last seen
-3. Has profiles for each user
-4. Loads information about a book
-5. Suggests similar books (through genre, tags, previously rented)
-6. File sharing system
-7. Payment calculations system with tokens
-8. Notifications about due date/ time remaining to return book
-9. Ratings and reviews of users (prompt book return,prompt back payment)
-10. Fine calculation and warnings
-11. User profile, customize & update profile, points/tokens
-12. Signup, login, password reset (verification)
-13. Recommend books for a user (Algorithm)
-14. Show latest and most popular books
+<br/>
+2. Home Page containing summary of different informations e.g
+
+   - rented books and remaining time
+   - shared books and remaining time (can also request for the book which sends an email to the rentee)
+   - current wallet
+   - trending books
+   - latest available books<br/>
+<img src="ScreenShots/Home Page.PNG" width="600">
+
+<br/>
+3. A search Page to search all available books<br/>
+<img src="ScreenShots/SearchPage.PNG" width="600">
 
 
-### Future plan
+<br/>
+4. By clicking on a book one will be directed to a page containing various information e.g
 
-1. Integrating online payment services
+   - the renting price (per week) and the deposit price
+   - the genre.
+   - a list of similar books which are links to their respective pages
+   - review of the book by the owner
+   - reviews of the book by people who have rented the book
+   - write a review of the book
+   - additional info like print quality, times rented etc<br/>
+   
+<img src="ScreenShots/RentPage.PNG" width="600">
+To rent the book one will have to write the number of weeks one will rent and click the "Rent" button. One can also message the owner of the book by clicking the "Message" button.
+<br/><br/>
+
+
+5. A Rent Out Book Page which will need all necessary information<br/>
+
+<img src="ScreenShots/RentOutPage.PNG" width="600">
+<br/>
+
+
+6. A Group Message Page with facilities like
+
+   - showing currently online users
+   - showing past messages<br/>
+   
+<img src="ScreenShots/ChatPage.PNG" width="600"><br/>
+
+
+
+7. A Profile Page<br/>
+
+<img src="ScreenShots/ProfilePage.PNG" width="600"><br/>
+
+
+
+8. An Edit Profile Page<br/>
+
+<img src="ScreenShots/EditProfilePage.PNG" width="600"><br/>
+
+
+
+9. A Help Page<br/>
+
+<img src="ScreenShots/HelpPage.PNG" width="600"><br/>
+
+
+
+10. Here payment for the book is automatically calculated and taken from the online wallet of the user.
+<br/>A deposit is also cut from the user until the rented book is returned within the stipulated time period.<br/>
+
+
+
+11. The owner of the book can also "request" for his book. 
+<br/>This will send an automatic email to the user reminding him of the deadline.
+<br/>
+
+
+<h1>Future plan</h1>
+1. Integrating online payment services<br/>
 2. Webscraping for book information
+<br/><br/>
+
+In BUET CSE FEST 2019<br/>
+<img src="ScreenShots/prize.jpeg" width="600"><br/>
