@@ -2,7 +2,8 @@
 
 An online peer-to-peer book sharing platform. Term project of CSE 108.
 
-Project Developers : Tahmeed Tarek (1705039)<br/>
+Project Developers : <br/>
+Tahmeed Tarek (1705039)<br/>
 Najibul Haque Sarker (1705044)
 
 <br/>
@@ -11,7 +12,7 @@ Najibul Haque Sarker (1705044)
 1. Login System<br/>
 <img src="ScreenShots/Login.PNG" width="600">
 
-<br/>
+
 2. Home Page containing summary of different informations e.g
 
    - rented books and remaining time
@@ -21,12 +22,11 @@ Najibul Haque Sarker (1705044)
    - latest available books<br/>
 <img src="ScreenShots/Home Page.PNG" width="600">
 
-<br/>
+
 3. A search Page to search all available books<br/>
 <img src="ScreenShots/SearchPage.PNG" width="600">
 
 
-<br/>
 4. By clicking on a book one will be directed to a page containing various information e.g
 
    - the renting price (per week) and the deposit price
