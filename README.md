@@ -2,6 +2,10 @@
 
 Term Project : CSE 108
 
+Platform : Windows
+
+Language and tools : Java, JavaFX, Hibernate ORM
+
 Project Developers : <br/>
 1. Tahmeed Tarek (1705039)<br/>
 2. Najibul Haque Sarker (1705044)
