@@ -1,13 +1,13 @@
 <h1>Bookabook</h1>
 
-An online peer-to-peer book sharing platform. Term project of CSE 108.
+Term Project : CSE 108
 
 Project Developers : <br/>
-Tahmeed Tarek (1705039)<br/>
-Najibul Haque Sarker (1705044)
+1. Tahmeed Tarek (1705039)<br/>
+2. Najibul Haque Sarker (1705044)
 
 <br/>
-<h1>Core showcase features</h1>
+<h1>Project Walkthrough</h1>
 
 1. Login System<br/>
 <img src="ScreenShots/Login.PNG" width="600">
@@ -90,5 +90,5 @@ To rent the book one will have to write the number of weeks one will rent and cl
 2. Webscraping for book information
 <br/><br/>
 
-In BUET CSE FEST 2019<br/>
+### CSE FEST 2019 - Project Showcasing
 <img src="ScreenShots/prize.jpeg" width="600"><br/>
